@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo
 echo pushing to lyh543/lyh543.github.io
 echo
 
