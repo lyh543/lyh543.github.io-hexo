@@ -4,13 +4,13 @@
 			"path": ".\\source\\_posts\\"
 		},
 		{
-			"path": "themes\\material"
-		},
-		{
 			"path": "source\\img"
 		},
 		{
 			"path": "themes\\indigo"
+		},
+		{
+			"path": "."
 		}
 	]
 }

@@ -7,6 +7,16 @@ category:
 top: false
 ---
 
+## git 新建库
+
+```bash
+mkdir lyh543.github.io
+cd lyh543.github.io
+git init
+```
+
+然后就可以按照下面的[常规三连](#git-常规三连)了
+
 ## git 常规三连
 
 ```bash
@@ -104,9 +114,11 @@ Windows 下也可以生成 ssh 密钥对，但是需要使用第三方软件：P
 
 ## 奇奇怪怪的操作
 
+```bash
 git log
 git reset --hard HEAD^
 git reset --hard HEAD^^
 git reset --hard HEAD~100
 git reset --hard 236c
 git reflog
+```
