@@ -26,7 +26,9 @@ $ git commit -m "upload 2 files."
 $ git push
 ```
 
-## Linux 下 git 使用 ssh 密钥
+## git 使用 ssh 密钥
+
+### 在 Linux 下给 git 使用 ssh
 
 大概分为三步走：
 
@@ -34,16 +36,16 @@ $ git push
 2. 设置github上的公钥；
 3. 修改git的remote url为git协议。
 
-### 本地生成密钥对（Linux）
+#### Linux 下本地生成密钥对
 
 `$ ssh-keygen -t rsa -C "lyh543@github.com"`
 
-passphrase 可留空~~因为太懒,不然以后每次push都要输这个passphrase~~
+passphrase 可留空~~因为太懒，不然以后每次 push 都要输这个 passphrase~~
 
 `The key fingerprint is:
 SHA256:QtXXXXXXXXXXXXXXXXXXXXXXXXXXXXlk lyh543@github.com`
 
-### 设置github上的公钥
+#### 设置 github 上的公钥
 
 1. 查看你的公钥
 
@@ -68,7 +70,7 @@ Hi lyh543! You've successfully authenticated, but GitHub does not provide shell 
 
 看到最后一句就是OK了。
 
-### 修改git的remote url为git协议，从`https`改为`ssh`（Linux）
+#### 修改git的 remote url 从 `https` 改为 `ssh`
 
 查看当前（git仓库下的）的remote url
 
@@ -85,7 +87,7 @@ origin  https://github.com/lyh543/lyh543.github.io.git (push)
 git remote set-url origin git@github.com:lyh543/lyh543.github.io.git
 ```
 
-## Windows 下 git 使用 ssh 密钥
+### Windows 下 git 使用 ssh 密钥
 
 Windows 下也可以生成 ssh 密钥对，但是需要使用第三方软件：PuTTYgen，在 Tortoise Git 中自带。由于方法不同，可以在 Windows 和 Linux 使用不同的 ssh Key。
 
@@ -93,7 +95,7 @@ Windows 下也可以生成 ssh 密钥对，但是需要使用第三方软件：P
 2. 设置github上的公钥；
 3. 设置本地git使用的密钥。
 
-### 本地生成密钥对（Windows）
+#### Windows 下本地生成密钥对
 
 进入软件，点`Generate`，然后就开始生成。由于生成时的随机数据是采集鼠标指针的移动，因此务必在生成过程中移动鼠标。
 
@@ -106,13 +108,15 @@ Windows 下也可以生成 ssh 密钥对，但是需要使用第三方软件：P
 然后 `Save Private Key` 把密钥文件存下来。  
 文本框中的内容是公钥，按照[上面的方法](#设置github上的公钥)设置github上的密钥。
 
-### 设置本地git使用的密钥
+#### 设置本地 git 使用的密钥
 
 由于笔者使用 Tortoise Git，在一个 reporisitory 中 push 的时候选中`自动加载 PuTTY密钥`即可。
 
 命令行 Git 另有实现方法。
 
-## 奇奇怪怪的操作
+## 时光机穿梭
+
+> 参考链接：https://www.liaoxuefeng.com/wiki/896043488029600/896954074659008#0
 
 ```bash
 git log

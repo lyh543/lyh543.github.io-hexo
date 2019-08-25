@@ -197,8 +197,6 @@ len('中文'.encode('utf-8')) # == 6
 'Age: 25. Gender: True'
 ```
 
-
-
 ### 布尔值
 
 `True`, `False` 大小写敏感

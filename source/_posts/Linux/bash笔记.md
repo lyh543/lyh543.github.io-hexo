@@ -92,3 +92,7 @@ echo the current time is $(date +%c)
 ```
 
 后者支持嵌套。
+
+## 输出：`echo`
+
+需要看 `echo` 的帮助请使用 `man echo` 而不是一般的 `command --help`。
