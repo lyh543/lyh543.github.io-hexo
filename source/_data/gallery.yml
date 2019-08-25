@@ -1,0 +1,4 @@
+Name:   #图片名字，例如 Material
+	full_link: http://example.com/full-image.png  #为完整图片的地址。
+	thumb_link: http://example.com/thumb-image.png  #为图片缩略图的地址，如果没有缩略图也可使用完整图片的地址。
+	descr: "这是一个描述"    #图片描述。

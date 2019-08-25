@@ -1,0 +1,60 @@
+{
+  "name": "hexo-material",
+  "version": "1.5.0",
+  "description": "Material Design Theme for Hexo",
+  "scripts": {
+    "test": "echo \"Error: no test specified\"",
+    "setup": "npm cache clean && npm install",
+    "lint": "npm run setup && bash lint.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viosey/hexo-theme-material.git"
+  },
+  "keywords": [
+    "hexo",
+    "theme",
+    "material"
+  ],
+  "author": {
+    "name": "Viosey"
+  },
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/viosey/hexo-theme-material/issues"
+  },
+  "homepage": "https://github.com/viosey/hexo-theme-material#readme",
+  "devDependencies": {
+    "ejs-lint": "^0.2.0",
+    "eslint": "^3.14.0",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "sass-lint": "^1.10.2"
+  },
+  "gitHead": "514cb0e7672f200fd70355f022aa865dc94b4d36",
+  "_id": "hexo-material@1.5.0",
+  "_shasum": "2db1267f45f29a336f13db5d862ebbfade04b1ea",
+  "_from": "hexo-material@latest",
+  "_npmVersion": "3.10.10",
+  "_nodeVersion": "7.3.0",
+  "_npmUser": {
+    "name": "viosey",
+    "email": "i@viosey.com"
+  },
+  "dist": {
+    "shasum": "2db1267f45f29a336f13db5d862ebbfade04b1ea",
+    "tarball": "https://registry.npmjs.org/hexo-material/-/hexo-material-1.5.0.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "viosey",
+      "email": "imviosey@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/hexo-material-1.5.0.tgz_1504768898040_0.9292070653755218"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/hexo-material/-/hexo-material-1.5.0.tgz"
+}
