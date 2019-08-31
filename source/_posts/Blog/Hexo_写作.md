@@ -1,7 +1,9 @@
 ---
 title: Hexo 写作
+date: 2019-06-23 16:33:03
 tags:
 - Hexo
+- Visual Studio Code
 category:
 - Blog
 top: false
@@ -44,9 +46,41 @@ top: false
 参数|描述|默认值
 -|-|-
 layout|布局|
+date|创建日期|
 updated|更新日期|文件更新日期
 comments|开启文章的评论功能|true
 permalink|覆盖文章网址|
+
+这些文本使用 `hexo new [draft] xxx` 会自动按照 `/Scaffold/post.md` （或 `/Scaffold/draft.md`）的模板生成。下面是我的 `post.md`：  
+
+```
+---
+title: {{ title }}
+date: {{ date }}
+---
+```
+
+由于 hexo 在 wsl 上有十秒的延迟，加上每次新建博客会顺便创建文件夹，不是很喜欢，我在 VSCode 上使用的是一个叫 [psioniq File Header](https://marketplace.visualstudio.com/items?itemName=psioniq.psi-header) 的插件，安装插件以后，编辑新文件前，按 `Ctrl+Alt+H` 两次即可按照 Visual Studio Code 的配置文件 `settings.json` 模板就可以创建开头。我的 `settings.json` 的相关部分长这个样子：
+
+```json
+   "psi-header.templates": [
+		{
+			"language": "*",
+			"template": [
+                "---",
+                "title: <<filename>>",
+                "date: <<dateformat('YYYY-MM-DD H:mm:ss')>>",
+                "tags:",
+                "- 杂谈",
+                "category:",
+                "- C++",
+                "- C++语法",
+                "mathjax: true",
+                "---"
+			]
+		}
+	],
+```
 
 ## 插入图片
 

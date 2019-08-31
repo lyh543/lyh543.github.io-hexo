@@ -7,6 +7,8 @@ category:
 top: false
 ---
 
+常用命令可查表：[Git-CheatSheet](git-cheatsheet.pdf)
+
 ## git 新建库
 
 ```bash
