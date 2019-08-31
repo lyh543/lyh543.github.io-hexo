@@ -20,7 +20,7 @@ Hexo写作支持Markdown。
 在命令行中输入`Hexo server`（简写`hexo s`），即可在`127.0.0.1:4000`即时预览博客。  
 Microsoft Edge似乎只能在`localhost:4040`中预览。
 
-![blog_preview](/img/blog_preview.jpg)
+![blog_preview](blog_preview.jpg)
 
 ## 文章信息
 

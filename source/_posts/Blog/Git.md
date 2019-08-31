@@ -101,11 +101,11 @@ Windows 下也可以生成 ssh 密钥对，但是需要使用第三方软件：P
 
 进入软件，点`Generate`，然后就开始生成。由于生成时的随机数据是采集鼠标指针的移动，因此务必在生成过程中移动鼠标。
 
-![PuTTYgen_1](/img/PuTTYgen_1.jpg)
+![PuTTYgen_1](PuTTYgen_1.jpg)
 
 大约1分钟以后，生成完成，如图2。
 
-![PuTTYgen_2](/img/PuTTYgen_2.jpg)
+![PuTTYgen_2](PuTTYgen_2.jpg)
 
 然后 `Save Private Key` 把密钥文件存下来。  
 文本框中的内容是公钥，按照[上面的方法](#设置github上的公钥)设置github上的密钥。

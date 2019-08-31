@@ -31,7 +31,7 @@ int main()
 
 ## 指针和 const
 
-![pointer and const](/img/pointer_and_const.png)
+![pointer and const](pointer_and_const.png)
 
 const 先向前看，没有就再向后看？
 

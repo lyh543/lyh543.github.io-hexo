@@ -24,7 +24,7 @@ cin >> s+1 >> p+1;
 
 ~~众所周知~~，KMP 是一种单串匹配算法，把朴素算法的`O(|S|*|T|)`优化到了`O(|S|+|T|)`。
 
-![KMP](/img/KMP.png)
+![KMP](KMP.png)
 
 如上图，在进行朴素算法时，如果我们已经进行了一些匹配成功，实际上我们就知道了原串的一些信息，**理论上**就可以使用这个信息来加速匹配，跳过一些绝对不可能匹配成功的情况。
 所以，该怎么做呢？这就是 KMP 很迷的地方之一，也是我一直看不懂 KMP 的一个点。
@@ -40,7 +40,7 @@ cin >> s+1 >> p+1;
 ### 求 `fail[]` 数组
 
 在T也很长的时候，暴力求解 `fail[]` 数组也是不可取的。  
-![fail()](/img/getFail.png)  
+![fail()](getFail.png)  
 这种情况下，可以看出：
 
 > 由于 `π(3)=1` ，可得 `T[1...1]==T[3...3]`；  
@@ -51,7 +51,7 @@ cin >> s+1 >> p+1;
 
 那如果`T[i+1]≠T[π(i)+1]`呢？
 
-![border的border仍然是原串的border](/img/abacabadabacaba.png)  
+![border的border仍然是原串的border](abacabadabacaba.png)  
 有一个神奇的性质，`border`的`border`仍然是原串的`border`。
 
 >由于 `abacaba` 是原串的 `border`，则 `黄串+c+绿串==蓝串+c+红串`。

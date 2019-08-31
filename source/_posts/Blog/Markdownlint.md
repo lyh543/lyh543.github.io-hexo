@@ -10,7 +10,7 @@ top: false
 
 Markdownlint 是 Visual Studio Code 的一个 Markdown 插件。
 
-![markdownlint_intro](/img/markdownlint_intro.jpg)
+![markdownlint_intro](markdownlint_intro.jpg)
 
 [下载链接](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
 
