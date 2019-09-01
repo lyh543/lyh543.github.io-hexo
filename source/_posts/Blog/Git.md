@@ -116,6 +116,46 @@ Windows 下也可以生成 ssh 密钥对，但是需要使用第三方软件：P
 
 命令行 Git 另有实现方法。
 
+## 命令行 Git 上代理
+
+经常会有挂上代理，浏览器访问 Github 快到飞起的，但是 Git Clone 却慢死的经历。awsl。
+
+以下方法收集自知乎的同一问题：[git clone一个github上的仓库，太慢，经常连接失败，但是github官网流畅访问，为什么？](
+https://www.zhihu.com/question/27159393/answer/141047266)
+
+### ShadowSocks 全局 HTTPS 代理（不推荐）
+
+```bash
+git config --global http.proxy socks5://127.0.0.1:1080
+git config --global https.proxy socks5://127.0.0.1:1080
+```
+
+其中 `1080` 是 ShadowSocks 代理的端口，可能需要根据自己的 ShadowSocks 配置进行修改。  
+另外使用该方法以后，需要用 HTTPS 协议（而不是 SSH）进行传输。
+
+该方法的缺点是会导致连向国内仓库时极慢。
+
+### ShadowSocks 对 Github 进行 HTTPS 代理
+
+```bash
+git config --global http.https://github.com.proxy socks5://127.0.0.1:1080
+git config --global https.https://github.com.proxy socks5://127.0.0.1:1080
+```
+
+也要注意 `1080` 是 ShadowSocks 代理的端口，可能需要根据自己的 ShadowSocks 配置进行修改。  
+另外使用该方法以后，需要用 HTTPS 协议（而不是 SSH）进行传输。
+
+### SSH 代理
+
+放个链接。[git clone一个github上的仓库，太慢，经常连接失败，但是github官网流畅访问，为什么？ - 戈登走過去的回答 - 知乎](https://www.zhihu.com/question/27159393/answer/809693236)
+
+### 改 hosts
+
+```
+151.101.72.249 github.http://global.ssl.fastly.net
+192.30.253.112 github.com
+```
+
 ## 时光机穿梭
 
 > 参考链接：https://www.liaoxuefeng.com/wiki/896043488029600/896954074659008#0
