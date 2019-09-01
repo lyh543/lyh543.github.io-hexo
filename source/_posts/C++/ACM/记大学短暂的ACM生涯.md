@@ -1,5 +1,6 @@
 ---
 title: 记大学短暂的ACM生涯
+date: 2019-08-18 22:02:19
 tags:
 - 闲谈
 category:
@@ -7,6 +8,8 @@ category:
 - ACM
 mathjax: true
 ---
+
+
 
 高中参加过 OI，大学里面自然对 ACM 比较感兴趣。在自我介绍的时候提了一句，有没有想一起参加 ACM 的~~还被同学听成了 SM~~。
 

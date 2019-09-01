@@ -1,5 +1,6 @@
 ---
 title: Git笔记
+date: 2019-09-01 22:02:19
 tags: 
 - Git
 category: 
@@ -123,26 +124,26 @@ Windows 下也可以生成 ssh 密钥对，但是需要使用第三方软件：P
 以下方法收集自知乎的同一问题：[git clone一个github上的仓库，太慢，经常连接失败，但是github官网流畅访问，为什么？](
 https://www.zhihu.com/question/27159393/answer/141047266)
 
-### ShadowSocks 全局 HTTPS 代理（不推荐）
+### Shadowsocks 全局 HTTPS 代理（不推荐）
 
 ```bash
 git config --global http.proxy socks5://127.0.0.1:1080
 git config --global https.proxy socks5://127.0.0.1:1080
 ```
 
-其中 `1080` 是 ShadowSocks 代理的端口，可能需要根据自己的 ShadowSocks 配置进行修改。  
+其中 `1080` 是 Shadowsocks 代理的端口，可能需要根据自己的 Shadowsocks 配置进行修改。  
 另外使用该方法以后，需要用 HTTPS 协议（而不是 SSH）进行传输。
 
 该方法的缺点是会导致连向国内仓库时极慢。
 
-### ShadowSocks 对 Github 进行 HTTPS 代理
+### Shadowsocks 对 Github 进行 HTTPS 代理
 
 ```bash
 git config --global http.https://github.com.proxy socks5://127.0.0.1:1080
 git config --global https.https://github.com.proxy socks5://127.0.0.1:1080
 ```
 
-也要注意 `1080` 是 ShadowSocks 代理的端口，可能需要根据自己的 ShadowSocks 配置进行修改。  
+也要注意 `1080` 是 Shadowsocks 代理的端口，可能需要根据自己的 Shadowsocks 配置进行修改。  
 另外使用该方法以后，需要用 HTTPS 协议（而不是 SSH）进行传输。
 
 ### SSH 代理
