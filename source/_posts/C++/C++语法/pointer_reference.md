@@ -1,5 +1,6 @@
 ---
 title: 指针pointer & 引用reference
+date: 2019-9-2
 category:
 - C++
 - C++语法
@@ -40,9 +41,12 @@ const 先向前看，没有就再向后看？
 ```c++
 int (*f)(int,char);  // f是指向具有两个参数的函数的指针
 int *f(int)         // f是一个函数，返回一个指向int的指针
+int *f(void)        // 参数是 void 也得写
 ```
 
-C++11中NULL，0，nullptr意义等价
+使用时直接 `f(x)` 即可。`f` 又被称为回调函数。
+
+C++11中NULL，0，nullptr意义等价。
 
 ## void * 指针
 
@@ -88,7 +92,9 @@ for (auto iter = s.begin(); iter != end; iter++)
 }
 ```
 
-## malloc & free from C
+## 动态内存
+
+### malloc & free from C
 
 ```c++
 #include <cstdlib>
@@ -101,22 +107,24 @@ free(a);
 }
 ```
 
-## new & delete (C++)
+### new & delete (C++)
 
 `new` 用于从内存中分配指定大小的内存
-用法1：`p=new type;`
-用法2：`p=new type(x);`
-用法3：`p=new type[n];`
+用法 1：`p=new type;`
+用法 2：`p=new type(x);`
+用法 3：`p=new type[n];`
 `delete` 用于释放 `new` 分配的堆内存
-用法1：`delete p;`
-用法2：`delete [ ]p;`
+用法 1：`delete p;`
+用法 2：`delete [ ]p;`
 
-## new/delete 与 malloc/free的区别
+注意对 `int` 数组，`delete p` 和 `delete [] p` 效果一样。但若把 `int` 换成自定义的类型，则 `delete p` 只释放第一个元素的内存，`delete [] p` 才释放全部内存，因为 **`delete` 后就会走析构函数，基本类型的对象没有析构函数，所以回收基本类型组成的数组空间用  `delete` 和 `delete[]` 都是可以的；但是对于类对象数组，只能用 `delete[]`**。总之保证 `new delete` 的 `[]` 的配套使用。
 
-* new能够自动计算要分配的内存类型的大小，不必用sizeof计算所要分配的内存字节数
-* new不需要进行类型转换，它能够自动返回正确的指针类型。
-* new可以对分配的内存进行初始化。
-* new和delete可以被重载，程序员可以借此扩展new和delete的功能，建立自定义的存储分配系统。
+### new/delete 与 malloc/free的区别
+
+* new 能够自动计算要分配的内存类型的大小，不必用 sizeof 计算所要分配的内存字节数
+* new 不需要进行类型转换，它能够自动返回正确的指针类型。
+* new 可以对分配的内存进行初始化。
+* new 和delete 可以被重载，程序员可以借此扩展new和delete的功能，建立自定义的存储分配系统。
 
 ## 智能指针
 
@@ -166,6 +174,10 @@ int &ia[10]=a;               //L4：错误，ia是引用数组，每个数组元
 
 **由 `int *(&rpa)` 可以看出，指针的`*` 是连着 `int` 的，引用的 `&` 是连着 `变量名` 的。**
 
+### 函数和引用
+
+参见这篇[引用](../C++函数/函数和引用)的博客。
+
 ### 右值引用
 
 右值引用是C++11为了支持移动操作而引入的新型引用类型，其重要特点就是只能绑定到即将（~~瞬间~~）销毁的对象上，比如常量或表达式。通过右值引用可以方便地将它引用的资源“移动”到另一个对象上。
@@ -183,5 +195,3 @@ int &ia[10]=a;               //L4：错误，ia是引用数组，每个数组元
 C 只有指针，没有引用；Java 只有引用，没有指针；C++ 二者皆有（C++ 和 Java 的引用不同，但在此不表）。
 
 那么，指针和引用谁好呢？
-
-

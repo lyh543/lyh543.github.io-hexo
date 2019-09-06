@@ -14,7 +14,7 @@ if (a == 'q')
     return;
 ```
 
-## 一直没有学过去的malloc：
+## 一直没有学过去的 malloc：
 
 ```c++
 int * a;
@@ -22,6 +22,8 @@ a = (int*)malloc(sizeof(int));
 *a = 3;
 free(a);
 ```
+
+## C++ 的
 
 ## static
 

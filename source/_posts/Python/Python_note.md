@@ -16,6 +16,12 @@ category:
 
 语句没有分号。
 
+逗号不是用于分隔表达式，而是用于对多元组赋值：
+
+```py
+a, b = b, a+b
+```
+
 代码块不用大括号，**完全靠缩进**（约定俗成为 **4 个空格**）
 
 注释用 `#` 号开头（和 shell 是一样的）
@@ -285,12 +291,13 @@ print(foo())
 `classmates[0]`|第一个元素 'Michael'
 `classmates[3]`|返回 `IndexError`
 `classamte[-1]`|返回最后一个元素（等价于`classmate[2]`）
+`classmate[0:2]`|返回子列表 `classmate[0,2)`，详见[切片](#切片-slice)
 `classmates.append('Adam')`|向末尾追加元素（类似于 C++ `std::vector::push_back()`）
 `classmates.insert(index, 'Jack')`|在索引号为 index 的位置前插入元素（`O(n)` 时间复杂度）
 `classmates.pop()`|删除末尾的元素
 `classmates.pop(index)`|删除索引号为 index 的元素（`O(n)` 时间复杂度）
 
-### tuple 元组
+### 元组 tuple
 
 ~~元组这翻译怪怪的，可是谁叫 n-tuple 翻译过来是  n 元组呢~~
 
@@ -324,6 +331,8 @@ d['Adam'] = 67
 #### 访问
 
 访问：`d['Adam']`，（返回 67）。如果不存在键，则返回 `KeyError`。
+
+如果要查询是否存在，可以使用 `if 'Adam' in d`。
 
 #### dict 的 key
 
@@ -390,6 +399,8 @@ print(sum)
 
 #### for ... in ...
 
+##### 在 list 用 for
+
 类似于 C++ 的 `for(int : vector<int>)`，Python 可以使用 `for <variable> in <list/tuple>`：
 
 ```py
@@ -410,6 +421,36 @@ list(range(0,5,1))
 ```
 
 就可以愉快的 `for i in list(range(5)):` 了、
+
+##### 在其他数据结构用 for
+
+`str`，`dict`也是可迭代的。默认情况下，`dict` 迭代的是 key，但也可以迭代 key 和 value。
+
+```py
+d = {'a': 1, 'b': 2, 'c': 3}
+for k in d:
+for v in d.values():
+for k, v in d.items():
+```
+
+判断某对象是否可迭代，可使用 `Iterable` 类型。
+
+```py
+from collections import Iterable
+isinstance('abc', Iterable) # return true
+```
+
+如果想要实现下标循环，可以用 `emumerate()` 把 list 变为 `索引-元素对`。
+
+```py
+for i, v in enumerate(['A', 'B', 'C']):
+```
+
+同时引用两个变量是很常见的。
+
+```py
+for x, y in [(1, 1), (2, 4), (3, 9)]:
+```
 
 ### while
 
@@ -522,3 +563,237 @@ def quadratic(a, b, c):
 
 print(quadratic(1,1,1));
 ```
+
+### 函数参数
+
+#### 1. 必选参数
+
+即最普通的用法。
+
+```py
+def pow(x, n):
+    pass
+
+pow(3, 2)
+```
+
+#### 2. 默认参数
+
+和 C++ 一样，Python 也有默认参数。
+
+```py
+def pow(x, n = 2):
+    pass
+
+pow(3)
+```
+
+**声明参数时必选参数在前，默认参数在后**，否则会导致编译错误。
+
+调用函数时，默认参数可以不写，也可以按顺序给出。如无法按顺序给出（第一个默认参数为默认，但第二个不默认），可以指明变量名。
+
+```py
+enroll('Adam', 'M', city='Tianjin')
+```
+
+##### 坑
+
+**默认参数要指向不变对象！！**
+
+如：
+
+```py
+def add_end(L = []):
+    L.append('END')
+    return L
+
+add_end() # return ['END']
+add_end() # return ['END', 'END']
+```
+
+究其本质，还是 [] 只是一个指针。
+
+用 `add_end(L = None)` 即可解决。
+
+```py
+def add_end(L = None):
+    if L is None
+        L = []
+    L.append('END')
+    return L
+
+add_end() # return ['END']
+add_end() # return ['END']
+```
+
+#### 3. 可变参数
+
+如果不使用可变参数，传入 list 或 tuple 时就需要先组装。
+
+```py
+def calc(numbers):
+    sum = 0
+    for n in numbers:
+        sum += n * n
+    return sum
+
+calc([1,2,3]) # = 14
+calc((4,5,6)) # = 77
+```
+
+如果使用可变参数，就不用组装了，也可以调用 0 个参数。在变量名前面加 `*` 即是可变参数。而调用 list 或 tuple 时也可以加一个 `*`。
+
+```py
+def calc(*numbers):
+    # ...
+
+calc(1,2,3) # = 14
+nums = (4,5,6)
+calc(*nums) # = 77
+```
+
+`print()` 也是使用这种形式。
+
+#### 4. 关键字参数
+
+上面是把所有参数变为 tuple，而这里是把额外的 0 个或 n 个参数变为 dict。
+
+```py
+def person(name, age, **kw):
+    print('name:', name, 'age:', age, 'other:', kw)
+
+>>> person('Michael', 30)
+name: Michael age: 30 other: {}
+>>> person('Adam', 45, gender='M', job='Engineer')
+name: Adam age: 45 other: {'gender': 'M', 'job': 'Engineer'}
+```
+
+这有什么用呢？比如，在 `person` 函数里，我们保证能接收到 `name` 和 `age` 这两个参数，但是，如果调用者愿意提供更多的参数，我们也能收到。  
+试想你正在做一个用户注册的功能，除了用户名和年龄是必填项外，其他都是可选项，利用关键字参数来定义这个函数就能满足注册的需求。
+
+```py
+>>> extra = {'city': 'Beijing', 'job': 'Engineer'}
+>>> person('Jack', 24, **extra)
+name: Jack age: 24 other: {'city': 'Beijing', 'job': 'Engineer'}
+```
+
+而传 dict 进去也是，加 `**` 就可以了。
+
+但是请注意，这种用法中，不管是传很多组，还是直接传 dict，Keywords 必须为 string 名。诸如 `1=one`，`'one'=1` 都不能作为关键词参数传进函数。而传进去的 Keywords，会加引号。
+
+#### 5. 命名关键字参数
+
+关键字参数中，对参数名没有直接限制；如果需要限制名字，可以使用命名关键字参数。
+
+```py
+def person(name, age, *, city, job):
+    print(name, age, city, job)
+```
+
+这样，我们只接受 city 和 job，其他参数会被忽略。
+
+#### 参数组合
+
+Python 定义函数，可以按顺序组合使用 `必选参数`、`默认参数`（y=1）、`可变参数`（\*kw，组成 tuple）、`命名关键字参数`（\*,x,y）、`关键字参数`（\*\*kw，组成 dict）。
+
+但是不要使用太多的组合~~否则代码就太难理解了~~。
+
+## 高级特性
+
+### 切片 slice
+
+现在有一个 `list L = list(range(20))`。使用切片可以快速得到其子序列。
+
+使用 `L[begin:end]` 可以得到 L 下标在 [begin, end) 范围内的数据。注意：
+
+1. begin 和 end 可以按[规定](#函数)使用负数。
+2. begin 和 end 可以省略，缺省值为 begin = 0， end = 末尾下标+1。
+3. 若 end > begin，则返回空 list `[]`。
+
+slice 也可以使用于 tuple，str 等支持切片的功能。
+
+### 迭代 iteration
+
+可见[for](#for--in)部分。
+
+### 列表生成式
+
+这个东西可以把 list（或可迭代的数据类型）中的元素通过自定义的映射函数生成新的 list 或 tuple。还可以配合 if、两层 for。
+
+```py
+>>> [x * x for x in range(1, 11)]
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+>>> [x * x for x in range(1, 11) if x % 2 == 0]
+[4, 16, 36, 64, 100]
+```
+
+另外还可以使用两个变量。
+
+```py
+>>> d = {'x': 'A', 'y': 'B', 'z': 'C' }
+>>> [k + '=' + v for k, v in d.items()]
+['y=B', 'x=A', 'z=C']
+```
+
+### 生成器 generator
+
+列表生成式是新建一个链表，而生成器是保存映射关系，需要时再进行计算。
+
+#### 第一种方法
+
+用法仅仅把列表生成式的 `[]` 改为 `()`。
+
+```py
+>>> g = (x * x for x in range(10))
+>>> g
+<generator object <genexpr> at 0x1022ef630>
+```
+
+我们可以反复使用 `next()` 获得 generator 的下一个返回值。
+
+```py
+>>> next(g)
+0
+>>> next(g)
+1
+>>> next(g)
+4
+>>> next(g)
+9
+>>> next(g)
+16
+>>> next(g)
+25
+>>> next(g)
+36
+>>> next(g)
+49
+>>> next(g)
+64
+>>> next(g)
+81
+>>> next(g)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+StopIteration
+```
+
+当然可以使用 for 循环。
+
+#### 第二种方法：yield
+
+输出 Fibonacci 数的前 max 位，可以使用一个函数：
+
+```py
+def fib(max):
+    n, a, b = 0, 0, 1
+    while n < max:
+        print(b)
+        a, b = b, a + b
+        n = n + 1
+    return 'done'
+```
+
+上述程序会一次性计算完前 max 位。
+
+把上面的程序改为 generator
