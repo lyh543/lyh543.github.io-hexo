@@ -145,8 +145,6 @@ ofstream：`ios_base::out`
 
 ### 文件指针位置相关操作
 
-
-
 ## string 和 iostream 的关系
 
 参见这篇[博客](../string/#string-和-iostream-的关系)。
