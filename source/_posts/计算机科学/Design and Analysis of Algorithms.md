@@ -128,3 +128,19 @@ while (some man is free and hasn't proposed to every woman)
 * 在稳定匹配 S 中，A-Y 在一起，B-Z 在一起。而由 (5)(6)，A-Z 对彼此的好感度高于他们的当前伴侣 B(Y)，因此，推出匹配 S 是不稳定的，矛盾。
 
 问题得证。
+
+#### 问题拓展：将病人安排在医院
+
+没有做过多研究，仅作摘抄。
+
+Men ≈ hospitals, Women ≈ med school residents
+
+Variant 1. Some participants declare others as unacceptable. (resident A unwilling towork in Cleveland)
+Variant 2. Unequal number of men and women.
+Variant 3. Limited polygamy. (hospital X wants to hire 3 residents)
+
+Def. Matching S unstable if there is a hospital h and resident r such that:
+
+* h and r are acceptable to each other; and
+* either r is unmatched, or r prefers h to her assigned hospital; and
+* either h does not have all its places filled, or h prefers r to at least one of its assigned residents.
