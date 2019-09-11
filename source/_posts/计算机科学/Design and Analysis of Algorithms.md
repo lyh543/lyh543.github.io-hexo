@@ -2,7 +2,7 @@
 title: 算法设计
 date: 2019-09-05 19:58:20
 tags:
-- 课程
+- 课程笔记
 category:
 - 计算机科学
 mathjax: true

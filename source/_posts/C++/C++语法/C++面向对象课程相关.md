@@ -2,10 +2,10 @@
 title: C++ 面向对象编程 课程相关
 date: 2019-09-02 15:29:42
 tags:
-- 课程
+- 课程笔记
 category:
 - C++
-- C++面向对象编程
+- C++语法
 mathjax: true
 ---
 

@@ -796,4 +796,8 @@ def fib(max):
 
 上述程序会一次性计算完前 max 位。
 
-把上面的程序改为 generator
+把上面的程序改为 generator。
+
+学不会学不会，感觉也不常用。留个坑吧。
+
+https://www.liaoxuefeng.com/wiki/1016959663602400/1017318207388128

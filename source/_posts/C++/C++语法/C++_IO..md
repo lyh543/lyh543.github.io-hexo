@@ -26,16 +26,16 @@ cout << endl;
 
 ## istream::getline()
 
+`getline()` 会吃掉空格。
+
 ```c++
 char word[50];
-cin.getline(word, 50); //ignore endline when storing
-
-//input a string to x which is up to 100 char
-//and see 'x' as end(default '\n')
-cin.getline(ch, 100, 'x');
+cin.getline(word, 50, delim = '\n'); //ignore endline when storing
 ```
 
 ## istream::get()
+
+`get()` 可以读一个字符或一个字符串。
 
 ```c++
 cin.get(ch);
@@ -48,6 +48,8 @@ ch = cin.get();
 cin.get(str, n, delim = '\n')
 ```
 
+这是读一个字符串，并且可以指定分隔符（最后分隔符会被吃掉）。
+
 ### **错误示范1**
 
 ```c++
@@ -56,7 +58,9 @@ cin >> a;
 cin.getline(s);
 ```
 
-紧接在读取数字等类型的cin语句后，getline会读取其前一条语句留在输入法中的”\n”而结束。
+`istream& operator>>` 不会吃掉最后的空格！！！ 
+
+紧接在读取数字等类型的 `cin` 语句后，`getline` 会读取其前一条语句留在输入法中的 `"\n"`而结束。
 
 ```c++
 cin >> a >> s;
@@ -145,6 +149,21 @@ ofstream：`ios_base::out`
 
 ### 文件指针位置相关操作
 
+以下 `p` 代表 `put`，对输出流操作；`g` 代表 `get`，对输入流操作。
+
+文件指针实际上就是一个标记字节的数字，起始为 `0`。
+
+用成员函数 `tellg()/tellp()` 获取当前位置，返回 `streampos`（实际上是一个整型，在 VS 2017 x86/x64 上范围和 `signed long long` 相同）。
+
+修改的成员函数有绝对和相对的。下仅以 `seekp()` 作示范，`seekg()` 用法相同。
+
+```c++
+istream& seekg (streampos pos); //(1)
+istream& seekg (streamoff off, ios_base::seekdir way); //(2)
+```
+
+(1) 修改到绝对指针，(2) 修改到相对指针，`off` (offset) 为位移量（可以为负），`way` 为位移的正负（`way > 0` 时往流的末尾，`way == 0` 时往流的开头，建议用 `true/false`，但既然 `off` 可以为负，感觉就很鸡肋了）。
+
 ## string 和 iostream 的关系
 
 参见这篇[博客](../string/#string-和-iostream-的关系)。
@@ -179,4 +198,4 @@ std::istream &operator>> (std::istream& is, ClassA& ca);
 
 操作符函数应该包括错误恢复(error recovery)，保证输入错误时，不会产生未知错误；
 
-可以增加I/O条件状态(condition state)进行判断，输入错误原因。
+可以增加 I/O 条件状态(condition state)进行判断，输入错误原因。

@@ -2,10 +2,10 @@
 title: C++：what's plus
 date: 2019-09-02 16:58:17
 tags:
-- 课程
+- 课程笔记
 category:
 - C++
-- C++面向对象
+- C++语法
 mathjax: true
 ---
 

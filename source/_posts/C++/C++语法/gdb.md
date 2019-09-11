@@ -2,7 +2,7 @@
 title: gdb 简易调试
 date: 2019-09-04 11:05:31
 tags:
-- 课程
+- 课程笔记
 category:
 - C++
 - C++语法
