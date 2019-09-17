@@ -1,5 +1,6 @@
 ---
 title: vi笔记（萌新向）
+date: 2019-8-20
 tags:
 category:
 - Linux

@@ -1,5 +1,6 @@
 ---
 title: Windows控制台常用操作
+date: 2019-8-19
 tags:
 category:
 - C++

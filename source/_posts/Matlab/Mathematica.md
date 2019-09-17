@@ -1,5 +1,6 @@
 ---
 title: Mathematica
+date: 2019-7-7
 category:
 - Matlab
 ---

@@ -1,5 +1,6 @@
 ---
 title: C++ stringstream
+date: 2019-8-16
 tags:
 category:
 - C++

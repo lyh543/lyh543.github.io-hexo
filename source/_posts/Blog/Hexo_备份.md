@@ -1,5 +1,6 @@
 ---
 title: Hexo 备份（及一次翻车的经历）
+date: 2019-9-17
 tags: Hexo
 category:
 - Blog

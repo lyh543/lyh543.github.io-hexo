@@ -1,5 +1,6 @@
 ---
 title: 矩阵覆盖 Dilworth（摘抄）
+date: 2019-6-25
 tags:
 - 数据结构
 category:

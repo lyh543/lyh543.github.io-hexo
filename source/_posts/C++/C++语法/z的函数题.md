@@ -1,5 +1,6 @@
 ---
 title: z的函数题
+date: 2019-8-15
 mathjax: true
 ---
 

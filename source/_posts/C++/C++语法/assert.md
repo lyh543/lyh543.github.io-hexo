@@ -1,5 +1,6 @@
 ---
 title: assert
+date: 2019-8-1
 category:
 - C++
 - C++语法

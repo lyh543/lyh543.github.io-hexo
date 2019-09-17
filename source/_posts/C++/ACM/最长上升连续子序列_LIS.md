@@ -1,5 +1,6 @@
 ---
 title: 最长上升连续子序列 LIS
+date: 2019-8-18
 tags:
 - 数据结构
 category:

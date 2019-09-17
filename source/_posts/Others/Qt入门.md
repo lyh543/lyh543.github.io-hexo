@@ -1,5 +1,6 @@
 ---
 title: Qt入门
+date: 2019-6-26
 tags:
 - Qt
 category:

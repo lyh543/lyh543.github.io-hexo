@@ -1,5 +1,6 @@
 ---
 title: C++ string
+date: 2019-8-14
 category:
 - C++
 - C++语法

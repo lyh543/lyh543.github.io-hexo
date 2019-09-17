@@ -1,5 +1,6 @@
 ---
 title: C++类型转换
+date: 2019-9-17
 category:
 - C++
 - C++语法

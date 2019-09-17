@@ -1,5 +1,6 @@
 ---
 title: TCHAR TEXT
+date: 2019-8-19
 tags:
 category:
 - C++

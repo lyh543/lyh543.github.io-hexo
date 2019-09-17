@@ -1,5 +1,6 @@
 ---
 title: LightOJ 1298 递推求一堆数的乘积之和
+date: 2019-9-17
 tags:
 - 数论
 - DP

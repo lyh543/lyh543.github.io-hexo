@@ -1,5 +1,6 @@
 ---
 title: bash笔记
+date: 2019-8-16
 tags:
 category:
 - Linux

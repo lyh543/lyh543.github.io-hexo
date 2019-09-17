@@ -1,5 +1,6 @@
 ---
 title: Test Blog
+date: 2019-6-24
 tags: 
 # - Hexo
 # - npm
@@ -44,7 +45,7 @@ mathjax: true
 
 下面是一张测试语法的图片。
 
-![hello_hexo](/img/hello_hexo.jpg)
+![hello_hexo](hello_hexo.jpg)
 
 $$e^{i\pi}=-1$$
 
