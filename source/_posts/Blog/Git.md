@@ -169,3 +169,10 @@ git reset --hard HEAD~100
 git reset --hard 236c
 git reflog
 ```
+
+## git 修改设置
+
+```bash
+git config [--local] --list # 查看设置；--local 用于本地库
+git config --local remote.origin.url git@github.com:lyh543/lyh543.github.io.git # 修改设置，项和名用空格间隔
+```
