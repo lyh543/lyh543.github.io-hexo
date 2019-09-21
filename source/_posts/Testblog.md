@@ -28,7 +28,7 @@ category:
 # -- C++语法
 # -- C++面向对象编程
 # - Blog
-# - Matlab
+# - MATLAB
 # - Excel
 # - LaTeX
 # - Linux
