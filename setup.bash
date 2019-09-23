@@ -1,6 +1,8 @@
 #!/bin/bash
 # set -x
 
+# About Tenda U12 drive, please look up in https://github.com/likwidoxigen/mt7610u_wifi.git
+
 # update apt-get source
 
 sudo sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
