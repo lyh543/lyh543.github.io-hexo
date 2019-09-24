@@ -18,6 +18,7 @@ mathjax: true
 `str2num`|字符串转数字
 `strtok(str, delim)`|查找 `str` 的第一个 `delim` 之前和之后的字符串
 `strcat`, `strvcat`|横向/纵向拼接字符串（纵向时可能会补长度）
+`strsplit(str,delimiter)`|按 `delimiter` 分割 `str`（多 `delimiter` 用 `cell` 传递）
 
 ### 分割字符串
 
