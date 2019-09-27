@@ -13,6 +13,7 @@ mathjax: true
 ## 字符串函数
 
 函数名|函数用途
+-|-
 `s=[s1,s3,num2str(num)]`|连接字符串
 `num2str`|数字转字符串
 `str2num`|字符串转数字

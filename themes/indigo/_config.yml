@@ -79,7 +79,7 @@ hideMenu: false
 # toc:
 #   list_number: true  # 是否显示数字排序
 toc:
-  list_number: false  # 是否显示数字排序
+  list_number: true  # 是否显示数字排序
 
 #toc:
 #  maxdepth: 3

@@ -68,6 +68,7 @@ mathjax: true
 自带的六种字体见下表：
 
 命令|字体
+-|-
 `\songti`|宋体
 `\heiti`|黑体
 `\fangsong`|仿宋

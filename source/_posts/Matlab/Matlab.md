@@ -34,7 +34,7 @@ mathjax: true
     0.9058    0.2785
 >> eye(5)
 >> ones(3)
->> zeros(3) % 可用于初始化
+>> zeros(3)   % 可用于初始化
 ```
 
 ### 矩阵的合并、取行列
@@ -49,11 +49,11 @@ mathjax: true
 >> a = [2 2; 5 8]
 
 >> a(1, 2)                 % 第一行第二列，2
->> a(1,1:2)               % 2 2
->> a(1,:)                   % 2 2
+>> a(1,1:2)                % 2 2
+>> a(1,:)                  % 2 2
 >> a([1,2],:)              % 2 2; 5 8
->> a(end-1:end,:)    %% 取倒数两列，倒数第一行
->> A(1,:)=[]              %% 删除第一行，a = [5 8]
+>> a(end-1:end,:)          %% 取倒数两列，倒数第一行
+>> A(1,:)=[]               %% 删除第一行，a = [5 8]
 ```
 
 ### 四则运算
@@ -116,7 +116,7 @@ score=input('请输入您的成绩：')    %输入MATLAB表达式
 name=input('请输入您的姓名：','s') %输入姓名
 disp(a) 显示数组内容
 fprintf('%6d', score)
-str=sprintf('%6d',score) %不能输出
+str=sprintf('%6d',score)         %不能输出
 ```
 
 转义字符：单引号`'`
@@ -128,7 +128,7 @@ str=sprintf('%6d',score) %不能输出
 #### for
 
 ```MATLAB
-for a = 1:10          % for a = array
+for a = 1:10          % for a = [array]
     string('njjnb')
 end
 ```
