@@ -295,12 +295,15 @@ v[find(v>=0)];
 
 ```MATLAB
 syms x y n;
-s = x^2 + y^2; subs(s,[x,y],[1,2])   % 替换变量（代值），返回 5
+s = x^2 + y^2; subs(s,[x,y],[1,2])  % 替换变量（代值），返回 5
 s = simplify(cos(x)^2-sin(x)^2)     % 化简表达式，返回 cos(2*x)
-s = limit((1+1/n)^n, n, inf);           % 求极限，返回 exp(1)
-s = y^3+x^2; diff(s,y);                  % 求（偏）导，返回 3*y^2          另有 diff(X,n,dim) 求 dim 阶导数
-int(x^2);                                        % 求积分，返回 x^3/3                 另有 int(expr,var). int(expr,a,b),  int(expr,var,a,b) 的形式
-taylor(exp(x),x,0,'order',3)            % 2阶泰勒展开，返回 x^2/2 + x + 1
+s = limit((1+1/n)^n, n, inf);       % 求极限，返回 exp(1)
+s = symsum(1/factorial(x), 0, Inf)  % 求级数，返回 exp(1)
+s = y^3+x^2; diff(s,y);             % 求（偏）导，返回 3*y^2
+% 另有 diff(X,n,dim) 求 dim 阶导数
+int(x^2);                           % 求积分，返回 x^3/3
+% 另有 int(expr,var). int(expr,a,b),  int(expr,var,a,b) 的形式
+taylor(exp(x),x,0,'order',3)        % 2阶泰勒展开，返回 x^2/2+x+1
 ```
 
 ### 解常微分方程
@@ -311,7 +314,7 @@ dsolve('Dy=(50-0.01*y)*y','y(0)=4','x'); % 二阶导的写法为'D2y'
 
 ## MATLAB 绘图
 
-见 [MATLAB 绘图](../draw)。
+见 [MATLAB 绘图](../matlab-draw)。
 
 ## MATLAB显示
 

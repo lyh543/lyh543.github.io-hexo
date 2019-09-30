@@ -9,7 +9,7 @@ category:
 mathjax: true
 ---
 
-## 类类型的定义
+## 类的定义
 
 类（Class）其实和 C++ 结构体差不多。
 
@@ -34,7 +34,7 @@ void ClassName::setTime(int h, int m, int s)
 ```
 
 `public`，`protected`，`private` 叫做`段约束符`。
-`private` 和 `protected` 只允许类的内部成员访问。`protect` 和 `private` 在派生的地方不同。不写段约束符时，成员默认是 `private` 的。
+`private` 和 `protected` 只允许类的内部成员访问。`protect` 和 `private` 在[派生](../inheritance-derive-polymorphism/#保护成员-和-继承方式：公有继承、私有继承、保护继承)的地方不同。不写段约束符时，成员默认是 `private` 的。
 
 三个段约束符的顺序可换；  
 可以把公开成员分开写，需要用多个 `public` 约束。
@@ -65,6 +65,27 @@ int ClassName s_value = 10; //定义
 对于非常量的静态成员，必须在类内声明，类外定义（常量定义可以写在里面或外面）。
 
 静态成员函数[见后](#静态成员函数)。
+
+### const 数据成员
+
+`const` 数据一般是不可以被修改的，理应每个类的成员的值都一样，是可以共用以节省空间的。实际呢？
+
+如果把一个数据设为 `const` ，他会自动变为 `static` 吗？
+
+```c++
+class Test
+{
+public:
+	const int c = 10;
+}A, B;
+
+int main()
+{
+	std::cout << &A.c << " " << &B.c;
+}
+```
+
+输出 `00007FF64CC64034 00007FF64CC64038`。显然是没有共用的，必须加 `static` 才可以共用内存。
 
 ### 类类型本身、指针、引用作为函数参数
 
@@ -193,7 +214,7 @@ class CString
 }
 ```
 
-### 友元函数
+### 友元函数 友元类
 
 对于某些需要封装过的数据的函数，调用这些数据不大容易。因此，产生了友元的机制。
 
@@ -223,12 +244,41 @@ class Y
 
 友元函数虽然方便，但是破坏了 OOP 的封装性，不能滥用。
 
-## const  相关
+## 类的组合
+
+一句话，就是一个类的某个成员是另一个类的对象。
+
+注意构造函数和析构函数一般需要调用包含的类的构造和析构函数，否则无法修改前一个类的 `private` 成员。  
+具体语法如下：
+
+```c++
+class Point{
+    int x, y;
+    public : Point(int _x, int _y){x = _x; y = _y;}
+    /*...*/
+}
+
+class Circle
+{
+    Point center;
+    int radius;
+    Circle(int _x, int _y, int _radius) : Point(_x, _y)
+    {
+        radius = _radius;
+    }
+}
+```
+
+
+## const  对象、函数
 
 一句话，const 对象不能被非 const 的成员函数调用。
 
 ```c++
 const CString str; //常对象
-int CString::size() const {}; //常函数
+int CString::size() const 
+{
+    /*...*/
+}; //常函数
 ```
 
