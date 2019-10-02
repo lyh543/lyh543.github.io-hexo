@@ -11,7 +11,7 @@ mathjax: true
 
 > MathJax is an open-source JavaScript display engine for LaTeX, MathML, and AsciiMath notation that works in all modern browsers。
 
-理论上方法是多种多样的，但我试了很多都不行~~不排除我太菜了，不会搞的可能~~
+理论上方法是多种多样的，都是基于 MathJax 的。但我试了很多都不行~~不排除我太菜了，不会搞的可能~~
 
 目前的方法摘自 https://github.com/viosey/hexo-theme-material/issues/604.
 
@@ -40,8 +40,8 @@ $$\frac{|ax + by + c|}{\sqrt{a^{2}+b^{2}}}$$
 
 3. 具体 LaTeX 语法见[博客：LaTeX数学公式学习笔记](../LaTeX数学公式学习笔记)
 
-4. 值得注意的是，LaTeX换行中行末需要`\\`，由于 Markdown 和 Mathjax 进行了两次渲染，所以需要`\\\\`。
-5. 另外空格后面接的`_`有时也会被 Markdown 转义掉，导致无法被 Mathjax 渲染，因此有些时候需要在`_`前添加`\`转义。
+4. 值得注意的是，LaTeX换行中行末需要`\\`，由于 Markdown 和 MathJax 进行了两次渲染，所以需要`\\\\`。
+5. 另外空格后面接的`_`有时也会被 Markdown 转义掉，导致无法被 MathJax 渲染，因此有些时候需要在`_`前添加`\`转义。
     ~~具体什么时候发生不清楚，但是可以观察 markdown 编辑器的染色情况判断`_`是否被转义~~
 
 ```latex

@@ -11,7 +11,7 @@ mathjax: true
 `help xxx` 用于查看命令。  
 单引号 `'` 和双引号 `"` 一样，推荐单引号。  
 用分号 `;` 结束语句，以屏蔽输出。  
-等于 `==`，不等 `~=`，取反 `~`。
+等于 `==`，不等 `~=`，取反 `~`，与或是 `&&` 和 `||`。
 
 ## 构造矩阵
 
@@ -250,6 +250,7 @@ f1(x)
 ### 向量的元素和/矩阵的每列和
 
 ```MATLAB
+cumsum(A) % 累积和/每列的累积和，即前缀和
 sum(A)
 min(A)
 max(A)
@@ -257,7 +258,7 @@ mean(A)
 
 [x, l] = min(A) % 顺便把最小值位置 index 给 l
 
-sum(A,2) % 矩阵的每行和（平均数）
+sum(A,2) % 矩阵的每行和（平均数），2 是第二维
 ```
 
 ### 向量长度、矩阵大小
@@ -296,15 +297,23 @@ v[find(v>=0)];
 ```MATLAB
 syms x y n;
 s = x^2 + y^2; subs(s,[x,y],[1,2])  % 替换变量（代值），返回 5
+
 s = simplify(cos(x)^2-sin(x)^2)     % 化简表达式，返回 cos(2*x)
+
 s = limit((1+1/n)^n, n, inf);       % 求极限，返回 exp(1)
+
 s = symsum(1/factorial(x), 0, Inf)  % 求级数，返回 exp(1)
+
 s = y^3+x^2; diff(s,y);             % 求（偏）导，返回 3*y^2
 % 另有 diff(X,n,dim) 求 dim 阶导数
+
 int(x^2);                           % 求积分，返回 x^3/3
 % 另有 int(expr,var). int(expr,a,b),  int(expr,var,a,b) 的形式
+
 taylor(exp(x),x,0,'order',3)        % 2阶泰勒展开，返回 x^2/2+x+1
 ```
+
+分段函数：`pw = piecewise(cond1,val1,cond2,val2,...,otherwiseVal)`，如`y=piecewise(x<0,-x^2,x^2);`。
 
 ### 解常微分方程
 
@@ -339,7 +348,7 @@ format long %%小数位数更多
 format short %%回到短模式
 ```
 
-### 清屏
+### 清屏、清变量
 
 ```MATLAB
 clc %% 清屏

@@ -28,7 +28,7 @@ $$a+b=c$$
 3. `[]`即是中括号。
 如`$[1+2]$`: $[1+2]$
 4. 编译时无视空格、回车，空格只用于分隔识别符。公式中需要空格请前往[#排版](#排版)
-5. LaTeX换行中行末需要`\\`，由于Markdown和Mathjax进行了两次渲染，所以需要`\\\\`。
+5. LaTeX换行中行末需要`\\`，由于 Markdown 和 MathJax 进行了两次渲染，所以需要`\\\\`。
 6. 目前已发现的需要用 `\`（Markdown 中需要 `\\`。下如不提及是在 Markdown 中使用 `\`，均为`\\`）转移的符号有：`%`，`&`，`\`，`{}`。
 
 ```latex
@@ -49,11 +49,10 @@ x&=a+b+c\\\\
 \end{split}
 \end{equation}
 
-## 符号
 
-符号和 Onenote 的基本一样，大概是相互借鉴 ~~Onenote 把 LaTeX 的符号照搬~~，然后 Onenote 简化了分数等一些部分吧。
+7. 符号和 Onenote 的基本一样，大概是相互借鉴 ~~Onenote 把 LaTeX 的符号照搬~~，然后 Onenote 简化了分数等一些部分吧。
 
-### 常用运算符
+## 常用运算符
 
 中文|LaTeX语句|数学符号
 -|-|-
@@ -65,7 +64,7 @@ x&=a+b+c\\\\
 方根|`\sqrt[3]{2}`|$\sqrt[3]{2}$
 |`\surd{2}`|$\surd{2}$
 
-### 常用关系符
+## 常用关系符
 
 在关系符前面加`\not`可得其否定形式。
 `\not\equiv`: $\not\equiv$
@@ -76,7 +75,7 @@ x&=a+b+c\\\\
 不等于|`\neq`|$\neq$
 相似|`\sim`|$\sim$
 
-### 微积分
+## 微积分
 
 中文|LaTeX语句|数学符号
 -|-|-
@@ -87,21 +86,22 @@ x&=a+b+c\\\\
 二重积分|`\iint_{0}^{1}{\frac{1}{n+1}}`|$\iint_{0}^{1}{\frac{1}{n+1}}$
 偏导数|`\frac{\partial y}{\partial x}`|$\frac{\partial y}{\partial x}$
 
-### 上下划线
+## 上下划线
 
 中文|LaTeX语句|数学符号
 -|-|-
-上划线|`\overbrace{a+b+\cdots+z}^{26}`|$\overbrace{a+b+\cdots+z}^{26}$
-下划线|`\underbrace{a+b+\cdots+z}_{26}`|$\underbrace{a+b+\cdots+z}_{26}$
+上划线|`\overline{123}`|$\overline{123}$
+上括弧|`\overbrace{a+b+\cdots+z}^{26}`|$\overbrace{a+b+\cdots+z}^{26}$
+下括弧|`\underbrace{a+b+\cdots+z}_{26}`|$\underbrace{a+b+\cdots+z}_{26}$
 向量|`\vec{a}\qquad\vec{AB}`|$\vec{a}\qquad\vec{AB}$
-|`\overrightarrow{AB}`|$\overrightarrow{AB}$
-|`\overleftarrow{AB}`|$\overleftarrow{AB}$
+||`\overrightarrow{AB}`|$\overrightarrow{AB}$
+||`\overleftarrow{AB}`|$\overleftarrow{AB}$
 
-### 矩阵
+## 矩阵
 
 > 参考博客：https://blog.csdn.net/bendanban/article/details/44221279
 
-#### 裸矩阵
+### 裸矩阵
 
 使用 `$$\begin{matrix}...\end{matrix}$$` 生成矩阵。矩阵中每一行以 `\\`换行（Markdown 中是`\\\\`），矩阵的元素用 `&` 来分隔开。  
 行间矩阵 $$\left(\begin{smallmatrix}1&2\\\\3&4\end{smallmatrix}\right)$$ 请使用 `$$\begin{smallmatrix}...\end{smallmatrix}$$`
@@ -126,12 +126,12 @@ $$
     \end{matrix}
 $$
 
-#### 带括号的矩阵
+### 带括号的矩阵
 
 如果需要带括号的矩阵，一种是加 `\left( \begin{matrix} ... \end{matrix} \right)`，另一种是使用 `\begin{bmatrix}...\end{bmatrix}`。  
 不过对于 `smallmatrix`，只能使用前面的方法，不能使用后面的加括号的方法。
 
-##### 花括弧
+#### 花括弧
 
 注意花括弧 `{}` 也是需要用 `\` 转义的。
 
@@ -155,7 +155,7 @@ $$
     \right\\}
 $$
 
-##### 中括弧及小括弧
+#### 中括弧及小括弧
 
 ```latex
 $$
@@ -196,11 +196,11 @@ $$
 -|-|-|-|-|-
 示例|$$\begin{pmatrix} 1&2\\\\3&4\end{pmatrix}$$|$$\begin{bmatrix} 1&2\\\\3&4\end{bmatrix}$$|$$\begin{Bmatrix} 1&2\\\\3&4\end{Bmatrix}$$|$$\begin{vmatrix} 1&2\\\\3&4\end{vmatrix}$$|$$\begin{Vmatrix} 1&2\\\\3&4\end{Vmatrix}$$
 
-### 奇奇怪怪的括号
+## 奇奇怪怪的括号
 
 > 参考博客：https://blog.csdn.net/miao0967020148/article/details/78712811
 
-使用括号的时候，可以加一句`\left` `right`，大概是告诉LaTex，我要用括号了，而不是简单的符号  
+使用括号的时候，可以加一句`\left` `\right`，大概是告诉 LaTeX，我要用括号了，而不是简单的符号  
 ~~好像用不用没有什么影响，不想打，好几个字符呢~~
 
 中文|LaTeX语句|数学符号
@@ -238,11 +238,11 @@ $$f(x)=
 1& \text{x \neq 0}
 \end{cases}$$
 
-### 排版
+## 排版
 
 中文|LaTeX语句|数学符号|注释
 -|-|-|-
-普通空格|`$a\space b$`|$a\space b$|
+普通空格|`$a \space b \\; c \\  d$`|$a \space b \\; c \\  d$|
 1cm短空格|`$a\quad b$`|$a\quad b$|
 2cm长空格|`$a\qquad b$`|$a\qquad b$|
 换行并对齐|`$\begin{split}`<br>`x&=a+b+c\\`<br>`&=d+e\\`<br>`&=g+f`<br>`\end{split}$`|$\begin{split}x&=a+b+c\\\\&=d+e\\\\&=g+f\end{split}$|开头`\begin{split}`<br>结束`\end{split}`<br>行末`\\`<br>需要对齐的符号前`&`
@@ -252,7 +252,7 @@ $$f(x)=
 |`\ddots`|$\ddots$
 公式标号|`a^2 + b^2 = c^2 \tag{1}`|$a^2 + b^2 = c^2 \tag{1}$
 
-### 数学符号表
+## 数学符号表
 
 常用：
 
@@ -260,7 +260,7 @@ $$f(x)=
 -|-|-
 |`\varphi`|$\varphi$
 
-全部：
+更多的：
 
 {%asset_img 50.gif%}
 {%asset_img 51.gif%}

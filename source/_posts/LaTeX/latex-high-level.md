@@ -8,6 +8,8 @@ category:
 mathjax: true
 ---
 
+该文章记录 LaTeX 原理等部分，和前一篇的简单用法分开。
+
 ## LaTeX 编译过程
 
 LaTeX 编译过程中会有六个文件：
