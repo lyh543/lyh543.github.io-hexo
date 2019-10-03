@@ -29,15 +29,20 @@ $ git commit -m "upload 2 files."
 $ git push
 ```
 
-## git 使用 ssh 密钥
+## git 保存密码
 
-### 在 Linux 下给 git 使用 ssh
+git 默认是不能保存密码的，每次 push 都需要输入账号密码，很烦。  
+
+一个选择是 ssh，这个方便，但是问题就是，使用 ssh 以后，就不能直接挂梯子了（梯子走 https 的）。
+第二个方案是走 https，不过让 Git 保存密码。这又分了两种方法。
+
+### 在 Linux 下 git 使用 ssh 密钥
 
 大概分为三步走：
 
 1. 本地生成密钥对；
-2. 设置github上的公钥；
-3. 修改git的remote url为git协议。
+2. 设置 github 上的公钥；
+3. 修改 git 的 remote url 为 git 协议。
 
 #### Linux 下本地生成密钥对
 
@@ -73,7 +78,7 @@ Hi lyh543! You've successfully authenticated, but GitHub does not provide shell 
 
 看到最后一句就是OK了。
 
-#### 修改git的 remote url 从 `https` 改为 `ssh`
+#### 修改 git 的 remote url 从 `https` 改为 `ssh`
 
 查看当前（git仓库下的）的remote url
 
@@ -117,6 +122,21 @@ Windows 下也可以生成 ssh 密钥对，但是需要使用第三方软件：P
 
 命令行 Git 另有实现方法。
 
+### (Linux) Git 保存密码
+
+> 参考博客：https://blog.csdn.net/xx326664162/article/details/49686241  
+> https://www.crifan.com/git_remember_record_user_and_password_no_need_input_again/
+
+Git的凭据存储有 cache、store、manager 三种方式。可以通过
+
+```bash
+git config --global credential.helper store
+```
+
+切换。
+
+其中，如果使用 `store`，密码将被会明文保存在 `~/.git-credentials`。
+
 ## 命令行 Git 上代理
 
 经常会有挂上代理，浏览器访问 Github 快到飞起的，但是 Git Clone 却慢死的经历。awsl。
@@ -134,7 +154,7 @@ git config --global https.proxy socks5://127.0.0.1:1080
 其中 `1080` 是 Shadowsocks 代理的端口，可能需要根据自己的 Shadowsocks 配置进行修改。  
 另外使用该方法以后，需要用 HTTPS 协议（而不是 SSH）进行传输。
 
-该方法的缺点是会导致连向国内仓库时极慢。
+该方法的缺点是会导致连向国内仓库时极慢。毕竟全局走服务器了嘛。
 
 ### Shadowsocks 对 Github 进行 HTTPS 代理
 
@@ -146,7 +166,7 @@ git config --global https.https://github.com.proxy socks5://127.0.0.1:1080
 也要注意 `1080` 是 Shadowsocks 代理的端口，可能需要根据自己的 Shadowsocks 配置进行修改。  
 另外使用该方法以后，需要用 HTTPS 协议（而不是 SSH）进行传输。
 
-### SSH 代理
+### ssh 代理
 
 放个链接。[git clone一个github上的仓库，太慢，经常连接失败，但是github官网流畅访问，为什么？ - 戈登走過去的回答 - 知乎](https://www.zhihu.com/question/27159393/answer/809693236)
 
