@@ -135,7 +135,18 @@ git config --global credential.helper store
 
 切换。
 
-其中，如果使用 `store`，密码将被会明文保存在 `~/.git-credentials`。
+其中，如果使用 `store`，密码将被会明文保存在 `~/.git-credentials`。感觉不大好。
+
+如果使用 `cache` 密码会在内存中保存一段时间。密码永远不会被存储在磁盘中，并且默认在15分钟后从内存中清除。不过时间是可以修改的。
+
+于是，就有人想到把这个时间设置为一个月 `2592000` （我直接用了 1e9 `1000000000`）。nb。
+
+```bash
+git config --global credential.helper cache
+git config credential.helper 'cache --timeout=1000000000'
+```
+
+还有一种在 `remote.url` 中加入自己的用户名和密码，更危险，就不表了。
 
 ## 命令行 Git 上代理
 

@@ -69,13 +69,13 @@ x = ga(problem)
 
 * `fun` 是一个函数句柄，如 `@(x)x^2` 或 `@myfun`
 * `nvars` 是自变量的维数
-* `A` 和 `b` 是自变量（称为 `x`，下同）的限制条件，满足 `A * x <= b`
-* `Aeq` 和 `beq` 是自变量（称为 `x`，下同）的限制条件，满足 `Aeq * x = beq`
-* `lb` 和 `ub` 是 `x` 的上界和下界。
-* `nonlcon` 意思是非线性限制条件（non-linear constraints）。在这里是一个函数句柄，接受变量 `x`，返回向量 `C` 和 `Ceq`，要求遗传算法在 `C(x) <= 0 && Ceq(x) = 0` 的非线性范围下进行搜索。
-* `IntCon`，整数限制，是一个元素取值从 1 到 `nvars` 的向量，要求 `x` 的这些维度需要取整数。注意如果设了这一项，`Aeq`、`beq`、`nonlcon(2)` 需要设为空（整数规划不能和线性规划同时具备）。
+* $A$ 和 $b$ 是自变量（称为 $x$，下同）的限制条件，满足 $A \cdot x \leq b$
+* $A_{eq}$ 和 $b_{eq}$ 是 $x$ 的限制条件，满足 $A_{eq} \cdot x = b_{eq}$
+* $lb$ 和 $ub$ 是 $x$ 的下界（lower bound）和下界（upper bound），满足 $lb \leq x \leq ub$
+* `nonlcon` 意思是非线性限制条件（non-linear constraints）。在这里是一个函数句柄，接受变量 $x$，返回向量 $C$ 和 $C_{eq}$，要求遗传算法在 $C(x) \leq 0 \wedge C_{eq}(x) = 0$ 的非线性范围下进行搜索。
+* `IntCon`，整数限制，是一个元素取值从 1 到 `nvars` 的向量，要求 $x$ 的这些维度需要取整数。注意如果设了这一项，$A_{eq}$、$b_{eq}$、`nonlcon(2)` 需要设为空（整数规划不能和线性规划同时具备）。
 
-上述 `A`、`b`、`Aeq`、`beq`、`nonIcon` 如果想要设为空，请使用 `[]`。
+上述 $A$、$b$、$A_{eq}$、$b_{eq}$、`nonIcon` 如果想要设为空，请使用 `[]`。
 
 更多细节还是看官网吧。
 
