@@ -22,6 +22,8 @@ end;
 
 ## plot
 
+老师教的方法。[官方文档](https://ww2.mathworks.cn/help/matlab/ref/plot.htm)
+
 已知表达式：
 
 ```MATLAB
@@ -31,6 +33,15 @@ plot(xx,yy);
 ```
 
 参数方程：
+
+```m
+t = linspace(0,2*pi,100);
+x1 = r*cos(t);
+y1 = r*sin(t);
+plot(x1,y1)
+```
+
+利用 `for` 和 `pause(0.02); hold off;` 还能做出动画来。
 
 ```m
 r = 3;
@@ -50,7 +61,24 @@ for i=1:100
 end
 ```
 
+还可以指定线型。
+
+但是 `fplot` 不香吗？
+
 绘制三维图可以使用 `plot3`。
+
+### fplot
+
+[官方文档](https://ww2.mathworks.cn/help/matlab/ref/fplot.html)
+
+fplot 可以直接传函数进去（推荐用符号函数，用匿名函数会警告）。传一个函数即是普通函数，传两个就是参数方程。区间用一个二元向量 `[1 2]`表示。
+
+```m
+fplot(f)
+fplot(f,xinterval)
+fplot(funx,funy)
+fplot(funx,funy,tinterval)
+```
 
 ### ezplot
 

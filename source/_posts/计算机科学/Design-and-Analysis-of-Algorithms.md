@@ -178,15 +178,22 @@ $$ f(n) = o(g(n)) \space \Leftrightarrow \space \lim_{n \to \infty} \frac{f(n)}{
 ### 分治算法
 
 分治复杂度计算：  
+
 > 若 $T(n) = k \cdot O(\frac{n}{2}) + \Theta(f(n))$，则 $T(n) = O(n^{log_2 k})\cdot T(1) + O(log n*f(n))$。（构造等比数列或列出递归树证明）
+
+还有更通用的（但是好复杂）：
+
+>若 $T(n) = \begin{cases}1 & \text{n=1} \\ kT(\frac{n}{m})+f(n) & \text{n>1} \end{cases}$，
+>
+> 则 $T(n)=n^{log_mk}+\sum_{j=0}^{log_mn-1}k^j f(\frac{n}{m^j})$
 
 注意分治递推表达式里面的常数 k 推出来和 n  的次数是有关系的。
 
 #### 递归表达式处理
 
-* Substitution method
-* Recursion-tree method
-* Master method
+* Substitution method（迭代法——直接展开）
+* Recursion-tree method（迭代法——递归树法）
+* Master method（主方法，即套公式法）
 
 可参考《算法导论》或其他书籍的递归理论。
 
@@ -314,8 +321,9 @@ SAT 问题（Satisfiability）是给定一个析取范式（CNF），判定是�
 
 ![3_SAT_to_Independent_Set](3_SAT_to_Independent_Set.jpg)
 
-证明：显然 $k$ 是图的独立集大小的上界。若该图的最大独立集大小为 $k$，则每个三角形必有一个顶点在该独立集中，且这些点不会同时出现 $x$ 和 $\overline{x}$ 的情况（否则这两点会被相连，与独立集定义矛盾），则可使取的点（$x$ 或 $\overline{y}$）的值为真，即是 3-SAT 的解。  
-若 3-SAT 有解，则独立集可取解中所有值为真的点，以及值为假的点的取反（即若 $x$ 为假，取所有 $\overline{x}$），对于同一三角形中的点，可在取到的集合去掉，即可得到一个大小为 k 的独立集。
+> 证明：显然 $k$ 是图的独立集大小的上界。若该图的最大独立集大小为 $k$，则每个三角形必有一个顶点在该独立集中，且这些点不会同时出现 $x$ 和 $\overline{x}$ 的情况（否则这两点会被相连，与独立集定义矛盾），则可使取的点（$x$ 或 $\overline{y}$）的值为真，没有被赋值的变量任取真或假，即是 3-SAT 的解。
+>
+> 若 3-SAT 有解，则独立集可取解中所有值为真的点，以及值为假的点的取反（即若 $x$ 为假，取所有 $\overline{x}$），对于同一三角形中的点，可在取到的集合去掉任一，即可得到一个大小为 k 的独立集。
 
 ##### 总结
 
@@ -338,9 +346,15 @@ SAT 问题（Satisfiability）是给定一个析取范式（CNF），判定是�
 
 而对于目前的所有问题，都可以证明有自身归约的性质（但不代表所有问题一定都有自身归约的性质）。
 
-##### 例子
+##### 例子：最小点覆盖
 
+下面证明最小点覆盖的优化问题可以归约到决定问题。
 
+1. 二分搜索找到最小点覆盖的大小，并设为 k；
+2. 在图中找到一个点 v 使得删掉 v （及其邻边）的图的有大小为 k-1 的点覆盖；
+3. 在图中删去点 v，并返回 2 继续执行。
+
+不同的问题证明自身归约有不同的方法，但其实也是有套路可循的。
 
 ### P 与 NP
 
@@ -405,7 +419,7 @@ NP 是 nondetermistic (turing machine) polynomial-time，即非确定性图灵�
 
 #### NP-Complete
 
-NP-Complete（NPC）：所有 NP 问题都能归约到这个问题。
+NP-Complete（NPC、NP完全）：所有 NP 问题都能归约到这个问题。
 
 NPC 的意义是，他们是 NP 中最难的问题，因为如果证明其中一个在多项式内有解，则直接证明了 P=NP！  
 因此，我们不需要花太多精力来找是否存在多项式复杂度的问题。
@@ -417,9 +431,12 @@ NPC 的意义是，他们是 NP 中最难的问题，因为如果证明其中一
 ![Circuit SAT](Circuit_SAT.jpg)
 ![证明Circuit SAT 是 NPC](Circuit_SAT_2.jpg)
 
+证明的大概思路就是，对于任意 NP 问题，都可以把他的有限的解和验证算法的 t 构成一个逻辑电路，就把所有问题归约为了这个问题。
+
 ##### 更多的 NP-Complete 问题
 
 我们证明 NP-Complete的，当然不可能按定义证明所有 NP 问题都能被归约到这个问题。但是，  
+
 有了第一个 NP-Complete 问题，我们就可以通过把已知的 NP-Complete 问题归约到其他问题，从而证明更多的问题也是 NP-Complete。
 
 以下就是一个 NP-Complete 问题的拓扑图。
@@ -435,7 +452,7 @@ NPC 的意义是，他们是 NP 中最难的问题，因为如果证明其中一
 5. Partitioning problems: 3D-MATCHING 3-COLOR.
 6. Numerical problems:  SUBSET-SUM, KNAPSACK.
 
-大多数问题，要么已知是 P 的，要么已经被证明是 NP-Complete 的了。（例外：质因数分解、判断图的同构、纳什均衡等）
+**大多**数问题，要么已知是 P 的，要么已经被证明是 NP-Complete 的了。（也有例外：质因数分解、判断图的同构、纳什均衡等）
 
 看到这里，你大概已经明白了，我们一般说一个问题已被证明多项式不可解，其实不是说的 NP，而是 NP-Complete。  
 
