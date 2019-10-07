@@ -60,7 +60,7 @@ size(A) %返回一个1x2数组
 
 找到 v 中大于 0 元素的下标。
 
-```m
+```matlab
 idx=find(v>=0);
 v(find(v>=0));
 ```

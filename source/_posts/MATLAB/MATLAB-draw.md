@@ -10,7 +10,7 @@ mathjax: true
 
 ## 动画程序框架
 
-```m
+```matlab
 close all;
 N = 100;
 for i=1:N
@@ -34,7 +34,7 @@ plot(xx,yy);
 
 参数方程：
 
-```m
+```matlab
 t = linspace(0,2*pi,100);
 x1 = r*cos(t);
 y1 = r*sin(t);
@@ -43,7 +43,7 @@ plot(x1,y1)
 
 利用 `for` 和 `pause(0.02); hold off;` 还能做出动画来。
 
-```m
+```matlab
 r = 3;
 t = linspace(0,2*pi,100);
 x1 = r*cos(t); y1 = r*sin(t);
@@ -73,7 +73,7 @@ end
 
 fplot 可以直接传函数进去（推荐用符号函数，用匿名函数会警告）。传一个函数即是普通函数，传两个就是参数方程。区间用一个二元向量 `[1 2]`表示。
 
-```m
+```matlab
 fplot(f)
 fplot(f,xinterval)
 fplot(funx,funy)

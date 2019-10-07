@@ -57,7 +57,7 @@ mathjax: true
 
 可以把矩阵变为线性矩阵：
 
-```m
+```matlab
 A = [1 2 3; 6 5 4];
 A(:); %返回 [1 6 2 5 3 4]'
 ```
@@ -127,7 +127,7 @@ MATLAB 脚本执行的时候，其**变量默认是既不跨文件，也不跨�
 
 修改上述脚本得到：
 
-```m
+```matlab
 global a;
 a=2;
 fun(1);
@@ -237,7 +237,7 @@ MATLAB 的**数学函数**，网上都说有两种，分别是内联函数和匿
 正常情况下，函数外的参数不能被使用，自变量也不能被修改。和 C 一样。  
 若想要使用全局变量，在声明和使用变量时，都需要加 `global` 关键字，
 
-```m
+```matlab
 % hello.md
 function ret = hello
 disp('hello world');
@@ -257,12 +257,33 @@ end
 返回值可以为多参数。可以用 `nargin` 和 `nargout` 检测输入、输出参数个数。  
 函数中支持 `return`。
 
-```m
+```matlab
 function [r, v]=myfun(x)
     r=x.^2;    %计算第1个输出参数
     if nargout>=2,
         v = 2*x; %计算第2个输出参数
     end
+```
+
+##### Function in Function
+
+> 摘自：如何评价 MATLAB R2016b ? - winner245的回答 - 知乎
+> https://www.zhihu.com/question/50662537/answer/122451045
+
+在 MATLAB R2016b 以后，还支持在函数里面写函数，并且对于输入和输出相同的函数（即原地调用），性能会有优化。
+
+```matlab
+function main
+tic, x = rand(1e8,1); toc
+tic, y = notInplace(x); toc
+tic, x = inplace(x); toc
+isequal(x,y)
+
+function y = notInplace(x)
+y = 1.2*x; 
+
+function x = inplace(x)
+x = 1.2*x;
 ```
 
 #### 匿名函数
@@ -299,7 +320,7 @@ function [r, v]=myfun(x)
 
 ## Matlab 自带函数
 
-这都是查手册可以解决的事情，放在另一篇[博客]()里了。
+这都是查手册可以解决的事情，放在另一篇[博客](../MATLAB-functions)里了。
 
 ## 字符串与文件
 
@@ -373,7 +394,7 @@ clear A B %% 清变量
 
 ### 暂停
 
-```m
+```MATLAB
 pause        %按任意键以继续
 pause(0.5)
 ```

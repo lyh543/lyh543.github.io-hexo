@@ -48,7 +48,7 @@ mathjax: true
 
 MATLAB 的 `ga()` 函数可以寻找函数在无约束或线性、非线性、整数约束下的**最小值**。
 
-```m
+```matlab
 x = ga(fun,nvars)
 x = ga(fun,nvars,A,b)
 x = ga(fun,nvars,A,b,Aeq,beq)

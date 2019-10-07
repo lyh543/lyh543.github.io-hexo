@@ -25,7 +25,7 @@ mathjax: true
 
 `str2 = strsplit(str,delimiter)`
 
-```m
+```matlab
 str = 'ABC;UVW;QWERTY';
 strsplit(str, {';', 'V'}); % == "ABC"    "U"    "W"    "QWERTY"
 ```
@@ -34,7 +34,7 @@ strsplit(str, {';', 'V'}); % == "ABC"    "U"    "W"    "QWERTY"
 
 和C语言很像。打开文件、读取、关闭。`fid` 是文件句柄。
 
-```m
+```matlab
 fid = fopen('myout.txt', 'wt');     %打开
 fprintf(fid,'name=%s', name);    %格式化读取
 fgets(fid);                                    %读取一行和回车

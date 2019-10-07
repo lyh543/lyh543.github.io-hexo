@@ -157,7 +157,10 @@ class CString
 
 注意 `CString str2 = str1;` 和 `CString str2; str2 = str1;` 是有区别的！！！
 
-前者调用的是拷贝构造函数，后者调用的是赋值函数。二者是不同的。
+前者调用的是拷贝构造函数，函数原型是 `Cstring(const Cstring &)`；
+后者调用的是赋值函数，函数原型是 `Cstring& operator = (const Cstring &)`。
+
+二者是不同的。
 
 所以，重载拷贝构造函数的时候，要思考是否需要重载赋值函数。
 
