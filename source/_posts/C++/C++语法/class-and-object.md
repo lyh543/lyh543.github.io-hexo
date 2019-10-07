@@ -110,7 +110,7 @@ class CString
 }
 
 CString aStr;   //调用构造函数
-aStr.Cstring(); //也会调用构造函数
+aStr.CString(); //也会调用构造函数
 ```
 
 #### 重载构造函数
@@ -142,7 +142,9 @@ CString str3("3");  //调用 CString(const char *)
 
 #### 拷贝构造函数
 
-当使用 `CString str2 = str1;` 时，编译器实际上调用了默认的 `Cstring(Cstring &)` 拷贝构造函数，把 `str1` 的内容通过**位拷贝**，复制给了 `str2`。  
+当使用 `CString str2 = str1;` 时，编译器实际上调用了默认的 `CString(CString &)` 拷贝构造函数，把 `str1` 的内容通过**位拷贝**，复制给了 `str2`。  
+
+同时，拷贝构造函数也是将 `const CString &` 强转为 `CString` 的方法。
 
 如果我们不想这么做，而是手动复制部分数据，可以使用：
 
@@ -151,18 +153,21 @@ class CString
 {
     //...
     public:
-    Cstring(Cstring &)}{...};
+    CString(CString &)}{...};
 }
 ```
 
 注意 `CString str2 = str1;` 和 `CString str2; str2 = str1;` 是有区别的！！！
 
-前者调用的是拷贝构造函数，函数原型是 `Cstring(const Cstring &)`；
-后者调用的是赋值函数，函数原型是 `Cstring& operator = (const Cstring &)`。
+函数类型|函数原型|调用场景
+-|-|-
+强制转换|`int ()`|`int(A);` 和 `int i = A;`（隐式）
+拷贝构造函数|`CString(const CString &)`|`CString B = A;` 和 `return A;`
+赋值函数|`CString& operator = (const CString &)`|`B = A;`
 
 二者是不同的。
 
-所以，重载拷贝构造函数的时候，要思考是否需要重载赋值函数。
+所以，重载拷贝构造函数的时候，要思考是否同时需要重载赋值函数。
 
 #### 类到其他类型的强制转换
 
