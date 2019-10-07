@@ -22,7 +22,7 @@ end;
 
 ## plot
 
-老师教的方法。[官方文档](https://ww2.mathworks.cn/help/matlab/ref/plot.htm)
+这是老师教的方法。[官方文档](https://ww2.mathworks.cn/help/matlab/ref/plot.htm)
 
 已知表达式：
 
