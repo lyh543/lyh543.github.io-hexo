@@ -23,7 +23,7 @@ mathjax: true
 > 3. 完成一篇篇幅较长，含有很多插图，表格和公式的论文后，一旦论文需要修改，Word 在排版上会发生巨大的工作量，而 LaTeX 的工作量则要小得多。
 > 4. 大部分国内外杂志，要求寄去的文章按 LateX 格式排版，国内越来越多的学校开始鼓励毕业论文采用 LaTeX 编写。
 
-## 编译器、IDE 及 参考书
+### 编译器、IDE 及 参考书
 
 推荐 TeX Live 和 TeXStudio。参考书推荐：[一份不太简短的LaTeX教程.pdf](一份不太简短的LaTeX教程.pdf)。
 
@@ -38,7 +38,7 @@ mathjax: true
 
 更多 `documentclass` 可以自己查询。
 
-## 你好， LaTeX
+### 你好， LaTeX
 
 原生 LaTeX 不支持中文。需要引入包。课程使用的是 `CJK`。但是在我的 TeXstudio 编译不过？？？？？？
 
@@ -78,19 +78,75 @@ mathjax: true
 
 字号 `zihao`、字距 `ziju` 等特殊格式请查阅 ctex 官方文档。
 
-## 文档基本格式
+## 文档基本符号
+
+### 空格、回车
 
 转义的字词后，空格不起作用，除了使用 `\space`，还可以使用 `\;` 和 `"\ "`（不含引号）。  
 MathJax 的写法：`\space`、`\\;`、`"\\ "`（不含引号）。
 
-换行使用 `\\` ，也可以使用两个回车。一个回车没有用。（MathJax 中得 `\\\\`）
+换行使用 `\endline`、`\\` ，也可以使用两个回车。一个回车没有用。（MathJax 中得 `\\\\`）
 
-使用 `\noindent` 以去掉首行缩进。
+### 注释
 
-左对齐：`\begin{flushleft}`（默认，不常用）  
+1. 单行注释：直接加入 `%` 即可；
+2. 多行注释：
+
+```latex
+\usepackage{verbatim}
+\begin{comment} ... \end{comment}
+```
+
+### 特殊符号
+
+`\LaTeX` 即能打出 $\rm\LaTeX$ 的官方图标。
+
+## 文档格式
+
+### 文字格式
+
+* 粗体：`\textbf{}`；
+* 斜体：`\emph{}`；
+* 下划线：`\underline{}`（这是唯一一个数学公式外能用的数学公式功能）。
+
+可以进行叠加： `\textbf{\emph{\underline{Hello}}}`。
+
+下划线处理大段文字时，不能自动换行（大概是数学公式并不需要换行）。  
+
+需要引入 `ulem` 宏包，并将 `\underline` 改为 `\ulem`。  
+不过如果中文包使用的是 `CJK`，需要使用 `CJKulem`。
+
+
+### 段落格式
+
+分页：`\newpage`、`\clearpage`；
+
+使用 `\noindent` 以去掉首行缩进，使用 `\indent` 以加入首行缩进。
+
+左对齐：`\begin{flushleft}`（默认，所以不常用）  
 右对齐：`begin{flushright}`  
 居中：`begin{center}`
 
-## 特殊符号
+### 章节格式
 
-`\LaTeX` 即能打出 LaTeX 的官方图标。
+* 通用：`\part{}`、`\paragraph{}`、`\subparagraph{}`、
+* `\section{}`、`\subsection{}`、`\subsubsection{}` 关联编号（即 `1.1.1`）。
+* 在 `book` 类中，`\section` 以上还有一级更高的 ：`\chapter{}` 。
+* `\section*{}` 不参与自动编号。
+
+### 页面格式
+
+```
+\usepackage{geometry}
+\geometry{left=5.0cm, right=2.0cm, top=2.0cm, bottom=2.0cm} % 全局设置
+```
+
+### 文档信息及标题
+
+`\title{}`：标题。
+`\author{}`：作者信息，以及邮件信息等等。
+`\date{2017\\December}`：日期
+
+以上命令可放全局变量位置或文档正文位置。
+
+然后在正文里调用一句 `\maketitle` 产生标题。
