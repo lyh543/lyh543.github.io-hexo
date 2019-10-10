@@ -27,7 +27,7 @@ mathjax: true
 
 推荐 TeX Live 和 TeXStudio。参考书推荐：[一份不太简短的LaTeX教程.pdf](一份不太简短的LaTeX教程.pdf)。
 
-## Hello, word
+## Hello, world
 
 ```latex
 \documentclass{article} % 源文件第一行必须是介个

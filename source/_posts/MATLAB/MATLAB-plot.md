@@ -20,9 +20,11 @@ for i=1:N
 end;
 ```
 
-## plot
+## plot 按自变量、因变量值绘图
 
 这是老师教的方法。[官方文档](https://ww2.mathworks.cn/help/matlab/ref/plot.htm)
+
+这个方法的实现是：将输入的 n 个点中，相邻两个点都用直线连接。当点足够密时，可以认为曲线是平滑的了。需要散点图请使用 `scatter`。
 
 已知表达式：
 
@@ -40,6 +42,20 @@ x1 = r*cos(t);
 y1 = r*sin(t);
 plot(x1,y1)
 ```
+
+## hold on
+
+使用两个 `plot` （或其他画图语句）后，第二个会删掉前面的图并且重新画。
+
+要想将两个图叠加，需要在两个 `plot` 之间加一句 `hold on`。一般习惯写法是：
+
+```m
+plot(...), hold on;
+plot(...), hold on;
+plot(...)
+```
+
+## 做动画
 
 利用 `for` 和 `pause(0.02); hold off;` 还能做出动画来。
 
@@ -67,7 +83,7 @@ end
 
 绘制三维图可以使用 `plot3`。
 
-### fplot
+## fplot 按符号函数绘图
 
 [官方文档](https://ww2.mathworks.cn/help/matlab/ref/fplot.html)
 
@@ -87,4 +103,10 @@ ezplot(sin(x)/x);
 ezplot(t,t^2,[1,2]);
 ```
 
+### scatter 散点图
 
+```m
+for i = 1:10
+    scatter(i,rand()), hold on;
+end
+```
