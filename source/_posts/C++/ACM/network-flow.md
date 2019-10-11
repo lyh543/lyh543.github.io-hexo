@@ -122,6 +122,10 @@ f(e) & if \\ e^R \in E
 
 良心的肖老师也提供了[演示 PPT](demo-maxflow.ppsx)。
 
+Ford-Fulkerson 的算法即是先建立剩余图，然后在剩余图上进行我们最开始的贪心。在增大每边的流量时，需要减少同向边的容量，同时增加反向边的容量。
+
+[Ford-Fulkerson 算法](Ford_Fulkerson_Algorithm.jpg)
+
 ### 增广路算法
 
 ## 后记

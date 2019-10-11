@@ -235,7 +235,9 @@ DP 可以写为递归形式，也可以写为自底向上的循环形式。
 
 见[另一篇博客](/C++/ACM/网络流)。
 
-## 复杂度
+## NP 和难以计算的问题
+
+讲 NP 之前，我们得先来聊聊什么是归约。
 
 归约，是把看起来不相关的两个问题的解决方法联系起来。这样，就能用一个已知为（公认为） NP 的问题，证明一堆问题是 NP 的。
 
@@ -417,7 +419,7 @@ NP 是 nondetermistic (turing machine) polynomial-time，即非确定性图灵�
 
 ![P NP NP-Complete NP-Hard](P_np_np-complete_np-hard.svg)
 
-#### NP-Complete
+### NP-Complete
 
 NP-Complete（NPC、NP完全）：所有 NP 问题都能归约到这个问题。
 
@@ -426,14 +428,14 @@ NPC 的意义是，他们是 NP 中最难的问题，因为如果证明其中一
 
 问题是，第一个 NP-Complete 问题是如何产生的呢？
 
-##### 第一个 NP-Complete 问题：Circuit Satisfiablity
+#### 第一个 NP-Complete 问题：Circuit Satisfiablity
 
 ![Circuit SAT](Circuit_SAT.jpg)
 ![证明Circuit SAT 是 NPC](Circuit_SAT_2.jpg)
 
 证明的大概思路就是，对于任意 NP 问题，都可以把他的有限的解和验证算法的 t 构成一个逻辑电路，就把所有问题归约为了这个问题。
 
-##### 更多的 NP-Complete 问题
+#### 更多的 NP-Complete 问题
 
 我们证明 NP-Complete的，当然不可能按定义证明所有 NP 问题都能被归约到这个问题。但是，  
 
@@ -457,3 +459,8 @@ NPC 的意义是，他们是 NP 中最难的问题，因为如果证明其中一
 看到这里，你大概已经明白了，我们一般说一个问题已被证明多项式不可解，其实不是说的 NP，而是 NP-Complete。  
 
 虽然 NP-Complete 的定义里面**也**没有直接提到"多项式不可解"，但是，可以注意到的是，NP-Complete 问题多项式可解的充要条件是：**P=NP**。
+
+39-49???????
+
+#### NP 问题归约距离
+
