@@ -11,18 +11,22 @@ mathjax: true
 常用的可以看 MATLAB 教程书籍的附录。这里放一个整理的 [pdf](MATLAB函数速查手册.pdf)。
 
 ## 好用的函数收集
-
+ 
 （从 xls  txt）读写表格：`xlsread`，`readmatrix`（MATLAB R2019a 起）。
 
 映射、map：[`containers.Map`](https://ww2.mathworks.cn/help/matlab/matlab_prog/creating-a-map-object.html)。
 
 分段函数：`piecewise`。
 
-求函数最小值：
-    - `fminunc()` (Function MINimun UNConstraint)
-    -  `ga()` ([Genetic Algorithm](../genetic-algorithm#在-MATLAB-中调用遗传算法)). 
+## 最优化
 
+求函数最小值，有一堆工具箱函数~~不知道有什么区别~~：
 
+* `fminunc()` (Function MINimun UNConstraint)
+* `fmincon()` Find minimum of unconstrained multivariable functioncollapse
+* `fminsearch()` 使用无导数法计算无约束的多变量函数的最小值
+* `linprog()` 解线性规划问题
+* `ga()` ([遗传算法](../genetic-algorithm#在-MATLAB-中调用遗传算法)). 
 
 ## 统计函数
 
