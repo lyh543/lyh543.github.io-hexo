@@ -55,7 +55,7 @@ int main()
 输出 2。
 
 
-[参考代码](add1.cpp)
+[参考代码](Add_1.cpp)
 
 ### addAll()
 
@@ -76,7 +76,7 @@ int main()
 2 3 4
 ```
 
-[参考代码](addAll.cpp)
+[参考代码](Add_All.cpp)
 
 ## 实现一个栈
 
@@ -114,10 +114,34 @@ int main()
 
 要求算法复杂度不大于 $O((|t|-|s|)*|s|)$。
 
-[参考代码](stringMatching.cpp)
+[参考代码](String_Matching.cpp)
 
-## 括号匹配
+## 括号匹配（10.10）
 
 https://www.luogu.org/problem/P1739
 
+[参考代码](Bracket_Matching.cpp)
 
+## 哈希查找（10.13）
+
+用哈希散列实现以下算法：
+
+输入 $n$ 和 $m$，随后输入 $n$ 个数和 $m$ 个数，问这 $m$ 个数中有多少个出现在了 $n$ 个数之中。
+
+$n, m \leq 10^5, a_i \leq 10^9$。要求从文件 `input.txt` 里输入。
+
+提示：数可能有重复。
+
+样例输入：
+
+```
+3 3
+1 2 2
+1 1 3
+```
+
+输出 `2`。
+
+用 `C++ set` 写的[数据生成代码](Hash_Data_Maker.cpp)。
+
+[参考代码](Hash_Searching.cpp)

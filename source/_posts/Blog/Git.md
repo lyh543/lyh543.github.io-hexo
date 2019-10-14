@@ -36,6 +36,8 @@ git 默认是不能保存密码的，每次 push 都需要输入账号密码，�
 一个选择是 ssh，这个方便，但是问题就是，使用 ssh 以后，就不能直接挂梯子了（梯子走 https 的）。
 第二个方案是走 https，不过让 Git 保存密码。这又分了两种方法。
 
+多 ssh 部署可以看链接：https://www.awaimai.com/2200.html
+
 ### 在 Linux 下 git 使用 ssh 密钥
 
 大概分为三步走：
