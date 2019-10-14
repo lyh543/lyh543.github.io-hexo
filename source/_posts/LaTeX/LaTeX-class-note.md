@@ -72,11 +72,11 @@ mathjax: true
 `\songti`|宋体
 `\heiti`|黑体
 `\fangsong`|仿宋
-`kaishu`|楷书
-`lishu`|隶书
-`youyuan`|幼圆
+`\kaishu`|楷书
+`\lishu`|隶书
+`\youyuan`|幼圆
 
-字号 `zihao`、字距 `ziju` 等特殊格式请查阅 ctex 官方文档。
+字号 `\zihao`、字距 `\ziju` 等特殊格式请查阅 ctex 官方文档。
 
 ## 文档基本符号
 
@@ -124,8 +124,8 @@ MathJax 的写法：`\space`、`\\;`、`"\\ "`（不含引号）。
 使用 `\noindent` 以去掉首行缩进，使用 `\indent` 以加入首行缩进。
 
 左对齐：`\begin{flushleft}`（默认，所以不常用）  
-右对齐：`begin{flushright}`  
-居中：`begin{center}`
+右对齐：`\begin{flushright}`  
+居中：`\begin{center}`
 
 ### 章节格式
 

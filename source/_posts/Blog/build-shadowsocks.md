@@ -47,7 +47,7 @@ nano /etc/shadowsocks-libev/config.json
     "server":"0.0.0.0",
     "server_port":443,
     "local_port":1080,
-    "password":"qazwsxedc123",
+    "password":"AMDyes",
     "timeout":600,
     "method":"aes-256-cfb",
     "fast_open": false
