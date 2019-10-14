@@ -77,6 +77,13 @@ x = ga(problem)
 
 上述 $A$、$b$、$A_{eq}$、$b_{eq}$、`nonIcon` 如果想要设为空，请使用 `[]`。
 
+如果想要屏蔽输出 `Optimization terminated: ....`，要使用 `option` 参数：
+
+```m
+op=optimoption('ga');
+op.Display=off;
+```
+
 更多细节还是看官网吧。
 
 ### 优化工具 Optimization Tool

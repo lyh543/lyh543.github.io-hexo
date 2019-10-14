@@ -24,7 +24,7 @@ git init
 
 ```bash
 # 如果本地、服务器端不一致，需要 git pull
-$ git add --all
+$ git add --all # 单文件是 git add <file>
 $ git commit -m "upload 2 files."
 $ git push
 ```
@@ -204,6 +204,12 @@ git reset --hard HEAD~100
 git reset --hard 236c
 git reflog
 ```
+
+### 修改上次 commit
+
+可以使用 `git commit --amend -m "xxx"` 以修改上次的 commit。
+
+如果已经 push 了，下次就需要 `git push -f` 强制推送。如果还没有 `push`，就当一切都没发生过，直接 `git push` 就行。
 
 ## git 修改设置
 

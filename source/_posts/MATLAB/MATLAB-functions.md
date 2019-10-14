@@ -22,10 +22,13 @@ mathjax: true
 
 求函数最小值，有一堆工具箱函数~~不知道有什么区别~~：
 
-* `fminunc()` (Function MINimun UNConstraint)
-* `fmincon()` Find minimum of unconstrained multivariable functioncollapse
-* `fminsearch()` 使用无导数法计算无约束的多变量函数的最小值
+* `fminbnd()` 求一元函数极值
+* `fminsearch()` 使用无导数法计算无约束多变量函数的最小值（梯度下降法）
+* `fminunc()` 计算无约束的多变量函数的最小值（牛顿法）
+* `fmincon()` 计算有约束的多变量函数的最小值
 * `linprog()` 解线性规划问题
+* `intlinprog()` 解整数线性规划问题
+
 * `ga()` ([遗传算法](../genetic-algorithm#在-MATLAB-中调用遗传算法)). 
 
 ## 统计函数

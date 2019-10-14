@@ -89,6 +89,10 @@ $V^{-1} \cdot D \cdot V = A$
 `double`, `char`, `sym`, `struct`, `cell`  
 数组以1开头（毕竟万物皆矩阵）
 
+#### 取整函数
+
+`ceil` 向上取整、`floor` 向下取整、`round` 四舍五入、`fix` 向零取整。
+
 #### 强制转换
 
 ```MATLAB
