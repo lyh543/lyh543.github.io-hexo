@@ -1,13 +1,17 @@
 ---
 title: LaTeX 数学公式学习笔记
+date: 2019-10-15
 category:
 - LaTeX
 mathjax: true
 ---
 
+LaTeX 更多语法请见另一篇[博客](../LaTeX-class-note)。
+
 ## 基本语法
 
-1. 在一对`$`中间即是行内公式，在一对`$$`即是行间居中公式。亦可以在`\begin{equation}`和`\end{equation}`之间打公式。  
+1. MathJax 在一对 `$` 中间即是行内公式，在一对 `$$` 即是行间居中公式。亦可以在 `\begin{equation}` 和 `\end{equation}` 之间打行间公式。  
+LaTeX 稍有区别（[见后](#纯正-LaTeX-插入公式)），但也可以使用上面的东西。
 
 ```
 $$a+b=c$$
@@ -23,13 +27,15 @@ $$a+b=c$$
 
 \begin{equation}a+b\end{equation}
 
+另外，还可以使用 `\(` `\)`、
+
 2. 下标`_`，上标`^`，后面跟`{}`  
 如`$a^{2}_{j}$`: $a^{2}_{j}$
 3. `[]`即是中括号。
 如`$[1+2]$`: $[1+2]$
 4. 编译时无视空格、回车，空格只用于分隔识别符。公式中需要空格请前往[#排版](#排版)
 5. LaTeX换行中行末需要`\\`，由于 Markdown 和 MathJax 进行了两次渲染，所以需要`\\\\`。
-6. 目前已发现的需要用 `\`（Markdown 中需要 `\\`。下如不提及是在 Markdown 中使用 `\`，均为`\\`）转移的符号有：`%`，`&`，`\`，`{}`。
+6. 目前已发现的需要用 `\`（Markdown 中需要 `\\`。下如不提及是在 Markdown 中使用 `\`，均为`\\`）转义的符号有：`%`，`&`，`\`，`{}`。
 
 ```latex
 \begin{equation}
@@ -246,6 +252,7 @@ $$f(x)=
 1cm短空格|`$a\quad b$`|$a\quad b$|
 2cm长空格|`$a\qquad b$`|$a\qquad b$|
 换行并对齐|`$\begin{split}`<br>`x&=a+b+c\\`<br>`&=d+e\\`<br>`&=g+f`<br>`\end{split}$`|$\begin{split}x&=a+b+c\\\\&=d+e\\\\&=g+f\end{split}$|开头`\begin{split}`<br>结束`\end{split}`<br>行末`\\`<br>需要对齐的符号前`&`
+||`&`常用于对齐
 省略号|`1...n`<br>`1 \dots n`|$1 \dots n$
 |`1 \cdots n`|$1 \cdots n$
 |`\vdots`|$\vdots$
@@ -269,3 +276,40 @@ $$f(x)=
 {%asset_img 54.gif%}
 {%asset_img 55.gif%}
 {%asset_img 56.gif%}
+
+## 纯正 LaTeX 插入公式
+
+由于博主在接触 LaTeX 之前就学了 MathJax，所以上述的大多数语法都是基于 MathJax 而非纯正 LaTeX 语法。
+
+LaTeX 插入公式的格式和 MathJax 稍有区别，但是公式的语法还是差不多的。
+
+LaTeX 插入数学公式需要调用宏包：
+
+```latex
+\usepackage{amsmath}
+\usepackage{amssymb}
+```
+
+（貌似 TeXstudio 自带，不需要这两行命令也能写数学公式）
+
+行内公式的格式有：
+
+```latex
+\(a+b\)
+$a+b$ %最常用；MathJax 仅支持这种
+\begin{math}a+b\end{math}
+```
+
+行间公式：
+
+```latex
+\[a+b\]
+$$a+b$$ %最常用；MathJax 仅支持这种
+\begin{displaymath}a+b\end{displaymath}
+```
+
+MathJax 支持另一种行间公式：`\begin{equation}a+b\end{equation}`。
+
+LaTeX 也支持这个功能，但是会进行自动标号（MathJax 不会标号）。
+
+要想不标号，请使用 `\begin{equation*}`。与 `\section*{}` 如出一辙。

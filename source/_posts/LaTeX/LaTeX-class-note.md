@@ -82,7 +82,7 @@ mathjax: true
 
 ### 空格、回车
 
-转义的字词后，空格不起作用，除了使用 `\space`，还可以使用 `\;` 和 `"\ "`（不含引号）。  
+转义的字词后，空格不起作用，除了使用 `\space`，还可以使用`"\ "`（不含引号，最常用）、`\,`、`\;`、`\:`。  
 MathJax 的写法：`\space`、`\\;`、`"\\ "`（不含引号）。
 
 换行使用 `\endline`、`\\` ，也可以使用两个回车。一个回车没有用。（MathJax 中得 `\\\\`）
@@ -114,7 +114,7 @@ MathJax 的写法：`\space`、`\\;`、`"\\ "`（不含引号）。
 下划线处理大段文字时，不能自动换行（大概是数学公式并不需要换行）。  
 
 需要引入 `ulem` 宏包，并将 `\underline` 改为 `\ulem`。  
-不过如果中文包使用的是 `CJK`，需要使用 `CJKulem`。
+如果中文包使用的是 `CJK`，需要将引入的宏包改为 `CJKulem`。
 
 
 ### 段落格式
@@ -150,3 +150,28 @@ MathJax 的写法：`\space`、`\\;`、`"\\ "`（不含引号）。
 以上命令可放全局变量位置或文档正文位置。
 
 然后在正文里调用一句 `\maketitle` 产生标题。
+
+### 摘要和关键字
+
+摘要可以用自带的，但是关键字需要自己写。
+
+```latex
+\begin{abstract}
+	This is an example of abstract.
+	
+	\textbf{Keywords}: Abstract, Exmaple
+\end{abstract}
+```
+
+如果你正在中文环境上写英文文章，你就会遇到啼笑皆非的情况~~和我一样~~：英文摘要上方写着大大的汉字“摘要”！
+
+遇到这种情况，你只需要在摘要前加一行代码：
+
+```latex
+\renewcommand{\abstractname}{Your Abstract Name}
+```
+就可以把你的摘要标题变为 `Your Abstract Name` 了。
+
+## 数学公式
+
+正式学 LaTeX 之前我就开始写数学公式了，所有内容我就放在另外一篇[博客](../LaTeX-math-equation)了。
