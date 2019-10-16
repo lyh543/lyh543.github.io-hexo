@@ -4,7 +4,7 @@ date: 2019-8-17
 tags: 
 - npm
 category: 
- - Blog
+- Linux
 ---
 
 npm是随同NodeJS一起安装的包管理工具。
