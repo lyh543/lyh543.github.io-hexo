@@ -15,10 +15,39 @@ mathjax: true
 * [npm](../npm)
 * [vi 基础](../vi)
 
-## 修改 root 密码
+## 系统
+
+### 修改 root 密码
 
 ```
 sudo passwd root
+```
+
+### 查看 Linux 发行版名称和版本号
+
+> 转载自：[如何查看LINUX发行版的名称及其版本号](https://www.qiancheng.me/post/coding/show-linux-issue-version)
+
+#### 查看 Linux 内核版本
+
+1. `cat /proc/version`
+
+2. `uname -a`
+
+#### 查看 Linux 系统版本
+
+1. `lsb_release -a`，通用；
+
+2. `cat /etc/issue`，也是通用；
+
+3. `cat /etc/redhat-release` 只适用于 Redhat 系 Linux。
+
+## 文件
+
+### 下载、解压
+
+```bash
+wget https://github.com/fatedier/frp/releases/download/v0.29.0/frp_0.29.0_linux_amd64.tar.gz
+tar -zxvf frp_0.29.0_linux_amd64.tar.gz
 ```
 
 ## 进程

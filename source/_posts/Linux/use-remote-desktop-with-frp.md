@@ -20,7 +20,7 @@ mathjax: true
 
 除了以上选择以外，其实微软自带了远程桌面 `mstsc`。在局域网内你就可以通过远程 `*.*.*.*:3389` （你的电脑 ip）体验到远程桌面，体验同样是相当不错的。
 
-（**但是实测 mstsc 没有 Teamviewer 好，因为在 10M 以下带宽，mstsc 会模糊字体；而 Teamviewer 可以在较低的带宽显示清晰的字体**，所以本文只是用于体验）
+（**但是实测 mstsc 没有 Teamviewer 好，因为在 10Mbps 以下带宽，mstsc 会模糊字体；而 Teamviewer 可能经过玄学优化，可以在较低的带宽（实时流量一般不超过 1Mbps）显示清晰的字体**，所以本文只是用于体验，日常使用还是推荐 Teamviewer）
 
 但是，如果在外网体验的话，就不大好了。原因是，你在外网里找不到被远程端的 ip 地址（未经强调，本文所有 ip 指 ipv4，此处是因为 ipv6 在中国还没普及）。
 
@@ -34,12 +34,12 @@ ip 是一台机器在互联网上的唯一地址，可以通过你的机器 ip�
 
 因此，聪明的运营商们想了一个办法，可以用一个设备，把他的一个 ip，下发为一万个 ip（当然，远不止这么多）。  
 这种方法叫 NAT（Network Address Translation，网络地址转换）。  
-好处是 ip 够用了，坏处是，转换过的 ip 是不能在互联网上直接访问到，你就不能直接靠输入 ip 来实现远程。（所以互联网上能直接访问到的 ip 又叫公网 ip）
+好处是 ip 够用了，坏处是，转换过的 ip 是不能在互联网上直接访问到的，而且还是动态变化的。你就不能直接靠输入 ip 来实现远程内网 ip。（所以互联网上能直接访问到的 ip 又叫公网 ip）
 
 但是，你想想，肯定是会有方法的，要是你的电脑和一个有公网 ip 的电脑建立了联系，要想访问你的电脑，就可以通过找到这个 ip，让公网 ip 电脑转发一下数据到你的电脑上，就成了！  
 这便是内网穿透。
 
-内网穿透需要一台有公网的电脑，最简单的办法，就是去租一个服务器。而实现转发数据、内网穿透的软件叫 [frp](https://github.com/fatedier/frp)。
+内网穿透需要一台有公网的电脑，最简单的办法，就是去租一个服务器。而实现转发数据、内网穿透的软件也有不少，如 [frp](https://github.com/fatedier/frp)、ngrok 等等。
 
 （以下两段复制自 [使用 Shadowsocks 搭建回国代理](../build-shadowsocks)）
 
@@ -122,13 +122,17 @@ remote_port = 5200 # 服务器接收 Remote Desktop 信息的端口，可以改
 
 可能会看到 `ignore input` 之类的警告，不用管，`Ctrl+C` 退出前台即可，此时 `ssserver` 正在后台运行。
 
-客户端需要开机后台启动 `frpc`，可以使用 vbs：
+客户端需要开机后台启动 `frpc`，网上有说把 vbs 脚本放在 Startup 目录，博主试了一下不行：
 
-新建一个文本文档，加入下面两行脚本代码，并改名为 `startup-frpc.vbs`，复制到 `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp` 下。
+> 新建一个文本文档，加入下面两行脚本代码，并改名为 `startup-frpc.vbs`，复制到 `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp` 下。
 
 ```vbs
 set ws=WScript.CreateObject("WScript.Shell")
 ws.Run "c:\frp\frpc.exe -c c:\frp\frpc.ini",0
 ```
 
-要是这时没启动，就双击执行一下 vbs 即可。
+推荐用 `任务计划`，用 GUI 设定一下就行。具体百度吧，不难，启动命令用 `start /b frpc.exe -c frpc.ini`。
+
+## 后记
+
+利用 frp，还可以进行一些骚操作：把自己的电脑当做云盘（比云服务提供的大）、配合 Shadowsocks 和学校寝室的电脑搭建校园网的代理。总之，几个东西的搭配，就能搞很多东西出来了。
