@@ -1,5 +1,5 @@
 ---
-title: z的函数题
+title: z的专属题库
 date: 2019-8-15
 mathjax: true
 ---
@@ -145,3 +145,19 @@ $n, m \leq 10^5, 1 \leq a_i \leq 10^9$。要求从文件 `input.txt` 里输入�
 用 `C++ set` 写的[数据生成代码](Hash_Data_Maker.cpp)。
 
 [参考代码](Hash_Searching.cpp)
+
+## 字符串移位
+
+题目来自[编程珠玑](/Computer-Science/Programming-Pearls/#将一个字符串-S-的后-i-位移到前-i-位)。  
+
+要求用移位和倒序两种方法实现。
+
+## 各类排序算法
+
+各类排序算法以函数的形式写在一个文件里。[代码](sort.cpp)
+
+包含的排序有：
+
+* 简单插入排序
+
+* 希尔排序

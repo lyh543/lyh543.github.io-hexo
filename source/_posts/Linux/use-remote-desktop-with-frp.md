@@ -18,9 +18,7 @@ mathjax: true
 * Anydesk 国内网速太慢，不可用；
 * 应急的话，还可以用 QQ 的远程协助。（用 QQ 的远程协助启动 Teamviewer 的远程协助）
 
-除了以上选择以外，其实微软自带了远程桌面 `mstsc`。在局域网内你就可以通过远程 `*.*.*.*:3389` （你的电脑 ip）体验到远程桌面，体验同样是相当不错的。
-
-（**但是实测 mstsc 没有 Teamviewer 好，因为在 10Mbps 以下带宽，mstsc 会模糊字体；而 Teamviewer 可能经过玄学优化，可以在较低的带宽（实时流量一般不超过 1Mbps）显示清晰的字体**，所以本文只是用于体验，日常使用还是推荐 Teamviewer）
+除了以上选择以外，其实微软自带了远程桌面 `mstsc`。在局域网内你就可以通过远程 `*.*.*.*:3389` （你的电脑 ip）体验到远程桌面，体验同样是相当不错的，几乎和 Teamviewer 是一样的（所以一般的同学就可以直接选 Teamviewer 了）。
 
 但是，如果在外网体验的话，就不大好了。原因是，你在外网里找不到被远程端的 ip 地址（未经强调，本文所有 ip 指 ipv4，此处是因为 ipv6 在中国还没普及）。
 
@@ -116,13 +114,19 @@ remote_port = 5200 # 服务器接收 Remote Desktop 信息的端口，可以改
 
 如果没什么问题，就可以测试远程桌面了。
 
+注意，远程桌面连接的时候可能会提示密码错误（即使你密码输入正确了）。  
+这大概是个 bug，原因是你远程那边登录使用的不是密码（而是 PIN）。~~说不定是个为了安全的 feature 呢~~ 
+解决方法是，远程端那边需要想办法注销账户，然后用密码登录，这边再远程就没有说明问题了。
+
 要是可以正常使用，就可以准备守护进程了。
 
-服务端使用 `nohup /etc/frp/frps -c /etc/frp/frps.ini & &> /dev/null`。
+### 服务端后台运行
+
+服务端使用 `nohup /etc/frp/frps -c /etc/frp/frps.ini & &> /dev/null` 使 frp 后台运行。
 
 可能会看到 `ignore input` 之类的警告，不用管，`Ctrl+C` 退出前台即可，此时 `ssserver` 正在后台运行。
 
-客户端需要开机后台启动 `frpc`，网上有说把 vbs 脚本放在 Startup 目录，博主试了一下不行：
+客户端需要开机后台启动 `frpc`，可以把 vbs 脚本放在 Startup 目录。
 
 > 新建一个文本文档，加入下面两行脚本代码，并改名为 `startup-frpc.vbs`，复制到 `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp` 下。
 
@@ -131,7 +135,7 @@ set ws=WScript.CreateObject("WScript.Shell")
 ws.Run "c:\frp\frpc.exe -c c:\frp\frpc.ini",0
 ```
 
-推荐用 `任务计划`，用 GUI 设定一下就行。具体百度吧，不难，启动命令用 `start /b frpc.exe -c frpc.ini`。
+也可以用 `任务计划`，用 GUI 设定一下就行。具体百度吧，不难，启动命令用 `start /b frpc.exe -c frpc.ini`。
 
 ## 后记
 

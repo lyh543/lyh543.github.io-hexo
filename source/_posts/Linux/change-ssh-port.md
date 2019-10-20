@@ -9,6 +9,8 @@ category:
 mathjax: true
 ---
 
+## 修改 ssh 端口的前因后果
+
 今天用安卓手机 ssh 连接我的服务器的时候，出现了 `kex_exchange_identification`。又要修 bug 了。
 
 百度了一下，按照 [ssh连接失败，排错经验](https://www.cnblogs.com/starof/p/4709805.html) 的步骤做了一下，发现 ssh 有时连得上，有时连不上。迷惑行为。
@@ -47,6 +49,8 @@ ssh 没有仅允许白名单访问的方法，那咋办嘛。
 后来突然想到，**不应该用默认端口的**，否则他发现端口可用就可以暴力破解了！
 
 于是下面才是正题：如何更改 ssh 的端口。
+
+## 修改方法
 
 ```
 vi /etc/ssh/sshd_config

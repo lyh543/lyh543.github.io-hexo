@@ -8,6 +8,8 @@ mathjax: true
 
 LaTeX 更多语法请见另一篇[博客](../LaTeX-class-note)。
 
+纯正的 LaTeX 调用公式的语法请见[最后一部分](#纯正-LaTeX-插入公式)。
+
 ## 基本语法
 
 1. MathJax 在一对 `$` 中间即是行内公式，在一对 `$$` 即是行间居中公式。亦可以在 `\begin{equation}` 和 `\end{equation}` 之间打行间公式。  
@@ -233,15 +235,15 @@ $$\Bigg ( \bigg [ \Big \\{ \big \langle \left | \| x \| \right | \big \rangle \B
 ```latex
 $$f(x)=
 \begin{cases}
-0& \text{x=0}\\\\
-1& \text{x \neq 0}
+0& x=0\\\\
+1& x \neq 0
 \end{cases}$$
 ```
 
 $$f(x)=
 \begin{cases}
-0& \text{x=0}\\\\
-1& \text{x \neq 0}
+0& x=0\\\\
+1& x \neq 0
 \end{cases}$$
 
 ## 排版

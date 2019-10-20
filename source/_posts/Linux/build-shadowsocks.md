@@ -67,11 +67,13 @@ nano /etc/shadowsocks-libev/config.json
 
 如果连接以后，随便上一个网，看到服务器上出现 `INFO     connecting www.baidu.com:443 from x.x.x.x`，那么恭喜你，成功啦！
 
-## 服务器上守护进程
+## 服务器上后台运行、开机自启
 
-可以用了以后，你想要开机自启，还想要让他在后台跑，就需要进程守护。下面两种方法二选一：
+下面两种方法二选一：
 
-### 使用 nohup
+### 使用 nohup 后台运行
+
+由于服务器一般是不断电一直运行的。因此一般不用考虑开机自启的。
 
 使用 `nohup` 的话，一行代码就 ok：
 
@@ -82,14 +84,24 @@ nohup ssserver & &> /dev/null
 
 可能会看到 `ignore input` 之类的警告，不用管，`Ctrl+C` 退出前台即可，此时 `ssserver` 正在后台运行。
 
-### 使用 pm2
+### 设置开机自启
+
+在 `/etc/rc.local` 直接追加命令即可。
+
+```
+sudo echo "nohup ssserver & &> /dev/null" >>/etc/rc.local
+```
+
+### 使用 pm2 后台守护、开机自启
+
+pm2 可以进行后台守护、开机自启。
 
 这个要麻烦一点，要从 `npm` 下载，所以还得先下载 `npm`。
 
 ```bash
-apt install npm
-npm install pm2 -g
+sudo apt install npm
+sudo npm install pm2 -g
 pm2 --name s1 -f start ss-server # 配置 pm2
-pm2 startup # 启动
+pm2 startup # 设置 pm2 开机自启
 pm2 save # 保存
 ```
