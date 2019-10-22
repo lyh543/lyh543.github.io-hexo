@@ -41,20 +41,20 @@ $$a+b=c$$
 
 ```latex
 \begin{equation}
-\begin{split}
+\begin{aligned}
 x&=a+b+c\\\\
 &=d+e\\\\
 &=f+g
-\end{split}
+\end{aligned}
 \end{equation}
 ```
 
 \begin{equation}
-\begin{split}
+\begin{aligned}
 x&=a+b+c\\\\
 &=d+e\\\\
 &=f+g
-\end{split}
+\end{aligned}
 \end{equation}
 
 
@@ -71,17 +71,22 @@ x&=a+b+c\\\\
 |`1/2`|$1/2$
 方根|`\sqrt[3]{2}`|$\sqrt[3]{2}$
 |`\surd{2}`|$\surd{2}$
+取模|`a \bmod b`|$a \bmod b$
+|`7 \equiv 1 \pmod 3`|$7 \equiv 1 \pmod 3$
 
 ## 常用关系符
 
 在关系符前面加`\not`可得其否定形式。
 `\not\equiv`: $\not\equiv$
 
+另外，可以使用 `\stackrel{}{}` 实现两符号的上下重叠。见[排版](#排版)。
+
 中文|LaTeX语句|数学符号
 -|-|-
 等价|`\equiv`|$\equiv$
 不等于|`\neq`|$\neq$
 相似|`\sim`|$\sim$
+全等|`\simeq`|$\simeq$
 
 ## 微积分
 
@@ -94,24 +99,44 @@ x&=a+b+c\\\\
 二重积分|`\iint_{0}^{1}{\frac{1}{n+1}}`|$\iint_{0}^{1}{\frac{1}{n+1}}$
 偏导数|`\frac{\partial y}{\partial x}`|$\frac{\partial y}{\partial x}$
 
+有些上下标的位置在文中公式和独立公式中是不一样的，以 `\sum` 为例：
+
+* 文中公式 `$\sum_1^2x$` 的效果为：$\sum_1^2x$；
+* 独立公式 `$$\sum_1^2x$$` 的效果为：
+
+$$\sum_1^2x$$
+
+
+但也可以用 `\limits` 和 `\nolimits` 来控制上下标的出现位置：
+
+* 使用方法如 `$\sum\limits_1^2x$` 就强制将上下标写在上边和下边：$\sum\limits_1^2x$  
+* 而 `$$\sum\nolimits_1^2x$$` 使其强制出现在右边角上：
+
+$$\sum\nolimits_1^2x$$
+
 ## 上下划线
 
 中文|LaTeX语句|数学符号
 -|-|-
+加粗|`\mathbf{X}`|$\mathbf{X}$
 上划线|`\overline{123}`|$\overline{123}$
+下划线|`\underline{123}`|$\underline{123}$
 上括弧|`\overbrace{a+b+\cdots+z}^{26}`|$\overbrace{a+b+\cdots+z}^{26}$
 下括弧|`\underbrace{a+b+\cdots+z}_{26}`|$\underbrace{a+b+\cdots+z}_{26}$
 向量|`\vec{a}\qquad\vec{AB}`|$\vec{a}\qquad\vec{AB}$
-||`\overrightarrow{AB}`|$\overrightarrow{AB}$
-||`\overleftarrow{AB}`|$\overleftarrow{AB}$
+|`\overrightarrow{AB}`|$\overrightarrow{AB}$
+|`\overleftarrow{AB}`|$\overleftarrow{AB}$
 
 ## 矩阵
 
 > 参考博客：https://blog.csdn.net/bendanban/article/details/44221279
 
+另外貌似也可以使用 `\begin{array}`。
+
 ### 裸矩阵
 
 使用 `$$\begin{matrix}...\end{matrix}$$` 生成矩阵。矩阵中每一行以 `\\`换行（Markdown 中是`\\\\`），矩阵的元素用 `&` 来分隔开。  
+
 行间矩阵 $$\left(\begin{smallmatrix}1&2\\\\3&4\end{smallmatrix}\right)$$ 请使用 `$$\begin{smallmatrix}...\end{smallmatrix}$$`
 
 如，
@@ -136,73 +161,43 @@ $$
 
 ### 带括号的矩阵
 
-如果需要带括号的矩阵，一种是加 `\left( \begin{matrix} ... \end{matrix} \right)`，另一种是使用 `\begin{bmatrix}...\end{bmatrix}`。  
-不过对于 `smallmatrix`，只能使用前面的方法，不能使用后面的加括号的方法。
+如果需要带括号的矩阵，一种是用 `\left(` 和 `\right)` 括住 `\begin{matrix} ... \end{matrix}`。注意，如果不加 `\left` 和 `\right`，括号是和其他字符等高，而不是完全括住了矩阵。
 
-#### 花括弧
-
-注意花括弧 `{}` 也是需要用 `\` 转义的。
-
-```latex
-$$
-    \left\\{
-    \begin{matrix}
-    1 & 2 \\\\
-    3 & 4
-    \end{matrix}
-    \right\\}
-$$
-```
-
-$$
-    \left\\{
-    \begin{matrix}
-    1 & 2 \\\\
-    3 & 4
-    \end{matrix}
-    \right\\}
-$$
-
-#### 中括弧及小括弧
-
-```latex
-$$
-    \left[
-    \begin{\matrix}
-    1 & 2 \\\\
-    3 & 4
-    \end{matrix}
-    \right]
-$$
-```
-
-或
-
-```latex
-$$
-    \begin{bmatrix}
-    1 & 2 \\\\
-    3 & 4
-    \end{bmatrix}
-$$
-```
-
-的效果如下：
-
-$$
-    \left[
-    \begin{matrix}
-    1 & 2 \\\\
-    3 & 4
-    \end{matrix}
-    \right]
-$$
+另一种是使用 `\begin{bmatrix}...\end{bmatrix}`。  
 
 不同的 matrix 名对应的矩阵列表如下：
 
 代码|`pmatrix`|`bmatrix`|`Bmatrix`|`vmatrix`|`Vmatrix`
 -|-|-|-|-|-
-示例|$$\begin{pmatrix} 1&2\\\\3&4\end{pmatrix}$$|$$\begin{bmatrix} 1&2\\\\3&4\end{bmatrix}$$|$$\begin{Bmatrix} 1&2\\\\3&4\end{Bmatrix}$$|$$\begin{vmatrix} 1&2\\\\3&4\end{vmatrix}$$|$$\begin{Vmatrix} 1&2\\\\3&4\end{Vmatrix}$$
+示例|$$\begin{pmatrix} 1&2\\\\3&4\end{pmatrix}$$ | $$\begin{bmatrix} 1&2\\\\3&4\end{bmatrix}$$|$$\begin{Bmatrix} 1&2\\\\3&4\end{Bmatrix}$$|$$\begin{vmatrix} 1&2\\\\3&4\end{vmatrix}$$|$$\begin{Vmatrix} 1&2\\\\3&4\end{Vmatrix}$$
+
+但是直接用 `{}`，它不香吗？
+
+对于 `smallmatrix`，只能使用第一种方法，不能使用后面的更改 `matrix` 类型的方法。
+
+### 数组 array
+
+貌似 `array` 也可以用于建矩阵，而且**必须**指定列对齐的形式：
+
+$$
+\begin{array}{clr}
+1 & 2 & 3 \\\\
+4 & 5 & 6 \\\\
+7 & 8 & 9
+\end{array}
+$$
+
+```
+\begin{array}{clr}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{array}
+```
+
+`clr` 的每个字母分别代表了一列的对齐方式：第一列居中 `c(enter)`、第二列左对齐 `l(eft)`、第三列右对齐 `r(ight)`。
+
+
 
 ## 奇奇怪怪的括号
 
@@ -253,13 +248,14 @@ $$f(x)=
 普通空格|`$a \space b \\; c \\  d$`|$a \space b \\; c \\  d$|
 1cm短空格|`$a\quad b$`|$a\quad b$|
 2cm长空格|`$a\qquad b$`|$a\qquad b$|
-换行并对齐|`$\begin{split}`<br>`x&=a+b+c\\`<br>`&=d+e\\`<br>`&=g+f`<br>`\end{split}$`|$\begin{split}x&=a+b+c\\\\&=d+e\\\\&=g+f\end{split}$|开头`\begin{split}`<br>结束`\end{split}`<br>行末`\\`<br>需要对齐的符号前`&`
+换行并对齐|`$\begin{aligned}`<br>`x&=a+b+c\\`<br>`&=d+e\\`<br>`&=g+f`<br>`\end{aligned}$`|$\begin{aligned}x&=a+b+c\\\\&=d+e\\\\&=g+f\end{aligned}$|开头`\begin{aligned}`<br>结束`\end{aligned}`<br>行末`\\`<br>需要对齐的符号前`&`
 ||`&`常用于对齐
 省略号|`1...n`<br>`1 \dots n`|$1 \dots n$
 |`1 \cdots n`|$1 \cdots n$
 |`\vdots`|$\vdots$
 |`\ddots`|$\ddots$
-公式标号|`a^2 + b^2 = c^2 \tag{1}`|$a^2 + b^2 = c^2 \tag{1}$
+公式标号|`a^2 + b^2 = c^2 \tag{1}`|$a^2 + b^2 = c^2 \tag{1}$|原生 LaTeX 的 `$$a+b$$` 是自带编号的
+重叠符号|`\stackrel{F}{=}`|$\stackrel{F}{=}$
 
 ## 数学符号表
 
