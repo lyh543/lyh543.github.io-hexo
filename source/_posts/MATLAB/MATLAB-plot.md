@@ -101,14 +101,14 @@ fplot(funx,funy)
 fplot(funx,funy,tinterval)
 ```
 
-### ezplot
+## ezplot
 
 ```MATLAB
 ezplot(sin(x)/x);
 ezplot(t,t^2,[1,2]);
 ```
 
-### scatter 散点图
+## scatter 散点图
 
 后来老师讲了带参数的 `plot`，真香。（`scatter` 的图默认是空心的大圈，不香）
 
@@ -117,3 +117,11 @@ for i = 1:10
     scatter(i,rand()), hold on;
 end
 ```
+
+## histogram 直方图
+
+旧版使用 `hist`，新版使用 `histogram`。
+
+输入一个向量，绘出 x 的每个元素的直方图。
+
+其中，默认把 x 的值分为 10 个区间。

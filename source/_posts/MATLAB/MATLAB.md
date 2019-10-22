@@ -37,6 +37,10 @@ mathjax: true
 >> zeros(3)   % 可用于初始化
 ```
 
+神奇的是， `zeros` 一开始并没有占用内存，而 `ones` 就会占用。
+
+另有 `normrnd(mu, sigma)` 按正态分布生成随机函数。
+
 ### 矩阵的合并、取行列
 
 ```MATLAB
