@@ -4,7 +4,7 @@ date: 2019-09-16 20:25:23
 tags:
 - 课程笔记
 category:
-- MATLAB
+- 数学建模
 mathjax: true
 ---
 
