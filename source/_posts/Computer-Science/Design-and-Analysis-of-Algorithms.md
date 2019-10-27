@@ -3,6 +3,7 @@ title: 算法设计
 date: 2019.10.28
 tags:
 - 课程笔记
+- 坑
 category:
 - 计算机科学
 mathjax: true
@@ -20,13 +21,17 @@ mathjax: true
 
 ### 问题的分类（按复杂度）
 
-P: a solutuon can be solved in polynimoal time.
-NP: a solution can be checked in polynomial time.
-NPC: problems that may not have a polynomial-time algorithm.
+* P: a solutuon can be solved in polynimoal time.
+* NP: a solution can be checked in polynomial time.
+* NPC: problems that may not have a polynomial-time algorithm.
 
 ![P NP NP-Complete NP-Hard](P_np_np-complete_np-hard.svg)
 
-PTAS: Polynomial-time approximation scheme, an approximation algorithm
+*PTAS: Polynomial-time approximation scheme
+
+和上面不同的是，上面的词描述的都是问题，而 PTAS 是解决问题的方法。也就是说，可以说某个 NP-Hard 问题有 PTAS 算法。
+
+PTAS 要求对于给定的任意近似率 1+ε，都能给出一个多项式算法，虽然这个多项式在 ε 趋于 0 时会变为指数级或更高。一般来说 PTAS 算法的复杂度都可以写为 $O(n^{(1/ε)})$ 或 $O(n^{exp(1/ε)})$。如 TSP 问题和背包问题都存在 PTAS 算法。
 
 #### NPC 问题的求解
 
@@ -180,7 +185,7 @@ $$ f(n) = o(g(n)) \space \Leftrightarrow \space \lim_{n \to \infty} \frac{f(n)}{
 
 分治复杂度计算：  
 
-> 若 $T(n) = k \cdot O(\frac{n}{2}) + \Theta(f(n))$，则 $T(n) = O(n^{log_2 k})\cdot T(1) + O(log n*f(n))$。（构造等比数列或列出递归树证明）
+> 若 $T(n) = k \cdot O(\frac{n}{2}) + \Theta(n)$，且  则 $T(n) = O(n^{\log_2 k})\cdot T(1) + O(n\log n)$。（构造等比数列或列出递归树证明）
 
 还有更通用的（但是好复杂）：
 
@@ -188,7 +193,9 @@ $$ f(n) = o(g(n)) \space \Leftrightarrow \space \lim_{n \to \infty} \frac{f(n)}{
 >
 > 则 $T(n)=n^{log_mk}+\sum_{j=0}^{log_mn-1}k^j f(\frac{n}{m^j})$
 
-注意分治递推表达式里面的常数 k 推出来和 n  的次数是有关系的。
+不如使用主方法。
+
+注意分治递推表达式里面的常数 $k$ 推出来和 $n$ 的次数是有关系的。
 
 #### 递归表达式处理
 
@@ -210,7 +217,7 @@ $$ f(n) = o(g(n)) \space \Leftrightarrow \space \lim_{n \to \infty} \frac{f(n)}{
 
 ### 动态规划
 
-DP 是为了解决递归算法中的重复计算。
+DP 是为了解决递归算法中的重复计算。 
 
 DP 可以写为递归形式，也可以写为自底向上的循环形式。
 
@@ -465,5 +472,7 @@ NPC 的意义是，他们是 NP 中最难的问题，因为如果证明其中一
 
 39-49???????
 
-#### NP 问题归约距离
+#### NP 问题归约例子
+
+## 近似算法
 

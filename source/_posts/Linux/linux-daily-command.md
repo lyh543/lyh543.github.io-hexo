@@ -9,7 +9,7 @@ mathjax: true
 
 常用命令的详细部分都分为单独博客撰写：
 
-* [bash语法](../bash)
+* [纯 bash 语法](../bash)
 * [Git](../Git)
 * [APT](../APT)
 * [npm](../npm)
@@ -17,9 +17,15 @@ mathjax: true
 
 ## 系统
 
+### 以 root 身份登录
+
+```sh
+sudo su
+```
+
 ### 修改 root 密码
 
-```
+```sh
 sudo passwd root
 ```
 
@@ -63,7 +69,7 @@ ps aux | grep vi
 kill -9 138
 ```
 
-### 开机自启、后台进程
+### 后台进程
 
 #### 使用 nohup
 
@@ -87,3 +93,8 @@ pm2 --name s1 -f start ss-server # 配置 pm2
 pm2 startup # 启动
 pm2 save # 保存
 ```
+
+### 开机自启
+
+在 `sudo /etc/rc.local` 最后追加命令，然后给权限 `sudo chmod a+x /etc/re.local` 即可。
+

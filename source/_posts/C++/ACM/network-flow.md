@@ -11,7 +11,7 @@ category:
 
 在 ACM 中第一次听到网络流，但是还没认真学就被迫退役了。（菜的真实）
 
-第二次是在肖老师的 [算法设计与分析](/计算机科学/Design_and_Analysis_of_Algorithms#网络流) 课程上，大概了解了网络流的思想。
+第二次是在肖老师的 [算法设计与分析](/Computer-Science/Design_and_Analysis_of_Algorithms#网络流) 课程上，大概了解了网络流的思想。
 
 ## 定义
 

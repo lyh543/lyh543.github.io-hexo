@@ -1,5 +1,5 @@
 ---
-title: bash笔记
+title: bash 笔记
 date: 2019-8-16
 tags:
 category:
@@ -35,8 +35,12 @@ mathjax: true
 ## 文件/文件夹操作
 
 ```bash
-ls  # 显示文件夹的内容
+ls  # 显示文件夹的内容， -sh 显示大小（带大小单位）
+
 cat text.txt  # 显示文档的内容
+head [-n 10] text.txt # 显示文档开头
+tail [-n 10] text.txt # 显示文档结尾
+
 mkdir new_dir # 新建文件夹
 chmod a+x test.sh # 给脚本文件加可执行的权限
 ./test.sh  # 执行可执行文件

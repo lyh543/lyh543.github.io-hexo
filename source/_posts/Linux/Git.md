@@ -98,6 +98,19 @@ origin  https://github.com/lyh543/lyh543.github.io.git (push)
 git remote set-url origin git@github.com:lyh543/lyh543.github.io.git
 ```
 
+### 题外话：把 ssh 密钥给服务器
+
+使用 ssh 远程登录服务器的时候，每次都要输入密钥。其实也可以使用 ssh 密钥进行登录。而且甚至没有 git 这么麻烦，还要去官网上加入公钥。
+
+直接一句：
+
+```
+ssh-keygen
+ssh-copy-id -i ~/.ssh/id_rsa.pub  root@192.168.x.xxx -p22
+```
+
+即可。
+
 ### Windows 下 git 使用 ssh 密钥
 
 Windows 下也可以生成 ssh 密钥对，但是需要使用第三方软件：PuTTYgen，在 Tortoise Git 中自带。由于方法不同，可以在 Windows 和 Linux 使用不同的 ssh Key。
