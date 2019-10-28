@@ -115,6 +115,7 @@ theme: indigo
 deploy:
   type: git
   repo:
-    github: https://github.com/lyh543/lyh543.github.io.git
+    # github: https://github.com/lyh543/lyh543.github.io.git
+    github: git@github.com:lyh543/lyh543.github.io.git
     coding: git@e.coding.net:lyh543/lyh543.github.io.git
   branch: master
