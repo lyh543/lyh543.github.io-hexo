@@ -8,6 +8,8 @@ category:
 mathjax: true
 ---
 
+> 2019.10.29 更新：由于 Gitalk 对 GitHub 之外的网站支持不好（在 `github.io` 以外的域名下都不能进行评论），现已迁移至 Valine。
+
 阅读 [Material 主题](https://github.com/viosey/hexo-theme-material/) 的主题配置文件以后，可以发现，Material 主题的配置文件是自带了评论区的功能，但是给的几个网站都不是很好用。（disqus国内用不了，changyan需要备案，gitment作者~~删库跑路了~~停更并把服务器关了）。  
 
 在 Material 的 github 网站的 issue 下找到了关于新增 [gitalk](https://github.com/gitalk/gitalk/blob/master/readme-cn.md) 的 pull request。  
@@ -45,7 +47,9 @@ comment:
 
 看样子 bug 是因为 Gitalk 是默认用文章标题作 issue 的 `lable`，并以此作为该评论区的唯一识别码。但是 Github 限制了 issue 的 `lable` 长度不超过 50，这导致无法正常生成评论。
 
-该 Issues 下有一条评论给出了[一个方案](https://github.com/gitalk/gitalk/issues/102#issuecomment-364930067)。但是博主尝试以后发现仍然不行，不懂 Javascript 的博主猜测是 Javascript 的函数名引用错了。经 Google 以后，找到了一个[可用的 Javascript](https://github.com/viosey/hexo-theme-material/issues/622#issuecomment-373307046)。
+该 Issues 下有一条评论给出了[一个方案](https://github.com/gitalk/gitalk/issues/102#issuecomment-364930067)，使用标题的 Hash 值作为 `label`。
+
+但是博主尝试以后发现仍然不行，不懂 Javascript 的博主猜测是 Javascript 的函数名引用错了。经 Google 以后，找到了一个[可用的 Javascript](https://github.com/viosey/hexo-theme-material/issues/622#issuecomment-373307046)。
 
 但是还有一个问题是，他不会为每一篇博客自动生成 issue，也就是初始化评论。
 

@@ -21,7 +21,9 @@ mathjax: true
 5 8
 >> 1:2:10    % 1 3 5 7 9
 >> 1:5         % 1 2 3 4 5
->> linspace(1,2,10)  %  (start, end, length) 1.0000    1.1111    1.2222    1.3333    1.4444   1.5556    1.6667    1.7778    1.8889    2.0000
+>> linspace(1,2,10)
+%  (start, end, length)
+%  1.0000    1.1111    1.2222    1.3333    1.4444   1.5556    1.6667    1.7778    1.8889    2.0000
 ```
 
 `1:5` 语法是闭区间，和 Python 左闭右开不一样。
@@ -339,32 +341,111 @@ x = 1.2*x;
 
 符号编程即 $y = ax^2 + bx + c$ 此类函数，并可以对其进行求极限、求导、积分等操作。
 
+### 替换变量（求值）
+
 ```MATLAB
 syms x y n;
-s = x^2 + y^2; subs(s,[x,y],[1,2])  % 替换变量（代值），返回 5
-
-s = simplify(cos(x)^2-sin(x)^2)     % 化简表达式，返回 cos(2*x)
-
-s = limit((1+1/n)^n, n, inf);       % 求极限，返回 exp(1)
-
-s = symsum(1/factorial(x), 0, Inf)  % 求级数，返回 exp(1)
-
-s = y^3+x^2; diff(s,y);             % 求（偏）导，返回 3*y^2
-% 另有 diff(X,n,dim) 求 dim 阶导数
-
-int(x^2);                           % 求积分，返回 x^3/3
-% 另有 int(expr,var). int(expr,a,b),  int(expr,var,a,b) 的形式
-
-taylor(exp(x),x,0,'order',3)        % 2阶泰勒展开，返回 x^2/2+x+1
+s = x^2 + y^2; subs(s,[x,y],[1,2])
 ```
 
-分段函数：`pw = piecewise(cond1,val1,cond2,val2,...,otherwiseVal)`，如`y=piecewise(x<0,-x^2,x^2);`。
+将 `x = 1, y = 2` 代入，返回 5。
+
+### 解方程
+
+```m
+y = x^2 + 2*x;
+solve(y-1,x);
+```
+
+解 `y-1=0` 关于 x  的方程。返回：
+
+
+```
+[- 2^(1/2) - 1
+   2^(1/2) - 1]
+```
+
+### 化简表达式
+
+```m
+s = simplify(cos(x)^2-sin(x)^2)
+```
+
+返回 `cos(2*x)`。
+
+### 求极限
+
+```m
+s = limit((1+1/n)^n, n, inf);
+```
+
+返回 `exp(1)`。
+
+### 求级数
+
+```m
+s = symsum(1/factorial(x), 0, Inf)
+```
+
+返回 `exp(1)`。
+
+### 求导
+
+```m
+s = y^3+x^2; diff(s,y);
+```
+
+返回 `3*y^2`。
+
+另有求 dim 阶导数：
+
+```m
+diff(X,n,dim)
+```
+
+另外，对于矩阵 `A`，`diff(A)` 是差分。  
+
+另外可以求近似导数 $f'(x)=\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h}$：
+
+```
+h = 0.001;
+X = 1:h:2;
+Y = sin(X);
+D = diff(Y)/h;
+
+### 积分
+
+```m
+int(x^2);
+```
+
+返回 `x^3/3`。
+
+另有以下形式：
+
+```m
+int(expr,var);
+int(expr,a,b);
+int(expr,var,a,b);
+```
+
+### 泰勒展开
+
+```m
+taylor(exp(x),x,0,'order',3)
+```
+
+2 阶泰勒展开，返回 `x^2/2+x+1`。 
 
 ### 解常微分方程
 
 ```MATLAB
 dsolve('Dy=(50-0.01*y)*y','y(0)=4','x'); % 二阶导的写法为'D2y'
 ```
+
+### 分段函数
+
+分段函数：`pw = piecewise(cond1,val1,cond2,val2,...,otherwiseVal)`，如`y=piecewise(x<0,-x^2,x^2);`。
 
 ## MATLAB 绘图
 
