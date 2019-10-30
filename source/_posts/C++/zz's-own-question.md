@@ -161,3 +161,7 @@ $n, m \leq 10^5, 1 \leq a_i \leq 10^9$。要求从文件 `input.txt` 里输入�
 * 简单插入排序
 
 * 希尔排序
+
+## 从后序、中序遍历求先序遍历
+
+[洛谷 P1030](https://www.luogu.org/problem/P1030)
