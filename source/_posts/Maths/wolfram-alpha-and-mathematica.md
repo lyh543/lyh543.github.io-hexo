@@ -2,7 +2,7 @@
 title: Wolfram Alpha 和 Mathematica
 date: 2019-7-7
 category:
-- MATLAB
+- 数学
 ---
 
 之前一直分不清 Wolfram Alpha 和 Mathematica，以为在线的那个网站就是 Mathematica。

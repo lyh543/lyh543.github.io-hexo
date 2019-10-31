@@ -4,7 +4,7 @@ date: 2018-07-01
 tags:
 - 读书笔记
 category:
-- Others
+- 数学
 mathjax: true
 ---
 

@@ -4,7 +4,7 @@ date: 2019-10-28 19:35:27
 tags:
 - 课程笔记
 category:
-- 数学建模
+- 数学
 mathjax: true
 ---
 

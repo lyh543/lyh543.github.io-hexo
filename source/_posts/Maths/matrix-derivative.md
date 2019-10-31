@@ -2,8 +2,9 @@
 title: 矩阵求导（转载）
 date: 2019-10-04 17:22:53
 tags:
+- 转载
 category:
-- 计算机科学
+- 数学
 mathjax: true
 ---
 
