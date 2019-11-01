@@ -25,11 +25,13 @@ Github markdown 支持目录/页内跳转。只需要在网页链接以后加 `#
 3. 把空格变为连字符 `-`；
 4. 如果标题不唯一，则在标题后加 `-1`，`-2`，……
 
-如对于这篇[博客](/Cpp/Cpp-Grammar/time)的“MSVC 下获取本程序运行的时间（μs 级）”标题，应使用
+如对博主的另一篇博客的的 `MSVC 下获取本程序运行的时间（μs 级）` 标题，应使用
 
 `[MSVC 下获取本程序运行的时间（μs 级）](/cpp/cpp-grammar/time/#msvc-下获取本程序运行的时间μs-级)`
 
 [MSVC 下获取本程序运行的时间（μs 级）](/cpp/cpp-grammar/time/#msvc-下获取本程序运行的时间μs-级)
+
+其实这公式也不用记，如果你的博客有 toc(table of contents，即目录) 的功能，直接复制对应标题的目录的链接就可以了。
 
 ## 图片链接
 
@@ -37,7 +39,7 @@ Github markdown 支持目录/页内跳转。只需要在网页链接以后加 `#
 
 ![image](https://gitee.com/uploads/images/2019/0424/194736_1331e2af_551056.jpeg)
 
-想要修改图片大小，必须使用 HTML 语法~~不会~~。
+想要修改图片大小，必须使用 HTML 语法~~不会~~。所以还是本地用 PS 改图片大小吧。
 
 ## 超链接
 
@@ -203,4 +205,5 @@ int main()
 
 ## LaTeX 公式
 
-原生Markdown不支持LaTeX数学公式，要想使用，请移步Mathjax.
+原生Markdown不支持LaTeX数学公式，要想使用，请移步Mathjax。
+
