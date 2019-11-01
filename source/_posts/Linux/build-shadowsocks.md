@@ -4,6 +4,7 @@ date: 2019-10-14 12:33:12
 tags: 
 - 服务器
 - Shadowsocks
+- ssh
 category:
 - Linux
 mathjax: true
