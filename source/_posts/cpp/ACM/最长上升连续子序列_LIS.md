@@ -14,7 +14,7 @@ category:
 因为上升子序列的 LIS 里面一个数不能排在相同的数的后面，所以这个数必须要找到 `lower_bound()`
 
 `upperbound()` 的 `last` 参数取不到这个点，类似于end()
-[lower_bound 和 upper_bound](../../C++语法/lowerbound_upperbound/)
+[lower_bound 和 upper_bound](../../cpp-grammar/lowerbound_upperbound/)
 
 ```c++
 //上升子序列

@@ -11,7 +11,7 @@ top: false
 
 Hexo写作支持Markdown。  
 不懂就查[文档](https://hexo.io/zh-cn/docs/writing)
-下面是一些区别于[常规Markdown](../Markdown_语法)的点。
+下面是一些区别于[常规Markdown](../markdown-grammar)的点。
 
 ## 即时预览
 
@@ -130,10 +130,10 @@ permalink_defaults:
 然后就可以按HTML的常规引用了。  
 同文件夹文章的相互引用：`../Hexo_建站/`（最后的`/`是可选的）  
 链接到[某个标题](#文章信息)：`../Hexo_写作#文章信息` 或 `#文章信息`  
-链接到标题的更详细的语法可以看[Markdown 语法：锚点](../Markdown_语法#锚点anchor)。
+链接到标题的更详细的语法可以看[Markdown 语法：锚点](../markdown-grammar#锚点anchor)。
 
 对`_posts`上一级的文件就写绝对路径吧，如 `/img/test.jpg`。  
-注意从根目录开始引用博客不加 `_posts`，如 `/C++/Blog/Hexo_写作`
+注意从根目录开始引用博客不加 `_posts`，如 `/cpp/Blog/Hexo_写作`
 
 ## 引入LaTeX 公式—— [Mathjax](../../LaTeX/Hexo插入LaTeX公式)
 

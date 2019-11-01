@@ -39,7 +39,7 @@ Visual Studio Code - `File`（工具栏） - `Preference` - `Settings` - `Extens
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "markdownlint.ignore": [
-        "*/Markdown_语法.md"
+        "*/markdown-grammar.md"
     ]
 }
 ```
