@@ -27,7 +27,7 @@ mathjax: true
 
 ![P NP NP-Complete NP-Hard](P_np_np-complete_np-hard.svg)
 
-*PTAS: Polynomial-time approximation scheme
+* PTAS: Polynomial-time approximation scheme
 
 和上面不同的是，上面的词描述的都是问题，而 PTAS 是解决问题的方法。也就是说，可以说某个 NP-Hard 问题有 PTAS 算法。
 
