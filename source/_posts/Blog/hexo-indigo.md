@@ -1,5 +1,5 @@
 ---
-title: Hexo_indigo主题配置
+title: Hexo Indigo主题配置
 date: 2019-9-17
 tags:
 - Indigo

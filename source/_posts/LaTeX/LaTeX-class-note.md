@@ -228,3 +228,112 @@ MathJax 的写法：`\space`、`\\;`、`"\\ "`（不含引号）。
 
 
 最近学业繁忙，咕咕咕。
+
+### tabular* 表格
+
+tabular* 在 tabular 上又增加了功能。
+
+一是可以指定表格的总宽度，二是可以将所有列在设定的表格宽度中均匀展开（即让表格横向均匀展开，不留横向空位）。
+
+```latex
+\begin{tabular*}{10cm}{lll}
+	\hline
+	Start & End  & Character Block Name \\
+	\hline
+	3400  & 4DB5 & CJK Unified Ideographs Extension A \\
+	4E00  & 9FFF & CJK Unified Ideographs \\
+	\hline
+\end{tabular*}
+```
+
+这是没有横向展开的。把第一行的 `{lll}` 改为 `{@{\extracolsep{\fill}}lll}` 即可横向展开。下面是两个对比图。
+
+![不使用 extracolsep](extracolsep-off.jpg)
+![使用 extracolsep](extracolsep-on.jpg)
+
+#### tabularx 表格
+
+tabularx 也可以实现对表格总宽度的设定。
+
+```latex
+\begin{tabularx}{8cm}{llX}  
+    \hline
+    Start & End  & Character Block Name \\
+    \hline
+    3400  & 4DB5 & CJK Unified Ideographs Extension A \\
+    4E00  & 9FFF & CJK Unified Ideographs \\
+    \hline
+\end{tabularx}
+```
+
+![tabularx](tabularx.jpg)
+
+## 文档内容部分
+
+这部分的内容，Markdown 也有，但是 LaTeX 可以调各种参数，功能强大。相对应的，命令也会比较长。
+
+~~Markdown 真香~~
+
+### 水平横线
+
+Markdown 里的预览：
+
+---------------------------
+
+LaTeX 版本：
+
+```latex
+\rule[raise-height]{width}{thickness}
+\rule[4pt]{18cm}{0.5pt} % 参考配置
+```
+
+### 分条目命令
+
+#### 无标号
+
+Markdown 里的预览：
+
+* a
+* b
+
+LaTeX 版本：
+
+```latex
+\begin{itemize}
+	\item[*] a
+	\item[*] b
+\end{itemize}
+```
+
+`[*]` 可以不要（即默认使用黑点），或者换成其他的符号 `+` `-` 等。
+
+#### 数字标号
+
+Markdown 里的预览：
+
+1. a
+2. b
+
+LaTeX 版本：
+
+```latex
+\begin{enumerate}[1.]
+	\item a
+	\item b
+\end{enumerate}
+```
+
+也可以使用其他的标号，修改 `[1.]` 部分即可。
+
+#### 文字描述
+
+```latex
+\begin{description}
+	\item[研究生课程：] 数据挖掘等；
+	\item[本科课程：] 高等代数等；
+	\item[自学课程：] Stanford:编程方法。
+\end{description}
+```
+
+![文字描述](description.jpg)
+

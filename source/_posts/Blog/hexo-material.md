@@ -1,8 +1,6 @@
 ---
 title: Hexo Material 主题配置
 date: 2019-8-17
-tags:
-- Material
 category:
 - Blog
 mathjax: true
@@ -10,7 +8,7 @@ mathjax: true
 
 [Material 主题](https://github.com/viosey/hexo-theme-material/)是一个基于 Material Design （质感设计）的 [Hexo](https://hexo.io/)主题。  
 
-Hexo 更换主题的方法参见另一篇[博客](../Hexo_建站)。
+Hexo 更换主题的方法参见另一篇[博客](../hexo-building-blog)。
 
 在网上找到了一个配置过程非常详实的[博客](https://zhouxiaoyu1994.github.io/2017/04/27/Hexo%E6%B7%B1%E5%9D%91%E4%B9%8B%E6%97%85%EF%BC%885%EF%BC%89%E2%80%94%20Materia%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/)，而且还修复了一些主题的小 bug，基本上按照这个博客做就好啦。
 

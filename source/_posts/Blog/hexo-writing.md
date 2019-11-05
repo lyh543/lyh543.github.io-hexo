@@ -116,7 +116,7 @@ HTML间的常规引用：
 Hexo 中，文章间的引用使用常规方法好像容易炸，因为 Hexo 创建文章是按日期创建的，如`https://lyh543.github.io:4000/2019/06/26/Testblog/`，不同日期的文件夹就会炸。  
 Google 了一下，据说 Hexo 3.0 可以使用
 
-```{% post_link Hexo_写作 Hexo_写作 %}```
+```{% post_link hexo-writing hexo-writing %}```
 
 的形式引用，但测了一下还是不行。
 于是是用另一种方式，通过修改`站点配置文件`，修改文章的命名方式，改为只由`title`命名。
@@ -128,12 +128,12 @@ permalink_defaults:
 ```
 
 然后就可以按HTML的常规引用了。  
-同文件夹文章的相互引用：`../Hexo_建站/`（最后的`/`是可选的）  
-链接到[某个标题](#文章信息)：`../Hexo_写作#文章信息` 或 `#文章信息`  
+同文件夹文章的相互引用：`../hexo-building-blog/`（最后的`/`是可选的）  
+链接到[某个标题](#文章信息)：`../hexo-writing#文章信息` 或 `#文章信息`  
 链接到标题的更详细的语法可以看[Markdown 语法：锚点](../markdown-grammar#锚点anchor)。
 
 对`_posts`上一级的文件就写绝对路径吧，如 `/img/test.jpg`。  
-注意从根目录开始引用博客不加 `_posts`，如 `/cpp/Blog/Hexo_写作`
+注意从根目录开始引用博客不加 `_posts`，如 `/cpp/Blog/hexo-writing`
 
 ## 引入LaTeX 公式—— [Mathjax](../../LaTeX/Hexo插入LaTeX公式)
 

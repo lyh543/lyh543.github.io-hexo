@@ -92,4 +92,4 @@ language: zh-CN
 
 即可。
 
-Material主题配置具体需要注意的点见另一篇[博客](../Hexo_Material主题配置)。
+Material主题配置具体需要注意的点见另一篇[博客](../hexo-material)。
