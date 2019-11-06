@@ -179,7 +179,8 @@ pm2 save # 保存
 * [创建 ssh 密钥并给 Git/服务器使用](../Git/#在-Linux-下-git-使用-ssh-密钥)
 * [ssh 远程登录服务器](../build-shadowsocks/#ssh-远程登录)
 * [修改 ssh 的端口](../change-ssh-port/)
-
+* [Windows 上使用 ssh](../setup-ssh-windows/)
+* 
 ### 查看 ssh 登陆日志
 
 ```
