@@ -126,6 +126,8 @@ remote_port = 5200 # 服务器接收 Remote Desktop 信息的端口，可以改
 
 可能会看到 `ignore input` 之类的警告，不用管，`Ctrl+C` 退出前台即可，此时 `ssserver` 正在后台运行。
 
+### 客户端开机运行
+
 客户端需要开机后台启动 `frpc`，可以把 vbs 脚本放在 Startup 目录。
 
 > 新建一个文本文档，加入下面两行脚本代码，并改名为 `startup-frpc.vbs`，复制到 `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp` 下。
@@ -138,6 +140,31 @@ ws.Run "c:\frp\frpc.exe -c c:\frp\frpc.ini",0
 也可以用 `任务计划`，用 GUI 设定一下就行。具体百度吧，不难，启动命令用 `start /b frpc.exe -c frpc.ini`。
 
 为了防止意外，可以在远程的电脑上安装额外的临时的远程桌面解决方案如 Teamviewer 或 QQ 以应急。
+
+### 客户端守护进程
+
+但是有些时候还是会有蜜汁启动不了。即使我设了启动命令+任务计划，仍然必须要登录以后才会启动 `frpc`。
+
+于是我打算搞一个进程守护，任务计划每五分钟启动一次，检测 `frpc` 是否正在运行，否则后台启动 `frpc`。
+
+为此我需要以下文件（都放在 `D:\Documents\Tools\frp\`）：
+
+1. vbs 脚本，让命令行程序在后台运行的最简单的实现方法。内容如下：
+
+```vbs
+set ws=createobject("wscript.shell")
+ws.run"D:\Documents\Tools\frp\frpc-daemon.bat",0,ture
+```
+
+2. `frpc-daemon.bat` 脚本，因为 bat 检测进程最为方便。vbs 也可以检测进程，但是按网上 Google 到的方法都只能检测会话名为 Console 的进程，对于任务计划启动的 Services 进程是检测不到的，再加上博主不会 vbs，于是采用的是 `vbs+bat` 的方法。  
+bat 内容如下：
+
+```bat
+set path=D:\Documents\Tools\frp
+tasklist | find "frpc" || %path%\frpc.exe -c %path%\frpc.ini
+```
+
+3. 任务计划。触发器部分，勾上 `重复任务间隔` 设为 5 分钟。启动程序 `wscript`，添加参数为 `"D:\Documents\Tools\frp\frpc-daemon.vbs"`。
 
 ## 部分 bug 及解决方案
 
