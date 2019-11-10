@@ -9,6 +9,10 @@ mathjax: true
 ---
 
 > 2019.10.29 更新：由于 Gitalk 对 GitHub 之外的网站支持不好（在 `github.io` 以外的域名下都不能进行评论），现已迁移至 Valine。
+> Valine 的博客推送做的不是很好，不过有第三方实现方案。可查阅 [官方网站](https://valine.js.org/notify.html)。
+>
+> 2019.11.6 更新：由于 GitHub OAuth API 限制，只能有一个回调网页`Authorization callback URL`，但是没有限制为 `github.io`。可在 https://github.com/settings/developers 对应的地方修改。
+> gitalk 真香。邮件是由 GitHub 发的，稳定性比自己邮箱发会稳定得多。
 
 阅读 [Material 主题](https://github.com/viosey/hexo-theme-material/) 的主题配置文件以后，可以发现，Material 主题的配置文件是自带了评论区的功能，但是给的几个网站都不是很好用。（disqus国内用不了，changyan需要备案，gitment作者~~删库跑路了~~停更并把服务器关了）。  
 
@@ -45,9 +49,9 @@ comment:
 
 去 Gitalk 的 Issues 下还真找到了这个 [Issue]https://github.com/gitalk/gitalk/issues/102], 还是被置顶了的。
 
-看样子 bug 是因为 Gitalk 是默认用文章标题作 issue 的 `lable`，并以此作为该评论区的唯一识别码。但是 Github 限制了 issue 的 `lable` 长度不超过 50，这导致无法正常生成评论。
+看样子 bug 是因为 Gitalk 是默认用文章标题作 issue 的 `lable`，并以此作为该评论区的唯一识别码。Github 限制了 issue 的 `lable` 长度不超过 50，如果使用中文，在链接中一个中文等于三个字符，导致 `label` 过长，无法正常生成评论。
 
-该 Issues 下有一条评论给出了[一个方案](https://github.com/gitalk/gitalk/issues/102#issuecomment-364930067)，使用标题的 Hash 值作为 `label`。
+该 Issues 下有一条评论给出了[一个方案](https://github.com/gitalk/gitalk/issues/102#issuecomment-364930067)，使用标题的 Hash 值的前 50 位作为 `label`。
 
 但是博主尝试以后发现仍然不行，不懂 Javascript 的博主猜测是 Javascript 的函数名引用错了。经 Google 以后，找到了一个[可用的 Javascript](https://github.com/viosey/hexo-theme-material/issues/622#issuecomment-373307046)。
 

@@ -153,7 +153,35 @@ MathJax 的写法：`\space`、`\\;`、`"\\ "`（不含引号）。
 
 然后在正文里调用一句 `\maketitle` 产生标题及以上信息。
 
-## 参考文献
+## 引用参考文献
+
+LaTeX 的引用原理是给每个文献写一个好记的名字，然后引用的时候直接引用名字。  
+编译的时候自动对文献进行标号，并将引用处和文献根据名字绑定，然后标号。最后名字是不会呈现在文档里的。好评。
+
+了解了原理以后，基本也是无脑抄板子。不需要额外的库。
+
+```latex
+\documentclass{article} % 源文件第一行必须是介个
+\usepackage[UTF8]{ctex}
+\begin{document}
+
+xxx说的对。\cite{Zhang10} \\
+\indent yyy说的也对。\cite{Li10}
+
+\begin{thebibliography}{}
+	
+	\bibitem{Li10}
+	L. Ming, Y. Shucheng, R. Kui, and L. Wenjing, Securing Personal Health Records in Cloud Computing: Patient-Centric and Fine-Grained
+	Data Access Control in Multi-owner Settings, in: Processing of SecureComm 2010, LNICST 50, pp. 89-106, 2010.
+	
+	\bibitem{Zhang10}
+	R. Zhang, and L. Liu, Security Models and Requirements for Healthcare Application Clouds, in: Processing of  Cloud 2010, pp. 268-275, 2010.
+\end{thebibliography}
+
+\end{document} 
+```
+
+![引用参考文献 示例](bibliography.jpg)
 
 ### 摘要和关键字
 
@@ -195,45 +223,118 @@ MathJax 的写法：`\space`、`\\;`、`"\\ "`（不含引号）。
 \end{tabular}
 ```
 
-![表格](tabular1.jpg)
+![表格](tabular.jpg)
 
 ### 给表格加边框
 
 可以看到，如不加说明，LaTeX 表格是不带边框的。
 
-如果要对一整行添加水平边框
+如果要对一整行添加水平边框，在行间（或第一行前，最后一行后，下同）使用 `\hline` 命令即可。
 
-部分增加边框
+注意最后一行加边框时，最后一行必须换行 `\\`。
 
-竖直边框
+如需部分列添加水平边框（如想在第 i 列到第 j 列加入边框），将 `\hline` 换为 `\cline{i-j}` 的形式即可。  
+如果只有一列，则需使用 `\cline{i-i}`。  
+如果需要添加多个间断的水平边框，连续使用多个命令（如 `\cline{1-2}\cline{4-4}` 即可。
 
-\vline 不可用
+对于竖直边框，在表格 `\begin` 的 `clr` 部分加入 `|` 即可，如 `\begin{tabular}{|c|l|rr|}`。
+
+如果需要间断的数值边框，书上说的 `\vline`，但是貌似不可用，会歪的。
+
+```latex
+\begin{tabular}{|c|lr|}
+	\hline
+	ab & cd & ef \\
+	\cline{1-1}\cline{3-3}
+	cd & ef & ab \\
+	\cline{1-2}
+	ef & ab & cd \\
+	\hline
+\end{tabular}
+```
+
+![边框 示例](tabular-border.jpg)
 
 ### 合并单元格
 
-合并水平单元格
+这一段会比较硬核，于是再分三个小段讲。
 
-合并单元格中间可能无视以上竖直边框，但可自己加边框
+#### 合并水平单元格
 
-合并竖直单元格
+这是最简单的。格式为 `\multicolumn{2}{|c|}{ef}`。  
+1. 第一个 `{2}` 为要合并的水平单元格数量；  
+2. 第二个 `{|c|}` 表示该单元格的对齐方式和列边框（**会覆盖掉上面的列边框设置**）；  
+3. 第三个 `{ef}` 为文本格式。
 
-\usepackage
+注意合并单元格以后，该行的 `&` 数较其他行会少一些。
 
-同时合并行和列
+测试的时候不要把每一行的同两列都合并了，不然合并了还是没效果。（逃
 
-必须 column 包含 row
+#### 合并竖直单元格
 
-### 文本插入表格及表头
+合并竖直单元格还需要调宏包 `\usepackage{multirow}`。
 
+调用格式为（在合并的第一行写） `\multirow{2}{*}{ab}`。
 
+`{2}` 和 `{ab}` 和上述的意思相近，注意这里的 `{*}` 是需要无脑抄的参数，没有会报错。
 
-最近学业繁忙，咕咕咕。
+另外，`\cline` 和 `\hline` 设置不会被覆盖，需要自己调整（要不就会出现单元格被穿过去的情况）。
 
-### tabular* 表格
+#### 同时合并行和列
 
-tabular* 在 tabular 上又增加了功能。
+虽然理论实现非常简单，就是上述两个语句的嵌套，但是因为细节太多太多，这才是最硬核的部分。
 
-一是可以指定表格的总宽度，二是可以将所有列在设定的表格宽度中均匀展开（即让表格横向均匀展开，不留横向空位）。
+1. 仍然需要在合并的第一行调用。
+2. 必须 `\multicolumn` 在外，`\multirow` 在内，如 `\multicolumn{2}{c|}{ \multirow{2}{*}{gh} }`。不然会报错。
+3. 合并的后面几行需要写 `\multicolumn`，数量和列对齐格式和第一行的 `\multicolumn` 相同，内容留空 `{}`。
+
+最后是以上几个例子的综合实例。
+
+```latex
+\begin{tabular}{|c|c|c|c|}
+	\hline
+	\multirow{2}{*}{ab} & \multicolumn{2}{|c|}{ef} & cd\\
+	\cline{2-4}
+	& ef & \multicolumn{2}{c|}{\multirow{2}{*}{gh}} \\
+	\cline{1-2}
+	ef & gh & \multicolumn{2}{c|}{} \\
+	\hline
+	1 & 2 & 3 & 4 \\
+	\hline
+\end{tabular}
+```
+
+![合并单元格 示例](tabular-multicoluimn-multirow.jpg)
+
+### 美观地插入表格
+
+上面是“如何创建一个表格”，这一部分是“如何将表格美观的插入文档”。
+
+如下是无脑抄板子：
+
+```latex
+\begin{table}[!hbp]  % !hbp 尝试在本页中插入表格，否则就在下一页插入
+	\centering       % 表格居中
+	\begin{tabular}{|c|c|c|c|c|}
+
+	\hline
+	lable 1-1 & label 1-2 & label 1-3 & label 1 -4 & label 1-5 \\
+	\hline
+	label 2-1 & label 2-2 & label 3-3 & label 4-4 & label 5-5 \\
+	\hline
+	\end{tabular}
+
+	\caption{表格标题} % 表格标题
+\end{table} 
+```
+
+### tabular\* 表格
+
+tabular\* 在兼容 tabular 的语法上，又增加了功能。
+
+一是必须指定表格的总宽度，二是可以将所有列在设定的表格宽度中均匀展开（即让表格横向均匀展开，不留横向空位）。
+
+不需要新的宏包。
 
 ```latex
 \begin{tabular*}{10cm}{lll}
@@ -248,8 +349,8 @@ tabular* 在 tabular 上又增加了功能。
 
 这是没有横向展开的。把第一行的 `{lll}` 改为 `{@{\extracolsep{\fill}}lll}` 即可横向展开。下面是两个对比图。
 
-![不使用 extracolsep](extracolsep-off.jpg)
-![使用 extracolsep](extracolsep-on.jpg)
+![不使用 extracolsep](tabular-extracolsep-off.jpg)
+![使用 extracolsep](tabular-extracolsep-on.jpg)
 
 #### tabularx 表格
 
