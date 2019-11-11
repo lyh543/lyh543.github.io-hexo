@@ -38,6 +38,8 @@ mathjax: true
 
 更多 `documentclass` 可以自己查询。
 
+在接下来的学习中，可以使用 Bing/Google 到的模板。
+
 ### 你好， LaTeX
 
 原生 LaTeX 不支持中文。需要引入包。课程使用的是 `CJK`。但是在我的 TeXstudio 编译不过？？？？？？
@@ -369,7 +371,7 @@ tabularx 也可以实现对表格总宽度的设定。
 
 ![tabularx](tabularx.jpg)
 
-## 文档内容部分
+## 文档内容元素
 
 这部分的内容，Markdown 也有，但是 LaTeX 可以调各种参数，功能强大。相对应的，命令也会比较长。
 
