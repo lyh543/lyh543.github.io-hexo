@@ -226,6 +226,16 @@ git reflog
 
 如果已经 push 了，下次就需要 `git push -f` 强制推送。如果还没有 `push`，就当一切都没发生过，直接 `git push` 就行。
 
+### 回滚到上次的文件
+
+对于只是修改了 `test.txt` 文件，还没有进行任何 Git 操作的，可以一句恢复为之前的文件。
+
+```bash
+git checkout -- test.txt
+```
+
+更多的情况可看[Git 之 恢复修改的文件](https://www.cnblogs.com/liuq/p/9203087.html)
+
 ## git 修改设置
 
 ```bash

@@ -211,16 +211,16 @@ $$ f(n) = o(g(n)) \space \Leftrightarrow \space \lim_{n \to \infty} \frac{f(n)}{
 
 对于表达式 $T(n)=aT(\frac{n}{b})+f(n)$，  其中 $a≥1$ 和 $b>1$ 是常数，$f(n)$ 是一个渐进正的函数（渐进函数，并且是增函数），其中 $\frac{n}{b}$ 指 $\lfloor \frac{n}{b} \rfloor$ 或 $\lceil \frac{n}{b} \rceil$：
 
-* 若对于某常数 $\epsilon>0$，有 $f((n)=O(n^{\log_b{a-\epsilon}})$，则 $T(n)=\Theta(n^{\log_b a})$
+* 若对于某常数 $\varepsilon>0$，有 $f((n)=O(n^{\log_b{a-\varepsilon}})$，则 $T(n)=\Theta(n^{\log_b a})$
 * 若 $f((n)= \Theta(n^{\log_ba})$，则 $T(n)=\Theta(n^{\log_ba}\log n)$
-* 若对于某常数 $\epsilon>0$，有 $f(n)=\Omega(n^{\log_b{a+\epsilon}})$，且对常数 $c<1$ 与所有足够大的 $n$，有 $a\cdot f(\frac{n}{b}) \leq c \cdot f(n)$，则 $T(n)=\Theta(f(n))$
+* 若对于某常数 $\varepsilon>0$，有 $f(n)=\Omega(n^{\log_b{a+\varepsilon}})$，且对常数 $c<1$ 与所有足够大的 $n$，有 $a\cdot f(\frac{n}{b}) \leq c \cdot f(n)$，则 $T(n)=\Theta(f(n))$
 
 主方法其实是在说这个事情：  
 
 对于 $T(n)=aT(\frac{n}{b})+f(n)$，其最终算出来的复杂度为某两项之和。前一项化出来肯定是 $\Theta(n^{\log_b a})$，主方法做的事情，就是为了在某些条件下，就可以直接判断哪一项的复杂度更高（然后忽略掉另一项）。
 
 而第一、三条的奇奇怪怪的形式是为了表示一句话：“如果后一项的复杂度低于/高于 $\Theta(n^{\log_b a})$”。  
-在渐进复杂度中没有“复杂度低于”的这种表示法，只能引入 $\epsilon>0$ 来表示复杂度的高于、低于。于是看起来才这么复杂，**为了严谨性不得不牺牲可读性**。
+在渐进复杂度中没有“复杂度低于”的这种表示法，只能引入 $\varepsilon>0$ 来表示复杂度的高于、低于。于是看起来才这么复杂，**为了严谨性不得不牺牲可读性**。
 
 #### 分治实例
 

@@ -439,4 +439,3 @@ LaTeX 版本：
 ```
 
 ![文字描述](description.jpg)
-

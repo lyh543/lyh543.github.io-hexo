@@ -94,7 +94,7 @@ x&=a+b+c\\\\
 -|-|-
 极限|`\lim_(n->\infty)\frac{\sin n}{n}`|$\lim_{n\to 0}\frac{\sin n}{n}$
 连续求和|`\sum_{n=1}^{\infty}{\frac{1}{n}}`|$\sum_{n=1}^{\infty} {\frac{1}{n}}$
-连续求积|`\prod_\epsilon`|$\prod_\epsilon$
+连续求积|`\prod_\varepsilon`|$\prod_\varepsilon$
 积分|`\int_{0}^{1}{\frac{1}{n+1}}`|$\int_{0}^{1}{\frac{1}{n+1}}$
 二重积分|`\iint_{0}^{1}{\frac{1}{n+1}}`|$\iint_{0}^{1}{\frac{1}{n+1}}$
 偏导数|`\frac{\partial y}{\partial x}`|$\frac{\partial y}{\partial x}$
@@ -127,7 +127,7 @@ $$\sum\nolimits_1^2x$$
 |`\overrightarrow{AB}`|$\overrightarrow{AB}$
 |`\overleftarrow{AB}`|$\overleftarrow{AB}$
 
-## 矩阵
+## 矩阵 matrix
 
 > 参考博客：https://blog.csdn.net/bendanban/article/details/44221279
 
@@ -197,6 +197,29 @@ $$
 
 `clr` 的每个字母分别代表了一列的对齐方式：第一列居中 `c(enter)`、第二列左对齐 `l(eft)`、第三列右对齐 `r(ight)`。
 
+### 讨论情况 cases
+
+```latex
+$$f(x)=
+\begin{cases}
+0& x=0\\
+1& x \neq 0
+\end{cases}$$
+```
+
+$$f(x)=
+\begin{cases}
+0& x=0\\\\
+1& x \neq 0
+\end{cases}$$
+
+如果是需要对齐等于号，可以使用 `\begin{align}`（详解看 [排版](#排版)）。大括号需要下一段提到的 `\left\{ \right.` 来实现。
+
+
+$$ \left\\{ \begin{aligned}
+I_0 &= 1 - e^{-1} \\\\
+I_n &= 1-nI_{n-1} \quad (n=1,2,...)
+\end{aligned} \right.$$
 
 
 ## 奇奇怪怪的括号
@@ -208,14 +231,18 @@ $$
 
 中文|LaTeX语句|数学符号
 -|-|-
-大括号|`$\left\\{ \frac{a}{b} \right\\}$` `$\\{ \\}$`|$\left\\{ \frac{a}{b} \right\\}$
+大括号|`$\left\{ \frac{a}{b} \right\}$` `$\{ \}$`|$\left\\{ \frac{a}{b} \right\\}$
 尖括号|`$\left \langle \frac{a}{b} \right \rangle$`|$\left \langle \frac{a}{b} \right \rangle$
-单竖线|`$\left\| \frac{a}{b} \right\|$`|$\left\| \frac{a}{b} \right\|$
-双竖线|`$\left \|\| \frac{a}{b} \right \|\|$`|$\left \| \frac{a}{b} \right \|$
+单、双竖线|由于和 Markdown 表格语法冲突，单竖线和双竖线的语法写在表格下|
 取整函数|`$\left \lfloor \frac{a}{b} \right \rfloor$`|$\left \lfloor \frac{a}{b} \right \rfloor$
 取顶函数|`$\left \lceil \frac{c}{d} \right \rceil$`|$\left \lceil \frac{c}{d} \right \rceil$
-混合括号|`$\left [ 0,1 \right )\left \langle \psi \right \|$`|$\left [ 0,1 \right )\left \langle \psi \right \|$
-单左括号|`$\left \\{ \frac{a}{b} \right .$` 加个点就可以省略了|$\left \\{ \frac{a}{b} \right .$
+混合括号|`$\left [ 0,1 \right )\left \langle \psi \right \|$`|$\left [ 0,1 \right )\left \langle \psi \right\|$
+单左括号|`$\left \{ \frac{a}{b} \right .$` <br>加个点就可以省略了|$\left \\{ \frac{a}{b} \right .$
+
+单竖线：`$\left| \frac{a}{b} \right|$` $\left| \frac{a}{b} \right|$
+双竖线：`$\left\| \frac{a}{b} \right\|$` $\left\\| \frac{a}{b} \right\\|$
+
+（提醒 MathJax 用户：上述符号前的 `\` 都应使用 `\\`，而 `left` 和 `right` 前仍为 `\`）
 
 另外，可以使用 `\big`，`\Big`，`\bigg`，`\Bigg` 来控制括号的大小。
 
@@ -225,21 +252,6 @@ $$\Bigg ( \bigg [ \Big \\{ \big \langle \left | \| x \| \right | \big \rangle \B
 
 $$\Bigg ( \bigg [ \Big \\{ \big \langle \left | \| x \| \right | \big \rangle \Big \\} \bigg ] \Bigg )$$
 
-分段函数的大括号写法：
-
-```latex
-$$f(x)=
-\begin{cases}
-0& x=0\\\\
-1& x \neq 0
-\end{cases}$$
-```
-
-$$f(x)=
-\begin{cases}
-0& x=0\\\\
-1& x \neq 0
-\end{cases}$$
 
 ## 排版
 
@@ -261,9 +273,11 @@ $$f(x)=
 
 常用：
 
-中文|LaTeX语句|数学符号
--|-|-
-|`\varphi`|$\varphi$
+LaTeX语句|数学符号
+-|-
+`\varphi`|$\varphi$
+`\epsilon`|$\epsilon$
+`\varepsilon`|$\varepsilon$
 
 更多的：
 
