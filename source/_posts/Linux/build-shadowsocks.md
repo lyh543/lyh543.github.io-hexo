@@ -106,3 +106,13 @@ pm2 --name s1 -f start ss-server # 配置 pm2
 pm2 startup # 设置 pm2 开机自启
 pm2 save # 保存
 ```
+
+## 配置 bbr
+
+搭上梯子以后，发现学校教育网很稳，但是寝室里面的电信网丢包率有 40% 左右。
+
+Google 了一下，说是可以上 BBR。BBR 是什么，如何开启，可以看下面两篇博客，博主就不再复读了。
+
+[Google BBR是什么？](https://tech.jandou.com/CentOS7-Google-BBR.html)
+
+[Ubuntu 18.04/18.10快速开启Google BBR的方法](https://www.moerats.com/archives/612/)

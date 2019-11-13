@@ -430,7 +430,7 @@ LaTeX 版本：
 
 #### 文字描述
 
-```latex
+```latex                                                
 \begin{description}
 	\item[研究生课程：] 数据挖掘等；
 	\item[本科课程：] 高等代数等；

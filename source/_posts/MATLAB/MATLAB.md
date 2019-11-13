@@ -99,6 +99,8 @@ $V^{-1} \cdot D \cdot V = A$
 
 `ceil` 向上取整、`floor` 向下取整、`round` 四舍五入、`fix` 向零取整。
 
+~~然而 C++ 用户还是喜欢使用 `int32`~~
+
 #### 强制转换
 
 ```MATLAB
@@ -344,7 +346,7 @@ x = 1.2*x;
 ### 替换变量（求值）
 
 ```MATLAB
-syms x y n;
+syms x y r(n);
 s = x^2 + y^2; subs(s,[x,y],[1,2])
 ```
 
@@ -442,6 +444,8 @@ taylor(exp(x),x,0,'order',3)
 ```MATLAB
 dsolve('Dy=(50-0.01*y)*y','y(0)=4','x'); % 二阶导的写法为'D2y'
 ```
+
+详见[MATLAB 解常微分方程](../differential-equation/#MATLAB-解常微分方程)。
 
 ### 分段函数
 
