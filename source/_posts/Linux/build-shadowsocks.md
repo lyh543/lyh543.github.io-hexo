@@ -20,19 +20,19 @@ mathjax: true
 
 然后租了服务器会给 ip 地址（下面为方便叙述，设为 `39.1.2.3`）和密码。
 
-## ssh 远程登录
+## ssh 远程登录服务器
 
 注意**阿里云的服务器要开放防火墙的端口，不然连不上**！！！！！！！！  
 作者就是被这个坑了一下午还没弄好。上面需要开放 `22` 端口，协议选 `tcp`。
 
-在本地 Ubuntu（或 wsl 或自行百度 ssh 的方法）使用 `ssh -p22 root@39.1.2.3` 登录远程服务器。
+在本地 Ubuntu（或 wsl 或 [Windows 的 ssh 客户端](../setup-ssh-windows/)）使用 `ssh -p22 root@39.1.2.3` 登录远程服务器。
 
 要是出现 `ssh: connect to host 39.1.2.3 port 22: Resource temporarily unavailable`，  
 再本地尝试 `ping 39.1.2.3`，要是连不上，说明 ip 被封了，需要删掉服务器，重新建一台服务器。
 
-## 配置 shadowsocks
+## 服务器配置 shadowsocks
 
-成功连上以后，安装 shadowsocks-libev：
+成功连上以后，在服务器安装 shadowsocks-libev：
 
 ```bash
 apt update # debian 下是 apt，CentOS 换成 yum install 即可
@@ -52,7 +52,7 @@ nano /etc/shadowsocks-libev/config.json
     "server":"0.0.0.0",
     "server_port":443,
     "local_port":1080,
-    "password":"AMDyes",
+    "password":"lyh543,xyz",
     "timeout":600,
     "method":"aes-256-cfb",
     "fast_open": false
@@ -62,11 +62,14 @@ nano /etc/shadowsocks-libev/config.json
 注意：
 * `server` 不能为 `127.0.0.1`，不然连不上；  
 * `server_port` 建议不要使用默认的 `8838`；
-* 如果有：`local_address` 必须删掉。
+* 如果有：`local_address` 必须删掉；
+* `password` 改为自己设的密码。
 
-然后 `ss-server`（CentOS 下是 `ssserver  -c /etc/shadowsocks.json`），并在本地修改 Shadowsocks 配置，就可以进行连接了。（再次提醒，记得开放服务器的对应端口~~不然你一个小时又没了~~，这里是 `443`），协议选 `tcp`。
+然后执行 `ss-server`（CentOS 下是 `ssserver  -c /etc/shadowsocks.json`）。理论上服务器端就配置好了。
 
-如果连接以后，随便上一个网，看到服务器上出现 `INFO     connecting www.baidu.com:443 from x.x.x.x`，那么恭喜你，成功啦！
+在本地下载 Shadowsocks， 并修改 Shadowsocks 配置（具体过程略），就可以进行连接了。（再次提醒，记得开放服务器的对应端口~~不然你一个小时又没了~~，这里是 `443`），协议选 `tcp`。
+
+如果连接以后，随便上一个网站，看到服务器上出现 `INFO     connecting www.baidu.com:443 from x.x.x.x`，那么恭喜你，成功啦！
 
 ## 服务器上后台运行、开机自启
 
@@ -116,3 +119,5 @@ Google 了一下，说是可以上 BBR。BBR 是什么，如何开启，可以�
 [Google BBR是什么？](https://tech.jandou.com/CentOS7-Google-BBR.html)
 
 [Ubuntu 18.04/18.10快速开启Google BBR的方法](https://www.moerats.com/archives/612/)
+
+但貌似丢包率还是不低。。。

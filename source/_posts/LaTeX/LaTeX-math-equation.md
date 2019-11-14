@@ -73,6 +73,7 @@ x&=a+b+c\\\\
 |`\surd{2}`|$\surd{2}$
 取模|`a \bmod b`|$a \bmod b$
 |`7 \equiv 1 \pmod 3`|$7 \equiv 1 \pmod 3$
+范数|`\| x \|`|$\\| x \\|$
 
 ## 常用关系符
 

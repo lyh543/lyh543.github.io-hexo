@@ -7,6 +7,8 @@ category:
 mathjax: true
 ---
 
+## 使用 MathJax 渲染 Hexo 中的数学公式
+
 本文摘自 https://www.sail.name/2018/05/31/use-mathjax-in-hexo/.
 
 > MathJax is an open-source JavaScript display engine for LaTeX, MathML, and AsciiMath notation that works in all modern browsers。
@@ -24,9 +26,18 @@ vendors:
     mathjax: https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js
 ```
 
-2. 在用到mathjax的Markdown文档的front-matter里填入`mathjax: true`即可。
+2. 在用到 mathjax 的 Markdown 文档的 front-matter 里填入`mathjax: true`即可。
 
-{% post_link LaTeX数学公式学习笔记 测试 %}
+```
+---
+title: Hexo 插入 LaTeX 公式
+tags:
+- Hexo
+category:
+- LaTeX
+mathjax: true
+---
+```
 
 预览：
 
@@ -38,11 +49,15 @@ Simple inline $a = b + c$.
 
 $$\frac{|ax + by + c|}{\sqrt{a^{2}+b^{2}}}$$
 
-3. 具体 LaTeX 语法见[博客：LaTeX数学公式学习笔记](../LaTeX数学公式学习笔记)
+## 使用 MathJaX 注意
 
-4. 值得注意的是，LaTeX换行中行末需要`\\`，由于 Markdown 和 MathJax 进行了两次渲染，所以需要`\\\\`。
-5. 另外空格后面接的`_`有时也会被 Markdown 转义掉，导致无法被 MathJax 渲染，因此有些时候需要在`_`前添加`\`转义。
-    ~~具体什么时候发生不清楚，但是可以观察 markdown 编辑器的染色情况判断`_`是否被转义~~
+1. 具体 LaTeX 语法见[博客：LaTeX数学公式学习笔记](../LaTeX-math-equation)
+
+2. 值得注意的是，LaTeX 中本来就存在的 `\` 在 MathJax 都需要替换为 `\\`，如换行为 `\\\\`，范数的 `\|` 在 MathJax 中应为 `\\|`。这个问题是 Markdown 和 MathJax 双重渲染造成的。
+
+3. 而对于某些 Markdown 中的符号（指的就是一对 `*` 和 `_`），这个时候需要一个 `\` 来进行转义。
+
+这里转义的目的是使得 Markdown 不把他识别为关键字，而上面的 `\\` 可以理解为先在 Markdown 中渲染在 `\`，然后进行 MathJax 编译的时候再理解为 LaTeX 转义符。
 
 ```latex
 \begin{equation}

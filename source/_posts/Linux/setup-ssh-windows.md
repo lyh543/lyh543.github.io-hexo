@@ -11,7 +11,7 @@ category:
 mathjax: true
 ---
 
-和 Linux 一样，Windows 10 上也可以使用 ssh 客户端和服务器。对 Windows 进行 ssh 的效果就是 `cmd`，当然你也可以在里面输入 `powershell` 或 `wsl` 使用其他的命令行。
+和 Linux 一样，Windows 10 （博主为 Win 10 1909）上也可以使用 ssh 客户端和服务器。对 Windows 进行 ssh 的效果就是 `cmd`，当然你也可以在里面输入 `powershell` 或 `wsl` 使用其他的命令行。
 
 ~~这就是这篇文章归类于 Linux 的原因吗~~
 
