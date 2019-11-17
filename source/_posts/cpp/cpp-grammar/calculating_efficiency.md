@@ -54,7 +54,7 @@ x64|3.47E+08|3.61E+08|1.9E+09|3.04E+09
 测试的类型有 `int`，`long long`，`float`，`double` 和一个自定义的高精度运算 `BigInteger`（源码包含在[测试代码](./computer_calculating_efficiency.cpp)中）。测试的运算有 `+`，`*`，`cmath` 中的 `sqrt()` 和 `log()`。
 
 `int`，`long long`，`double` 都是从 1 测到 1e9。  
-在进行 `float` 的测试时发现使用 `i++`，当数据达到 $2^{24} \approx 1.6 \ times 10^7$ 时，`i` 的值不会发生变化（1 溢出了，这和和浮点数的记法有关）。于是对于 `float` 的测试都是从 1 测到 1e7，重复 100 次。  
+在进行 `float` 的测试时发现使用 `i++`，当数据达到 $2^{24} \approx 1.6 \times 10^7$ 时，`i` 的值不会发生变化（1 溢出了，这和和浮点数的记法有关）。于是对于 `float` 的测试都是从 1 测到 1e7，重复 100 次。  
 `BigInteger` 由于太慢，只从 1 测到 1e7。
 
 以下是测试结果：

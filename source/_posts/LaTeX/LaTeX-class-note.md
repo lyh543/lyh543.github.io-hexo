@@ -330,7 +330,7 @@ xxx说的对。\cite{Zhang10} \\
 \end{table} 
 ```
 
-有关 `[!hbp]`，详见：[插入浮动体](#插入浮动体)。
+有关 `[!hbp]` 等，详见：[插入浮动体](#插入浮动体)。
 
 ### tabular\* 表格
 
@@ -444,7 +444,7 @@ LaTeX 版本：
 
 ### 插入图片
 
-插入图片的命令：
+插入图片的板子：
 
 ```latex
 \documentclass{article}
@@ -456,6 +456,38 @@ LaTeX 版本：
 
 插入的图片需要为 `eps` 格式。可以使用  PS 或 LaTeX 带的 `bmeps` 工具转换（详见 [bmeps 工具](#bmeps-工具)）。
 
+`includegraphics` 的详细语法：
+
+```
+\includegraphics[option]{file}
+```
+
+`option` 可以为（多个 `option` 用逗号隔开）：
+
+选项|解释
+-|-
+`[width=3in]`|图片宽度为 3 inches
+`[width=\testwidth]`|图片宽度为文本宽度
+`[width=0.8\textwidth]`|图片宽度为文本宽度的 0.8 倍（可以做乘法）
+`[width=\testwidth-2.0in]`|图片宽度比文本宽度少 2 inches（居然还能做减法）
+|
+`[angle=270]`|顺时针旋转 270°
+
+#### 美观的插入图片
+
+依旧是抄板子。
+
+```latex
+\begin{figure}[!hbp]
+\centering
+\includegraphics[width=0.7\textwidth]{图片文件}
+\caption{标题名称}\label{fig1}
+\end{figure}
+```
+
+* 有关这段代码的详细解释，详见：[插入浮动体](#插入浮动体)。
+
+
 #### bmeps 工具
 
 `bmeps` 可将照片转为 `eps` 格式。
@@ -463,15 +495,33 @@ LaTeX 版本：
 ```
 bmeps [options] [ <inputfile> [ <outputfile> ] ]
 ```
-
-参数|作用
--|-
-`-g`|无色彩转化
-
-
-
+常用参数中 `-g` 是无色彩转化，`-c` 是有色彩转化。
 
 ### 插入浮动体
+
+表格的 `\table` 和图片的 `\figure` 等都算是浮动体，他们有类似的语法体系。
+
+下面以插入图片为例：
+
+```latex
+\begin{figure}[!hbp]
+\centering               % 居中
+\includegraphics[width=0.7\textwidth]{图片文件}
+\caption{标题名称}\label{fig1}
+\end{figure}
+```
+
+关于 `[!hbp]` 的解释如下（默认为 `[tbp]`）：
+
+* ! 严格按照说明放置，即使看起来不好。
+* h 浮动体就放在当前页面上。这主要用于小浮动体
+* t 放在页面顶部
+* b 放在页面底部
+* p 放在一专门页面，仅含一个浮动体
+
+如果把 `\caption{标题名称}` 写在 `\includegraphics` 之前，则得到的图片的标题在图片的上面。
+
+`\label{fig1}` 是这个图片的标签，在别的地方那个引用这个图片的话，用 `\ref{fig1}` 就可以了。（注意：`\label` 必须放在 `\caption` 命令的后面，如果放在其他的地方，则插图的计数器就会出错）
 
 ## 使用 LaTeX 制作幻灯片
 

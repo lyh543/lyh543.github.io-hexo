@@ -157,3 +157,5 @@ http-server
 ```
 
 其中 `http-server` 的常用参数为 `http-server [path] [-p port]`。`port` 默认为 8080。
+
+另外，实现同样功能的还有：https://github.com/lwsjs/local-web-server
