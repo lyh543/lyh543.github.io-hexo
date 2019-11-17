@@ -108,6 +108,14 @@ alias la='ls -al --color=auto'
 
 3. `cat /etc/redhat-release` 只适用于 Redhat 系 Linux。
 
+### 查看磁盘大小
+
+`ls -df`
+
+### 查看端口占用
+
+`lsof -i 8999`
+
 ## 文件
 
 ### 新建、删除

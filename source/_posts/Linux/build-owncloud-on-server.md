@@ -1,5 +1,5 @@
 ---
-title: 利用服务器搭建自己的 Owncloud 云盘
+title: 搭建自己的 Owncloud 云盘
 date: 2019-10-17 16:33:05
 tags:
 - 服务器
@@ -15,6 +15,10 @@ mathjax: true
 官方教程：https://doc.owncloud.org/server/9.0/admin_manual/installation/linux_installation.html
 
 按照上面无脑配就可以了。不多说。
+
+## 配置 Owncloud
+
+按照知乎的链接装完以后，配置文件在 `/etc/owncloud/config.php`，云盘文件在 `/var/lib/owncloud/data` 里。
 
 ## 重置 Owncloud 密码
 

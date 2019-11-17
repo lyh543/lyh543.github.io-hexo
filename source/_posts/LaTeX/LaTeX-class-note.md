@@ -315,7 +315,7 @@ xxx说的对。\cite{Zhang10} \\
 如下是无脑抄板子：
 
 ```latex
-\begin{table}[!hbp]  % !hbp 尝试在本页中插入表格，否则就在下一页插入
+\begin{table}[!hbp]  % 有关[!hbp]，详见：插入浮动体
 	\centering       % 表格居中
 	\begin{tabular}{|c|c|c|c|c|}
 
@@ -329,6 +329,8 @@ xxx说的对。\cite{Zhang10} \\
 	\caption{表格标题} % 表格标题
 \end{table} 
 ```
+
+有关 `[!hbp]`，详见：[插入浮动体](#插入浮动体)。
 
 ### tabular\* 表格
 
@@ -439,3 +441,93 @@ LaTeX 版本：
 ```
 
 ![文字描述](description.jpg)
+
+### 插入图片
+
+插入图片的命令：
+
+```latex
+\documentclass{article}
+\usepackage{graphicx}    %   使用graphicx 包
+\begin{document}
+	\includegraphics{file.eps}    %    按图片原尺寸插入图片 file.eps
+\end{document}
+```
+
+插入的图片需要为 `eps` 格式。可以使用  PS 或 LaTeX 带的 `bmeps` 工具转换（详见 [bmeps 工具](#bmeps-工具)）。
+
+#### bmeps 工具
+
+`bmeps` 可将照片转为 `eps` 格式。
+
+```
+bmeps [options] [ <inputfile> [ <outputfile> ] ]
+```
+
+参数|作用
+-|-
+`-g`|无色彩转化
+
+
+
+
+### 插入浮动体
+
+## 使用 LaTeX 制作幻灯片
+
+什么是 beamer？
+
+beamer 是 LaTeX 的一个文档类，和 article、 book 一样；beamer 主要是写幻灯片用的，目前表现最好的书写幻灯片的宏包之一；采用 LaTeX 命令来组织幻灯片，用 `frame` 命令生成单页幻灯片（`Slide`）。
+
+### Hello, World!
+
+先跑一下，看下什么效果。
+
+如果编译不过，请参照文末解决。
+
+```latex
+\documentclass[red]{beamer}
+\usepackage[UTF8]{ctex}
+\usetheme{Warsaw}
+\begin{document}
+	%%------------------------------------------
+	\title{beamer~测试}
+	\author{XXX}
+	\institute{lyh543}
+	\date{\today}
+	
+	\frame{\titlepage}
+	%%------------------------------------------
+	\begin{frame}
+		\frametitle{test}
+		Hello, world!
+	\end{frame}
+	%%------------------------------------------
+\end{document}
+```
+
+需要说明的几点：
+
+1. `\usetheme{}` 显然是用来换主题的。可供选择的有：`Madrid`、`Warsaw`、`CambridgeUS`；
+2. `\begin{frame}` `\end{frame}` 是 beamer 里面重要的概念，每一个 `frame` 定义了一张 Page。
+
+### 
+
+## bug 及可能的解决方法
+
+### 无法编译/更新宏包
+
+这里仅列举 beamer 编译不成功的例子，其他宏包是类似的。
+
+> 使用 beamer 编译不能成功, 可能是使用的 beamer, pgf, xcolor 宏包需要更新，更新地址为：  
+> ~~当然也可以使用 LaTeX 发行版提供的宏包管理工具~~
+>  
+> beamer 更新地址: http://sourceforge.net/projects/latex-beamer/  
+> pgf 更新地址: http://sourceforge.net/projects/pgf/  
+> xcolor 更新地址: http://www.ctan.org/tex-archive/macros/latex/contrib/xcolor/  
+> 
+> 具体更新步骤如下:
+>   
+> (1) 下载: 下载最新的 `beamer`, `pgf`, `xcolor` 包;  
+> (2) 安装: 找到 TeX 的安装目录 `texmf`, 放到下面的地方即可： `texmf/tex/latex/beamer`, `texmf/tex/latex/pgf`,  `texmf/tex/latex/xcolor`  
+> 这里有一个细节要注意一下: 如果 `texmf/tex/latex/` 目录下原来有 `beamer`, `pgf` 等文件夹, 宜先删除原有的旧文件夹, 再粘贴新文件。(直接覆盖的话，可能会因为文件名不同，使旧文件没有被删除。)

@@ -8,11 +8,23 @@ category:
 mathjax: true
 ---
 
+## 前言
+
 某些国外网站，虽然没有被墙，但是下载个东西，几十 KB 的网速很难顶。
 
 于是想把东西下载服务器上，然后本地从服务器满速下载。这也就是离线下载的原理。
 
+## 基础知识
+
+后台运行也是非常重要的，博主就一笔带过，将原本的命令改为 `nohup <命令> &` 即可后台执行（此时可以按 `Ctrl+C` 关掉 `nohup` 的前端）。
+
+另外，如果服务器显示了“可以通过 `127.0.0.1:8080` 访问……”，表示的是服务器本机的 8080 端口，就可以在你的电脑访问 `[服务器ip]:8080`（如 `39.1.2.3:8080`）来访问对应的网站。后文不再赘述。
+
 ## 服务器下载文件
+
+服务器下载 http(s) 直链，最常用、也是最无脑的就是 `wget <Link>` 了。  
+对付非直链的情况，我们有非直链的解决方案；  
+对于种子/磁力链，我们可以使用
 
 ### wget 下载 Google Drive 文件
 
@@ -77,7 +89,7 @@ https://download2331.mediafire.com/chmg33d4airg/yrd1py7od5911zt/Catalina+Virtual
 
 然后就可以 `wget "$Index_data"` 或手动 `wget <网址>` 进行下载。
 
-如果需要后台下载，当然是用 nohup 了。这样，即使是几十 kb 的下载速度，服务器下个三天三夜，然后就可以满速下到本地了。
+如果需要后台下载，当然是用 nohup 了。这样，即使是几十 kb 的下载速度，服务器下个三天三夜，然后就可以以满速下到本地了。
 
 ```bash
 nohup wget "$Index_data" &
@@ -85,11 +97,24 @@ nohup wget "$Index_data" &
 
 下载的进度可以 `tail nohup.out` 查看输出文件的最后几行。
 
+### qbittorrent 下载磁力链/种子
+
+```bash
+apt install qbittorrent
+qbittorent-nox
+```
+
+安装 qbittorrent 以后，提供了两条命令 `qbittorrent` 和 `qbittorrent-nox` 的。前者是提供 GUI 的，后者是给命令行使用的（所谓 `no X`）。
+
+输入 `qbittorent-nox` 以后，就可以在本地通过访问对应的网站来管理服务器的 qbittorent 下载种子了。
+
+如果需要后台执行，可以使用 `qbittorrent-nox -d`。
+
 ## 服务器、本机互传文件
 
-### scp 命令通过 ssh 在服务器和本地互传文件
+### scp 命令：通过 ssh 在服务器和本地互传文件
 
-```
+```bash
 scp /home/work/source.txt work@192.168.0.10:/home/work/
 #把本地的source.txt文件拷贝到192.168.0.10机器上的/home/work目录下
 
@@ -104,16 +129,31 @@ scp -r /home/work/sourcedir work@192.168.0.10:/home/work/
 
 # 更改端口用 -P 参数
 ```
+### http 传输文件
 
-### simpleHTTPserver 两行建立 http 文件服务器
+#### python3 http.server 一行建立 http 文件服务器（不支持断点续传、密码验证）
 
 ```bash
 sudo apt-get install python3
-python3 -m  http.server
+
+python3 -m  http.server 8000
 ```
+
+需要更多的选项，可以使用 `python3 -m  http.server --help`
 
 看到 `Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...` 以后即可。
 
-就可以在互联网上访问到当前文件夹了。后台运行同样是 `nohup`。
+就可以在互联网上通过打开访问到当前文件夹了。后台运行同样是 `nohup`。
 
-注意这是没有密码验证的（毕竟 `simple` ），所以**不要长期开放！！！**
+注意这是没有密码验证的，也不支持断点续传（毕竟 `simple` ），所以**不要长期开放！！！**
+
+#### npm http-server 一行建立 http 文件服务器（支持断点续传，不支持密码验证）
+
+```bash
+apt install npm
+npm install http-server -g
+
+http-server
+```
+
+其中 `http-server` 的常用参数为 `http-server [path] [-p port]`。`port` 默认为 8080。

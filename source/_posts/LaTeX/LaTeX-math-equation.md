@@ -301,6 +301,7 @@ LaTeX 插入数学公式需要调用宏包：
 ```latex
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amsthm} % 某些数学定理和证明会用到
 ```
 
 （貌似 TeXstudio 自带，不需要这两行命令也能写数学公式）
