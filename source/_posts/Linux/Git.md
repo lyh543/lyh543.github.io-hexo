@@ -20,15 +20,17 @@ cd lyh543.github.io
 git init
 ```
 
-然后就可以按照下面的[常规三连](#git-常规三连)了
+然后就可以按照下面的[上传三连](#git-上传三连)了
 
-## git 常规三连
+## git 上传三连
 
 ```bash
-# 如果本地、服务器端不一致，需要 git pull
-$ git add --all # 单文件是 git add <file>
-$ git commit -m "upload 2 files."
-$ git push
+# 如果本地、服务器端不一致，需要先 git pull
+
+git add --all # 单文件是 git add <file>
+# git status # 这句可以看到到底 add 了哪些东西
+git commit -m "upload 2 files."
+git push
 ```
 
 ## git 保存密码
@@ -167,7 +169,7 @@ git config credential.helper 'cache --timeout=1000000000'
 
 还有一种在 `remote.url` 中加入自己的用户名和密码，更危险，就不表了。
 
-## 命令行 Git 上代理
+## git 代理
 
 经常会有挂上代理，浏览器访问 Github 快到飞起的，但是 Git Clone 却慢死的经历。awsl。
 
@@ -242,3 +244,12 @@ git checkout -- test.txt
 git config [--local] --list # 查看设置；--local 用于本地库
 git config --local remote.origin.url git@github.com:lyh543/lyh543.github.io.git # 修改设置，项和名用空格间隔
 ```
+
+## git 修改远端
+
+```bash
+git remote -v # 查看所有远端
+git remote set-url origin git@github.com:lyh543/lyh543.github.io.git # 修改远端
+```
+
+更多的命令，可以随便敲一个不存在的命令，如 `git remote hhh` 来查看所有命令。

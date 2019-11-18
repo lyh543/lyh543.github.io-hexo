@@ -12,6 +12,8 @@ Hexo 更换主题的方法参见另一篇[博客](../hexo-building-blog)。
 
 在网上找到了一个配置过程非常详实的[博客](https://zhouxiaoyu1994.github.io/2017/04/27/Hexo%E6%B7%B1%E5%9D%91%E4%B9%8B%E6%97%85%EF%BC%885%EF%BC%89%E2%80%94%20Materia%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/)，而且还修复了一些主题的小 bug，基本上按照这个博客做就好啦。
 
+## 几个 bug
+
 但是按照这篇博客做了之后，还是有几个小问题：
 
 ### bug1：无法本地搜索
@@ -101,12 +103,9 @@ busuanzi:
 一些插件的链接  
 
 [hexo-generator-search][1]  
-[hexo-helper-post-top][2]  
 
-但是安装`hexo-helper-post-top`以后，必须要有一个置顶的博客额，不然就会炸。还是卸载吧。
 
 [1]: https://github.com/PaicHyperionDev/hexo-generator-search
-[2]: https://www.npmjs.com/package/hexo-helper-post-top
 
 下载安装插件，需要在博客根目录使用下面这句命令
 
@@ -117,3 +116,24 @@ npm install <package name> --save
 一定要加`--save`参数，这样该插件才会被加入该项目的`dependencies`中，下次生成hexo的时候才会被编译。
 
 插件具体使用方法建议去看各插件的github项目的`README.MD`文件。
+
+### 博客置顶插件
+
+> 摘抄自：[【持续更新】最全Hexo博客搭建+主题优化+插件配置+常用操作+错误分析](https://juejin.im/post/5bebfe51e51d45332a456de0#heading-29#heading-21)
+
+安装插件：
+
+```bash
+npm uninstall hexo-generator-index --save
+npm install hexo-generator-index-pin-top --save
+```
+
+然后在需要置顶的文章的Front-matter中加上 `top` 即可：
+
+```
+---
+title: 2018
+date: 2018-10-25 16:10:03
+top: 10
+---
+```

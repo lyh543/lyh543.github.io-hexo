@@ -78,7 +78,7 @@ int main()
 
 [参考代码](Add_All.cpp)
 
-## 实现一个栈
+## 栈
 
 写一个栈的结构，并用函数实现栈的以下功能，并自己完成测试：
 
@@ -90,12 +90,12 @@ int main()
 
 [参考代码](stack.cpp)
 
-## 实现一个单向链表
+## 单向链表
 
 写一个单向链表的结构，并用函数实现链表的以下功能，并自己完成测试：
 
 1. `void push_back(int x)` 函数，用于在链表尾部增加值为 `x` 的节点。
-2. `int size()` 函数，要求 $O(n)$ 返回链表中节点的个数。
+2. `int size()` 函数，要求 $O(n)$ （即遍历的形式）返回链表中节点的个数。
 3. `node * get_head()` 函数，返回头节点的地址。
 4. `void insert(node * posi, int x)` 函数，用于在 `posi` 节点后插入一个值为 `x` 的节点。保证 `posi` 合法。
 5. `void delete_node(node * posi)` 函数，删除地址为 `posi` 的节点。保证 `posi` 合法。
@@ -162,6 +162,14 @@ $n, m \leq 10^5, 1 \leq a_i \leq 10^9$。要求从文件 `input.txt` 里输入�
 
 * 希尔排序
 
-## 从后序、中序遍历求先序遍历
+## 二叉树
 
-[洛谷 P1030](https://www.luogu.org/problem/P1030)
+### 从先序、中序遍历求后序遍历
+
+如题，输入两个字符串，表示二叉树的先序和中序遍历，输出后序遍历。
+
+另外，洛谷有类似的题目：求先序遍历 [洛谷 P1030](https://www.luogu.org/problem/P1030)
+
+## 递归练习
+
+[洛谷 P1028 数的计算](https://www.luogu.org/problem/P1028)
