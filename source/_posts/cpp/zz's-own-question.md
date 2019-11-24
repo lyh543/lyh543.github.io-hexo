@@ -94,14 +94,14 @@ int main()
 
 写一个单向链表的结构，并用函数实现链表的以下功能，并自己完成测试：
 
-1. `void push_back(int x)` 函数，用于在链表尾部增加值为 `x` 的节点。
-2. `int size()` 函数，要求 $O(n)$ （即遍历的形式）返回链表中节点的个数。
-3. `node * get_head()` 函数，返回头节点的地址。
-4. `void insert(node * posi, int x)` 函数，用于在 `posi` 节点后插入一个值为 `x` 的节点。保证 `posi` 合法。
-5. `void delete_node(node * posi)` 函数，删除地址为 `posi` 的节点。保证 `posi` 合法。
-6. `void pop_back()` 函数，用于删除链表尾部的节点。
-7. `void print_linked_list()` 函数，按顺序输出链表中的所有节点的值。
-8. `node * find(int x)` 函数，返回链表中第一个值为 `x` 的节点的地址。
+1. `void push_back(int x)` 函数，用于在链表尾部增加值为 `x` 的结点。
+2. `int size()` 函数，要求 $O(n)$ （即遍历的形式）返回链表中结点的个数。
+3. `node * get_head()` 函数，返回头结点的地址。
+4. `void insert(node * posi, int x)` 函数，用于在 `posi` 结点后插入一个值为 `x` 的结点。保证 `posi` 合法。
+5. `void delete_node(node * posi)` 函数，删除地址为 `posi` 的结点。保证 `posi` 合法。
+6. `void pop_back()` 函数，用于删除链表尾部的结点。
+7. `void print_linked_list()` 函数，按顺序输出链表中的所有结点的值。
+8. `node * find(int x)` 函数，返回链表中第一个值为 `x` 的结点的地址。
 
 [参考代码](list.cpp)
 

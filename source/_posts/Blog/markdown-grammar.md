@@ -12,7 +12,7 @@ category:
 
 > 参考链接: https://www.zhihu.com/question/58630229/answer/191984051
 
-Github markdown 支持目录/页内跳转。只需要在网页链接以后加 `#` 和标题，如：
+Github Markdown 支持目录/页内跳转。只需要在网页链接以后加 `#` 和标题，如：
 
 `[“图片链接”标题](#图片链接)`
 
@@ -68,6 +68,8 @@ Github markdown 支持目录/页内跳转。只需要在网页链接以后加 `#
 * 这是<del>删除线</del>
 * 这也是~~删除线~~
 * Emoji :laughing: :joy:
+    - 这是第一个小点
+    - 这是第二个小点
 ```
 
 * 这是<b>加粗</b>
@@ -76,6 +78,8 @@ Github markdown 支持目录/页内跳转。只需要在网页链接以后加 `#
 * 这是<del>删除线</del>
 * 这也是~~删除线~~
 * Emoji :laughing: :joy:
+    - 这是第一个小点
+    - 这是第二个小点
 
 ## 表格
 
@@ -205,5 +209,5 @@ int main()
 
 ## LaTeX 公式
 
-原生Markdown不支持LaTeX数学公式，要想使用，请移步Mathjax。
+原生 Markdown 不支持 LaTeX 数学公式，要想使用，请移步 Mathjax。
 
