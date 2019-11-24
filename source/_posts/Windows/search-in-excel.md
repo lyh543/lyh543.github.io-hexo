@@ -1,8 +1,10 @@
 ---
 title: 精确搜索——用学号匹配名字
 date: 2019-4-15
-category:
+tags:
 - Excel
+category:
+- Windows
 ---
 
 ```vb

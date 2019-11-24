@@ -1,10 +1,10 @@
 ---
 title: Windows 使用小技巧
 category:
-- Others
+- Windows
 tags:
 - Visual Studio Code
-- Windows
+- Excel
 mathjax: true
 ---
 
@@ -22,6 +22,12 @@ mathjax: true
 
 在文本编辑器中，`Home` 跳到本行开头；`End` 跳到本行结尾；  
 如果想到跳到全文开头/结尾，加 `Ctrl` 就可以了。
+
+#### Excel 中的 End 按键
+
+对于处理大量数据的 Excel 表格，有些时候拖滚动条都要拖好久。我们知道，`Home` 和 `End` 在其他应用能跳到同行的开头和结尾，但是貌似不能解决几千甚至几万行的 Excel。
+
+所以，Excel 对 `End` 进行了“魔改”，按了 `End` 以后，并没有立即跳转到行末，而是等待输入一个方向键，**即可跳转到该方向的最后一个位置**。
 
 ### Shift 高级菜单
 

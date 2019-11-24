@@ -375,9 +375,13 @@ void quick_sort(vector<int>& Arr, int l, int r)
 
 树中结点的度数是直接儿子的个数，不是图中度数的定义。
 
+
 ### 二叉树
 
+满二叉树（Full Binary Tree，更加严格）一定是完全二叉树（Complete Binary Tree），反之不一定。~~搞清定义啊~~
+
 $n_0=n_2+1$
+
 
 * 二叉排序树
 
@@ -404,4 +408,6 @@ $n_0=n_2+1$
 
 ## 后记
 
-由于课程紧张，后期笔记就比较水了，这是中国大学 MOOC 的[学习链接](https://www.icourse163.org/course/0809uestc080-1002532005)。
+由于课程紧张，后期笔记就比较水了。
+
+这是中国大学 MOOC 的[学习链接](https://www.icourse163.org/course/0809uestc080-1002532005)。

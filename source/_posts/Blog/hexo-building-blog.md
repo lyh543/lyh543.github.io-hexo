@@ -64,7 +64,7 @@ deploy:
 还要安装`hexo-deployer-git`：
 
 ```bash
-npm install hexo-deployer-git --save`
+npm install hexo-deployer-git --save 
 ```
 
 ## 给 hexo 换主题

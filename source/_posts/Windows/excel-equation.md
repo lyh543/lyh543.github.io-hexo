@@ -1,8 +1,10 @@
 ---
 title: Excel 公式
 date: 2019-9-14
-category:
+tags:
 - Excel
+category:
+- Windows
 ---
 
 [Office链接](https://support.office.com/zh-cn/article/excel-中的公式概述-ecfdc708-9162-49e8-b993-c311f47ca173?ui=zh-CN&rs=zh-CN&ad=CN)

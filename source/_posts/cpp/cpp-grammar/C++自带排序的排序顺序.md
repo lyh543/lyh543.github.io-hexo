@@ -2,7 +2,7 @@
 title: C++自带排序的排序顺序
 date: 2019-7-25
 tags:
-- 语言测试
+- 语法测试
 - STL
 category:
 - C++

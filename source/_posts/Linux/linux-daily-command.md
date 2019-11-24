@@ -108,10 +108,6 @@ alias la='ls -al --color=auto'
 
 3. `cat /etc/redhat-release` 只适用于 Redhat 系 Linux。
 
-### 查看磁盘大小
-
-`ls -df`
-
 ### 查看端口占用
 
 `lsof -i 8999`
@@ -128,6 +124,19 @@ alias la='ls -al --color=auto'
 wget https://github.com/fatedier/frp/releases/download/v0.29.0/frp_0.29.0_linux_amd64.tar.gz
 tar -zxvf frp_0.29.0_linux_amd64.tar.gz
 ```
+
+### 查看文件/文件夹/磁盘的大小
+
+中文|英文|命令
+-|-|-
+查看磁盘大小|**d**isplay **f**ilesystem|`df -h`
+查看目录下的文件大小|**l**i**s**t|`ls -hs`
+查看目录下的文件夹的大小|**d**isk **u**sage|`du -h --max-depth=1`
+
+以上的 `-h` 都是 `--human-readable`，不使用这个开关，则会使用一个数字表示大小（单位为 `KB`）；使用开关后，则会使用 `200K`，`1.8G` 的形式。  
+注意 `du` 如不加 `--max-depth` 参数，会统计完所有的目录。
+
+
 
 ## 进程
 

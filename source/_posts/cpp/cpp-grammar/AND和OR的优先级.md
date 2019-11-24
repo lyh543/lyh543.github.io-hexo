@@ -2,7 +2,7 @@
 title: C/C++ && 和 || 的优先级
 date: 2019-8-20
 tags:
-- 语言测试
+- 语法测试
 category:
 - C++
 - C++语法

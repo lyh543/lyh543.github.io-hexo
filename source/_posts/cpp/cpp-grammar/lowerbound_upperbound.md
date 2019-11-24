@@ -2,7 +2,7 @@
 title: lower_bound() 和 upper_bound() 返回值
 date: 2019-8-17
 tags:
-- 语言测试
+- 语法测试
 - STL
 category:
 - C++
