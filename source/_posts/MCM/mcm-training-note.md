@@ -5,7 +5,6 @@ tags:
 category:
 - 数学建模
 mathjax: true
-top: true
 ---
 
 ## 2019 秋季集训
