@@ -20,6 +20,14 @@ for i=1:N
 end;
 ```
 
+## 图的注释、美化
+
+```m
+plot(x,y);
+title('y=f(x)')
+xlabel('x'), ylabel('y')
+```
+
 ## plot 按自变量、因变量值绘图
 
 这是老师教的方法。[官方文档](https://ww2.mathworks.cn/help/matlab/ref/plot.htm)
@@ -142,3 +150,6 @@ end
 输入一个向量，绘出 x 的每个元素的直方图。
 
 其中，默认把 x 的值分为 10 个区间。
+
+## mesh 散点图
+

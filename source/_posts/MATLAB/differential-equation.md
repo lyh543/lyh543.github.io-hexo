@@ -8,8 +8,6 @@ category:
 mathjax: true
 ---
 
-
-
 ## 常微分方程
 
 常微分方程就是解 $\frac{dN}{dt}=rN, N(0)=N_0$ 这一类的方程。
@@ -93,4 +91,15 @@ t = t * dt;
 h = plot(t, x(1:i),'r-', t, y(1:i), 'k-') % r 红色， k 黑色
 set(h, 'linewidth' ,2);
 legend('x', 'y');
+```
+
+## 解高阶微分方程
+
+```m
+function dy=odefun(t,y)
+n=length(y);  dy=zeros(n,1);
+dy(1)=y(2)
+dy(2)=y(3)
+% ...
+dy(n)=f(t,y(2),y(3),...,y(n-1));
 ```
