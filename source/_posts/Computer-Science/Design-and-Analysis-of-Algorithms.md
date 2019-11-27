@@ -387,9 +387,13 @@ SAT 问题（Satisfiability）是给定一个析取范式（CNF），判定是�
 
 #### 决定性问题
 
-决定性问题的严格定义：$X$ 是一个字符串（当然也可以是数字）的集合，$s$ 是一个字符串，决定问题是需要判断 $s$ 是否在 $X$ 中。
+决定性问题的严格定义：
 
-多项式时间复杂度：指对于每个字符串 $s$，判断 $s$ 是否在 $X$ 中的算法所需时间是 $s$ 长度 $|s|$ 的多项式次数。
+> $X$ 是一个字符串（当然也可以是数字）的集合，$s$ 是一个字符串，决定问题是需要判断 $s$ 是否在 $X$ 中。
+
+多项式时间复杂度：
+
+> 指对于每个字符串 $s$，判断 $s$ 是否在 $X$ 中的算法所需时间是 $s$ 长度 $|s|$ 的多项式次数。
 
 如判断数字 t 是不是质数的朴素算法，就不是多项式时间复杂度的（是 $10^{|t|}$ 的）。在 2002 年出现了多项式复杂度的 AKS 算法，$p(|s|)=|s|^8$。  
 它的 $X$ 集合是 $\\{2,3,5,...\\}$。
@@ -414,7 +418,7 @@ SAT 问题（Satisfiability）是给定一个析取范式（CNF），判定是�
 其实不是，说不定一万年以后就有人证出了某个 NP 问题是多项式可解的呢？  
 所以呢，NP 的严格定义是存在多项式时间的验证算法，它并没有提及问题本身能否在多项式内是可解的。
 
-不过呢，在平时，一般我们说的 NP 指的就是目前多项式不可解的问题。
+不过呢，在平时，一般很多人说的 NP 指的就是目前多项式不可解的问题。这种说法是错误的。
 
 那 NP 为什么叫 NP 啊？它定义里面就没有一个 N 开头的单词啊。  
 NP 是 nondetermistic (turing machine) polynomial-time，即非确定性图灵机能在多项式时间内解决的问题。啊看不懂看不懂。
@@ -428,43 +432,48 @@ NP 是 nondetermistic (turing machine) polynomial-time，即非确定性图灵�
 
 只需证明能在多项式时间内验证就行了。（不是说要证明他多项式不可解喔别被坑了哈哈哈哈）
 
-验证合数显然是多项式可解的，那验证质数是 NP 呢？只能调用 AKS 跑一遍了，甚至不需要 $t$。
-
-#### P、NP 和 EXP
-
-这几个概念再理一遍：
-
-> P：  使用图灵机能在多项式时间内解决的问题；  
-> NP： 存在多项式时间的验证算法的决定问题；  
-> EXP：使用图灵机能在 $O(2^{p(n)})$ 的时间内解决的问题（$p(n)$ 代表 $n$ 的多项式）。
-
-有 $P \subseteq NP \subseteq EXP$。
-
-其中 $NP \subseteq EXP$，可由 $NP$ 的定义，解的集合 $X$ 肯定是有限的，因此能够在指数时间完成枚举即可。
-
-![P NP NP-Complete NP-Hard](P_np_np-complete_np-hard.svg)
+验证合数显然是多项式可解的，那验证质数是 NP 呢？只能调用 AKS 跑一遍了，甚至不需要验证算法可以额外提供的 $t$。
 
 ### NP-Complete
 
-NP-Complete（NPC、NP完全）：所有 NP 问题都能归约到这个问题。
+> NP-Complete（NPC、NP完全）：所有 NP 问题都能归约到这个问题，并且这个问题也是 NP 的。
+
+顺便说一句，满足第一点的问题也被称为 NP-Hard。这里并不需要证明它不是 NP 的，因为你几乎不能证明一个问题不是 NP 的（毕竟证伪难）。  
+所以 NP-Hard 包含了 NP-Complete 问题。如上一点的图。
 
 NPC 的意义是，他们是 NP 中最难的问题，因为如果证明其中一个在多项式内有解，则直接证明了 P=NP！  
 因此，我们不需要花太多精力来找是否存在多项式复杂度的问题。
 
 问题是，第一个 NP-Complete 问题是如何产生的呢？
 
+#### P、NP 和 EXP
+
+在讲第一个 NP-Complete 问题之前，这几个概念再理一遍：
+
+> P：  使用图灵机能在多项式时间内解决的问题；  
+> NP： 存在多项式时间的验证算法的决定问题；  
+> EXP：使用图灵机能在 $O(2^{p(n)})$ 的时间内解决的问题（$p(n)$ 代表 $n$ 的多项式）。
+> NP-Complete：所有 NP 问题都能归约到这个问题，并且这个问题也是 NP 的。
+> NP-Hard：所有 NP 问题都能归约到这个问题。
+
+有 P $\subseteq$ NP $\subseteq$ EXP，NP $\wedge$ NP-Hard = NP-Complete。
+
+其中 NP $\subseteq$ EXP，可由 NP 的定义，解的集合 $X$ 肯定是有限的，因此能够在指数时间完成枚举即可。
+
+![P NP NP-Complete NP-Hard](P_np_np-complete_np-hard.svg)
+
 #### 第一个 NP-Complete 问题：Circuit Satisfiablity
 
 ![Circuit SAT](Circuit_SAT.jpg)
-![证明Circuit SAT 是 NPC](Circuit_SAT_2.jpg)
+![证明 Circuit SAT 是 NPC](Circuit_SAT_2.jpg)
 
 证明的大概思路就是，对于任意 NP 问题，都可以把他的有限的解和验证算法的 t 构成一个逻辑电路，就把所有问题归约为了这个问题。
 
 #### 更多的 NP-Complete 问题
 
-我们证明 NP-Complete的，当然不可能按定义证明所有 NP 问题都能被归约到这个问题。但是，  
+我们证明 NP-Complete 的，如果按定义，证明所有 NP 问题都能被归约到这个问题，这也太难了。但是——  
 
-有了第一个 NP-Complete 问题，我们就可以通过把已知的 NP-Complete 问题归约到其他问题，从而证明更多的问题也是 NP-Complete。
+有了第一个 NP-Complete 问题，我们就可以通过把已知的 NP-Complete 问题归约到其他问题，（根据归约的传递性）从而证明更多的问题也是 NP-Complete。
 
 以下就是一个 NP-Complete 问题的拓扑图。
 
@@ -479,7 +488,7 @@ NPC 的意义是，他们是 NP 中最难的问题，因为如果证明其中一
 5. Partitioning problems: 3D-MATCHING 3-COLOR.
 6. Numerical problems:  SUBSET-SUM, KNAPSACK.
 
-**大多**数问题，要么已知是 P 的，要么已经被证明是 NP-Complete 的了。（也有例外：质因数分解、判断图的同构、纳什均衡等）
+**大多**数 NP 问题，要么已知是 P 的，要么已经被证明是 NP-Complete 的了。（也有例外：质因数分解、判断图的同构、纳什均衡等）
 
 看到这里，你大概已经明白了，我们一般说一个问题已被证明多项式不可解，其实不是说的 NP，而是 NP-Complete。  
 
