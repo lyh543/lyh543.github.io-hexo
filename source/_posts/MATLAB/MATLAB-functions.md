@@ -25,10 +25,10 @@ mathjax: true
 |功能|函数名|注释|
 |-|-|-|
 |单变量优化|`fminbnd()`|求一元函数最小值|
-|无约束优化|`fminsearch()`|使用无导数法计算最小值（类似梯度下降法）|
-||`fminunc()`|计算无约束的多变量函数的最小值（牛顿法）|
+|无约束优化|`fminsearch()`|使用无导数法计算最小值|使用 Lagarias 等的单纯形搜索法
+||`fminunc()`|计算无约束的多变量函数的最小值|使用牛顿法和（梯度法？）
 |有约束优化|`fmincon()`|在有线性约束下计算最小值|
-|线性规划|`linprog()`|解线性规划问题|
+|线性规划|`linprog()`|解线性规划问题|双单纯形法或 `interior-point algorithm`
 |整数规划|`intlinprog()`|解整数线性规划问题|
 |[遗传算法](../genetic-algorithm#在-MATLAB-中调用遗传算法)|`ga()`|包含以上所有功能，不过精度较低
 
@@ -36,11 +36,17 @@ mathjax: true
 
 功能|函数名|注释
 -|-|-
-正态概率函数|`normpdf(x)`
-正态分布函数|`normcdf(x)`
+正态概率函数|`normpdf`|pdf: Probability Density Function
+正态分布函数|`normcdf`|cdf: Cumulative Density Function
+正态下侧分位数|`norminv(p)`|返回 $x$ 满足 $\varPhi(x)=p$
+按正态分布生成随机数|`normrnd`
 |
-`cftool`|曲线拟合工具箱
-`distributionFitter`|分布拟合工具箱|
+上述函数的卡方分布版本|将四个函数的 `norm` 改为 `chi2`|很香
+|
+正态分布拟合|`normfit`|使用 Wald 检验
+|
+曲线拟合工具箱|`cftool`|
+分布拟合工具箱|`distributionFitter`|
 
 ## 工具箱
 
