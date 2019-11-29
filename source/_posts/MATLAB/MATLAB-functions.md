@@ -32,7 +32,15 @@ mathjax: true
 |整数规划|`intlinprog()`|解整数线性规划问题|
 |[遗传算法](../genetic-algorithm#在-MATLAB-中调用遗传算法)|`ga()`|包含以上所有功能，不过精度较低
 
-##
+## 概率统计相关
+
+功能|函数名|注释
+-|-|-
+正态概率函数|`normpdf(x)`
+正态分布函数|`normcdf(x)`
+|
+`cftool`|曲线拟合工具箱
+`distributionFitter`|分布拟合工具箱|
 
 ## 工具箱
 

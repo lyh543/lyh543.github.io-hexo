@@ -22,10 +22,29 @@ end;
 
 ## 图的注释、美化
 
+### 图的注释
+
 ```m
 plot(x,y);
 title('y=f(x)')
 xlabel('x'), ylabel('y')
+```
+
+### plot 图的美化
+
+```m
+h = plot(x1,y1, 'r-'); % r 红色， k 黑色
+set(h, 'linewidth' ,2);
+legend('X', 'Y');
+```
+
+
+### 散点图的美化
+
+```m
+plot(d(:,1),y,'o','markersize',12)
+set(gca,'fontsize',14)
+set(gcf,'color','w')
 ```
 
 ## plot 按自变量、因变量值绘图
@@ -51,26 +70,10 @@ y1 = r*sin(t);
 plot(x1,y1)
 ```
 
-### plot 的美化
-
-```m
-h = plot(x1,y1, 'r-'); % r 红色， k 黑色
-set(h, 'linewidth' ,2);
-legend('X', 'Y');
-```
-
 ### plot 散点图
 
 ```m
 plot(1:5, 1:5, '.'); % 另可用 `o`, `*`
-```
-
-### 散点图的美化
-
-```m
-plot(d(:,1),y,'o','markersize',12)
-set(gca,'fontsize',14)
-set(gcf,'color','w')
 ```
 
 ## hold on
