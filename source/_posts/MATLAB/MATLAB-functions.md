@@ -32,11 +32,14 @@ mathjax: true
 |整数规划|`intlinprog()`|解整数线性规划问题|
 |[遗传算法](../genetic-algorithm#在-MATLAB-中调用遗传算法)|`ga()`|包含以上所有功能，不过精度较低
 
+##
+
 ## 工具箱
 
 命令|名称
 -|-
 `cftool`|曲线拟合工具箱
+`distributionFitter`|分布拟合工具箱|相关知识还可见[MATLAB参数估计与假设检验-参数估计](https://blog.csdn.net/MATLAB_matlab/article/details/55802815)
 
 ## 统计函数
 

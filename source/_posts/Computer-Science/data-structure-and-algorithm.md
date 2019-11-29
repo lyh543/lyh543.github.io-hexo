@@ -3,9 +3,9 @@ title: 数据结构与算法
 date: 2019-09-03 12:59:19
 tags:
 - 课程笔记
+- 数据结构
 category:
 - 计算机科学
-- 数据结构
 mathjax: true
 ---
 
