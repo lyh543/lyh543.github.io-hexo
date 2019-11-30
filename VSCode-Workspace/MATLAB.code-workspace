@@ -2,10 +2,10 @@
 	"folders": [
 		{
 			"name": "MATLAB",
-			"path": "D:\\Documents\\Git\\lyh543.github.io\\source\\_posts\\MATLAB"
+			"path": "..\\source\\_posts\\MATLAB"
 		},
 		{
-			"path": "D:\\Documents\\Git\\lyh543.github.io\\source\\_posts\\MCM"
+			"path": "..\\source\\_posts\\MCM"
 		}
 	]
 }
