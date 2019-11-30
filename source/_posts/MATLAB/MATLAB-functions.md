@@ -95,3 +95,12 @@ size(A) %返回一个1x2数组
 idx=find(v>=0);
 v(find(v>=0));
 ```
+
+## 绘图
+
+见[绘图](../MATLAB-plot)。
+
+## 图片处理
+
+* 读取：`pic = imread('a.bmp')`
+* 显示：`imshow(pic)`

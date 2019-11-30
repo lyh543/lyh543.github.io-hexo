@@ -126,7 +126,7 @@ remote_port = 5200 # 服务器接收 Remote Desktop 信息的端口，可以改
 
 可能会看到 `ignore input` 之类的警告，不用管，`Ctrl+C` 退出前台即可，此时 `ssserver` 正在后台运行。
 
-### 客户端开机运行
+### 客户端开机运行（不推荐）
 
 客户端需要开机后台启动 `frpc`，可以把 vbs 脚本放在 Startup 目录。
 
@@ -141,11 +141,11 @@ ws.Run "c:\frp\frpc.exe -c c:\frp\frpc.ini",0
 
 为了防止意外，可以在远程的电脑上安装额外的临时的远程桌面解决方案如 Teamviewer 或 QQ 以应急。
 
-### 客户端守护进程
+### 客户端守护进程（）
 
-但是有些时候还是会有蜜汁启动不了。即使我设了启动命令+任务计划，仍然必须要登录以后才会启动 `frpc`。
+但是有些时候还是会有蜜汁启动不了。即使我设了启动命令+任务计划，仍然必须要登录以后才会启动 `frpc`。因此我并不推荐开机自启的方法，而是用这种进程守护的功能。
 
-于是我打算搞一个进程守护，任务计划每五分钟启动一次，检测 `frpc` 是否正在运行，否则后台启动 `frpc`。
+于是我打算搞一个进程守护，任务计划每一分钟启动一次，检测 `frpc` 是否正在运行，否则后台启动 `frpc`。
 
 为此我需要以下文件（都放在 `D:\Documents\Tools\frp\`）：
 
@@ -160,13 +160,19 @@ ws.run"D:\Documents\Tools\frp\frpc-daemon.bat",0,ture
 bat 内容如下：
 
 ```bat
-set path=D:\Documents\Tools\frp
-tasklist | find "frpc" || %path%\frpc.exe -c %path%\frpc.ini
+set frppath=D:\Documents\Tools\frp
+tasklist | find "frpc" || %frppath%\frpc.exe -c %frppath%\frpc.ini
 ```
 
-3. 任务计划。触发器部分，勾上 `重复任务间隔` 设为 5 分钟。启动程序 `wscript`，添加参数为 `"D:\Documents\Tools\frp\frpc-daemon.vbs"`。
+3. 任务计划。
+ 
+常规部分，选择“不管用户是否登录都要运行”，**不要**勾选“不存储密码”。  
+触发器部分，选择 `一次`，时间默认，然后勾上 `重复任务间隔` 设为 1 分钟。  
+操作部分，启动程序 `wscript`，添加参数为 `"D:\Documents\Tools\frp\frpc-daemon.vbs"`（你的 `frpc-daemon.vbs` 路径，带引号）。
 
-## 部分 bug 及解决方案
+虽然这种方法会占用一点点 CPU（实际上占用的很少很少），但是真的非常推荐，配置好以后，要是哪天手滑关了 frpc，问题也不大，几分钟以后就会启动。并且配置好以后，也会开机自启，非常好用，推荐。
+
+## 部分错误及解决方案
 
 ### frps 和 frpc 无法连接
 
@@ -182,6 +188,8 @@ tasklist | find "frpc" || %path%\frpc.exe -c %path%\frpc.ini
 关闭`根据网络调整质量`，可改为`256kbps-2M`，然后开启平滑字体。
 
 如果仍然无效，可能需要远程登录成功、退出以后重新登录。
+
+2019.11.30 更新：如果网络不好，这个真的没法解决，只能选择将就着用，或者换 Teamviewer。
 
 
 ### mstsc 和 Teamviewer 打开文件资源管理器时卡顿（更新于 2019.10.21）

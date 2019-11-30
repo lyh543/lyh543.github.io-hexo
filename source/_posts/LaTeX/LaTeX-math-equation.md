@@ -272,13 +272,19 @@ $$\Bigg ( \bigg [ \Big \\{ \big \langle \left | \| x \| \right | \big \rangle \B
 
 ## 数学符号表
 
-常用：
+常用希腊字母表：
 
-LaTeX语句|数学符号
--|-
-`\varphi`|$\varphi$
-`\epsilon`|$\epsilon$
-`\varepsilon`|$\varepsilon$
+||小写|大写|`var`小写|`var`大写
+|:-|:-|:-|:-|:-|
+`delta`|$\delta$|$\Delta$|\\|$\varDelta$
+`phi`|$\phi$|$\Phi$|$\varphi$|$\varPhi$
+`psi`|$\psi$|$\Psi$|\\|$\varPsi$
+`epsilon`|$\epsilon$|\\|$\varepsilon$|\\
+`chi`|$\chi$
+
+用法：小写即为 `\` 加英文名；大写只要首字母大小就行；`var` 是 `\var` 加大/小写字母。
+
+如 `\varPsi` 为 $\varPsi$。
 
 更多的：
 

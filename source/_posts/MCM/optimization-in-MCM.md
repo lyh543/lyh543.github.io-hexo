@@ -49,6 +49,8 @@ p - 范数：
 
 $$||x||_p=(|x_1|^p+|x_2|^p+ \cdots + |x_p|^p)^{1/p}$$
 
+更多向量范数知识见[链接](../non-linear-equation/#范数简介)
+
 * 等值线及其性质
 * 全微分、方向导数、梯度
 
@@ -119,3 +121,174 @@ ccc，究极傻逼背包，正解不讲的
 先进行模块化设计，设计出一个较为通用的遗传算法的 MATLAB 语言实现
 
 ~~可是不是有工具箱吗~~
+
+## 有约束优化
+
+$$\min f(x) \\\\
+s.t.\begin{cases}
+g_i(x) \geq 0 & i = 1,2,...,m \\\\
+h_j(x) = 0 & j = 1,2,...,l
+\end{cases}$$
+
+有约束优化常用罚函数法转化为无约束优化：当函数即将达到可行域边界/超出边界时，急剧增加其函数值作为“惩罚”，对可行域内的点不予惩罚。前者是内点法，后者是外点法。
+
+### 外点罚函数法
+
+可构造以下函数，将对 $f(x)$ 的有约束优化转为对 $F(x,\sigma)$ 的无约束优化：
+
+$$F(x,\sigma) = f(x) + \sigma P(x)$$
+
+其中惩罚因子 $\sigma$ 是很大的正数， $P(x)$是连续函数。
+
+$$P(x)=\sum_{j=1}^l\phi(h_j(x)) + \sum_{i=1}^m\psi(g_i(x))$$
+
+其中 $\phi$ 和 $\psi$ 是满足以下条件的连续函数：
+
+$$
+\phi(y)
+\begin{cases}
+=0 & y=0 \\\\
+\>0 & y \neq 0
+\end{cases} \qquad
+\psi(y)
+\begin{cases}
+=0 & y \geq 0 \\\\
+\>0 & y\<0
+\end{cases}
+$$
+
+$$\phi(h_j(x))=|h_j(x)|^\beta \qquad \psi(g_i(x))=[\max\\{0,-g_i(x)\\}]^\alpha$$
+
+常取 $\alpha = \beta = 2$。显然在可行域内，$P(x)=0$，否则 $P(x)>0$。
+
+
+1. $\sigma P(x)$ 被称为罚项，$F(x,\sigma)$ 被称为罚函数。
+2. 注意，惩罚因子 $\sigma$ 越大，找到的点就越接近极值点；但并不是  $\sigma$ 越大就越好，因为 $\sigma$ 越大会使得求导和 Hesse 矩阵趋向病态。
+3. 外点罚函数法要求 $f(x)$ 在可行域外也有定义，如没有定义，需要考虑内点罚函数法。
+
+#### 算法
+
+算法实现上，常使用 $\sigma$ 从小取到大的方法：
+
+1. 初始化：
+   * 选定初始点 $x^{(0)}$
+   * 初始罚因子 $\sigma$
+   * 设置罚因子的放大系数 $c>1$（如 $c=10$）
+   * 置 $k=1$
+2. 以 $x^{(k-1)}$ 为起始点，求解无约束问题
+    $$\min F(x,\sigma)$$得到极小点 $x^{(k)}$。
+3. 若 $\sigma P(x) < \varepsilon$，则输出 $x^{(k)}$ 并终止，否则转 4。
+4. 置 $\sigma = \sigma * c, k=k+1$，并返回 2。
+
+这种通过求解一系列无约束问题来获得约束问题最优解的方法称作**序列无约束极小化**`SUMT`。
+
+#### 例题
+
+下面是运用外点法求解
+
+$$ \min f(x) = x_1^2+2x_2^2 \\\\
+s.t. \\; x_1 + x_2 >= 1$$
+
+的 MATLAB 程序。
+
+```m
+global sigma f P;
+f=@(x)x(1)^2+2*x(2)^2;
+g=@(x)x(1)+x(2)-1;
+P=@(x)max(0,-g(x))^2;
+x=[0,0]
+sigma=1;
+c=10;
+epsilon=1e-5;
+
+for k = 1:20
+    x = fminunc(@F,x)
+    disp(sigma*P(x))
+    if (sigma*P(x) < epsilon)
+        disp('answer successfully found')
+        break;
+    end
+    sigma=sigma*c;
+end
+
+function y=F(x)
+global sigma f P;
+    y=f(x)+sigma*P(x);
+end
+```
+
+最值为：
+
+```
+x(1) = 0.6666
+x(2) = 0.3334
+```
+
+### 内点罚函数法
+
+外点罚函数法要求 $f(x)$ 在可行域外也有定义，如没有定义，需要考虑内点罚函数法。
+
+这次，当迭代点靠近边界点时，就迅速增加目标函数值（而不是当迭代点在可行域外时才动手），保证迭代点在可行域内。
+
+由于内点罚函数总是从内点出发，于是不适用于有等式约束的问题。
+
+$$\min f(x) \\\\
+s.t. \\; g_i(x) \geq 0 \quad i = 1,2,...,m$$
+
+类似于外点法，我们定义**障碍函数**：
+
+$$F(x,\mu)=f(x)+\mu B(x)$$
+
+不同的时，当 $x$ 趋向可行域边界时，让 $B(x) \to \infty$。$B(x)$ 的设定一般如下：
+
+$$\begin{aligned}
+B(x) &= \sum_{i=1}^m \frac{1}{g_i(x)} \\\\
+B(x) &= -\sum_{i=1}^m \ln g_i(x) \\\\
+B(x) &= \sum_{i=1}^m \frac{1}{g_i^2(x)} \\\\
+\end{aligned}$$
+
+对于 $\mu$，如果 $\mu$ 越小，无约束问题的最优解越接近原问题的最优解。因此要求 $\\{\mu\\}$ 是单调下降序列。
+
+实际应用中，还可以对不同的 $g_i(x)$ 施加不同的 $\mu_i$：
+
+$$F(x,\mu)=f(x)+\sum_{i=1}^n \mu_i\frac{1}{g_i(x)}$$
+
+算法与外点法大致相同，故略。参数选择上，可选 $r_1 = 10, C = 0.1$。
+
+#### 例题
+
+$$\min f(x)=(x_1-1)^2+x_2^2 \\\\
+s.t. \begin{cases}
+x_1 \geq 0 \\\\
+x_2 \geq 0
+\end{cases}$$
+
+```m
+global mu f B
+f=@(x)(x(1)-1)^2+x(2)^2;
+B=@(x)log(x(1))+log(x(2));
+x=[1,1];
+mu=10;
+c=0.1;
+epsilon=1e-9;
+for k = 1:20
+    x = fminunc(@F,x)
+    disp(mu*B(x))
+    if (abs(mu*B(x)) < epsilon)
+        break;
+    end
+    mu=mu*c;
+end
+
+function y=F(x)
+global mu f B;
+    y=f(x)-mu*B(x);
+end
+```
+
+最值为：
+
+```
+x(1) = 1.000
+x(2) = 0.000
+```
