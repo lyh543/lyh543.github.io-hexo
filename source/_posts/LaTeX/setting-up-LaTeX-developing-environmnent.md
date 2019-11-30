@@ -1,8 +1,7 @@
 ---
 title: 配置 LaTeX 开发环境 (TeX Live / CTeX + TeXstudio)
 date: 2019-11-12 20:58:41
-tags:
-- 课程笔记
+tags: 
 category:
 - LaTeX
 mathjax: true

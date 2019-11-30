@@ -1,5 +1,6 @@
 ---
 title: Hexo 插入 LaTeX 公式
+date: 2019-10-15
 tags:
 - Hexo
 category:
