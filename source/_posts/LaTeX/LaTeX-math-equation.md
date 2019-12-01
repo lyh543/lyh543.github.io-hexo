@@ -227,8 +227,9 @@ I_n &= 1-nI_{n-1} \quad (n=1,2,...)
 
 > 参考博客：https://blog.csdn.net/miao0967020148/article/details/78712811
 
-使用括号的时候，可以加一句`\left` `\right`，大概是告诉 LaTeX，我要用括号了，而不是简单的符号  
-~~好像用不用没有什么影响，不想打，好几个字符呢~~
+使用括号的时候，可以加一句`\left` `\right`，大概是告诉 LaTeX，我要用括号了，这样 LaTeX 会根据括号中内容中的高度自动调整括号的高度。
+
+
 
 中文|LaTeX语句|数学符号
 -|-|-
@@ -245,7 +246,9 @@ I_n &= 1-nI_{n-1} \quad (n=1,2,...)
 
 （提醒 MathJax 用户：上述符号前的 `\` 都应使用 `\\`，而 `left` 和 `right` 前仍为 `\`）
 
-另外，可以使用 `\big`，`\Big`，`\bigg`，`\Bigg` 来控制括号的大小。
+但是要注意，`\left` 和 `\right` 中间不能出现换行 `\\`。如果实在需要调整括号高度，可以参照下一行。
+
+还可以使用 `\big`，`\Big`，`\bigg`，`\Bigg` 手动控制括号的高度。
 
 ```latex
 $$\Bigg ( \bigg [ \Big \\{ \big \langle \left | \| x \| \right | \big \rangle \Big \\} \bigg ] \Bigg )$$
@@ -261,8 +264,8 @@ $$\Bigg ( \bigg [ \Big \\{ \big \langle \left | \| x \| \right | \big \rangle \B
 普通空格|`$a \space b \\; c \\  d$`|$a \space b \\; c \\  d$|
 1cm短空格|`$a\quad b$`|$a\quad b$|
 2cm长空格|`$a\qquad b$`|$a\qquad b$|
-换行并对齐|`$\begin{aligned}`<br>`x&=a+b+c\\`<br>`&=d+e\\`<br>`&=g+f`<br>`\end{aligned}$`|$\begin{aligned}x&=a+b+c\\\\&=d+e\\\\&=g+f\end{aligned}$|开头`\begin{aligned}`<br>结束`\end{aligned}`<br>行末`\\`<br>需要对齐的符号前`&`
-||`&`常用于对齐
+换行并对齐|`$\begin{aligned}`<br>`x&=a+b+c\\`<br>`&=d+e\\`<br>`&=g+f`<br>`\end{aligned}$`|$\begin{aligned}x&=a+b+c\\\\&=d+e\\\\&=g+f\end{aligned}$|开头 `\begin{aligned}` <br>结束 `\end{aligned}`<br>行末 `\\` <br>需要对齐的符号前 `&`
+||`&` 可以放在任意符号之前表示“在此处对齐”
 省略号|`1...n`<br>`1 \dots n`|$1 \dots n$
 |`1 \cdots n`|$1 \cdots n$
 |`\vdots`|$\vdots$

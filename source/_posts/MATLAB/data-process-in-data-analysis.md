@@ -3,6 +3,7 @@ title: 数值分析中的数据处理方法
 date: 2019-11-25 19:47:54
 tags:
 - 课程笔记
+- 数值分析
 category:
 - MATLAB
 mathjax: true
@@ -15,7 +16,7 @@ mathjax: true
 
 这东西和拟合有点像。
 
-已知 $f(x)$ 的很多点 $x_i, y_i)$，要找一个函数 $P(x) \approx f(x)$。
+已知 $f(x)$ 的很多点 $(x\_i, y\_i)$，要找一个函数 $P(x) \approx f(x)$。
 
 这里使用的是多段分段函数进行近似。
 
@@ -69,7 +70,55 @@ plot3(X,Y,Z,'O','markersize',14)
 
 二阶中心差商 $f''(a) =\frac{f(a+h)+f(a-h)-2f(a)}{h^2}+O(h^2)$
 
-证明都是泰勒展式。
+证明都是通过泰勒展式，略。
+
+实际使用时，令 $h$ 为一个较小的数（如 $h=10^{-5}$）即可求 $f$ 在 $a$ 点的微分。
+
+### 数值方法求梯度
+
+> 参考链接：https://www.bilibili.com/video/av59319786
+
+梯度的定义：
+
+$$\nabla f(\vec{x}) = \left[\begin{matrix}
+\frac{\partial f}{\partial x_1} \\\\
+\frac{\partial f}{\partial x_2} \\\\
+\vdots \\\\
+\frac{\partial f}{\partial x_n}
+\end{matrix}\right]$$
+
+数值方法求梯度，其实就是上面的微分方法用来求 n 遍偏导。  
+每次求偏导的方法如下：
+
+$$\frac{\partial f}{\partial x\_i} = \frac{ f(\vec{x};x\_i+\Delta x\_i) - f(\vec{x};x\_i-\Delta x\_i)}{2x\_i} + O((\Delta x\_i)^2)$$
+
+### 数值方法求黑塞矩阵
+
+黑塞矩阵：
+
+$$\nabla^2f(\vec{x})=\left[\begin{array}{cccc}
+{\frac{\partial^2 f}{\partial x\_1^2}} & {\frac{\partial^2 f}{\partial x\_1 \partial x\_2}} & {\cdots} & {\frac{\partial^2 f}{\partial x\_1 \partial x\_n}} \\\\
+{\frac{\partial^2 f}{\partial x\_2 \partial x\_1}} & {\frac{\partial^2 f}{\partial x\_2^2}} & {\cdots} & {\frac{\partial^2 f}{\partial x\_2 \partial x\_n}} \\\\
+{\vdots} & {\vdots} & {\ddots} & {\vdots} \\\\
+{\frac{\partial^2 f}{\partial x\_n \partial x\_1}} & {\frac{\partial^2 f}{\partial x\_n \partial x\_2}} & {\cdots} & {\frac{\partial^2 f}{\partial x\_n^2}}
+\end{array}\right]$$
+
+其实和上面本质是一样的，只是二阶导要求两次。推导过程就略了（可以看上面参考链接的视频），最后的每一项的结果如下：
+
+$$\begin{aligned}
+\frac{\partial^2 f}{\partial x\_i \partial x\_j} = &\frac{1}{4\Delta x\_i\Delta x\_j} \bigg[ \\\\
+&f(\vec{x};x\_i+\Delta x\_i,x\_j+\Delta x\_j) + f(\vec{x};x\_i-\Delta x\_i,x\_j-\Delta x\_j)\\\\
+&-f(\vec{x};x\_i-\Delta x\_i,x\_j+\Delta x\_j) - f(\vec{x};x\_i+\Delta x\_i,x\_j-\Delta x\_j)\bigg] \\\\
+&+ O((\Delta x\_i)^2)
+\end{aligned}$$
+
+看起来麻烦，其实就是如下图，需要找得到 A 点的二阶偏导时，将 A 的 $x_i, x_j$ 各增加/减少 $\Delta x_i, \Delta x_j$ 的量，得到 B、C、D、E，用 (B+D)-(C+E) （的函数值加减以后的结果）除以 $4\Delta x_i\Delta x_j$ 即可。
+
+![数值方法求二阶偏导](getting-partial-derivative.png)
+
+注意这个方法不能用在对角线上。求对角线上的二阶导仍需要用上面数值微分提到的求二阶导方法。
+
+$$\frac{\partial^2 f}{\partial x\_i^2} =\frac{ f(\vec{x};x\_i+\Delta x\_i) + f(\vec{x};x\_i-\Delta x\_i) - 2f(\vec{x}) } {(\Delta x\_i)^2}+O((\Delta x\_i)^2)$$
 
 ## 数值积分
 

@@ -3,6 +3,7 @@ title: 遗传算法 和 MATLAB
 date: 2019-09-23 21:13:10
 tags:
 - 课程笔记
+- 遗传算法
 category:
 - MATLAB
 mathjax: true
