@@ -172,4 +172,11 @@ $n, m \leq 10^5, 1 \leq a_i \leq 10^9$。要求从文件 `input.txt` 里输入�
 
 ## 递归练习
 
-[洛谷 P1028 数的计算](https://www.luogu.org/problem/P1028)
+* [洛谷 P1028 数的计算](https://www.luogu.org/problem/P1028)
+
+* 输入一个十进制的数，将其转为二进制并输出。如，输入 `13`，输出 `1101`。
+
+* 输入一个正整数，输出相同的数。要求：
+  * 使用 `int` 类型存储
+  * 使用 `getchar` 和 `putchar`，而不是 `scanf` 和 `printf` 进行输入、输出。
+  * 

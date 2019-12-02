@@ -1,8 +1,6 @@
 ---
 title: 🐴图
 date: 2019-9-8
-category:
-- Others
 ---
 
 码图系统最新地址：http://121.48.165.91:1024/aptat/user/login.action

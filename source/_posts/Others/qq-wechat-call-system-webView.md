@@ -1,8 +1,6 @@
 ---
 title: QQ，微信实现调用系统WebView教程
 date: 2019-6-26
-category: 
-- Others
 ---
 
 实在受不了垃圾X5内核，打开网页总慢半秒

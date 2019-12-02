@@ -5,6 +5,7 @@ tags:
 - 服务器
 - Shadowsocks
 - ssh
+- 代理
 category:
 - Linux
 mathjax: true
@@ -82,7 +83,7 @@ nano /etc/shadowsocks-libev/config.json
 
 注意：
 * `server` 不能为 `127.0.0.1`，不然连不上；  
-* `server_port` 建议不要使用默认的 `8838`；
+* `server_port` 建议不要使用默认的 `8838`，可以修改为 `0-65535` 间的其他端口，比如 `22222`；
 * 如果有：`local_address` 必须删掉；
 * `password` 改为自己设的密码。
 
@@ -103,6 +104,8 @@ nano /etc/shadowsocks-libev/config.json
 nohup ssserver & &> /dev/null
 ```
 
+（实际山 ssserver 自带了后台运行的方法，但是通用方法它不香吗）
+
 到这里，Shadowsocks 的配置就基本完成了。
 
 ## 番外篇：配置 bbr
@@ -116,3 +119,24 @@ Google 了一下，说是可以上 BBR。BBR 是什么，如何开启，可以�
 [Ubuntu 18.04/18.10快速开启Google BBR的方法](https://www.moerats.com/archives/612/)
 
 但貌似丢包率还是不低。。。
+
+## 常见错误及解决方案
+
+### 无法 ssh 登录远程服务器
+
+* 尝试 ping 你的服务器，输入命令 `ping x.x.x.x`，如果显示 `100% 丢失`（或 `100% packet loss`），说明这个 ip 已经被墙了，需要删掉服务器，重新开一台；
+* 可能没有开放服务器上的 `22` 端口（协议为 `tcp`）？
+
+### 服务端配置好了，本地连不上/连上以后显示 500 Internal Proxy Error
+
+* 可能是某些信息（如网址、密码、加密方式）没对应上，总之某些信息出锅了，而不是网络故障。
+* 可能 Shadowsocks 使用的端口被屏蔽了，在[服务端修改端口](#服务器配置-Shadowsocks)，然后在本地客户端也修改为对应的端口，再尝试链接。
+* 可能是端口被服务端其他进程占用了（可以通过命令 `lsof -i <端口号>` 查看）。如果确实，再改一个。
+
+如果仍然没有搞定，可能需要通过查看 `nohup.out` 文件来看 Shadowsocks 的日志的最后二十行：
+
+```
+tail -n 20 nohup.out
+```
+
+然后上网百度 / Google。

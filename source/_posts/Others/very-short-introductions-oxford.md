@@ -3,8 +3,6 @@ title: 牛津通识读本
 date: 2019-8-4
 tags:
 - 读书笔记
-category:
-- Others
 mathjax: true
 ---
 

@@ -4,7 +4,6 @@ date: 2019-6-16
 tags: 
 - 资源
 category:
-- Others
 ---
 
 [rating.pdf](rating.pdf)
