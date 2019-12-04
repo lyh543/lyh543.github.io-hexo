@@ -1,10 +1,13 @@
 ---
-title: Verilog HDL 速成手册
+title: Verilog HDL 速成手册（坑）
 date: 2019-12-02 21:37:29
 tags:
 - 课程笔记
+- 坑
 mathjax: true
 ---
+
+数字逻辑要学这个，于是整理了一篇笔记。顺便说一下，如果打算写代码，我们使用的是 `Xilinx 14.5 Webpack`。（安装下来占了 20G，我只是想入个 Verilog 的门。。。。）
 
 ## 概述
 
@@ -203,6 +206,10 @@ assign F=~((A&B)|(~(C&D)));
 
 `always`块经常用来描述时序逻辑电路。
 
+`always` 类似于无条件的 `while`，而 `always @()` ；类似于有条件的 `while`。
+
+`always` 本身只影响到下面的一句，配合 `begin`...`end` 才能够实现装很多句话。
+
 示例：`always` 过程实现计数器的过程
 
 ```v
@@ -212,6 +219,22 @@ begin
     else out<=out+1;
 end
 ```
+
+示例：`always` 实现时钟信号
+
+module clock(output reg clock)
+//在零时刻把clock变量初始化
+initial
+    clock = 1'b0;
+//每半个周期把clock信号翻转一次
+always
+     #10 clock=~clock;
+initial 
+     #1000 $finish;//1000个时间单位后，停止仿真
+
+endmodule
+
+> 原文链接：https://blog.csdn.net/qq_33929689/article/details/51842606
 
 ## 数值和数据类型
 
@@ -360,7 +383,6 @@ Hello China is stored as 00000048656c6c6f20776f726c64
 Hello China!!! is stored as 48656c6c6f20776f726c64212121
 ```
 
-
 ### 数据类型
 
 数据类型上，分为 `net`（线网型）和 `reg`（寄存器型）。
@@ -504,6 +526,8 @@ wire [7:0] array3 [0:15][0:255][0:15]
 
 看了几个例子，应该比较懂了。
 
+**声明变量位数是从高到0！！！**
+
 ## Verilog 表达式
 
 ### 操作符
@@ -566,9 +590,11 @@ Verilog 分为三大流派：行为级建模、结构级建模，以及行为级
 > Verilog HDL 中的多数过程模块都从属于以下两种过程语句：
 > * `initial` 语句
 > * `always` 语句
-> 一个模块中可以包含任意多个 `initial`或always语句。  
+> 一个模块中可以包含任意多个 `initial`或 `always` 语句。  
 > 这些语句相互并行执行，即这些语句的执行顺序与其在模块中的顺序无关。  
 > 一个 `initial` 语句或 `always` 语句的执行产生一个单独的控制流，所有的 `initial` 和 `always` 语句在 0 时刻开始并行执行。 
+
+所有语句（除一开始的声明）都必须包含在 `initial` 或 `always` 里。
 
 #### initial 语句
 
@@ -592,7 +618,6 @@ a;
 //...
 initial
     a=2;
-end
 ```
 
 当然，`initial` 语句也可以带有时延控制：
@@ -602,7 +627,6 @@ reg Curt;
 ...
 initial
     # 2 a = 1;
-end
 ```
 
 寄存器变量 `a` 在时刻 2 被赋值为 1。`initial` 语句在 0 时刻开始执行，在时刻 2 完成执行。
@@ -653,7 +677,7 @@ begin
 end
 ```
 
-> `always` 语句有一个过程性赋值。因为 `always` 语句重复执行，并且在此例中没有时延控制，过程语句将在 0 时刻无限循环。因此， `always` 语句的执行必须带有某种时序控制。 
+> `always` 语句有一个过程性赋值。因为 `always` 语句重复执行，并且在此例中没有时延控制，过程语句将在 0 时刻无限循环。因此，`always` 语句的执行必须带有某种时序控制。 
 
 示例：`always` 语句用于 4 选 1 开关
 
@@ -698,6 +722,9 @@ endmodule
 > 语句块提供将两条或更多条语句组合成语法结构上相当于一条语句的机制。在 Verilog HDL 中有两类语句块，即：  
 > 1. 顺序语句块 `begin`...`end`：语句块中的语句按给定次序顺序执行。  
 > 2. 并行语句块 `fork`...`join`：语句块中的语句并行执行。
+
+注意，`begin`...`end` 或 `fork`...`join` 相当于 C 语言的 `{`...`}`（毕竟都是叫代码块），他们俩一个是顺序、一个是并行。
+
 
 
 示例：顺序语句块的 Verilog HDL 描述
@@ -756,6 +783,8 @@ nand(y,a,b,c,d);
 
 **注意Verilog 门级赋值语句的输出在最前面，后面可以有一到多个输入。**
 
+更多的门级描述语句[见后]()
+
 ### 连续赋值语句
 
 也可以使用连续赋值语句实现相同的与非功能：
@@ -770,7 +799,7 @@ assign y=~(a&b&c&d); // y 必须是 wire 型变量
 
 ### 过程赋值语句
 
-> 一段话分了五页 ppt 警告
+一段话分了五页 ppt 预警
 
 > 过程赋值语句的硬件实现是：从赋值语句右边提取出的逻辑，用于驱动赋值语句左边的变量（必须是 `reg`型）。有两种类型的过程赋值语句：  
 > * 阻塞赋值语句（Blocking Assignment Statement）  
@@ -778,24 +807,250 @@ assign y=~(a&b&c&d); // y 必须是 wire 型变量
 
 #### 阻塞赋值语句
 
-以赋值操作符“=”来标识的赋值的操作称为阻塞型过程赋值语句，阻塞赋值语句可以简述为：在一个always块中，语句是按从上到下顺序执行的。它具有如下特点：
-1）顺序块内的各条阻塞语句以它们在顺序块中的排列先后次序依次得到执行；而并行块中的各条阻塞赋值语句则是同时得到执行。
-2）阻塞赋值语句的执行过程是：首先计算右端赋值表达式的取值，然后立即将计算结果赋值给“=”左端的被赋值变量。 这种语句更多的用在行为仿真和时序仿真的过程中。
+> 以赋值操作符 `=` 来标识的赋值的操作称为阻塞型过程赋值语句，阻塞赋值语句可以简述为：在一个 `always` 块中，语句是按从上到下顺序执行的。它具有如下特点：  
+> 1. 顺序块内的各条阻塞语句以它们在顺序块中的排列先后次序依次得到执行；而并行块中的各条阻塞赋值语句则是同时得到执行。  
+> 2. 阻塞赋值语句的执行过程是：首先计算右端赋值表达式的取值，然后立即将计算结果赋值给 `=` 左端的被赋值变量。 这种语句更多的用在行为仿真和时序仿真的过程中。
 
 #### 非阻塞赋值语句
 
-以赋值操作符“<=”来标识的赋值操作的也是出现在initial和always块语句中，在非阻塞赋值语句中，赋值号“<=”左边的赋值变量也必须是reg型变量，其值不象在过程赋值语句那样，语句结束时即刻得到，而在该块语句结束才可得到。
+> 以赋值操作符 `<=` 来标识的赋值操作的也是出现在 `initial` 和 `always` 块语句中，在非阻塞赋值语句中，赋值号 `<=` 左边的赋值变量也必须是 `reg` 型变量，其值不象在过程赋值语句那样，语句结束时即刻得到，而在该块语句结束才可得到。
+> 
+> 非阻塞赋值语句的特点如下：  
+> 1. 在 `begin-end` 顺序语句块中，一条非阻塞赋值语句块的执行不会阻塞下一条语句的执行，即在本条非阻塞赋值语句对应的赋值操作执行完毕之前，下一条语句才可以开始执行。   
+> 2. 仿真过程在遇到非阻塞型赋值语句后，首先计算其右端赋值表达式的值，然后要等到当前仿真时间结束时再将该计算结果赋值给被赋值变量，即非阻塞赋值操作时在同一仿真时刻上的其他普通操作结束之后才得到执行的。  
+> 因此非阻塞赋值语句的这个特点是不同于阻塞型赋值语句的执行时序特点的。
 
-非阻塞赋值语句的特点如下：
+这写的什么玩意。看不懂看不懂。
 
-1）在begin-end顺序语句块中，一条非阻塞赋值语句块的执行不会阻塞下一条语句的执行，即在本条非阻塞赋值语句对应的赋值操作执行完毕之前，下一条语句才可以开始执行。
+例子：非阻塞赋值的 Verilog HDL 描述
 
-2）仿真过程在遇到非阻塞型赋值语句后，首先计算其右端赋值表达式的值，然后要等到当前仿真时间结束时再将该计算结果赋值给被赋值变量，即非阻塞赋值操作时在同一仿真时刻上的其他普通操作结束之后才得到执行的。
-因此非阻塞赋值语句的这个特点是不同于阻塞型赋值语句的执行时序特点的。
+```v
+module block(a3,a2,a1,clk);
+input clk,a1; output reg a3,a2;
+always @(posedge clk)
+begin
+  a2<=a1;
+  a3<=a2;
+end 
+endmodule
+```
 
+例子：阻塞赋值的 Verilog HDL 描述
 
+```v
+module block(a3,a2,a1,clk);
+input clk,a1; output reg a3,a2;
+always @(posedge clk)
+begin
+  a2=a1;
+  a3=a2;
+end 
+endmodule
+```
 
+只有赋值符号不同。
 
+~~在这里第一次使用了 Xilinx 编程测试~~
+
+测试的内容是：
+
+```v
+initial begin
+    a1 = 1;
+    clk = 0;
+
+    #100;
+    clk = 1;
+end
+```
+
+测试的结果显示：
+> 对于非阻塞型的 `<=`，100ns 后 `a2` 变为 1，而 `a3` 仍为 `x`。  
+> 阻塞型的 `=`，100ns 后 `a2` 和  `a3` 都变为 1。
+
+这很好的解释了二者的区别，简单的来说就是：
+
+> `<=` 是并行执行的，`=` 是顺序执行的。
+
+并行的那个是阻塞，顺序执行的是非阻塞。记一下就行。
+
+顺便，`<=` 和 `=` 这些赋值都是 `reg` 的玩意，`wire` 得使用门（）。如果想对 `wire` 类型赋初值，请使用 `wire a; a = 1'b1`。
+
+### 流程控制
+
+#### if-else
+
+写法和 C++ 一样，只是判断执行标准时，如果是 `0zx` 之一，就不执行。
+
+示例：使用 `if-else` 实现 D 触发器
+
+```v
+module v_registers_2 (C,D,CLR,Q);
+    input C, D, CLR;
+    output Q;
+    reg Q;
+    always @(negedge C or posedge CLR)
+    begin
+        if (CLR)  Q<=1'b0;
+        else      Q<=D;
+    end
+endmodule
+```
+
+#### case
+
+和 C 语言的写法稍微有点不同，用法一样。不需要 `break`，有 `default`。
+
+示例：`case` 语句实现多路选择器的 Verilog HDL 语句
+
+```v
+module mux4 (sel, a, b, c, d, outmux);
+	input [1:0] sel,a,b.c,d;
+	output reg [1:0] outmux;
+	always @(sel or a or b or c or d)
+	begin
+        case (sel)
+            2'b00: outmux=a;
+            2'b01: outmux=b;
+            2'b10: outmux=c;
+            default: outmux=d;
+        endcase
+	end
+endmodule
+```
+
+示例：`case` 语句实现 3-8 译码器的 Verilog HDL 语句
+
+```v
+module v_decoders_1 (sel, res);
+    input [2:0] sel;
+    output [7:0] res;
+    reg [7:0] res;
+
+    always @(sel or res)
+    begin
+        case (sel)
+            3'b000 : res=8'b00000001;
+            3'b001 : res=8'b00000010;
+            3'b010 : res=8'b00000100;
+            3'b011 : res=8'b00001000;
+            3'b100 : res=8'b00010000;
+            3'b101 : res=8'b00100000;
+            3'b110 : res=8'b01000000;
+            default : res=8'b10000000;
+        endcase
+    end
+endmodule
+```
+
+~~居然是枚举。。。~~
+
+对于 `z` 和 `x`，还有 `casex` 和 `casez`。用法和上面一样。示例：
+
+```v
+casez(Mask)
+    4'b1??? : Dbus[4] = 0;
+    4'b01?? : Dbus[3] = 0;
+    4'b001? : Dbus[2] = 0;
+    4'b0001 : Dbus[1] = 0;
+endcase
+```
+
+`casez` 语句表示：
+* 如果 `Mask` 的第 1 位是 1（忽略其它位），那么将 `Dbus[4]` 赋值为0；  
+* 如果 `Mask` 的第 1 位是 0 ，并且第 2 位是 1（忽略其它位），那么 `Dbus[3]` 被赋值为 0；
+* 依此类推。
+
+`casex` 和 `casez`的区别在于：
+
+> `casez` treats all the z values in the case expression as don't cares while `casex` treats all the x and z values in the case expression as don't cares.
+
+#### forever
+
+字如其人。
+
+示例：`forever` 实现时钟
+
+```v
+initial begin
+    Clock=0;
+    #5 forever
+        #10 Clock = ~Clock;
+end
+```
+
+> 这一实例产生时钟波形：时钟首先初始化为 0 ，并一直保持到第 5 个时间单位。  
+此后每隔 10 个时间单位，`Clock` 反相一次。
+
+> 注意，在过程语句中必须使用某种形式的时序控制（如 `#10`），否则， `forever` 循环将在 0 时后永远死循环下去。
+
+它和 `always` 的区别是，`always` 的级别更高，但功能上貌似可以互相替代。
+
+#### repeat
+
+循环的时候直接指定了重复次数。`xz` 被视为 0。
+
+示例：
+
+```v
+repeat (Count)
+    Sum=Sum+10;
+repeat (Shift By)
+    P_Reg=P_Reg << 1;
+```
+
+`forever` 相当于 `repeat(infinity)`（当然，是没有这种写法的）
+
+> 单篇笔记 1000 行纪念。
+
+#### while
+
+和 C 语言一样。另外，`xz` 被视为 0。
+
+示例：（顺序查找 `0`？）
+
+```v
+parameter P = 4;
+always @(ID_complete)
+begin : UNIDENTIFIED
+    integer i;
+    reg found;
+    unidentified=0;
+    i=0;
+    found = 0;
+    while (!found && (i < P))
+    begin
+        found = !ID_complete[i];
+        unidentified[i] = !ID_complete[i];
+        i=i+1;
+    end
+end
+```
+
+#### for
+
+和 C 语言一样。
+
+示例：
+
+```v
+module countzeros (a, Count);
+    input [7:0] a;
+    output reg[2:0] Count;
+    reg [2:0] Count_Aux;
+    integer i;
+
+    always @(a)
+    begin
+        Count_Aux = 3'b0;
+        for (i = 0; i < 8; i = i+1)
+        begin
+            if (!a[i]) Count_Aux = Count_Aux+1;
+        end
+        Count = Count_Aux;
+    end
+endmodule
+```
 
 Verilog系统任务和函数
 Verilog用户定义任务和函数
