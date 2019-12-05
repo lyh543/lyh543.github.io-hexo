@@ -4,8 +4,9 @@ date: 2019-10-16 20:07:27
 tags:
 - 服务器
 - frp
+- 远程桌面
 category:
-- Linux
+- Windows
 mathjax: true
 ---
 
@@ -132,24 +133,36 @@ remote_port = 5200 # 服务器接收 Remote Desktop 信息的端口，可以改
 
 可能会看到 `ignore input` 之类的警告，不用管，`Ctrl+C` 退出前台即可，此时 `ssserver` 正在后台运行。
 
-### 客户端开机运行（不推荐）
+### 客户端开机运行
+
+下面的方法二选一。
 
 客户端需要开机后台启动 `frpc`，可以把 vbs 脚本放在 Startup 目录。
 
 > 新建一个文本文档，加入下面两行脚本代码，并改名为 `startup-frpc.vbs`，复制到 `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp` 下。
+
+（假设 `frpc.exe` 和 `frpc.ini` 都在 `c:\frp\` 目录）
 
 ```vbs
 set ws=WScript.CreateObject("WScript.Shell")
 ws.Run "c:\frp\frpc.exe -c c:\frp\frpc.ini",0
 ```
 
-也可以用 `任务计划`，用 GUI 设定一下就行。具体百度吧，不难，启动命令用 `start /b frpc.exe -c frpc.ini`。
+也可以用 `任务计划`，用 GUI 设定一下就行。具体百度吧，不难。
+
+额外说一句，在设置任务计划时，需要注意的是，
+
+* 在`属性-常规-安全选项`，中，选择`不管用户是否登录都要运行`，同时可以选择`使用最高权限运行`。（保存的时候需要输入账户的密码）
+* `触发器`选`在系统启动时`
+* `操作`选`启动程序`，命令为 `wscript`，参数为 `"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\startup-frpc.vbs"`。（你也可以把这个 vbs 放在别的目录，然后把这个目录修改为对应的目录）
 
 为了防止意外，可以在远程的电脑上安装额外的临时的远程桌面解决方案如 Teamviewer 或 QQ 以应急。
 
-### 客户端守护进程（）
+### 客户端守护进程
 
-但是有些时候还是会有蜜汁启动不了。即使我设了启动命令+任务计划，仍然必须要登录以后才会启动 `frpc`。因此我并不推荐开机自启的方法，而是用这种进程守护的功能。
+> 2019.12.5 更新：如果正确的配置启动命令以后，应该不会出现问题。所以也可以选择上面的配置。不过博主还是选择的下面的配置。
+
+但是有些时候还是会有蜜汁启动不了。即使我设了启动命令 + 任务计划，仍然必须要登录以后才会启动 `frpc`（而不是在开机后登陆前就启动了）。因此我并不推荐开机自启的方法，而是用这种进程守护的功能。
 
 于是我打算搞一个进程守护，任务计划每一分钟启动一次，检测 `frpc` 是否正在运行，否则后台启动 `frpc`。
 
