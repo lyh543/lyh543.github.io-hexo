@@ -91,7 +91,7 @@ bind_port = 7000
 
 客户端 `frpc.ini` 要复杂一点。
 
-```
+```ini
 [common]
 server_addr = 39.1.2.3 # 这里是 vps 的 ip
 server_port = 7000
@@ -177,6 +177,46 @@ tasklist | find "frpc" || %frppath%\frpc.exe -c %frppath%\frpc.ini
 操作部分，启动程序 `wscript`，添加参数为 `"D:\Documents\Tools\frp\frpc-daemon.vbs"`（你的 `frpc-daemon.vbs` 路径，带引号）。
 
 虽然这种方法会占用一点点 CPU（实际上占用的很少很少），但是真的非常推荐，配置好以后，要是哪天手滑关了 frpc，问题也不大，几分钟以后就会启动。并且配置好以后，也会开机自启，非常好用，推荐。
+
+## 番外：为 RDP 使用 UDP 协议
+
+远程桌面应该使用 TCP 还是 UDP 协议呢？
+
+抛去网上的一堆 TCP/UDP 枯燥难懂的定义，我找到了[这个问答](http://cn.voidcc.com/question/p-kvmxgfcn-px.html)。
+
+大概意思就是，UDP 只传输数据，不执行校验等命令。也就是说，较 TCP，
+
+* UDP 有更低的延迟（不执行命令）
+* UDP 牺牲了稳定性（不能防丢包等）
+
+在 Windows 8 中，微软已经在 UDP 协议上启用了 RDP 协议。
+
+至于是否使用 UDP，还是看自己（还有当地的网络情况）。
+
+如果想要使用 `frp` 通过 UDP 协议传输，需要把客户端 `frpc.ini` 配置的部分再抄一遍，把 `type` 改为 UDP 即可。
+
+```ini
+[common]
+server_addr = 39.1.2.3 # 这里是 vps 的 ip
+server_port = 7000
+[rdp]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 3389  # 本地的 Remote Desktop 对应端口
+remote_port = 5200 # 服务器接收 Remote Desktop 信息的端口，可以改
+[rdp-udp]
+type = udp
+local_ip = 127.0.0.1
+local_port = 3389
+remote_port = 5200
+```
+
+如果想禁用 UDP，一个方案是把 `frpc.ini` 的 UDP 部分删掉；也可以通过（在两个设备）组策略关掉远程桌面使用 UDP 的
+选项，在组策略的以下位置：
+
+```
+计算机配置/Windows 设置/管理模板/Windows 组件/远程桌面服务/远程桌面会话主机/连接/选择 RDP 传输协议
+```
 
 ## 部分错误及解决方案
 
