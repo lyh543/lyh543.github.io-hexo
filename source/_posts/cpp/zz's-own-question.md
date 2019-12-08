@@ -179,4 +179,8 @@ $n, m \leq 10^5, 1 \leq a_i \leq 10^9$。要求从文件 `input.txt` 里输入�
 * 输入一个正整数，输出相同的数。要求：
   * 使用 `int` 类型存储
   * 使用 `getchar` 和 `putchar`，而不是 `scanf` 和 `printf` 进行输入、输出。
-  * 
+
+
+## 动态规划练习
+
+* [洛谷 P1880 (NOI1995) 石子合并](https://www.luogu.com.cn/problem/P1880)
