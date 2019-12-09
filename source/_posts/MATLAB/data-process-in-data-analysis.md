@@ -4,6 +4,8 @@ date: 2019-11-25 19:47:54
 tags:
 - 课程笔记
 - 数值分析
+- 数学建模
+- MATLAB
 category:
 - MATLAB
 mathjax: true

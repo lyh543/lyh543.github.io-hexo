@@ -4,7 +4,7 @@ date: 2019-10-16 20:07:27
 tags:
 - 服务器
 - frp
-- 远程桌面
+- 远程桌面（RDP）
 category:
 - Windows
 mathjax: true

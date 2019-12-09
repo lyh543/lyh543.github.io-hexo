@@ -1,7 +1,7 @@
 ---
 title: MATLAB编程基础
 tags:
-- MATLAB 语法
+- MATLAB
 category:
 - MATLAB
 mathjax: true

@@ -3,7 +3,7 @@ title: MATLAB 解常微分方程
 date: 2019-11-11 19:44:18
 tags:
 - 课程笔记
-- MATLAB 语法
+- MATLAB
 - 常微分方程
 category:
 - MATLAB

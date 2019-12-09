@@ -2,8 +2,8 @@
 title: MATLAB 函数
 date: 2019-09-30 19:50:36
 tags:
-- MATLAB 语法
-
+- MATLAB
+- 最优化
 category:
 - MATLAB
 mathjax: true
@@ -45,6 +45,8 @@ mathjax: true
 按正态分布生成随机数|`normrnd`
 |
 上述函数的卡方分布版本|将四个函数的 `norm` 改为 `chi2`|很香
+上述函数的均匀分布版本|将四个函数的 `norm` 改为 `unif`|
+上述函数的指数分布版本|将四个函数的 `norm` 改为 `exp`|
 |
 正态分布拟合|`normfit`|使用 Wald 检验
 |
