@@ -1,6 +1,10 @@
 ---
-title: 指针pointer & 引用reference
+title: 指针 pointer & 引用 reference
 date: 2019-9-2
+tags:
+- C++
+- 指针
+- 引用
 category:
 - C++
 - C++语法
@@ -39,14 +43,21 @@ const 先向前看，没有就再向后看？
 ## 函数指针
 
 ```c++
-int (*f)(int,char);  // f是指向具有两个参数的函数的指针
-int *f(int)         // f是一个函数，返回一个指向int的指针
+//正确用法：
+int (*f)(int,char);  // f是指向“具有两个参数，返回 int 的函数”的指针
+int (*f)(void);
+int (*f) (ostream&, const vector<string>&); //例三
+
+//错误用法：
+int *f(int)         // f是一个函数，返回一个“指向 int 的指针”
 int *f(void)        // 参数是 void 也得写
 ```
 
-使用时直接 `f(x)` 即可。`f` 又被称为回调函数。
+使用时直接 `f(x)` 即可。`f` 又被称为回调函数(callback function)。
 
-C++11中NULL，0，nullptr意义等价。
+例三的 `f` 的变量类型为 `int (*) (ostream&, const vector<string>&)`。
+
+C++ 11 中 `NULL`，`0`，`nullptr` 等价。
 
 ## void * 指针
 
