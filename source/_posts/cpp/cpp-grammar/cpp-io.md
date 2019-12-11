@@ -2,6 +2,8 @@
 title: C++ I/O 输入输出
 date: 2019-09-04 10:34:08
 tags:
+- C++
+- iostream
 category:
 - C++
 - C++语法

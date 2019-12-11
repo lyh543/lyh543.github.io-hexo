@@ -2,6 +2,8 @@
 title: C 语言 I/O 输入输出
 date: 2019.6.18
 tags:
+- C++
+- stdio
 category:
 - C++
 - C++语法

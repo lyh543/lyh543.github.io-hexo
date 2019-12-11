@@ -7,21 +7,68 @@ category:
 tags:
 - Windows
 - C++
-- API
+- Win32 API
+- Visual Studio
 mathjax: true
 ---
 
 > 参考链接：https://github.com/guyaqi/backups/blob/master/notes/cpp1-2.md
 
-Windows API 的函数大多名称较长，如果不是有意向专门学习的话，没有太大的必要特地记住(用的时候还是会忘)
+Win32 API 的函数大多名称较长，如果不是有意向专门学习的话，没有太大的必要特地记住(用的时候还是会忘)
 
-微软公司出产的各种 API，都可以在 [msdn](https://msdn.microsoft.com/zh-cn/) 找到详细的文档和简单的例子，如果你想了解某个 WindowsAPI 的所有用法，这是最权威的地方。
+微软公司出产的各种 API，都可以在 [msdn](https://msdn.microsoft.com/zh-cn/) 找到详细的文档和简单的例子，如果你想了解某个 Win32 API 的所有用法，这是最权威的地方。
 
-所有 WindowsAPI 都需要包含 `Windows.h` 头文件。
+所有 Win32 API 都需要包含 `Windows.h` 头文件。
 
 ## system() 函数
 
 直接执行 `cmd` 命令行的命令。对于在学 C++ 之前学命令行/批处理的人，这个用起来很香。
+
+## 涉及字符串的函数
+
+这部分可能会有点坑。因为涉及到字符串编码，所以在英文上可能没什么问题，但是换成中文就会乱码。
+
+> > 摘自：https://github.com/guyaqi/backups/blob/master/notes/cpp1-4.md
+> 
+> TCHAR 与 TEXT 宏,这两个宏在对应的情况下有不同的解释，这与你的编译器默认使用的编码方式相关。
+> 
+> * 当 UNICODE 宏被定义的时候（MSVC 编译器指令 `/D UNICODE`)，TCHAR 是 wchat_t，TEXT 宏被解释成 C 语言内部用来转换宽字符的宏 `L"somestr"`
+> * 如果没有定义 UNICODE 宏，TCHAR 就是 char，TEXT 宏不进行任何操作。
+> 
+> 这种设定是在 utf-8 编码没有被广泛支持的时候,为了程序代码能够兼容使用不同代码的机器设定的，比如我使用的 win7 默认使用 gb2312（还是 gbk 来着）字符集对应的编码方式,而 win10 以上和其他使用 linux 内核的系统默认使用 utf-8 编码方式。
+> 
+> 值得一提的是 utf-8 使用 char，而通常 C++，Java，C# 对 UNICODE 的支持指的是使用 utf-16 的编码方式，在 C++ 中 utf-16 字符就是 wchar_t（宽字符）。
+
+简单的来说，C++ 有两种编码，一种是 ASCII 与其的拓展 UTF-8，另一种是 Unicode。C++ 默认使用的 `char` 是 ASCII 的，也就是说，你调用 Win32 API 时使用的是 `char` 字符串，但是程序按 Unicode 执行（Visual Studio 默认），那么就会出现乱码。（也可能出现编译错误，因为 `wchar_t` 和 `char` 是不能隐式转换的）
+
+有三种解决办法：
+
+一是将所有设计到字符和字符串的地方都改为 Unicode 流派的 `wchar_t`, `wstring`, `wiostream` 等等。如下面的程序：
+
+```c++
+TCHAR title[] = TEXT("新标题");
+setConsoleTitle(str);
+```
+
+不过，在涉及到 `char` 到 `wchar_t` 的转换时，容易出问题。貌似没有好的转换方法。也就是，要么全部用 Unicode，要么就不用 Unicode。
+
+方法二是将涉及到这样的函数的后面加一个 `A`。原因是，Visual Studio 的源码是这样实现这些函数的：
+
+```cpp
+#ifdef UNICODE
+#define SetConsoleTitle  SetConsoleTitleW
+#else
+#define SetConsoleTitle  SetConsoleTitleA
+#endif // !UNICODE
+```
+
+可以看到，这类函数都是用宏定义将函数分为两类，然后分开执行。第二种方法就是直接去执行带 `A` 的版本。
+
+第三种方法就是取消 `Unicode` 的宏定义。具体在 Visual Studio 的 `项目属性->配置属性->常规->字符集`，设置为多节字符集（多字节字符集即没有设置UNICODE宏，使用Unicode字符集就是设置了 `UNICODE` 宏）。
+
+设置的效果可以去 `C/C++->预处理器->预处理器定义` 查看
+
+注意 `QT-Addin` 生成的 Visual Studio 项目默认是加上 `UNICODE` 宏，只去 `项目属性->配置属性->常规->字符集` 没用，还要手动把 `QT-Addin` 设置的 `UNICODE` 宏删掉。[参考链接](https://www.cnblogs.com/qrlozte/p/4972682.html)
 
 ## 窗口部分
 
@@ -37,9 +84,7 @@ system("title newTitle");
 
 ~~好随意的标题~~
 
-但是这个方法在 windows 10 上，修改的标题不能有中文。原因可以看这篇博客:[TCHAR & TEXT](../TCHAR_TEXT)。
-
-还有另一个版本，推荐这个：
+还有另一个版本，调用 Win32 API：
 
 ```c++
 TCHAR title[] = TEXT("新标题");
@@ -191,9 +236,38 @@ SHORT GetAsyncKeyState(int nVirtKey);
 
 见[另一篇博客](../time#msvc-下获取本程序运行的时间μs-级)。
 
-## Directory Management
+## 文件管理
 
-就是命令行中 `cd` 等操作。
+### Directory Management
+
+就是命令行中获取当前文件夹、更改当前文件夹（即`cd`）等操作。
 
 微软官方文档链接：[Directory Management](https://docs.microsoft.com/en-us/windows/win32/fileio/directory-management)
 
+```c++
+DWORD GetCurrentDirectory(DWORD BUFSIZE, TCHAR[] Buffer);
+bool SetCurrentDirectory(TCHAR[])
+```
+
+具体详解请看[微软官方文档](https://docs.microsoft.com/en-us/windows/win32/fileio/changing-the-current-directory)
+
+### 遍历文件
+
+需要 `FindFirstFile` `FindNextFile` 和 `FindClose` 函数。
+
+具体详解请看[微软官方文档](https://docs.microsoft.com/en-us/windows/win32/fileio/listing-the-files-in-a-directory)
+
+### 得到文件大小
+
+需要上面遍历文件得到的 File Handle。
+
+```c++
+DWORD GetFileSize(
+  HANDLE  hFile,
+  LPDWORD lpFileSizeHigh
+);
+```
+
+第二参数可省。
+
+具体详解请看[微软官方文档](https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getfilesize）
