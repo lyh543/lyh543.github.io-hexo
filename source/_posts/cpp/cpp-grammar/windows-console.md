@@ -1,25 +1,27 @@
 ---
-title: Windows控制台常用操作
+title: Windows 控制台常用操作
 date: 2019-8-19
 category:
 - C++
 - C++语法
 tags:
 - Windows
+- C++
+- API
 mathjax: true
 ---
 
 > 参考链接：https://github.com/guyaqi/backups/blob/master/notes/cpp1-2.md
 
-WindowsAPI 的函数大多名称较长，如果不是有意向专门学习的话，没有太大的必要特地记住(用的时候还是会忘)
+Windows API 的函数大多名称较长，如果不是有意向专门学习的话，没有太大的必要特地记住(用的时候还是会忘)
 
 微软公司出产的各种 API，都可以在 [msdn](https://msdn.microsoft.com/zh-cn/) 找到详细的文档和简单的例子，如果你想了解某个 WindowsAPI 的所有用法，这是最权威的地方。
 
 所有 WindowsAPI 都需要包含 `Windows.h` 头文件。
 
-## system(const char *) 函数
+## system() 函数
 
-直接执行 `cmd` 命令行的命令。对于在学 C++ 之前学批处理的人，这个用起来很香。
+直接执行 `cmd` 命令行的命令。对于在学 C++ 之前学命令行/批处理的人，这个用起来很香。
 
 ## 窗口部分
 
@@ -188,3 +190,10 @@ SHORT GetAsyncKeyState(int nVirtKey);
 ## 计时、获取系统时间戳
 
 见[另一篇博客](../time#msvc-下获取本程序运行的时间μs-级)。
+
+## Directory Management
+
+就是命令行中 `cd` 等操作。
+
+微软官方文档链接：[Directory Management](https://docs.microsoft.com/en-us/windows/win32/fileio/directory-management)
+
