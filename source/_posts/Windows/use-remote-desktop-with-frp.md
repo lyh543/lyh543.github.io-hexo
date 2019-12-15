@@ -278,4 +278,4 @@ TeamViewer|闭源|P2P|免费或收费
 Hamachi|闭源|P2P|免费或收费
 花生壳|闭源|非P2P|免费或收费|免费限速
 
-除此之外，推荐（100 台设备以下）免费的 [ZeroTier](https://www.zerotier.com/download/)，使用带 GUI 的客户端来进行配置，配置过程参考[这篇博客](https://woodenrobot.me/2019/07/07/zerotier-one-start/)。不过缺点是，没有加入的设备，必须要安装客户端配置以后才能使用（`frp`只用配置服务器和内网设备，其他设备即可通过端口直接访问）。
+除此之外，推荐（100 台设备以下）免费的 [ZeroTier](https://www.zerotier.com/download/)，能够开机自启。使用带 GUI 的客户端来进行配置，配置过程参考[这篇博客](https://woodenrobot.me/2019/07/07/zerotier-one-start/)。不过缺点是，没有加入的设备，必须要安装客户端配置以后才能使用（`frp`只用配置服务器和内网设备，其他设备即可通过端口直接访问）。

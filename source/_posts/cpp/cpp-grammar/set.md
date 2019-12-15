@@ -4,6 +4,7 @@ date: 2019-7-27
 tags:
 - 数据结构
 - STL
+- C++
 category:
 - C++
 - C++语法
@@ -25,7 +26,8 @@ category:
 * `set.insert()` 的返回值是一个 `Pair`，`first` 是（新加入或原本就存在的）该元素的 `iterator`，`second` 是 插入成功与否的 `bool` 值。而 `multiset` 只返回 `iterator`。  
 * `++`和`--`支持`list`和`set` `multiset`，简直无敌。  
 * `set`的`*iter`不会随数据插入、删除而改变（想想指针你大概就懂了）。
-
+* 如何遍历 `const multiset` 呢？`set::const_iterator iter`。
+* 
 ## unordered_set
 
 unordered_set 的实现不是二叉平衡树，而是 hash。对于自定义类型，可能需要定义 `hash_value()` 函数并且重载`operator==`。
