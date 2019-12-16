@@ -125,3 +125,9 @@ $$\frac{\partial^2 f}{\partial x\_i^2} =\frac{ f(\vec{x};x\_i+\Delta x\_i) + f(\
 ## 数值积分
 
 梯形法数值积分 `trapz`
+
+积分中值定理：$\exist \xi \space \int_a^bf(x) = (b-a)f(\xi)$
+
+在数值积分时，可以在 $[a, b]$ 取均匀分布的 10000 个点，$f(x)$ 的平均值就可以近似 $f(\xi)$。？？？？
+
+貌似是数值积分的套路操作，但是微积分 I 没有讲。
