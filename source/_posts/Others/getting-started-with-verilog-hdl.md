@@ -596,7 +596,7 @@ endmodule
 
 示例：一位半加器：
 
-```
+```v
 module halfadd (X, Y, C, S);
     input X, Y;
     output C, S;
@@ -632,7 +632,7 @@ assign y = ~(a&b&c&d); // y 必须是 wire 型变量
 > 右边表达式使用的操作数无论何时发生变化, **左边表达式都重新计算**, 并且在指定的**时延后被赋予左边的网络变量**。  
 > 时延定义了右边表达式操作数变化与赋值给左边表达式之间的持续时间。如果没有定义时延值, 默认时延为 0。
 
-不要手滑把 `assign` 放在 `initial` 或 `always` 里。`always` 是门级描述的等价形式。
+不要手滑把 `assign` 放在 `initial` 或 `always` 里。`assign` 是门级描述的等价形式。
 
 示例： 2-4 解码器的 Verilog HDL 数据流描述
 

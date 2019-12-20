@@ -2,6 +2,7 @@
 title: auto 和 decltype 类型
 date: 2019-8-17
 tags:
+- C++
 category:
 - C++
 - C++语法

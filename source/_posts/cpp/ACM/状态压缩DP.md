@@ -15,7 +15,7 @@ category:
 
 ## 位运算技巧
 
-独立为了另一篇博客：[位运算](/cpp/cpp-grammar/位运算)。
+独立为了另一篇博客：[位运算](/cpp/cpp-grammar/bit-operation)。
 
 ## 例题：oy环游世界
 

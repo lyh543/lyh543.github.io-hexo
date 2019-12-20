@@ -1,6 +1,9 @@
 ---
 title: Copy Assignment & Constructor
 date: 2019-8-18
+tags:
+- C++
+- 面向对象编程
 category:
 - C++
 - C++语法
