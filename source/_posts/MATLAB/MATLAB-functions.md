@@ -53,7 +53,7 @@ mathjax: true
 曲线拟合工具箱|`cftool`|
 分布拟合工具箱|`distributionFitter`|
 
-## 工具箱
+## 工具箱函数
 
 命令|名称
 -|-
@@ -100,6 +100,22 @@ size(A) %返回一个1x2数组
 idx=find(v>=0);
 v(find(v>=0));
 ```
+
+## 图论
+
+命令名|作用
+-|-
+graphallshortestpaths|求图中所有顶点对之间的最短距离
+graphconncomp|找无向图的连通分支，或有向图的强弱连通分支
+graphisdag|测试有向图是否含有圈，不含圈返回1，否则返回0
+graphisomorphism|确定两个图是否同构，同构返回1，否则返回0
+graphisspantree|确定一个图是否是生成树，是返回1，否则返回0
+graphmaxflow|计算有向图的最大流
+graphminspantree|在图中找最小生成树
+graphpred2path|把前驱顶点序列变成路径的顶点序列
+graphshortestpath|求图中指定的一对顶点间的最短距离和最短路径
+graphtopootder|执行有向无圈图的拓扑排序
+graphtraverse|求从一顶点出发，所能遍历图中的顶点
 
 ## 绘图
 

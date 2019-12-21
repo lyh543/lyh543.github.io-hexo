@@ -107,6 +107,13 @@ void setTime(ClassName & ro); //对象引用作为参数
 
 （注意 `malloc` 不会）
 
+已经有的对象可以通过新建一个对象，然后赋值过去。
+
+```cpp
+CString A;
+A = CString();
+```
+
 #### 一般构造函数
 
 ```c++
@@ -171,7 +178,7 @@ class CString
 -|-|-
 强制转换|`int ()`|`int(A);` 和 `int i = A;`（隐式）
 拷贝构造函数|`CString(const CString &)`|`CString B = A;` 和 `return A;`
-赋值函数|`CString& operator = (const CString &)`|`B = A;`
+赋值函数|`CString& operator = (const CString &)`|`Cstring B; B = A;`
 
 二者是不同的。
 

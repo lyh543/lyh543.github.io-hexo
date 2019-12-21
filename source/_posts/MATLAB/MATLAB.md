@@ -43,7 +43,7 @@ mathjax: true
 
 神奇的是， `zeros` 一开始并没有占用内存，而 `ones` 就会占用。
 
-另有 `normrnd(mu, sigma)` 按正态分布生成随机函数。
+另有 `normrnd(mu, sigma)` 按正态分布生成随机函数，`sparse` 构造稀疏矩阵。
 
 ### 矩阵的合并、取行列
 
