@@ -25,7 +25,7 @@ git init
 ## git 上传三连
 
 ```bash
-# 如果本地、服务器端不一致，需要先 git pull
+# 如果本地、服务器端不一致，需要先 git pull，将服务器的内容拉取下来
 
 git add --all # 单文件是 git add <file>
 # git status # 这句可以看到到底 add 了哪些东西
@@ -209,6 +209,12 @@ git config --global https.https://github.com.proxy socks5://127.0.0.1:1080
 192.30.253.112 github.com
 ```
 
+## git 进阶
+
+对于刚入门 Git 的萌新，`clone`/`pull` `add` `commit` `push` 已经够用了。然而，如果要发挥 Git 全部的功能，还需要了解更多的东西。
+
+首先，需要了解分支 `branch`、远端的概念（为统一，以下 “分支” 将用英文代替）。
+
 ## 时光机穿梭
 
 > 参考链接：https://www.liaoxuefeng.com/wiki/896043488029600/896954074659008#0
@@ -253,3 +259,18 @@ git remote set-url origin git@github.com:lyh543/lyh543.github.io.git # 修改远
 ```
 
 更多的命令，可以随便敲一个不存在的命令，如 `git remote hhh` 来查看所有命令。
+
+## 当你在 branch 外 commit 后
+
+如果你在 branch 外 commit，然后立即切回 branch，你的 commit 就会掉。
+
+有两个解决方案：
+
+1. 将 commit 的内容变为一个新的 branch，然后在原来的 branch 中 merge 新的 branch；
+2. 用下面的 cherry-pick 命令在 branch 中把对应的 commit 捡回来。
+
+## cherry-pick 捡 commit
+
+`git cherry-pick` 是一个“捡” commit 的命令。可以把任意（非当前 branch 的） `commit` 拉到本 branch 来。
+
+非当前 branch 的 `commit` 可以通过 `git reflog` 查看。

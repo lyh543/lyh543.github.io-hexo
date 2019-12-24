@@ -52,7 +52,7 @@ cin.get(str, n, delim = '\n')
 
 这是读一个字符串，并且可以指定分隔符（最后分隔符会被吃掉）。
 
-### **错误示范1**
+### 错误示范1
 
 ```c++
 int a; char s[10];
@@ -72,7 +72,7 @@ cin >> a >> s;
 
 **cin会过滤空白字符，而cin.getline()不会。**
 
-### **错误示范2**
+### 错误示范2
 
 ```c++
 int a, b, c;
@@ -95,7 +95,7 @@ resetiosflags(ios::left);
 cout << hex << setiosflags(ios::showbase) <<  17 << 18; //hex十六进制，oct八进制，dec十进制
 ```
 
-## iostream 二进制输出
+## 二进制输出
 
 函数|作用
 `basic_istream& read(char_type* s, std::streamsize count)`|以二进制形式输入（不看是不是字符，直接莽输入）
@@ -201,3 +201,53 @@ std::istream &operator>> (std::istream& is, ClassA& ca);
 操作符函数应该包括错误恢复(error recovery)，保证输入错误时，不会产生未知错误；
 
 可以增加 I/O 条件状态(condition state)进行判断，输入错误原因。
+
+## 刷新输入缓冲区
+
+在读 `int` 的时候如果读到了非数字字符，输入流就会被关闭（输入流会变成错误状态），无法继续读入。
+
+解决的办法就是重新打开输入流（将错误状态更改为有效状态），顺便可能需要忽略掉一些字符。
+
+> `cin.clear()` 是将错误状态更改为有效状态
+> `cin.sync()` 是清除缓冲区中的未读信息
+> `cin.ignore()` 是忽略缓冲区中指定个数的字符，还可以指定忽略的结束符
+
+也就是说，当我们想要刷新输入流并忽略掉已经在缓冲区的字符时，我们可以使用以下方法：
+
+```cpp
+cin.clear();
+cin.sync();
+```
+
+但是，在 Visual Studio 2019 上，他貌似并没有清楚缓冲区的未读信息。
+
+在 [Stack Overflow](https://stackoverflow.com/a/10585440/12208030) 上提到了这么一句，
+
+> `cin.sync` discards all unread characters from the input buffer. **However, it is not guaranteed to do so in each implementation.** Therefore, ``ignore`` is a better choice if you want consistency.
+
+大意是， `cin.sync` 在各个平台上实现的方法可能不一样，比如这里在 Visual Studio 2019 上就不能用 `sync` 来清楚缓冲区的未读信息。可以改为如下：
+
+```cpp
+cin.clear();
+cin.ignore(10000, '\n');
+```
+
+这样可以忽略掉缓冲区的一行字符。
+
+注意 `ignore` 还可以忽略还没有输入的字符，如以下程序：
+
+```
+char ch;
+cin.igore(10);
+while (cin >> ch)
+    cout << ch;
+```
+
+运行程序，输入 `qwertyuiopasdf`，会输出 `asdf`。
+
+## 命令行程序控制输入
+
+命令行防止错误的输入真是令人头疼的问题了。一般有两个方案：
+
+1. 只使用 `cin.getline()` 读入，一行一行的读
+2. 读错了以后马上刷新，按上面一个标题的办法
