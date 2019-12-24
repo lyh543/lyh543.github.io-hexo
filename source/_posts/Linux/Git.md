@@ -33,6 +33,16 @@ git commit -m "upload 2 files."
 git push
 ```
 
+### 一键三连
+
+在很熟悉三连操作以后，就会感到有点麻烦了。于是用 `alias` 实现了一个命令缩写。
+
+```bash
+alias commit='git_commit() { git add --all && git commit -m "$1" && git push;}; git_commit'`
+```
+
+但是因为 `alias` 不是开机自启的，要想开机自启，可以看 [另一篇博客](../linux-daily-command/#alias-简化命令)，此略。
+
 ## git 保存密码
 
 git 默认是不能保存密码的，每次 push 都需要输入账号密码，很烦。  
