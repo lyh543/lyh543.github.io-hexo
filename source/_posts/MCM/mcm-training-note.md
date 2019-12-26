@@ -3,6 +3,7 @@ title: 数学建模集训课程笔记目录
 date: 2019-10-26
 tags:
 - 课程笔记
+- 目录
 category:
 - 数学建模
 mathjax: true

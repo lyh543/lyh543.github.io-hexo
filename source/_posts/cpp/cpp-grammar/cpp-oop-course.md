@@ -5,6 +5,7 @@ tags:
 - 课程笔记
 - C++
 - 面向对象编程
+- 目录
 category:
 - C++
 - C++语法
@@ -17,6 +18,9 @@ mathjax: true
 * [C++：What's Plus](../cpp-whats-plus)
 * [C++ 面向对象——类与对象](../cpp-class-and-object)
 * [C++ 面向对象——继承、派生和多态](../cpp-inheritance-derive-polymorphism)
+* [C++ 模板](../cpp-template)
+* [C++ 名称空间](../cpp-namespace)
+* [C++ 异常处理](../cpp-exception-handling)
 
 预习：http://icc.hep.com.cn
 
