@@ -149,3 +149,12 @@ public:
 ### 重载等于 `=`
 
 重载 `=` 和拷贝构造函数很相似，于是放在[拷贝构造函数](../class-and-object/#拷贝构造函数)一节。
+
+### 从基类派生出结构
+
+有点不可信，但确实可以。
+
+> In C++, a structure's inheritance is the same as a class except the following differences: When deriving a struct from a class/struct, the default access-specifier for a base class/struct is public. And when deriving a class, the default access specifier is private.2009年6月11日
+> -- Struct inheritance in C++ - Stack Overflow
+
+结构和类的区别真就只有 `private` 和 `public` 了？

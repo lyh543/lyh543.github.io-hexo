@@ -57,7 +57,24 @@ class Dog: <继承方式> Terrestrial, <继承方式> Mammalia
 
 * 公有继承（public）：公有继承是 `is a` 的关系，基类的 `public` 和 `protected` 成员属性都不会改变。这是最常用的。
 * 私有继承（private）：他是一个 `has a` 的关系。基类的 `public` 和 `protected` 成员都会变为 `private`。
-* 保护继承（protected）：是私有继承的变体。基类的 `public` 和 `protected` 成员都会变为 `public`。
+* 保护继承（protected）：是私有继承的变体。基类的 `public` 和 `protected` 成员都会变为 `protected`。
+
+也可以用下面的表格来说明：
+
+基类|public 成员|protected 成员|private 成员
+-|-|-|-
+public 继承|public|protected|不可见
+protected 继承|protected|protected|不可见
+private 继承|private|private|不可见
+
+另外，`struct` 也是可以继承的：
+
+> In C++, a structure's inheritance is the same as a class except the following differences: When deriving a struct from a class/struct, the default access-specifier for a base class/struct is public. And when deriving a class, the default access specifier is private.
+> -- Struct inheritance in C++ - Stack Overflow
+
+实际开发中，私有继承和保护继承有多少应用场景呢？
+
+[知乎](https://www.zhihu.com/question/36133278/answer/66070708)上有这么一个问题，可见其实用的真的很少，很多私有继承可以用类的组合来代替，而 Java 直接就把私有和保护两种继承给砍掉了。
 
 #### 私有继承和类的组合
 
