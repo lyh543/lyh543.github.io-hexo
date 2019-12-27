@@ -112,6 +112,10 @@ alias la='ls -al --color=auto'
 
 `lsof -i 8999`
 
+### 查看网络流量
+
+可以使用第三方的 `nethogs`。
+
 ## 文件
 
 ### 新建、删除
