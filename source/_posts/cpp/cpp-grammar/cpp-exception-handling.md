@@ -75,11 +75,21 @@ int main()
 
 看到这里，你可能觉得这功能还是很蠢：当你想要 `catch` 两种错误时，`throw` 一个字符串是行不通的（因为 `catch` 识别的是类型），这又怎么办呢？
 
-## C++ 标准异常
+## 异常类和 C++ 标准异常
 
-上文说道，一个字符串行不通。于是，C++ 提供了一系列标准的异常，定义在 `<exception>` 中，他们都是继承于 `std::exception` 类。~~这也是为什么这篇异常处理会被插上面向对象的标签~~
+上文说道，一个字符串不好用。于是：
+
+C++ 提供了一个异常类 `std::exception`（定义在 `<exception>`），他是所有的异常的父类。
+
+除了构造函数、复制构造函数、析构函数以外，他只有一个 `const char * what()` 成员函数，还是个虚函数（简单的说，即父类声明、子类实现的函数）。这个函数是用来读取异常的字符串。
+
+除此之外，C++ 还提供了 C++ 标准异常，定义在 `<stdexcept>` 中，他们都是继承于 `std::exception` 类。他们除了实现 `what()` 以外，还在 `<exception>` 上加了两个构造函数，参数分别为 `const string &` 和 `const char *`。这就起到了传递字符串的效果：由字符串构造，由 `what()` 输出字符串。
+
+~~这也是为什么这篇异常处理会被插上面向对象的标签~~
 
 ![C++ 标准异常](https://www.runoob.com/wp-content/uploads/2015/05/exceptions_in_cpp.png)
+
+[cppreference](https://en.cppreference.com/w/cpp/error/exception) 上也提到了所有 C++ 标准异常。
 
 既然有了异常类，那么传递一个对象，判断类的类型，就是水到渠成的想法了。
 
@@ -125,6 +135,15 @@ int main()
 MyException caught
 C++ Exception
 ```
+
+## Which one: 断言、异常处理和 return false
+
+当程序遇到预期可能的错误时，可以进行[断言](../assert) `assert`、异常处理和返回一个错误返回值表示执行错误。那么到底该选择哪个呢？
+
+[知乎](https://www.zhihu.com/question/23669218)上有这个问题。结论基本是：
+
+* 三个词可以分为两类：一类是 `assert`，另一类是异常处理和返回错误值。因为 `assert` 应当是程序出了 bug 才会触发（程序应当“留下证据然后立即自爆”），另两个可能是用户输入了错误的内容触发的。应当修改错误或者引导用户进行正确输入。
+* 针对采用return value 还是 exception，没有一定的结论。[Stack Overflow](https://stackoverflow.com/questions/99683/which-and-why-do-you-prefer-exceptions-or-return-codes) 有一个针对这个问题的讨论，不过基本上没有结论，我比较喜欢的是抛出异常会强迫调用者处理，返回值则不会。无论那种，基本上都要有一堆的处理语句。[来源](https://www.zhihu.com/question/23669218/answer/28175134)
 
 ## 坑
 

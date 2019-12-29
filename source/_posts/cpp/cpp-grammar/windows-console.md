@@ -228,7 +228,11 @@ SHORT GetAsyncKeyState(int nVirtKey);
 不按下且没有按住|0000 0000（0）
 不按下但按住（有点迷）|0000 0001（1）
 
-关于按住（toggle）这个状态的理解有点迷，但是若只需要判断是不是按下，那就可以忽略低位。一种实现是 `GetKeyState(nVirtKey) & 0x8000`，第二种是判断 `GetKeyState(nVirtKey) >= 0`。
+关于按住（toggle）这个状态的理解有点迷。
+
+但是若只需要判断是不是按下，那就可以忽略低位。一种实现是 `GetKeyState(nVirtKey) & 0x80`，第二种是判断 `GetKeyState(nVirtKey) >= 0`。
+
+注意这里的
 
 对于这段的理解还是挺迷的，不过以后需要的时候再来深究吧。
 

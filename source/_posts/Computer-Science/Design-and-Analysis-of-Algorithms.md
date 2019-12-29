@@ -154,21 +154,23 @@ Def. Matching S unstable if there is a hospital h and resident r such that:
 
 渐进复杂度分析。
 
-$O(g(n)), \omega(g(n)), \Theta(g(n))$ 这些都是函数的集合。为什么用 “$=$”而不用 "$\in$"，只能说是习惯。
+> 渐近分析（asymptotic analysis、asymptotics），在数学分析中是一种描述函数在极限附近的行为的方法。 有多个科学领域应用此方法。 例子如下： 在计算机科学中，算法分析考虑给定算法在输入非常大的数据集时候的性能。——维基百科
+
+$O(g(n)), \Omega(g(n)), \Theta(g(n))$ 这些都是函数的集合。为什么用 “$=$”而不用 "$\in$"，只能说是习惯。
 
 主要是想说说另外两个非紧上界、下界。
 
 $O(g(n)) = \\{ f(n) |$  
 对于任何正常数 $c>0$，存在正数 $n_0>0$ 使得对所有 $n \geq n_0$ 有：$0 \leq f(n) < cg(n) \\}$  
 
-$ \omega (g(n)) = \\{ f(n) |$  
+$ \Omega (g(n)) = \\{ f(n) |$  
 对于任何正常数 $c>0$，存在正数 $n_0>0$ 使得对所有 $n \geq n_0$ 有：$0 \leq cg(n) < f(n) \\}$
 
 和上面的区别就是这是对于任何 $c$ 都满足，因此必须要在数量级上**非紧**，才能使得对于任何 $c$ 都满足。
 
 这还正是极限的定义：
 
-$$ f(n) = o(g(n)) \space \Leftrightarrow \space \lim_{n \to \infty} \frac{f(n)}{g(n)} = 0 \space \Leftrightarrow \space g(n) = \omega (f(n))$$
+$$ f(n) = o(g(n)) \space \Leftrightarrow \space \lim_{n \to \infty} \frac{f(n)}{g(n)} = 0 \space \Leftrightarrow \space g(n) = \Omega (f(n))$$
 
 传递性、对称性、反身性、互对称性、算术运算。
 
@@ -212,15 +214,19 @@ $$ f(n) = o(g(n)) \space \Leftrightarrow \space \lim_{n \to \infty} \frac{f(n)}{
 对于表达式 $T(n)=aT(\frac{n}{b})+f(n)$，  其中 $a≥1$ 和 $b>1$ 是常数，$f(n)$ 是一个渐进正的函数（渐进函数，并且是增函数），其中 $\frac{n}{b}$ 指 $\lfloor \frac{n}{b} \rfloor$ 或 $\lceil \frac{n}{b} \rceil$：
 
 * 若对于某常数 $\varepsilon>0$，有 $f((n)=O(n^{\log_b{a-\varepsilon}})$，则 $T(n)=\Theta(n^{\log_b a})$
-* 若 $f((n)= \Theta(n^{\log_ba})$，则 $T(n)=\Theta(n^{\log_ba}\log n)$
+* 若 $f(n)= \Theta(n^{\log_ba})$，则 $T(n)=\Theta(n^{\log_ba}\log n)$
 * 若对于某常数 $\varepsilon>0$，有 $f(n)=\Omega(n^{\log_b{a+\varepsilon}})$，且对常数 $c<1$ 与所有足够大的 $n$，有 $a\cdot f(\frac{n}{b}) \leq c \cdot f(n)$，则 $T(n)=\Theta(f(n))$
 
 主方法其实是在说这个事情：  
 
-对于 $T(n)=aT(\frac{n}{b})+f(n)$，其最终算出来的复杂度为某两项之和。前一项化出来肯定是 $\Theta(n^{\log_b a})$，主方法做的事情，就是为了在某些条件下，就可以直接判断哪一项的复杂度更高（然后忽略掉另一项）。
+对于 $T(n)=aT(\frac{n}{b})+f(n)$，其最终算出来的复杂度为某两项之和，并且前一项化出来肯定是 $\Theta(n^{\log_b a})$。
+
+主方法做的事情，就是为了在某些条件下，就可以直接判断哪一项的复杂度更高（然后忽略掉另一项）。
 
 而第一、三条的奇奇怪怪的形式是为了表示一句话：“如果后一项的复杂度低于/高于 $\Theta(n^{\log_b a})$”。  
 在渐进复杂度中没有“复杂度低于”的这种表示法，只能引入 $\varepsilon>0$ 来表示复杂度的高于、低于。于是看起来才这么复杂，**为了严谨性不得不牺牲可读性**。
+
+剩下具体的内容就不再展开了，因为涉及到了主方法的证明了。
 
 #### 分治实例
 
@@ -258,7 +264,7 @@ DP 可以写为递归形式，也可以写为自底向上的循环形式。
 
 ## 网络流
 
-见[另一篇博客](/cpp/ACM/网络流)。
+见[另一篇博客](/cpp/ACM/network-flow)。
 
 ## NP 和难以计算的问题
 
