@@ -154,7 +154,7 @@ Def. Matching S unstable if there is a hospital h and resident r such that:
 
 渐进复杂度分析。
 
-> 渐近分析（asymptotic analysis、asymptotics），在数学分析中是一种描述函数在极限附近的行为的方法。 有多个科学领域应用此方法。 例子如下： 在计算机科学中，算法分析考虑给定算法在输入非常大的数据集时候的性能。——维基百科
+> 渐近分析（asymptotic analysis、asymptotics），在数学分析中是一种描述**函数在极限**附近的行为的方法。 有多个科学领域应用此方法。 例子如下： 在计算机科学中，算法分析考虑给定算法在输入非常大的数据集时候的性能。——维基百科
 
 $O(g(n)), \Omega(g(n)), \Theta(g(n))$ 这些都是函数的集合。为什么用 “$=$”而不用 "$\in$"，只能说是习惯。
 
@@ -168,9 +168,11 @@ $ \Omega (g(n)) = \\{ f(n) |$
 
 和上面的区别就是这是对于任何 $c$ 都满足，因此必须要在数量级上**非紧**，才能使得对于任何 $c$ 都满足。
 
-这还正是极限的定义：
+这还很像极限的定义：
 
-$$ f(n) = o(g(n)) \space \Leftrightarrow \space \lim_{n \to \infty} \frac{f(n)}{g(n)} = 0 \space \Leftrightarrow \space g(n) = \Omega (f(n))$$
+$$ f(n) = O(g(n)) \space \Leftarrow \space \lim_{n \to \infty} \frac{f(n)}{g(n)} = 0 \space \Rightarrow \space g(n) = \Omega (f(n))$$
+
+但是不完全一样。如果拿极限定义，$f(n)$ 就不满足 $O(f(n))$ 了。
 
 传递性、对称性、反身性、互对称性、算术运算。
 
