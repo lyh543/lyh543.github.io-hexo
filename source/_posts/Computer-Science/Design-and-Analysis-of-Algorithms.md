@@ -213,7 +213,7 @@ $$ f(n) = O(g(n)) \space \Leftarrow \space \lim_{n \to \infty} \frac{f(n)}{g(n)}
 
 主方法看起来复杂，其实也不复杂。
 
-对于表达式 $T(n)=aT(\frac{n}{b})+f(n)$，  其中 $a≥1$ 和 $b>1$ 是常数，$f(n)$ 是一个渐进正的函数（渐进函数，并且是增函数），其中 $\frac{n}{b}$ 指 $\lfloor \frac{n}{b} \rfloor$ 或 $\lceil \frac{n}{b} \rceil$：
+对于表达式 $T(n)=aT(\frac{n}{b})+f(n)$，  其中 $a≥1$ 和 $b>1$ 是常数，$T(1)=\Theta(1)$，$f(n)$ 是一个渐进正的函数（渐进函数，并且是增函数），其中 $\frac{n}{b}$ 指 $\lfloor \frac{n}{b} \rfloor$ 或 $\lceil \frac{n}{b} \rceil$：
 
 * 若对于某常数 $\varepsilon>0$，有 $f((n)=O(n^{\log_b{a-\varepsilon}})$，则 $T(n)=\Theta(n^{\log_b a})$
 * 若 $f(n)= \Theta(n^{\log_ba})$，则 $T(n)=\Theta(n^{\log_ba}\log n)$
