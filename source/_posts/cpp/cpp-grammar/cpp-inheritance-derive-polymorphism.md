@@ -328,3 +328,73 @@ public:
 
 静态多态能实现接口的很大程度的复用，而动态多态就可以最大化复用的程度吧。
 
+> 2020.1.6 更新：在写了一个大实验以后，我发现了动态多态在实战中的用途。
+
+简单的来说，现在有 `class A` 为基类，其有派生类 `A1`、`A2`、`A3` 等。我们定义 `std::vector<A*>`，里面的指针可能指向 `A1`、`A2`、`A3`。
+
+使用动态多态的话，可以实现：将**多个不同的派生类 `Ai` 装在一个集合中**，但是调用的时候却是**调用 `Ai` 各自派生类的成员函数**。  
+
+静态多态则做不到，在 `Ai` 转为 `A` 的一瞬间，他就失去了他的派生成员。如下程序：
+
+
+```cpp
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+class A
+{
+public:
+	virtual void foo() { cout << "A" << endl; }
+};
+
+class A1 : public A
+{
+public:
+	void foo() { cout << "A1" << endl; }
+};
+
+void test1() //尝试静态多态
+{
+	A a;
+	A1 a1;
+	vector<A> vA;
+	vA.push_back(a);
+	vA.push_back(a1);
+
+	for (auto i : vA)
+		i.foo();
+}
+
+void test2() //动态多态
+{
+	A * a = new A;
+	A1 * a1 = new A1;
+	vector<A*> vA;
+	vA.push_back(a);
+	vA.push_back(a1);
+
+	for (auto i : vA)
+		i->foo();
+}
+
+int main()
+{
+	test1();
+
+	cout << endl;
+
+	test2();
+}
+```
+
+该程序的输出为：
+
+```
+A
+A
+
+A
+A1
+```
