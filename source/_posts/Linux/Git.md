@@ -210,7 +210,11 @@ git config --global https.https://github.com.proxy socks5://127.0.0.1:1080
 
 ### ssh 代理
 
-放个链接。[git clone一个github上的仓库，太慢，经常连接失败，但是github官网流畅访问，为什么？ - 戈登走過去的回答 - 知乎](https://www.zhihu.com/question/27159393/answer/809693236)
+Linux 的 ssh 代理可以通过[macOS 给 Git(Github) 设置代理（HTTP/SSH）](https://gist.github.com/chuyik/02d0d37a49edc162546441092efae6a1)的方法。
+
+注意如果是 wsl 2，因为 wsl 2 实际上是一个 Hyper-V 虚拟机，因此 Windows 上的代理如果想要被 Linux 使用，上面填 ip 的地方应该填 Windows 在 wsl 网络下的 ip（命令行输入 `ipconfig`，看到 `以太网适配器 vEthernet (WSL)` 的就是）。另外还需要 代理软件“允许局域网的连接”。
+
+如果是 Windows 下的 Git，可以参考：[git clone一个github上的仓库，太慢，经常连接失败，但是github官网流畅访问，为什么？ - 戈登走過去的回答 - 知乎](https://www.zhihu.com/question/27159393/answer/809693236)
 
 ### 改 hosts
 
