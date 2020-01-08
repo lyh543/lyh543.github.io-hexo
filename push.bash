@@ -1,10 +1,12 @@
 #!/bin/bash
 
-echo
-echo pushing to lyh543/lyh543.github.io
-echo
+if [ -z $1 ]; then
+    echo
+    echo pushing to lyh543/lyh543.github.io
+    echo
 
-hexo d -g
+    hexo d -g
+fi
 
 echo
 echo pushing to lyh543/lyh543.github.io.backup
