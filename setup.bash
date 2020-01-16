@@ -13,8 +13,8 @@ sudo apt-get update
 sudo apt-get install git
 git config user.name "lyh543"
 git config user.email "lyh543@github.com"
-git config --global http.https://github.com.proxy socks5://127.0.0.1:2080
-git config --global https.https://github.com.proxy socks5://127.0.0.1:2080
+# git config --global http.https://github.com.proxy socks5://127.0.0.1:2080
+# git config --global https.https://github.com.proxy socks5://127.0.0.1:2080
 
 git remote set-url origin git@github.com:lyh543/lyh543.github.io.backup.git
 
