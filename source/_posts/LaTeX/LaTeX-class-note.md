@@ -423,6 +423,7 @@ Markdown 里的预览：
 LaTeX 版本：
 
 ```latex
+\usepackage{enumerate}
 \begin{enumerate}[1.]
 	\item a
 	\item b

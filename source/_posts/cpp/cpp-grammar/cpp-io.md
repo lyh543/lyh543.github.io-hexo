@@ -28,7 +28,7 @@ cout << endl;
 
 ## istream::getline()
 
-`getline()` 会吃掉空格。
+`getline()` 会吃掉回车，只能用于读 `const char *`。
 
 ```c++
 char word[50];
@@ -37,20 +37,32 @@ cin.getline(word, 50, delim = '\n'); //ignore endline when storing
 
 ## istream::get()
 
-`get()` 可以读一个字符或一个字符串。
+`get()` 有两个重载函数：
+
+1. 读一个字符
+2. 读一个字符串。
+
+如果无参数，则是读字符，类似于 `getchar()`：
 
 ```c++
-cin.get(ch);
 ch = cin.get();
 ```
 
-上面两个都是读取一个字符，若可用则返回它，不可用时的处理略有不同，但都会设置 `failbit` 和 `eofbit`。
+上面两个都是读取一个字符，若可用则返回它，不可用时会对 `cin` 设置 `failbit` 和 `eofbit`。
+
+如果带参数，可以读 `char` `char *` `std::string`。
 
 ```c++
-cin.get(str, n, delim = '\n')
+char str1[n];
+cin.get(str1, n, '\n')
+
+string str2;
+cin.get(str2, '\n')
 ```
 
 这是读一个字符串，并且可以指定分隔符（最后分隔符会被吃掉）。
+
+`cin.get(str, '\n')` 类似于  `cin.getline()`，并且可以读 `std::string`。
 
 ### 错误示范1
 
