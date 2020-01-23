@@ -28,12 +28,24 @@ cout << endl;
 
 ## istream::getline()
 
-`getline()` 会吃掉回车，只能用于读 `const char *`。
+`getline()` 会吃掉回车。
+
+下面这种方法只能用于读 `char *`。
 
 ```c++
 char word[50];
-cin.getline(word, 50, delim = '\n'); //ignore endline when storing
+cin.getline(word, 50); //ignore endline when storing
 ```
+
+而下面这种方法，把 `cin` 作为参数则只能用于读取 `string`。
+
+```c++
+string str;
+getline(cin,str);
+```
+
+需要注意，`cin.getline` 是属于 `iostream` 的，而 `getline(cin,str)` 是属于 `string` 的。
+
 
 ## istream::get()
 
@@ -50,19 +62,14 @@ ch = cin.get();
 
 上面两个都是读取一个字符，若可用则返回它，不可用时会对 `cin` 设置 `failbit` 和 `eofbit`。
 
-如果带参数，可以读 `char` `char *` `std::string`。
+如果带参数，可以读 `char` `char *‘。
 
 ```c++
 char str1[n];
 cin.get(str1, n, '\n')
-
-string str2;
-cin.get(str2, '\n')
 ```
 
 这是读一个字符串，并且可以指定分隔符（最后分隔符会被吃掉）。
-
-`cin.get(str, '\n')` 类似于  `cin.getline()`，并且可以读 `std::string`。
 
 ### 错误示范1
 
