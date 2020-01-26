@@ -290,3 +290,44 @@ git remote set-url origin git@github.com:lyh543/lyh543.github.io.git # 修改远
 `git cherry-pick` 是一个“捡” commit 的命令。可以把任意（非当前 branch 的） `commit` 拉到本 branch 来。
 
 非当前 branch 的 `commit` 可以通过 `git reflog` 查看。
+
+## git 大文件版本管理：git-lfs
+
+[git-lfs 官网](https://git-lfs.github.com/)
+[GitHub 中文帮助页面](https://help.github.com/cn/github/managing-large-files/versioning-large-files)
+
+Git LFS 是 Github 开发的一个 Git 的扩展，他能够处理 Git 仓库里的大文件（如图片、视频等等），其原理是将 Git 仓库中的大文件替换为一个指针，然后将大文件存在另一个服务器上。这样做的好处有：
+
+* 可让您存储最大 2 GB 的文件
+* 使得 Git 仓库的容量更大
+* 更快的 Cloning 和 Fetching（大概用的服务器更快）
+* 操作和工作流等和原来完全一样
+
+以上是官方的，个人感觉可能还会使得每次更新大文件时，他不会再保存在 `.git` 文件夹，占取大量硬盘空间了。
+
+### git-lfs 安装
+
+Windows 上官网就行。Ubuntu 下：
+
+```bash
+sudo apt install git-lfs
+```
+
+### git-lfs 配置
+
+对于每个仓库下，第一次需要配置一下（如需要用 git-lfs 管理 psd 和 mp4 文件）
+
+```bash
+git lfs install
+git lfs track "*.psd"
+git lfs track "*.mp4"
+git add .gitattributes
+```
+
+以后就和常规 [git 上传三连](#git-上传三连) 相同了。
+
+```bash
+git add file.psd
+git commit -m "Add design file"
+git push origin master
+```
