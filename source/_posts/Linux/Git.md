@@ -10,9 +10,35 @@ category:
 top: false
 ---
 
+先说一个概念：Git 是目前最流行的**版本管理系统**，学会 Git 几乎成了开发者的必备技能。
+
+如果你看不懂这句话，你可以从字面意思理解“版本管理系统”：多个开发者在同一个软件的基础上，开发了不同的版本，他们可以通过 Git 方便、严谨的实现上传、下载、比对、合并代码间的冲突等操作。
+
+而我们最常用的把代码放到 GitHub（或其他 Git 服务器）上的操作，可以把远程服务器也看做一个开发者（虽然他什么也不会修改），我们每次开发完以后，就会将代码上传给他。
+
 常用命令可查表：[Git-CheatSheet](git-cheatsheet.pdf)
 
-## git 新建库
+## Git 入门
+
+### 在本地 Git 新建仓库
+
+入门，首先就是新建一个仓库了。对于这第一个概念，`仓库`，可以从字面理解为存代码的仓库，往往将一个项目的完整代码放在一个仓库。
+
+有两种方法：一是在本地新建一个 Git 仓库，另一种是在 GitHub 上新建库，然后下载到本地。
+
+如果你打算将代码放到 GitHub 上，这里推荐第二种方法。因为在 GitHub 新建了库以后，可能会有一些初始文件、初始设置，可能和本地不同。如果使用使问题更复杂，在初学阶段，可以先跳过这些麻烦的东西。
+
+首先假设你已经在 GitHub 网站上建立了库（或者你想把别人的库下载到本机），链接为 `https://github.com/lyh543/lyh543.github.io/`。现在想要在当前文件夹中，新建 `lyh543.github.io` 文件夹，并将仓库下载到本地：
+
+```bash
+git clone https://github.com/lyh543/lyh543.github.io/
+```
+
+本地就多了一个文件夹 `lyh543.github.io`，内容和网站上的一致。
+
+你也可以使用不同于 `HTTPS` 协议的 `SSH` 协议（如果你明白这是什么），将上面 clone 的 `HTTPS` 链接修改为 `SSH` 链接即可。
+
+顺便提一下，在本地新建仓库的方法如下：
 
 ```bash
 mkdir lyh543.github.io
@@ -20,20 +46,25 @@ cd lyh543.github.io
 git init
 ```
 
-然后就可以按照下面的[上传三连](#git-上传三连)了
+### Git 上传三连
 
-## git 上传三连
+在建立好库以后，每次写完代码，就可以按照下面的[上传三连](#git-上传三连)了。如果该项目只有你的一台设备进行开发（即不会出现不同步的情况），在 99% 的情况，你只会用到以下三条语句。
 
 ```bash
 # 如果本地、服务器端不一致，需要先 git pull，将服务器的内容拉取下来
 
 git add --all # 单文件是 git add <file>
+
 # git status # 这句可以看到到底 add 了哪些东西
-git commit -m "upload 2 files."
+
+git commit -m "upload 2 files." # 用文字说明这一次更新了什么东西，推荐写
+
 git push
 ```
 
-### 一键三连
+上传完以后，你就可以看到 GitHub 上的代码已经更新。
+
+#### 一键三连
 
 在很熟悉三连操作以后，就会感到有点麻烦了。于是用 `alias` 实现了一个命令缩写。
 
@@ -43,22 +74,22 @@ alias commit='git_commit() { git add --all && git commit -m "$1" && git push;}; 
 
 但是因为 `alias` 不是开机自启的，要想开机自启，可以看 [另一篇博客](../linux-daily-command/#alias-简化命令)，此略。
 
-## git 保存密码
+## Git SSH 协议
 
-git 默认是不能保存密码的，每次 push 都需要输入账号密码，很烦。  
+Git for Linux 如果操作 HTTPS 协议链接的仓库，是不能保存密码的，每次 push 都需要输入账号密码，很烦。（Git for Windows 貌似可以走网页认证，好像可以保存）  
 
-一个选择是 ssh，这个方便，但是问题就是，使用 ssh 以后，就不能直接挂梯子了（梯子走 https 的）。
-第二个方案是走 https，不过让 Git 保存密码。这又分了两种方法。
+一个选择是 ssh 协议，使用这个协议可以保存用户信息，很方便。
+第二个方案是走 https，不过让 Git 明文保存密码（不推荐）
 
-多 ssh 部署可以看链接：https://www.awaimai.com/2200.html
+多 ssh 秘钥部署可以看链接：https://www.awaimai.com/2200.html
 
-### 在 Linux 下 git 使用 ssh 密钥
+### 在 Linux 下 Git 使用 ssh 密钥
 
 大概分为三步走：
 
 1. 本地生成密钥对；
-2. 设置 github 上的公钥；
-3. 修改 git 的 remote url 为 git 协议。
+2. 设置 GitHub 上的公钥；
+3. 修改 Git 的 remote url 为 `SSH` 协议。
 
 #### Linux 下本地生成密钥对
 
@@ -94,7 +125,7 @@ Hi lyh543! You've successfully authenticated, but GitHub does not provide shell 
 
 看到最后一句就是OK了。
 
-#### 修改 git 的 remote url 从 `https` 改为 `ssh`
+#### 修改 Git 的 remote url 从 `https` 改为 `ssh`
 
 查看当前（git仓库下的）的remote url
 
@@ -179,24 +210,11 @@ git config credential.helper 'cache --timeout=1000000000'
 
 还有一种在 `remote.url` 中加入自己的用户名和密码，更危险，就不表了。
 
-## git 代理
+## Git 代理
 
 经常会有挂上代理，浏览器访问 Github 快到飞起的，但是 Git Clone 却慢死的经历。awsl。
 
-以下方法收集自知乎的同一问题：[git clone一个github上的仓库，太慢，经常连接失败，但是github官网流畅访问，为什么？](
-https://www.zhihu.com/question/27159393/answer/141047266)
-
-### Shadowsocks 全局 HTTPS 代理（不推荐）
-
-```bash
-git config --global http.proxy socks5://127.0.0.1:1080
-git config --global https.proxy socks5://127.0.0.1:1080
-```
-
-其中 `1080` 是 Shadowsocks 代理的端口，可能需要根据自己的 Shadowsocks 配置进行修改。  
-另外使用该方法以后，需要用 HTTPS 协议（而不是 SSH）进行传输。
-
-该方法的缺点是会导致连向国内仓库时极慢。毕竟全局走服务器了嘛。
+以下方法收集自知乎的同一问题：[git clone一个github上的仓库，太慢，经常连接失败，但是github官网流畅访问，为什么？](https://www.zhihu.com/question/27159393/answer/141047266)
 
 ### Shadowsocks 对 Github 进行 HTTPS 代理
 
@@ -205,7 +223,7 @@ git config --global http.https://github.com.proxy socks5://127.0.0.1:1080
 git config --global https.https://github.com.proxy socks5://127.0.0.1:1080
 ```
 
-也要注意 `1080` 是 Shadowsocks 代理的端口，可能需要根据自己的 Shadowsocks 配置进行修改。  
+也要注意 `1080` 是 Shadowsocks 代理的端口，可能需要根据自己的代理配置进行修改。  
 另外使用该方法以后，需要用 HTTPS 协议（而不是 SSH）进行传输。
 
 ### ssh 代理
@@ -220,54 +238,159 @@ Linux 的 ssh 代理可以通过[macOS 给 Git(Github) 设置代理（HTTP/SSH�
 
 ### 改 hosts
 
+还有一个方法是修改 Hosts 文件。对于没有代理的开发者，会有一点帮助（都是开发者了为什么还没有代理）。
+
 ```
 151.101.72.249 github.http://global.ssl.fastly.net
 192.30.253.112 github.com
 ```
 
-## git 进阶
+## Git 进阶
 
-对于刚入门 Git 的萌新，`clone`/`pull` `add` `commit` `push` 已经够用了。然而，如果要发挥 Git 全部的功能，还需要了解更多的东西。
+对于刚入门 Git 的萌新，`clone` `pull` `add` `commit` `push` 已经够用了。然而，如果要发挥 Git 全部的功能，还需要了解更多的东西。
 
-首先，需要了解分支 `branch`、远端的概念（为统一，以下 “分支” 将用英文代替）。
+### 回溯版本
 
-## 时光机穿梭
+#### git status/diff/checkout 查看当前状态
 
-> 参考链接：https://www.liaoxuefeng.com/wiki/896043488029600/896954074659008#0
+> 学习链接：https://www.liaoxuefeng.com/wiki/896043488029600/896954074659008#0
 
-```bash
-git log
-git reset --hard HEAD^
-git reset --hard HEAD^^
-git reset --hard HEAD~100
-git reset --hard 236c
-git reflog
-```
+下面只是对上述博客的一些简短的笔记。
 
-### 修改上次 commit
+使用 `git status` 可查看目前 Git 的状态（什么文件被修改过之类的……）
 
-可以使用 `git commit --amend -m "xxx"` 以修改上次的 commit。
+使用 `git diff readme.txt` 可查看 `readme.txt` 的还没有被 commit 的修改。
 
-如果已经 push 了，下次就需要 `git push -f` 强制推送。如果还没有 `push`，就当一切都没发生过，直接 `git push` 就行。
-
-### 回滚到上次的文件
-
-对于只是修改了 `test.txt` 文件，还没有进行任何 Git 操作的，可以一句恢复为之前的文件。
-
-```bash
-git checkout -- test.txt
-```
+对于只是修改了 `readme.txt` 文件，还没有进行任何 Git 操作的，可以 `git checkout -- readme.txt` 恢复为之前 `add` 过的文件。
 
 更多的情况可看[Git 之 恢复修改的文件](https://www.cnblogs.com/liuq/p/9203087.html)
 
-## git 修改设置
+#### git log/reflog/reset 版本回退
+
+使用 `git log` 可查看当前分支的**所有** commit 日志。
+可搭配 `--pretty=oneline` 简略显示。
+
+```
+$ git log --pretty=oneline
+a4a32854a37319561d16f1618cd9c20e0b3290bf (HEAD -> master, origin/master) append GPL
+f4d84ec5d20e8be8f7ef70802b1ba6e654986197 add distributed
+d5fd90e99d8a1d91a34d7aef9e615d122d2a2904 new readme.txt
+65a146ab6bc8b27dbaaed4d0c200d7d0ee8b6b65 add Hello world
+```
+
+前面的一串是 SHA1 值。
+
+回退到上一个版本：`git reset --hard HEAD^`  
+回退到上两个版本：`git reset --hard HEAD^^` 或 `HEAD~2`  
+回退/前进到指定版本：`git reset --hard a4a3`（到 `append GPL` 版本）
+
+如果回退以后想再前进，却忘了 SHA1 值，可以使用 `git reflog`。
+
+注意至少要写四位，否则会报错：
+
+```
+$ git reset --hard 65a
+fatal: ambiguous argument '65a': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+```
+
+#### 相关概念浅析：工作区、暂存区
+
+* 工作区 `working tree`：（对于 test 项目）test 文件夹
+* 版本库 `Repository`：`test/.git` 文件夹
+* 暂存区 `stage/index`：在版本库中
+* `master`：第一个分支，也在版本库中
+* `HEAD`：指向 `master` 的指针
+
+其逻辑关系如下：
+
+```
+test 文件夹
+ │
+ ├─工作区 working tree
+ │
+ └─版本库 .git 文件夹
+     │
+     ├─ 暂存区
+     │
+     ├─ master 分支
+     │
+     └─ 其他分支
+```
+
+* `git add`：将文件修改添加进暂存区
+* `git commit`：将暂存区的东西 commit 到当前分支。（在这之后用 `git status` 会显示 `working tree clean`）
+
+#### git diff/checkout/reset 笔记
+
+diff 只能比较两份文件，如果是操作中是新建文件/删除文件，`git diff` 会提示“没有差异”。
+
+各 diff 的区别：
+
+* `git diff`：显示工作区和暂存区的差异（即未 add 的内容）
+* `git diff --cached`：显示暂存区和 `HEAD` 的差异（即未 commit 的内容）
+* `git diff HEAD`：显示工作区和 `HEAD` 的差异（即未 add 或 commit 的内容）
+
+在命令后可加文件名，指定比对某文件。
+
+* `git checkout -- <file>` 可以认为是反向 add，是将暂存区的文档修改覆盖工作区的文档；
+  - 使用不带参数的 `git checkout --` 可以查看工作区和暂存区的文件差异。
+* `git reset HEAD <file>` 可以认为是反向 commit，是用当前分支的文档覆盖暂存区。（并不会修改工作区）
+
+
+
+#### 远程库操作
+
+在本地 `git init` 了一个库以后，如果需要上传到远程库，就需要设置远程库的地址（地址可以在 GitHub 网页上获取）：
+
+```
+git remote add origin git@github.com:lyh543/test.git
+```
+
+Git 规定，要给每一台远程主机命名。这里的 `origin` 就是 Git 给远程库的默认名字。虽然可以用别的名字，但是推荐 `origin`。
+
+然后，进行 push：
+
+```
+git push -u origin master
+```
+
+push 命令将本地的当前分支上传到 origin 的 master 分支（简写 origin/master）。  
+`-u`（或 `--set-upstream`）参数，还顺便将本地的 master 分支和 origin/master 分支进行关联，以后就不用指定。
+
+### 分支管理
+
+其他版本控制系统如SVN等都有分支管理，但是用过之后你会发现，这些版本控制系统创建和切换分支比蜗牛还慢，简直让人无法忍受，结果分支功能成了摆设，大家都不去用。
+
+但Git的分支是与众不同的，无论创建、切换和删除分支，Git在1秒钟之内就能完成！无论你的版本库是1个文件还是1万个文件。
+
+## Git 小技巧
+
+### git rm
+
+以下三种命令等价，都是从工作区删除并提交到暂存区
+
+1. `rm readme.txt` `git add readme.txt`
+2. `rm readme.txt` `git rm readme.txt`
+3. `git rm readme.txt`
+
+而从工作区删除，但是想恢复，只能在使用 `rm readme.txt` 的前提下 `git checkout -- readme.txt`。
+
+### --amend 修改上次 commit
+
+可以使用 `git commit --amend -m "xxx"` 以修改上次的 commit。
+
+如果已经 push 了，下次就需要 `git push -f` 强制推送。如果还没有 `push`，就相当于之前的 commit 没发生过，直接 `git push` 就行。
+
+### git 修改设置
 
 ```bash
 git config [--local] --list # 查看设置；--local 用于本地库
 git config --local remote.origin.url git@github.com:lyh543/lyh543.github.io.git # 修改设置，项和名用空格间隔
 ```
 
-## git 修改远端
+### git 修改远端
 
 ```bash
 git remote -v # 查看所有远端
@@ -285,7 +408,7 @@ git remote set-url origin git@github.com:lyh543/lyh543.github.io.git # 修改远
 1. 将 commit 的内容变为一个新的 branch，然后在原来的 branch 中 merge 新的 branch；
 2. 用下面的 cherry-pick 命令在 branch 中把对应的 commit 捡回来。
 
-## cherry-pick 捡 commit
+### cherry-pick 捡 commit
 
 `git cherry-pick` 是一个“捡” commit 的命令。可以把任意（非当前 branch 的） `commit` 拉到本 branch 来。
 
