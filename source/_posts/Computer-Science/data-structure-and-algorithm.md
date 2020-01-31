@@ -499,33 +499,65 @@ Huffman 可以应用于压缩文件，压缩率在 20%~90% 之间。
 
 ##### Huffman 编码贪心选择性质分析
 
+符号|说明
+:-|:-
+$f_x$|$x$ 出现的频度
+$d_T(x)$|$x$ 在 $T$ 树的深度
+$WPL(T)$|$T$ 树的 WPL（带权路径长度）
+|$WPL(T)=\sum_{x \in T} f_x \cdot d_T(x)$
+
 我们即要证明，一个序列 $S$ 的 Huffman 树是具有最小 WPL（带权路径长度）的二叉树。
 
-首先证明引理：对于一棵二叉树 $T$，设 $y$、$z$ 为其两个叶子且互为兄弟，他们的父亲是 $\omega$。若将 $\omega$ 看做具有权重（频率）$f_\omega = f_y + f_z$ 的叶子结点，按此法得到了树 $T'$，则有：
+我们的证明思路是：
 
-$$WPL(T')=WPL(T)-f_\omega$$
+> 证明引理 1（贪心选择）：对于一个序列，$y$ 和 $z$ 是其最小频度的字母。由这个序列中组成的 WPL 最小的二叉树中，一定存在一棵树，其中 $y$ 和 $z$ 是具有最大深度的兄弟子结点。  
+> 证明引理 2（最优子结构）：对于一棵二叉树 $T$，设 $y$、$z$ 为其两个叶子且互为兄弟，他们的父亲是 $\omega$。若将 $\omega$ 看做具有权重（频率）$f_\omega = f_y + f_z$ 的叶子结点，按此法得到的树 $T'$ 具有最小 WPL，则 $T$ 也具有最优子结构。
+
+首先证明引理 1：对于一个序列，$y$ 和 $z$ 是其最小频度的字母。由这个序列中组成的 WPL 最小的二叉树中，一定存在一棵树，其中 $y$ 和 $z$ 是具有最大深度的兄弟子结点。
+
+我们使用交换论证：设 $T$ 为 WPL 最小的二叉树，其最大深度兄弟子结点为 $a$, $b$。不失一般性地假设 $f_y \leq f_z$，$f_a \leq f_b$。由于 $y$、$z$ 频度最小，显然有 $f_y \leq f_a$，$f_z \leq f_b$。在此前提下，设将 $T$ 的 $a$、$y$ 结点交换得到的树为 $T'$，将 $T'$ 的 $b$、$z$ 结点交换得到的树为 $T''$。
+
+树 $T$ 和 $T'$ 的 WPL 之差为：
+
+$$\begin{aligned}
+WPL(T)-WPL(T') &= \sum_{x \in T} f_x \cdot d_T(x) - \sum_{x \in T'} f_x \cdot d_T'(x) \\\\
+&= f_a \cdot d_T(a) + f_y \cdot d_T(y) - f_a \cdot d_{T'}(a) - f_y \cdot d_{T'}(y) \\\\
+&= f_a \cdot d_T(a) + f_y \cdot d_T(y) - f_a \cdot d_T(y) - f_y \cdot d_T(a) \qquad \left( d_{T'}(a)=d_T(y) \right) \\\\
+&= (f_a - f_y) \cdot (d_T(a) - d_T(y)) \geq 0 \qquad \left(两项都非负\right)
+\end{aligned}$$
+
+所以 $WPL(T) \geq WPL(T')$。同理 $WPL(T') \geq WPL(T'')$。又因为 $T$ 为最下 WPL，故有 $WPL(T) \leq WPL(T'')$。  
+由三个不等式可得，$WPL(T) = WPL(T'')$，即 $T''$ 的 WPL 也是最小。引理 1 得证。
+
+在证明引理 2 之前，我们先证明引理 3：对于一棵二叉树 $T$，设 $y$、$z$ 为其两个叶子且互为兄弟，他们的父亲是 $\omega$。若将 $\omega$ 看做具有权重（频率）$f_\omega = f_y + f_z$ 的叶子结点，按此法得到了树 $T'$，则有：
+
+$$WPL(T')=WPL(T)-f_y-f_z$$
 
 证明如下：
 
 $$\begin{aligned}
-WPL(T) &= \sum_{x \in T} f_x \cdot depth_T(x) \\\\
-&= f_y \cdot depth_T(y) + f_z \cdot depth_T(z) + \sum_{x \in T, x \neq y, x \neq z} f_x \cdot depth_T(x) \\\\
-&= (f_y + f_z) \cdot (1 + depth_{T'}(\omega)) + \sum_{x \in T, x \neq y, x \neq z} f_x \cdot depth_T(x) \\\\
-&= f_{T'}(\omega) + \left[ f_{T'}(\omega) \cdot depth_{T'}(\omega) + \sum_{x \in T', x \neq \omega} f_x \cdot depth_{T'}(x) \right] \\\\
-&= f_\omega + WPL(T')
+WPL(T) &= \sum_{x \in T} f_x \cdot d_T(x) \\\\
+&= f_y \cdot d_T(y) + f_z \cdot d_T(z) + \sum_{x \in T, x \neq y, x \neq z} f_x \cdot d_T(x) \\\\
+&= (f_y + f_z) \cdot (1 + d_{T'}(\omega)) + \sum_{x \in T, x \neq y, x \neq z} f_x \cdot d_T(x) \\\\
+&= f_y + f_z + \left[ f_{T'}(\omega) \cdot d_{T'}(\omega) + \sum_{x \in T', x \neq \omega} f_x \cdot d_{T'}(x) \right] \\\\
+&= f_y + f_z + WPL(T')
 \end{aligned}$$
 
 有了这个性质，这样贪心的思路基本就清楚了。剩下的就是按照贪心的套路证明。数学归纳法 + 反证法：
 
-先证明：如果按上面方法构造的 $T'$ 是序列 $S'=S - {y, z} + {\omega}$ 的最优树，则 $T$ 是序列 $S$ 的最优树。
+证明引理 2：如果按上面方法构造的 $T'$ 是序列 $S'=S - \\{y, z\\} + \\{\omega\\}$ 的最优树，则 $T$ 是序列 $S$ 的最优树。
 
 令 $n = |S|$。
 
 * 当 $n = 2$ 时，显然一个根结点和两个叶子结点的结构具有最小 WPL；
-* 当 $n \geq 2$ 时，假设存在大小为 $n$ 的更优编码的树 $Z$。
-	* 按照前面的方法从 $Z$ 中删掉 $y$、$z$ 并加入 $\omega$ 获得 $Z'$ 树。
+* 当 $n \geq 2$ 时，假设存在大小为 $n$ 的更优编码的树 $Z$，其最深的兄弟子结点为 $a$ 和 $b$。
+	- 按引理 1 的方式将 $Z$ 树中 $a$、$b$ 和 $y$、$z$ 互换，得到 $Z'$。由引理 1 有 $WPL(Z) = WPL(Z')$；
+	- 按引理 3 的方式将 $Z'$ 树中 $y$、$z$ 替换为 $\omega$，得到 $Z''$。由引理 3 有 $WPL(Z'') = WPL(Z') - f_y - f_z$；
+	- 此时的 $Z''$ 为 $T'$ 树的另一个排序方式，由于 $T'$ 的 WPL 最优，有 $WPL(T') \leq WPL(Z'')$。 
+	- 由引理 3 有：$WPL(T')=WPL(T)-f_y-f_z$
+	- 综上有：$WPL(Z) = WPL(Z') = WPL(Z'') + f_y + f_z \geq WPL(T') + f_y + f_z = WPL(T)$，即 $WPL(Z) \geq WPL(T)$，证毕。
 
-
+有了引理 2，由数学归纳法可得：一个序列 $S$ 的 Huffman 树是具有最小 WPL（带权路径长度）的二叉树。证明完毕。
 
 #### 堆
 
