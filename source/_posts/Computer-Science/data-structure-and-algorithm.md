@@ -726,7 +726,7 @@ void build_max_heap(vector<T>& Arr)
 
 证明如下：
 
-为简洁起见，我们设树高为 $h$。（显然有 $h = O(\log n)$）
+为简洁起见，我们设树高为 $h$。显然有 $h = O(\log n)$。
 
 由 `max_heapify` 的复杂度分析，我们可以知道，该函数的复杂度是和以结点为根结点的树的深度成正比的。即根结点的复杂度为 $O(h)$，叶子结点为 $O(1)$。`build_max_heap` 对所有结点进行了 `max_heapify`，所以时间复杂度为：
 
@@ -744,7 +744,7 @@ $$O(\sum_{i=1}^h (h+1-i)\cdot 2^i) = O(4 \cdot 2^h - 2h - 4) = O(2^h) = O(n)$$
 
 因此 pop 过程不需要重新写删除元素的函数（所以也就只能删除堆顶的元素了~~好歹人家也是完全二叉树，删了中间的结点就不是完全二叉树了~~）。
 
-所以，堆排序实际分为两个步骤：先将数组调整为堆 `build_max_heap`，时间复杂度 $O(n \log n)$，再反复 pop 堆顶元素再调整，时间复杂度 $O(n\log n)$，总时间复杂度也为 $O(n\log n)$。
+所以，堆排序实际分为两个步骤：先将数组调整为堆 `build_max_heap`，时间复杂度 $O(n)$，再反复 pop 堆顶元素再调整，时间复杂度 $O(n\log n)$，总时间复杂度也为 $O(n\log n)$。
 
 代码如下：
 
@@ -764,6 +764,61 @@ void heap_sort(vector<T>& Arr, int l, int r)//非递归排序，不需要 l, r �
 }
 ```
 
+这里是对根结点进行了 $n$ 次 `max_heapify`，所以时间复杂度是 $O(n\log n)$。
+
+##### heap_insert
+
+这里的 `heap_insert` 和《算法导论》上的实现思想略微有点不同，但是算法复杂度数量级是相同的。
+
+这里的思想是在最后插入一个结点（使用 C++ 的 std::vector 的 push_back 函数），然后对新结点往上的结点都使用一次 `max_heapify`。
+
+注意到在原来已经是一个堆的前提下，这样的每次 `max_heapify` 都只会进行一次循环就结束，其实是 $O(1)$ 的，因此可以也保证时间复杂度是 $O(\log n)$。
+
+具体实现上，对于优先队列我创建了类 `priority_queue`。函数名为了与 `std::priority_queue` 保持一致，这里的 `heap_insert` 用的是 `push`。
+
+```cpp
+template <class T>
+class priority_queue //为突出算法核心并保持代码简洁，不进行异常情的检查
+{
+private:
+	vector<T> Arr;
+public:
+	void push(const T val)
+	{
+		Arr.push_back(val);
+		for (int i = Arr.size() - 1; i >= 0; i = father(i))
+		{
+			max_heapify(Arr, i, Arr.size());
+		}
+	}
+}
+```
+
+##### heap_heap_pop_max
+
+`pop` 过程和 `heap_sort` 的 10、11 行内容接近。就是将根结点和最后一个结点进行交换（方便 `vector::pop_back` 去掉最后一个元素），然后 `max_heapify`。
+
+```cpp
+void pop()
+{
+	swap(Arr[0], Arr[Arr.size() - 1]);
+	Arr.pop_back();
+	max_heapify(Arr, 0, Arr.size());
+}
+```
+
+##### heap_max
+
+一行，返回根结点就行。
+
+```cpp
+T top()
+{
+	return Arr[0];
+}
+```
+
+完整的结构体代码和其他堆的代码都可以参见 [sort.cpp](sort.cpp)。
 
 ### 树
 
