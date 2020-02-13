@@ -159,3 +159,9 @@ http-server
 其中 `http-server` 的常用参数为 `http-server [path] [-p port]`。`port` 默认为 8080。
 
 另外，实现同样功能的还有：https://github.com/lwsjs/local-web-server
+
+### 通过 SMB
+
+如果能使用 SMB，就可以把服务器的某个文件夹当做（Windows）本机的一个硬盘，上传下载都是非常的方便。
+
+然而，SMB 配置起来比较麻烦，一是 SMB 通常用于局域网内，在外网使用会麻烦一点；二是 SMB 的默认端口 445 被阿里云、腾讯云等封禁了，需要使用别的端口。但是确实有人实现过。我还是老老实实使用 scp 吧。

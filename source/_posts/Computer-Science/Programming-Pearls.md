@@ -1,6 +1,5 @@
 ---
 title: 《编程珠玑》笔记
-date: 2019-08-18 22:02:19
 tags:
 - 读书笔记
 category:
@@ -194,3 +193,25 @@ Little 定理简单的说来就是：
 
 在做出可靠性、可用性保证时，给出和我们的目标差十倍的结果；  
 在估算规模、开销和时间进度时，应该给出 2-4 倍保守的结果。
+
+## 随机序列的最大连续子序列和的期望
+
+出自于第八章。习题 8.6。
+
+这是个挺有意思的题目，但是很少有人研究：
+
+> 假定输入数组的各个元素是从 $[-1,1]$ 中均匀选出的随实数，那么最大子序列和的期望值是多少？
+
+博主手算了 $n=1$ 时期望为 1/4， $n=2$ 时期望为 1/2。
+
+以下是几个相关链接：
+
+> https://stackoverflow.com/questions/11261066/expectation-of-the-maximum-consecutive-subsequence-sum-of-a-random-sequence  
+> https://www.quora.com/What-is-the-expected-value-of-the-sum-of-the-maximum-sum-subvector-if-the-arrays-elements-are-random-real-numbers-chosen-uniformly-from-1-1#  
+
+链接中有人用 Mathematica 模拟，跑出了 $n \leq 5$ 的精确解为：1/2，1/4，23/32，291/320，4141/3840。
+
+也有人提到，经过 $n \leq 10000$ 的模拟，答案应该是 $O(n)$ 的。从理论上来说，可以把问题类比为 random walk，从而化归为布朗运动，得到 $O(n)$ 的证明。
+
+这题放在这里也太硬核了吧。。。。
+

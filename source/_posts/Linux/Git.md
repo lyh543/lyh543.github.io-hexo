@@ -751,7 +751,7 @@ git tag -a v1.4 -m "my version 1.4"
 注意这之后会进入 `detached HEAD` 的状态，不再有 `HEAD` 的概念。  
 在这个状态下会进行 commit 有一定副作用（具体见手册），推荐新开一个 branch 来进行操作。
 
-## 看完了？
+### 看完了？
 
 如果看完了，推荐去看看 [git-scm.com](git-scm.com) 的教程和手册，这里有官方对命令的解释，你对命令和概念的理解会更加精确。如 [git checkout](https://git-scm.com/docs/git-checkout)
 

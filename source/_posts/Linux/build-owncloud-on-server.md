@@ -1,12 +1,14 @@
 ---
 title: 搭建自己的 Owncloud 云盘
-date: 2019-10-17 16:33:05
+date: 2020-2-11 16:33:05
 tags:
 - 服务器
 category:
 - Linux
 mathjax: true
 ---
+
+> 2020.2.12 更新：相比 Owncloud，NextCloud 貌似更新。所以博主转投 NextCloud 了。另外知乎上也有很多人安利 seafile。
 
 ## 安装 Owncloud
 
@@ -18,7 +20,10 @@ mathjax: true
 
 ## 配置 Owncloud
 
-按照知乎的链接装完以后，配置文件在 `/etc/owncloud/config.php`，云盘文件在 `/var/lib/owncloud/data` 里。
+按照知乎的链接装完以后
+
+* 配置文件在 `/etc/owncloud/config.php`
+* 云盘文件默认在 `/var/lib/owncloud/data`，可在开始使用，进入管理员账户的时候修改。
 
 ## 重置 Owncloud 密码
 
