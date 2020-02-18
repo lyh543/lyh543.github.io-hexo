@@ -1,6 +1,6 @@
 ---
-title: Python 基础
-date: 2019-08-30 21:18:37
+title: Python 笔记
+date: 2020-2-18 21:18:37
 tags: 
 category: 
  - Python
@@ -10,7 +10,9 @@ category:
 
 比较基础的部分，新的东西就记一笔过一下就行了，方便以后查阅。
 
-学起来才有感觉，C++ 从会用到入门以后，学其他语言也不会只关心它的语法，还会去查它的实现，如 Python `list` 的实现，int 的上限（不存在的）。
+由于讲的偏系统，而不是深入浅出，比如一上来就把所有的东西讲完，也不说清哪些常用哪些不常用，其实不是很适合新手学习。
+
+学起来才会感觉到，C++ 从会用到入门以后，学其他语言也不会只关心它的语法，还会去查它的实现，如 Python `list` 的实现，int 的上限（不存在的）。
 
 ## 基础语法
 
@@ -90,6 +92,8 @@ Python 的 `\` 的结果是浮点数。
 Python 的 `\\` 和 `%` 是广义的整除和取模，可以在浮点数间使用。
 
 ### 字符串
+
+字符串可以理解为字符的 list，可以直接使用 list 的成员函数。
 
 #### 字符串常量
 
@@ -271,7 +275,7 @@ print(foo())
 
 和 C++ STL 的 `list` 不同，Python 的 `list` 实际上不是链表，是可变长度的数组（元素是指针，类似于 C++ STL 的 `vector<void *>`，所以可以不同类型的变量混合存储）。因此，`list.insert(index, elem)` 和 `list.pop(index)` 是 `O(n)` 时间复杂度的。
 
-#### 定义 list
+#### list 定义
 
 `list` 内可存不同类型，可以嵌套 list。
 
@@ -283,7 +287,7 @@ print(foo())
 >>> emptyset = []
 ```
 
-#### 函数
+#### list 成员函数
 
 函数名|函数用法
 -|-
@@ -291,7 +295,8 @@ print(foo())
 `classmates[0]`|第一个元素 'Michael'
 `classmates[3]`|返回 `IndexError`
 `classamte[-1]`|返回最后一个元素（等价于`classmate[2]`）
-`classmate[0:2]`|返回子列表 `classmate[0,2)`，详见[切片](#切片-slice)
+`classmate[0:2]`|返回子列表，其元素在 `classmate` 的下标范围为 `[0,2)`，详见[切片](#切片-slice)
+`classmate[-3:0]`|返回最后三个元素组成的子列表，详见[切片](#切片-slice)
 `classmates.append('Adam')`|向末尾追加元素（类似于 C++ `std::vector::push_back()`）
 `classmates.insert(index, 'Jack')`|在索引号为 index 的位置前插入元素（`O(n)` 时间复杂度）
 `classmates.pop()`|删除末尾的元素
@@ -409,7 +414,7 @@ for name in names:
     print(name)
 ```
 
-而如果是整数等差序列，可以使用 `range(start, stop[, step])` 函数，然后转为 list。`[start, stop)` 左闭右开，
+而如果是整数等差序列，可以使用 `range(start, stop[, step])` 函数，然后转为 list。`[start, stop)` 左闭右开。左闭右开可以按 C++ 常用的 `for (i = start; i < stop; i++)` 来记。
 
 以下四种语法等价。
 
@@ -543,7 +548,9 @@ def my_abs(x):
 
 还用到了 `raise` 返回错误。要多练习一下。
 
-交作业：给定 $a,b,c$，解一元二次方程$ ax^2 + bx + c = 0$：
+##### 函数练习
+
+给定 $a,b,c$，解一元二次方程$ ax^2 + bx + c = 0$：
 
 ```py
 import math
@@ -565,6 +572,8 @@ print(quadratic(1,1,1));
 ```
 
 ### 函数参数
+
+其中 3.-5. 有点硬核，先不管。用到再学。
 
 #### 1. 必选参数
 
@@ -700,21 +709,31 @@ Python 定义函数，可以按顺序组合使用 `必选参数`、`默认参数
 
 ## 高级特性
 
+这部分和 C 差异有点大，因此先水过去，等用到的时候再看。
+
 ### 切片 slice
 
 现在有一个 `list L = list(range(20))`。使用切片可以快速得到其子序列。
 
 使用 `L[begin:end]` 可以得到 L 下标在 [begin, end) 范围内的数据。注意：
 
-1. begin 和 end 可以按[规定](#函数)使用负数。
+1. begin 和 end 可以按[规定](#list-函数)使用负数。
 2. begin 和 end 可以省略，缺省值为 begin = 0， end = 末尾下标+1。
 3. 若 end > begin，则返回空 list `[]`。
 
 slice 也可以使用于 tuple，str 等支持切片的功能。
 
+另外还可以用 `L[start:end:step]` 指定 `step` 大小。每隔五个取一个就是 `arr[::5]`。
+
+```py
+>>> a=list(range(100))
+>>> a[::5]
+[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95]
+```
+
 ### 迭代 iteration
 
-可见[for](#for--in)部分。
+其实就是前面讲了的 [for ... in ...](#for-…-in-…) 语法。
 
 ### 列表生成式
 
@@ -801,3 +820,94 @@ def fib(max):
 学不会学不会，感觉也不常用。留个坑吧。
 
 https://www.liaoxuefeng.com/wiki/1016959663602400/1017318207388128
+
+## 函数式编程
+
+函数式编程就不仅仅是单纯的函数体、调用函数了了，还有更多的东西，比如类似于 C/C++ 函数指针的功能等等。
+
+### 将函数赋给变量
+
+其实就是将函数指针赋给了变量。
+
+```py
+>>> abs(-10)
+10
+
+>>> f=abs
+>>> f(10)
+10
+>>> f
+<built-in function abs>
+```
+
+理所应当地，也可以把函数作为函数的参数。
+
+```py
+def add(x, y, f):
+    return f(x) + f(y)
+print(add(5, -6, abs)) # 输出 11
+```
+
+下面是一些应用：`map`、`reduce`、`filter`、`sort`。
+
+### map
+
+python 的 `map` 其实类似于对一个 list/tuple 的每个元素使用函数 `f`，得到一个新的 list（实际上是把 `map` 类型转换为了 `list`），具体操作如下：
+
+```py
+>>> r = map(f,list(range(10)))
+>>> list(r)
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+```
+
+显然该操作也可以使用循环，但是 python 追求的就是极致的简洁。
+
+### reduce
+
+> reduce() 函数会对参数序列中元素进行累积。  
+> 函数将一个数据集合（链表，元组等）中的所有数据进行下列操作：用传给 reduce 中的函数 function（有两个参数）先对集合中的第 1、2 个元素进行操作，得到的结果再与第三个数据用 function 函数运算，最后得到一个结果。
+>  --[Python reduce() 函数| 菜鸟教程](https://www.runoob.com/python/python-func-reduce.html)
+
+`reduce` 和 `map` 一样，也接受两个参数，第一个是 `f(x,y)`，第二个是一个 list/tuple，作用类似于叠加：
+
+```py
+>>> def f(x,y):
+...     return x + y
+...
+>>> from functools import reduce
+>>> r = reduce(f,[1,2,3,4,5]);
+>>> r
+15
+```
+
+也可以尝试手写一个将存有 digit 的 list 转为 int：
+
+```py
+from functools import reduce
+
+def fn(x, y):
+    return x * 10 + y
+
+print(reduce(fn, [1, 2, 3, 5, 8, 3]))
+```
+
+#### 函数式编程练习
+
+使用 `reduce` 和 `map` 手写一个 `str2int` 函数，将字符串转为整数。
+
+这也说明，字符串可以当做字符的 list 来用。
+
+```py
+def str2int(_str):
+    from functools import reduce
+
+    def char2digit(x):
+        return ord(x)-ord('0')
+
+    def fn(x, y):
+        return x * 10 + y
+    return reduce(fn, map(char2digit, _str))
+
+
+print(str2int("123") + 321)
+```
