@@ -107,3 +107,27 @@ $ chmod +x /usr/local/bin/docker-compose
 $ docker-compose --version
 docker-compose version 1.25.4, build 8d51620a
 ```
+
+## Docker 基础命令
+
+初次接触 Docker，要记得两个概念：images（镜像） 和 containers（容器）。从网上获取一个镜像，然后每次可以由这个镜像创造一个容器（像是每次由一个系统镜像安装一个系统一样）。
+
+下面是博主最先接触到的几条命令，可能比较适合和博主一样的新人。
+
+命令|用途|常用参数
+-|-|-
+`docker run -dit ubuntu`|从 Ubuntu 镜像创造一个容器并运行|可用 `--name` 对容器命名，默认名是随机生成的；在最后可加 `<command>`
+`docker start -i <name>`|运行名为 `<name>`（也可以是容器的 container ID 值的前几位）的容器
+`docker images`|查看本地的镜像
+`docker container ls` （简写 `docker ps`）|查看正在运行的容器|加 `--all` 或 `-a` 查看所有的（包括已停止的镜像）
+`docker container rm <name>`|删除名为 `<name>`（也可以是容器的 container ID 值的前几位）的容器
+`docker container prune`|删除所有已停止的容器
+`docker container rename <old_name> <new_name>`|给容器改名
+`docker exec -it <name> /bin/bash`|在正在运行的 `<name>` 容器中运行 bash 命令行
+
+## Docker Compose 基础命令
+
+命令|用途|常用参数
+-|-|-
+`docker-compose up`|以当前文件夹下的 `docker-compose.yml` 作为配置文件，`run` 一个容器|`-d`可在后台运行
+`docker-compose down -v`|删除当前文件夹下的 `docker-compose.yml` 所指的容器

@@ -119,7 +119,9 @@ $$\sum\nolimits_1^2x$$
 
 中文|LaTeX语句|数学符号
 -|-|-
-加粗|`\mathbf{X}`|$\mathbf{X}$
+加粗|`\mathbf{x}`|$\mathbf{x}$
+|`\bm{x}` 在 `bm` package 中|MathJax 不支持
+|`\boldsymbol{x}` 在 `amsmath` 中|$\boldsymbol{x}$ 
 上划线|`\overline{123}`|$\overline{123}$
 下划线|`\underline{123}`|$\underline{123}$
 上括弧|`\overbrace{a+b+\cdots+z}^{26}`|$\overbrace{a+b+\cdots+z}^{26}$

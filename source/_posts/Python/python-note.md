@@ -302,6 +302,24 @@ print(foo())
 `classmates.pop()`|删除末尾的元素
 `classmates.pop(index)`|删除索引号为 index 的元素（`O(n)` 时间复杂度）
 
+#### list 和 str
+
+C 中，字符串是字符数组 `char[]`。
+Python 中虽然二者是不同的类型，但是可以互通。
+
+str 到 list 直接类型转换就好了。而 list 到 str 则需要使用 join 函数。
+
+```
+>>> list('abc')
+['a', 'b', 'c']
+
+>>> ''.join(['a', 'b', 'c'])
+'abc'
+
+'-'.join(['a', 'b', 'c'])
+'a-b-c'
+```
+
 ### 元组 tuple
 
 ~~元组这翻译怪怪的，可是谁叫 n-tuple 翻译过来是  n 元组呢~~
@@ -888,7 +906,7 @@ from functools import reduce
 def fn(x, y):
     return x * 10 + y
 
-print(reduce(fn, [1, 2, 3, 5, 8, 3]))
+print(reduce(fn, [1, 2, 3, 5, 8, 3])) # 输出123583
 ```
 
 #### 函数式编程练习
@@ -911,3 +929,154 @@ def str2int(_str):
 
 print(str2int("123") + 321)
 ```
+
+### filter
+
+这个函数有两个参数，第一个是返回 `True` 或 `False` 的函数 `f`，第二个是一个 list。 filter 函数返回 list 中 `f(x)` 为真的所有 `x`。
+
+```py
+def is_odd(n):
+    return n % 2 == 1
+
+list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))
+# 结果: [1, 5, 9, 15]
+```
+
+### sorted
+
+`sorted` 函数返回原 list/tuple 被排序以后的 list/tuple（而不是直接在 list/tuple 上修改）。
+
+```py
+>>> arr=[3,1,8,4,5]
+>>> sorted(arr)
+[1, 3, 4, 5, 8]
+```
+
+可以用一个函数作为 `key` 参数指定排序的依据。可以用 `Reverse=True` 参数使降序排列。
+
+注意这个函数不是类似于 C++ sort 所需的返回两个元素的大小的 bool 值，而是**返回一个元素的大小**，如可使用 `abs` 函数：
+
+```py
+>>> '-'.join(['a', 'b', 'c'])
+'a-b-c'
+>>> arr2=[-4, -2, 1, 3, 5]
+>>> sorted(arr2, key=abs)
+[1, -2, 3, -4, 5]
+```
+
+对字符串 list 可以直接以字典序排序：
+
+```py
+>>> arr3=['banana', 'anana', 'nana', 'ana', 'na', 'a']
+>>> sorted(arr3)
+['a', 'ana', 'anana', 'banana', 'na', 'nana']
+```
+
+注意在 Python 中，`Z<a`，如果想要忽略大小写，可以把 `key` 设定为 `str.tolower` 函数。
+
+```py
+>>> sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower, reverse=True)
+['Zoo', 'Credit', 'bob', 'about']
+```
+
+### 函数作为返回值
+
+我们可以在函数内部创建一个函数（又名嵌套函数），然后返回。刚看到这里，说实话不知道这个有什么意义。
+
+```py
+def lazy_sum(*args):
+    def sum():
+        ax = 0
+        for n in args:
+            ax = ax + n
+        return ax
+    return sum
+```
+
+```py
+>>> f = lazy_sum(1, 3, 5, 7, 9)
+>>> f
+<function lazy_sum.<locals>.sum at 0x101c6ed90>
+>>> f()
+25
+```
+
+多次调用 lazy_sum 时，会在不同位置创建多个函数，虽然他们本质是一样的。
+
+```py
+>>> f1 = lazy_sum(1, 3, 5, 7, 9)
+>>> f2 = lazy_sum(1, 3, 5, 7, 9)
+>>> f1==f2
+False
+```
+
+对于输入或输出是函数的函数，我们称为这种函数叫高阶函数。
+
+### 闭包 closure
+
+廖雪峰的博客这一部分讲的有点糙，没看懂。
+
+> 以下参考 [FOOFISH-PYTHON之禅](https://foofish.net/python-closure.html)。
+
+先来看一个例子：
+
+```py
+def print_msg():
+    # print_msg 是外围函数
+    msg = "zen of python"
+    def printer():
+        # printer 是嵌套函数
+        print(msg)
+    return printer
+
+another = print_msg()
+another() # 输出 zen of python
+```
+
+这个例子乍一眼看上去没什么问题，但是问题就在于，`msg` 其实是 `print_msg()` 的局部变量，在执行完 `print_msg` 以后，`msg` 应该被删掉，但是执行 `another` 的时候，又输出了。这就是闭包。
+
+> 在计算机科学中，闭包（Closure）是词法闭包（Lexical Closure）的简称，是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。
+
+闭包避免了使用全局变量，此外，闭包允许将函数与其所操作的某些数据（环境）关连起来。这一点与面向对象编程是非常类似的，在面对象编程中，对象允许我们将某些数据（对象的属性）与一个或者多个方法相关联。
+
+一般来说，当对象中只有一个方法时，这时使用闭包是更好的选择。来看一个例子：
+
+```py
+def adder(x):
+    def wrapper(y):
+        return x + y
+    return wrapper
+
+adder5 = adder(5)
+
+adder5(10) # 输出 15
+adder5(6)  # 输出 11
+```
+
+这比用类来实现更优雅，此外装饰器也是基于闭包的一中应用场景。
+
+没看大懂，以后再来看叭。
+
+### lambda 函数
+
+lambda 函数就是匿名函数。一般用于函数比较简短的情况。
+
+```py
+def is_odd(x):
+    return x % 2 == 1
+
+L=range(10)
+print(list(filter(is_odd, L))) # 输出 [1, 3, 5, 7, 9]
+```
+
+对于这个简短的的 `is_odd` 函数，写了不仅让代码多了两行（不考虑那种按代码行数计算工资的程序员），还多占用了一个 `is_odd` 名字。其实我们完全可以用匿名函数来解决：
+
+```py
+L=range(10)
+print(list(filter(lambda x : x % 2 == 1, L))) # 输出 [1, 3, 5, 7, 9]
+```
+
+也就是说，`lambda x : x % 2 == 1` 这是一个函数，完全等价于我们在第一段函数定义的 `is_odd(x)`。
+
+当然，当 lambda 函数变复杂时，还是推荐使用 `is_odd(x)` 这样的常规函数。
+

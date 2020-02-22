@@ -36,15 +36,18 @@ y_new = interp1(x,y,x_new,'spline');
 plot(x,y,'o',x_new,y_new,'r-');
 ```
 
-二维插值。这里不能使用 `interp2` 而需要使用 `griddata`，8 知道为什么。
+二维插值。这里不能使用 `interp2` 而需要使用 `griddata`，Google 了一下：
+
+> 二者均是常用的二维差值方法，两者的区别是，`interp2` 的插值数据必须是矩形域，即已知数据点 `(x,y)` 组成规则的矩阵，或称之为栅格，可使用 `meshgrid` 生成。而 `griddata` 函数的已知数据点 `(x,y)` 不要求规则排列，特别是对试验中随机没有规律采取的数据进行插值具有很好的效果。
+> `griddata(X,Y,XI,YI,'v4')` `v4`是一种插值算法，没有具体的名字，原文称为“MATLAB 4 griddatamethod”，是一种很圆滑的插值算法，效果不错。X 和 Y 提供的已知数据点，XI 和 YI是需要插值的数据点，一般使用 `meshgrid` 生成，当然也可以其他数据，但是那样绘图的时候就比较麻烦，不能使用 `mesh` 等，只能使用 `trimesh`。
 
 ```m
 X=[129.0  140.5  103.5  88.0  185.5  195.0  105.5 ...
-157.5  107.5  77.0  81.0  162.0  162.0  117.5];
-Y=[ 7.5   141.5   23.0  147.0  22.5   137.5  85.5 ...
--6.5   -81.0    3.0   56.5  -66.5   84.0   -33.5];
-Z=[ 4     8       6     8    6       8      8 ...
-     9     9       8     8     9      4       9 ];
+   157.5  107.5   77.0  81.0  162.0  162.0  117.5];
+Y=[  7.5  141.5   23.0  147.0  22.5  137.5   85.5 ...
+    -6.5  -81.0    3.0   56.5 -66.5   84.0  -33.5];
+Z=[  4      8      6      8     6      8      8 ...
+     9      9      8      8     9      4      9 ];
 
 % 船的吃水深度为5英尺。
 %在矩形区域（75，200）×（-50，150）
@@ -84,7 +87,7 @@ plot3(X,Y,Z,'O','markersize',14)
 
 梯度的定义：
 
-$$\nabla f(\vec{x}) = \left[\begin{matrix}
+> $$\nabla f(\boldsymbol{x}) = \left[\begin{matrix}
 \frac{\partial f}{\partial x_1} \\\\
 \frac{\partial f}{\partial x_2} \\\\
 \vdots \\\\
@@ -94,13 +97,13 @@ $$\nabla f(\vec{x}) = \left[\begin{matrix}
 数值方法求梯度，其实就是上面的微分方法用来求 n 遍偏导。  
 每次求偏导的方法如下：
 
-$$\frac{\partial f}{\partial x\_i} = \frac{ f(\vec{x};x\_i+\Delta x\_i) - f(\vec{x};x\_i-\Delta x\_i)}{2x\_i} + O((\Delta x\_i)^2)$$
+$$\frac{\partial f}{\partial x\_i} = \frac{ f(\boldsymbol{x};x\_i+\Delta x\_i) - f(\boldsymbol{x};x\_i-\Delta x\_i)}{2x\_i} + O \left((\Delta x\_i)^2 \right)$$
 
 ### 数值方法求黑塞矩阵
 
 黑塞矩阵：
 
-$$\nabla^2f(\vec{x})=\left[\begin{array}{cccc}
+$$\nabla^2f(\boldsymbol{x})=\left[\begin{array}{cccc}
 {\frac{\partial^2 f}{\partial x\_1^2}} & {\frac{\partial^2 f}{\partial x\_1 \partial x\_2}} & {\cdots} & {\frac{\partial^2 f}{\partial x\_1 \partial x\_n}} \\\\
 {\frac{\partial^2 f}{\partial x\_2 \partial x\_1}} & {\frac{\partial^2 f}{\partial x\_2^2}} & {\cdots} & {\frac{\partial^2 f}{\partial x\_2 \partial x\_n}} \\\\
 {\vdots} & {\vdots} & {\ddots} & {\vdots} \\\\
@@ -111,8 +114,8 @@ $$\nabla^2f(\vec{x})=\left[\begin{array}{cccc}
 
 $$\begin{aligned}
 \frac{\partial^2 f}{\partial x\_i \partial x\_j} = &\frac{1}{4\Delta x\_i\Delta x\_j} \bigg[ \\\\
-&f(\vec{x};x\_i+\Delta x\_i,x\_j+\Delta x\_j) + f(\vec{x};x\_i-\Delta x\_i,x\_j-\Delta x\_j)\\\\
-&-f(\vec{x};x\_i-\Delta x\_i,x\_j+\Delta x\_j) - f(\vec{x};x\_i+\Delta x\_i,x\_j-\Delta x\_j)\bigg] \\\\
+&f(\boldsymbol{x};x\_i+\Delta x\_i,x\_j+\Delta x\_j) + f(\boldsymbol{x};x\_i-\Delta x\_i,x\_j-\Delta x\_j)\\\\
+&-f(\boldsymbol{x};x\_i-\Delta x\_i,x\_j+\Delta x\_j) - f(\boldsymbol{x};x\_i+\Delta x\_i,x\_j-\Delta x\_j)\bigg] \\\\
 &+ O((\Delta x\_i)^2)
 \end{aligned}$$
 
@@ -122,55 +125,125 @@ $$\begin{aligned}
 
 注意这个方法不能用在对角线上。求对角线上的二阶导仍需要用上面数值微分提到的求二阶导方法。
 
-$$\frac{\partial^2 f}{\partial x\_i^2} =\frac{ f(\vec{x};x\_i+\Delta x\_i) + f(\vec{x};x\_i-\Delta x\_i) - 2f(\vec{x}) } {(\Delta x\_i)^2}+O((\Delta x\_i)^2)$$
+$$\frac{\partial^2 f}{\partial x\_i^2} =\frac{ f(\boldsymbol{x};x\_i+\Delta x\_i) + f(\boldsymbol{x};x\_i-\Delta x\_i) - 2f(\boldsymbol{x}) } {(\Delta x\_i)^2}+O((\Delta x\_i)^2)$$
 
 ## 数值积分
 
-按定义：$\int_a^bf(x)dx=\lim_{h\to0}\sum_{i=1}^nf(x_j)h$
+按积分定义有：
 
-又分为左矩形法（积分的高度按左端点的函数值计算）、右矩形法。
+$$\int_a^bf(x)dx=\lim_{h\to0}\sum_{i=1}^nf(x_j)h$$
 
-效率不高（仅一重积分中，$h$ 的精度需要相当高）
+当 $h$ 足够小时，数值积分结果即可近似实际结果。
+
+数值积分分为左矩形法（积分的高度按左端点的函数值计算）、右矩形法。
+
+效率不高（即使是一重积分中，$h$ 的精度就必须要相当高）
 
 构造思路：想构造 $A_k$ 使得
 
-$$\int_a^bf(x)dx=\sum_{k=0}^nA_kf(k)+R[f]$$
+$$\int_a^b f(x)dx=\sum_{k=0}^nA_kf(x_k)+R[f]$$
 
-$R[f]$ 为残差。（？？？）
+$R[f] = \int_a^b f(x)dx - \sum_{k=0}^nA_kf(x_k)$ 表示残差。不同算法的残差不同。
 
 ### 求积公式的代数精度
 
-$m$ 阶代数精度公式。
+对于每个求积公式，我们用对多项式进行求积，来定义 $m$ 阶代数精度公式：
+
+> 对于不高于 $m$ 次的任意多项式 $P(x)$，求积公式若恒等于 0，即  
+> $$R[f] = \int_a^b P(x)dx - \sum_{k=0}^nA_kP(x_k) \equiv 0$$
+> 且对于 $m+1$ 次多项式，不具有这么的性质，则称：
+> $$\int_a^b f(x)dx \approx \sum_{k=0}^nA_kf(x_k)$$
+> 具有 $m$ 阶的代数精度。
+
 
 ### 插值型求和公式
 
-Lagrange 插值？？？
+#### Lagrange 插值求积公式
 
-$l_j$ 是啥？？？
+这是基于 Lagrange 插值法的一个方法。
 
-应用 1：梯形公式？？？
+从思想上来说，Lagrange 插值法是通过函数 $f(x)$ 的已知的 $n+1$ 个点 $(x_j, y_j)$，构造出一个多项式 $p(x)$ 来近似 $f(x)$。（这个多项式最高为 $n$ 次，经过全部 $n+1$ 个点）  
+而 Lagrange 插值求积分，其思想就是用 $f(x)$ 算出 $n+1$ 个点，构造出 $p(x)$，再用 $p(x)$ 的积分（多项式积分很容易）来近似 $f(x)$ 的积分。
 
-误差 $R=-\frac{(b-a)^3}{12}f''(\xi)$
+在 Lagrange 插值中，已知 $n+1$ 个点 $(x_j, y_j)$，则应用 Lagrange 插值公式得到的 **Lagrange 插值多项式** 为：
+
+$$p(x) \approx \sum_{j=0}^k y_j l_j(x)$$
+
+其中
+
+$$l_j(x) = \prod_{i=0, i \neq j}^n\frac{x-x_i}{x_j-x_i}=\frac{(x-x_0)}{(x_j-x_0)} \cdots \frac{(x-x_{j-1})}{(x_j-x_{j-1})} \frac{(x-x_{j+1})}{(x_j-x_{j+1})} \cdots \frac{(x-x_{k})}{(x_j-x_{k})}$$
+
+公式的正确性略，请读者自行查阅资料。注意，这个 $l_j(x)$ 将会被用到积分过程中。
+
+$$\begin{split}
+f(x) &\approx p(x) \\\\
+\int_a^b f(x) &\approx \int_a^b \sum_{j=0}^k l_j(x) \cdot y_j \\\\
+&\approx  \sum_{j=0}^k \left[ \int_a^b l_j(x) \right] f(x_j)
+\end{split}$$
+
+令 $A_j = \int_a^b l_j(x)$，则推出了 [前面](#数值积分) 所提到的公式：
+
+$$\int_a^b f(x) = \sum_{j=0}^k A_j f(x_j) + R[f]$$
+
+可以证明此法的
+
+$$R[f] = \sum_a^b \frac{f^{(n+1)}(\xi)}{(n+1)!} \omega(x)dx$$
+
+其中 $\omega(x)=\prod_{i=0}^n (x-x_i)$。
+
+进一步推进，对于 $n+1$ 点（即 $n$ 次） Lagrange 插值求积公式，其代数精度至少为 $n$ 阶。
+
+##### 应用 1 梯形公式
+
+我们可以把整段区间的积分，分割为数个小区间的积分再求和。在求小区间的积分的时候，我们对小区间的两个端点进行拉格朗日插值积分。
+
+对于两点 $(a,f(a)), (b,f(b))$ 的线性插值，有
+
+$$
+l_0(x)=\frac{x_1-x}{x_1-x_0}\quad l_1(x)=\frac{x-x_0}{x_1-x_0} \\\\
+A_0=\int_a^b \frac{b-x}{b-a}dx=\frac{1}{2}(b-a)  \quad A_1=\int_a^b \frac{x-a}{b-a}dx=\frac{1}{2}(b-a) \\\\
+\int_a^b f(x)dx \approx \frac{b-a}{2}[f(a) + f(b)]
+$$
+
+误差
+
+$$\begin{split}
+R &=\int_a^b \frac{f''(\xi)}{2}(x-a)(x-b)dx = \frac{f''(\\eta)}{2}\int_a^b (x-a)(x-b)dx \\\\
+&=-\frac{(b-a)^3}{12}f''(\eta)
+\end{split}$$
 
 要使误差小：一是区间取小，二是二阶导数小（曲线更趋近于直线，几何上看也比较明显）
 
-梯形公式具有 1 阶代数精度，Lagrange 公式至少有 $n$ 阶代数精度公式
+梯形公式具有 1 阶代数精度。
 
 > MATLAB 梯形法数值积分 `trapz`
 
-应用 2：Simpson 公式（三点积分公式）
+另外梯形公式还能够推出另外一个公式：
 
-用二次函数近似，在一个区间上取三个点。
+> 来自数学建模实验的笔记：
+> 
+> 这是积分中值定理：$$\exists \xi, \quad \int_a^bf(x) = (b-a)f(\xi)$$
+> 
+> 在数值积分时，可以在 $[a, b]$ 中等间距地取 10000 个点，$f(x)$ 的平均值就可以近似 $f(\xi)$。
+> 
+> 貌似是数值积分的套路操作，但是微积分 I 没有讲。
+> 2020.2.22 更新：确实，这是[梯形公式](https://zh.wikipedia.org/wiki/梯形公式)，可见维基百科
 
-$$\int_a^bf(x)dx \approx \frac{b-a}{6} \left[ f(a)+4f(\frac{a+b}{2})+f(b) \right]$$
+##### 应用 2 Simpson 公式（三点积分公式）
+
+依旧是把整段区间的积分，分割为的积分再求和。不过，在求小区间的积分的时候，我们改用二次函数近似，在一个区间上取三个点（两个端点+中点）。
+
+计算过程仍然是类似于梯形公式，算 $l_j(x)$，对每一个进行积分得到 $A_j$，然后和每段的 $y_j$ 相乘再相加，最后得到
+
+$$\int_a^b f(x)dx \approx \frac{b-a}{6} \left[ f(a)+4f(\frac{a+b}{2})+f(b) \right]$$
 
 近似效果会好些。
 
-Simpson 公式竟然具有 3 阶代数精度
+Simpson 公式竟然具有 3 阶代数精度。
 
-还可以用高次函数，但是高次函数有震荡性，一般就使用线性或二次即可。
+当然，还可以用高次函数来跑 Lagrange 插值积分，但是高次函数有震荡性，一般就使用线性或二次即可。
 
-Newton-C ？？？？
+##### Newton-C ？？？？
 
 #### 复合梯形求积公式
 
@@ -217,12 +290,3 @@ A_0x_0^3+A_1x_1^3=0 & (4)
 对于别的区间，可以进行伸缩变换：
 
 `quad` 
-
-> 来自数学建模实验的笔记：
-> 
-> 积分中值定理：$\exist \xi \space \int_a^bf(x) = (b-a)f(\xi)$
-> 
-> 在数值积分时，可以在 $[a, b]$ 取均匀分布的 10000 个点，$f(x)$ 的平均值就可以近似 $f(\xi)$。？？？？
-> 
-> 貌似是数值积分的套路操作，但是微积分 I 没有讲。
-
