@@ -36,7 +36,7 @@ sudo -u apache /var/www/html/nextcloud/occ --help
 
 ## 安装基于 Docker 的 NextCloud
 
-为什么要用 Docker 呢？这是为了系统的干净吧。不过坏处是，Docker 的 NextCloud 访问宿主机的文件就没那么容易了。当然，各取所需。
+为什么要用 Docker 呢？这是为了系统的干净吧。不过坏处是，Docker 的 NextCloud 访问宿主机的文件就没那么容易了。当然，两种方法各有所长。
 
 顺便一提，如果使用 Docker 的话，甚至可以在一台 Windows 电脑上部署了，就可以在自己的 Windows 电脑上搭建一个，然后用 `frp` 等方式内网穿透到公网了（可参考[博客](/Windows/use-remote-desktop-with-frp)）。
 
@@ -58,3 +58,16 @@ docker-compose up -d
 ```
 
 经过漫长的镜像下载以后，即可在 `127.0.0.1:7070` 看到 NextCloud 初始化页面。
+
+### 配置 Nextcloud
+
+如果需要进入到 `docker` 的虚拟机中，可以使用一下命令进入容器的命令行：
+
+```
+[root@iz2ze nextcloud]# docker exec -it nextcloud_web_1 /bin/sh
+/ #
+```
+
+其中 `nextcloud_web_1` 为你的容器名，一般来说就是这个，可以通过 `docker ps` 查看。
+
+进入以后，就是 shell 的操作了。Nextcloud 文件的目录在 `/var/www/html`。

@@ -139,3 +139,48 @@ docker-compose version 1.25.4, build 8d51620a
 -|-|-
 `docker-compose up`|以当前文件夹下的 `docker-compose.yml` 作为配置文件，`run` 一个容器|`-d`可在后台运行
 `docker-compose down -v`|删除当前文件夹下的 `docker-compose.yml` 所指的容器
+
+## 常见错误（更新中）
+
+### 在 Docker 容器中如何安装软件
+
+不少 Docker 容器都是采用的 Alpine Linux，这个 linux 发行版没有 `sudo`，没有 `bash`，我猜是为了简洁吧，毕竟要做成镜像，所以把没用的功能尽量都砍了。
+
+Alpine Linux 下安装软件的命令为：
+
+```sh
+apk add <package name>
+```
+
+顺便中科大镜像源也有 Alpine Linux 的软件源，觉得国内网速慢的可以去更换，镜像站也有更换教程。
+
+### Read-only file system
+
+可能是 `docker-compose.yml` 中指定了目录为只读。这些可能出现在：
+
+```yml
+version: '3.3'
+ 
+services:
+  redis:
+    image: redis:4.0.1-alpine
+    networks:
+      - myoverlay
+    read_only: true # 指定为只读
+    
+networks:
+  myoverlay:
+```
+
+```yml
+  web:
+    build: ./web
+    restart: always
+    ports:
+      - 7070:80
+    volumes:
+      # - nextcloud:/var/www/html:ro   # ro 为只读 (read-only)
+      - nextcloud:/var/www/html        # 可读写的版本
+    depends_on:
+      - app
+```
