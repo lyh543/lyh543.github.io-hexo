@@ -16,6 +16,8 @@ Docker 像是一个容器一样，能够让应用运行在隔离的环境中。�
 
 ## 安装 Docker
 
+### Linux 安装 Docker
+
 由于项目是基于 Docker 的，所以要先安装 Docker。这篇文章安装的是稳定版的 Docker Engine - Community。
 
 先卸载以前的 Docker 安装：
@@ -89,6 +91,12 @@ For more examples and ideas, visit:
 ```
 
 表示测试正常。
+
+### Windows 安装 Docker
+
+Windows 也是支持 Docker 的，他还支持 Windows 容器和 Linux 容器。
+
+安装方法是去官网下载 Docker Desktop 并安装，然后就可以在命令行中使用 `docker` 和下面提到的 `docker-compose` 了，命令和 Linux 也是一样的。
 
 ## 安装 Docker Compose
 

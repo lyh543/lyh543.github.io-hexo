@@ -1,5 +1,5 @@
 ---
-title: Python 笔记
+title: Python 基础
 date: 2020-2-18 21:18:37
 tags: 
 category: 
@@ -287,6 +287,49 @@ print(foo())
 >>> emptyset = []
 ```
 
+如何初始化一个大小为 100，元素全为 0 的 `list` 呢？ 
+
+```py
+>>> newlist = [0] * 100
+```
+
+没错——  
+Python 的列表居然支持乘法！！！！这也太香了！
+
+但是这种语法有陷阱——如果想要建立二维 list，以下语法是不行的：
+
+```py
+>>> list2d = [[0] * 10] * 100
+```
+
+当你想要编辑第二行第二列个元素时，执行 `list2d[1][1] = 1` 后，会发现第二列的所有元素都变成了 `1`！
+
+究其本质，是上面所说的，元素是指针，`[[0] * 10] * 100` 的外层 list 的 100 个元素实际上是指向了同一个 `list`。
+
+解决方案有三个：
+
+一是在外层老老实实的迭代：
+
+```py
+list2d = []
+for i in range(100):
+    list2d.append([0] * 10)
+```
+
+二是使用后面才会学到的列表生成式：
+
+```py
+list2d = [ [0 for i in range(10)] for j in range(100) ]
+```
+
+三是使用 `numpy.zeros`
+
+```py
+import numpy as np
+test = np.zeros((m, n), dtype=np.int)
+```
+
+
 #### list 成员函数
 
 函数名|函数用法
@@ -405,6 +448,20 @@ else:
     print('teenage')
 ```
 
+#### “三目运算符”
+
+C / Java 中有很好用的三目运算符：
+
+```c
+printf("%s", value == true ? "Yes" : "No");
+```
+
+Python 没有三目运算符，但是 `if` 也可以用一行做到类似的功能：
+
+```py
+print("Yes" if value == True else "No")
+```
+
 ### 循环
 
 不精准的测试了一下，在我的 `i7-6600U` 下，以下代码大概要 10s：
@@ -432,7 +489,11 @@ for name in names:
     print(name)
 ```
 
-而如果是整数等差序列，可以使用 `range(start, stop[, step])` 函数，然后转为 list。`[start, stop)` 左闭右开。左闭右开可以按 C++ 常用的 `for (i = start; i < stop; i++)` 来记。
+##### 用 range 生成序列
+
+而如果是整数等差序列，可以使用 `range(start, stop[, step])` 函数，然后转为 list。`[start, stop)` 左闭右开。左闭右开可以按 C++ 常用的 `for (i = start; i < stop; i += step)` 来记。
+
+如果是倒序的话，只要令 `step` 为负数即可。依旧是 `start` 闭，`end` 开（即 `for (i = start; i > stop; i += step)`）
 
 以下四种语法等价。
 
@@ -443,7 +504,9 @@ list(range(0,5,1))
 [0, 1, 2, 3, 4]
 ```
 
-就可以愉快的 `for i in list(range(5)):` 了、
+就可以愉快的 `for i in list(range(5)):` 了。
+
+顺便一提，`range` 可以类型转换为 `list`。
 
 ##### 在其他数据结构用 for
 
@@ -866,7 +929,7 @@ def add(x, y, f):
 print(add(5, -6, abs)) # 输出 11
 ```
 
-下面是一些应用：`map`、`reduce`、`filter`、`sort`。
+下面是一些应用：`map`、`reduce`、`filter`、`sorted`。
 
 ### map
 
@@ -1080,3 +1143,150 @@ print(list(filter(lambda x : x % 2 == 1, L))) # 输出 [1, 3, 5, 7, 9]
 
 当然，当 lambda 函数变复杂时，还是推荐使用 `is_odd(x)` 这样的常规函数。
 
+### 装饰器 decorator
+
+装饰器是什么？在调试程序的时候，可能需要在函数的前后输出相关信息。此时，我们就可以对函数进行“装饰”，使得运行该函数时，会输出相关信息。
+
+那么，如何实现呢？我们定义一个 `wrapper` 函数，他做的事情是在某函数开始时输出、在函数结束时再输出。
+
+如果我们还想要写一个通用 `wrapper` 函数对于所有函数都生效，那么 `wrapper` 执行的函数应该作为一个参数。作为谁的参数呢？
+
+在 Python 的装饰器里，我们定义一个 `wrapper` 函数，其输入、输出和 `func` 完全一致，这个函数做的事，就是调用 `func` 函数，并在调用 `func` 前后做一些事情（输出、计时等等）。
+
+而指定 `func` 的办法，是我们再定义一个 `log` 函数，这个函数输入 `func`，这个函数的操作是定义并返回调用了 `func` 的 `wrapper`。说了这么多大概晕了，那么直接上代码吧。
+
+```py
+def log(func):
+
+    def wrapper(*args, **kw):
+        print('starting executing function %s' % func.__name__)
+        start_time = time.time()
+        value = func(*args, **kw)
+        end_time = time.time()
+        print('function %s end in %d seconds' % (func.__name__, start_time - end_time))
+        return value
+    
+    return wrapper
+```
+
+有了上面的代码，我们可以在需要装饰的函数前（示例为 `test`）加上 `@log`。
+
+```py
+@log
+def test(x, y):
+    time.sleep(2)
+    return x + y
+```
+
+先不说 `@log` 的原理，我们先来调用一下 `test` 函数。把上面的两段代码整合在一起，然后调用 `test`。
+
+```py
+def log(func):
+
+    def wrapper(*args, **kw):
+        print('starting executing function %s' % func.__name__)
+        start_time = time.time()
+        value = func(*args, **kw)
+        end_time = time.time()
+        print('function %s end in %d seconds' % (func.__name__, end_time - start_time))
+        return value
+    
+    return wrapper
+
+@log
+def test(x, y):
+    time.sleep(2)
+    return x + y
+
+print(test(12,138))
+```
+
+输出如下
+
+```
+starting executing function test
+function test end in 2 seconds
+150
+```
+
+如果把 `@log` 去掉，那么程序只会输出 `150`。也就是说，我们成功地在 `test` 执行前后进行了计时、输出。
+
+再回来说 `@log` 的原理：在定义 `test` 函数前加 `@log`，程序会在 `test` 定义完以后，执行 `test=log(test)`。配合 `log` 函数的定义就能做到前面所述的效果。具体过程如下：
+
+1. 定义原 `test`
+2. 把 `test` 作为参数给 `log`。
+   - `log` 创造了 `wrapper(*args, **kw)` 函数，该 `wrapper` 函数执行 `test(*args, **kw)` 并返回 `test` 的返回值
+3. `test=log(test)`。将创造的 `wrapper` 函数改名为 `test`。
+4. 以后调用 `test`，执行的实际上是在 `log(test)` 中定义的 `wrapper`。
+
+大致原理如上。
+
+但是还有一点问题，在以后我们调用 `test.__name__` 时，由于此时的 `test` 实际上是 `wrapper`，所以返回就有点问题。
+
+解决方法可以在 `wrapper` 定义中加一句 `wrapper.__name__ = func.__name__`。但是推荐直接调用 Python 自带的装饰器。
+
+```py
+import functools
+
+def log(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kw):
+        print('starting executing function %s' % func.__name__)
+        start_time = time.time()
+        value = func(*args, **kw)
+        end_time = time.time()
+        print('function %s end in %d seconds' % (func.__name__, start_time - end_time))
+        return value
+    
+    return wrapper
+```
+
+完整代码如下：
+
+```py
+import time
+import functools
+
+def log(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kw):
+        print('starting executing function %s' % func.__name__)
+        start_time = time.time()
+        value = func(*args, **kw)
+        end_time = time.time()
+        print('function %s end in %d seconds' % (func.__name__, end_time - start_time))
+        return value
+    return wrapper
+
+@log
+def test(x, y):
+    time.sleep(2)
+    return x + y
+
+f = test(11, 22)
+
+print(f)
+print(test.__name__)
+```
+
+> 在面向对象（OOP）的设计模式中，decorator 被称为装饰模式。OOP 的装饰模式需要通过继承和组合来实现，而 Python 除了能支持 OOP 的 decorator 外，直接从语法层次支持 decorator。Python 的 decorator 可以用函数实现，也可以用类实现。
+> decorator 可以增强函数的功能，定义起来虽然有点复杂，但使用起来非常灵活和方便。—— 廖雪峰的 Python 教程
+
+### 偏函数 partial function
+
+看到这个名字想到了微积分的偏导数。其实差不多，偏导数是 `f(x,y)` 固定了 `x` 求关于 `y` 的导数，Python 的偏函数也是，用于固定一个参数。
+
+那么偏函数和重新定义一个函数有什么区别呢？如下：
+
+```py
+int2_1 = functools.partial(int, base = 2)
+
+def int2_2(x):
+    return int(x, base = 2)
+
+print(int2_1(12138), int2_1(12138))
+```
+
+## 模块
+
+见[模块](../python-module)。

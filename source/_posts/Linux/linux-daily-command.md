@@ -118,8 +118,18 @@ alias la='ls -al --color=auto'
 
 ```bash
 wget https://github.com/fatedier/frp/releases/download/v0.29.0/frp_0.29.0_linux_amd64.tar.gz
-tar -zxvf frp_0.29.0_linux_amd64.tar.gz
+tar -zxvf frp_0.29.0_linux_amd64.tar.gz   # -z 参数用于解压 .gz 文件
 ```
+
+`tar` 的用法：
+
+```bash
+tar -cf archive.tar foo bar  # Create archive.tar from files foo and bar.
+tar -tvf archive.tar         # List all files in archive.tar verbosely.
+tar -xf archive.tar          # Extract all files from archive.tar.
+```
+
+对于 `zip`，可以使用 `unzip`。
 
 ### 查看文件/文件夹/磁盘的大小
 

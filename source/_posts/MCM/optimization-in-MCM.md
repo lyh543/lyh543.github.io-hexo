@@ -157,6 +157,8 @@ $$
 \end{cases}
 $$
 
+一个可行的取法为：
+
 $$\phi(h_j(x))=|h_j(x)|^\beta \qquad \psi(g_i(x))=[\max\\{0,-g_i(x)\\}]^\alpha$$
 
 常取 $\alpha = \beta = 2$。显然在可行域内，$P(x)=0$，否则 $P(x)>0$。

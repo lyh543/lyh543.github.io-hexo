@@ -7,21 +7,68 @@ category:
 mathjax: true
 ---
 
-## 数学函数
+需要引入模块的函数，以模块（需要 import 的文件名）为标题进行分组。函数和模块均以字母排序。
+
+## builtins 内置函数
 
 ```py
-float abs(float)
-float/int max(a1,a2,a3,...) # 这里的参数是一个 sequence，类似于 range() 函数的返回值，和 C 语言不同，很有意思
+
+# 数学相关
+
+abs(float)
+max(a1,a2,a3,...) # 这里的输入参数是一个 sequence，和 C 语言不同，很有意思
+
+# 字符串相关
+
+str.find(',')     # 找到就返回第一个下标，找不到就返回 -1（注意不是 False）
+' '.join(list)    # 将 list 等组合为一个字符串，用 ' ' 分隔
+str.split()       # 将字符串按 sep = ' ' 分拆成 list
+
+
+# 容器相关
+
+set()             # 定义集合
+
+# 其他
+
+elem in list                          # 在 list 中查找元素，返回 bool，这个直接用 in 关键字可太猛了
+isinstance(variable, tuple of type)   # 判断变量类型
+range(start, stop[, step])            # 得到一个序列，可用于 for，或转换为 list 类型
+reversed(range(10))                   # 将一个 list/str 翻转
+
 ```
 
+## functools
+
 ```py
-import math
+functools.partial(func, **kw)
+functools.reduce(func, list)
+functools.wraps(func)
+```
+
+## math
+
+```py
 math.sqrt(float)
 ```
 
-## Python编程常用函数
+## re
+
+正则表达式相关内容请查看 [正则表达式](/Computer-Science/regular-expression.md)
 
 ```py
-range(start, stop[, step])
-bool isinstance(variable, tuple of type)
+re.findall('\d+',str) % 找到 str 中的数并组成 list
+```
+## sys
+
+```py
+sys.argv % 以 list 形式返回程序被调用时的参数
+```
+
+## time
+
+```py
+
+time.sleep(second)
+time.time() % 单位为秒
 ```

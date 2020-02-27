@@ -34,7 +34,27 @@ chmod a+x /var/www/html/nextcloud/occ # 给可执行权限
 sudo -u apache /var/www/html/nextcloud/occ --help
 ```
 
-## 重置 Owncloud 密码
+## 安装基于 Docker 的 NextCloud
 
-官方的不会用。我 Owncloud 又没存什么东西，于是就直接卸载、重装了。（最省事
+为什么要用 Docker 呢？这是为了系统的干净吧。不过坏处是，Docker 的 NextCloud 访问宿主机的文件就没那么容易了。当然，各取所需。
 
+顺便一提，如果使用 Docker 的话，甚至可以在一台 Windows 电脑上部署了，就可以在自己的 Windows 电脑上搭建一个，然后用 `frp` 等方式内网穿透到公网了（可参考[博客](/Windows/use-remote-desktop-with-frp)）。
+
+首先要安装 Docker 以及 Docker Compose，可参照[这篇教程](../docker)。
+
+然后需要几个配置文件，我压缩好以后，放在我的网站上，当然也可以直接从服务器下载：
+
+```bash
+wget https://www.lyh543.xyz/Linux/build-owncloud-on-server/nextcloud-docker-compose.tar
+tar -xf nextcloud-docker-compose.tar
+cd nextcloud-docker-compose
+cd nextcloud
+```
+
+然后一句
+
+```bash
+docker-compose up -d
+```
+
+经过漫长的镜像下载以后，即可在 `127.0.0.1:7070` 看到 NextCloud 初始化页面。
