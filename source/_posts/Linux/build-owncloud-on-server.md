@@ -1,14 +1,16 @@
 ---
 title: 搭建自己的 Owncloud 云盘
-date: 2020-2-11 16:33:05
+date: 2020-2-27 16:33:05
 tags:
 - 服务器
+- Docker
 category:
 - Linux
 mathjax: true
 ---
 
 > 2020.2.12 更新：相比 Owncloud，NextCloud 貌似更新。所以博主转投 NextCloud 了。另外知乎上也有很多人安利 seafile。
+> 2020.2.27 更新：接触了 Docker 以后，发现使用 Docker 搭建更加方便（可从[这篇博客](../docker)中了解）。于是也花了一点时间钻研，搭建好了 NextCloud 和 Seafile，并把方法一并写在下面。
 
 ## 安装 Owncloud
 
