@@ -76,8 +76,8 @@ y(t_1) &\approx y(t_0) + (t_1 - t_0)f(t_0,y_0)
 例题：预测战争模型
 
 $\left\\{ \begin{aligned}
-\frac{dx}{dy} &= -0.15y \\\\
-\frac{dy}{dx} &= -0.1x \\\\
+\frac{dx}{dt} &= -0.15y \\\\
+\frac{dy}{dt} &= -0.1x \\\\
 x_0 &= 10000 \\\\
 y_0 &= 5000
 \end{aligned} \right.$

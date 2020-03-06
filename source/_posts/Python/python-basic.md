@@ -1289,4 +1289,17 @@ print(int2_1(12138), int2_1(12138))
 
 ## 模块
 
-见[模块](../python-module)。
+在 Python 中，一个 `.py` 文件就称之为一个模块（Module）。
+
+### 使用模块
+
+```py
+import sys
+import numpy as np
+```
+
+按第一行导入 `sys` 模块后，我们就有了变量 `sys` 指向该模块，利用访问 `sys` 这个变量的成员（如 `sys.argv`），就可以访问 `sys` 模块的所有功能。也可以使用别的变量名，比如后面一句，就用 `np` 指向了 `numpy`。
+
+顺便，在 Python 环境中（即 `>>>` 中）貌似没法直接运行脚本，如果需要调用脚本中的函数，应该当做模块一样，`import filename` 然后 `filename.function_name()` 来调用。
+
+

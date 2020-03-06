@@ -11,11 +11,12 @@ category:
 
 ## 结论
 
-`lower_bound() -1` 是最后一个小于 value 的数
-`lower_bound()` 是第一个大于等于 value 的数
+> `lower_bound()` 是第一个大于等于 value 的数  
+> `upper_bound()` 是第一个大于 value 的数
 
-`upper_bound() - 1` 是最后一个小于等于 value 的数
-`upper_bound()` 是第一个大于 value 的数
+如果需要小于（小于等于），可以使用：
+> `lower_bound() -1` 是最后一个小于 value 的数  
+> `upper_bound() - 1` 是最后一个小于等于 value 的数
 
 lower_bound() 和 upper_bound() 在 set/multiset/map/multimap 中仍可用（作为成员函数使用），其中 map 只能搜索第一个元素（毕竟是以第一个元素排序的）。
 
@@ -23,13 +24,13 @@ lower_bound() 和 upper_bound() 在 set/multiset/map/multimap 中仍可用（作
 
 > 1 2 2 2 3 3 4 5
 >
-> lower_bound:  
+> lower_bound(2) = 1:  
 > a[1-1] = 1  
 > a[1] = 2  
 > a[1+1] = 2  
 >
 >
-> upper_bound:  
+> upper_bound(2) = 4:  
 > a[4-1] = 2  
 > a[4] = 3  
 > a[4+1] = 3

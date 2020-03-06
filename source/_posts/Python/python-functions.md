@@ -38,6 +38,18 @@ reversed(range(10))                   # 将一个 list/str 翻转
 
 ```
 
+## bisect
+
+二分搜索。
+
+```py
+bisect.bisect_left(a, x, lo=0, hi=len(a)) # 返回第一个大于等于 x 的下标
+bisect.bisect_right(a, x, lo=0, hi=len(a)) # 返回第一个大于 x 的下标
+bisect.bisect # == bisect_right
+```
+
+可见 Python 的 `bisect_left` 和 `bisect_right` 等价于 C++ 的 `lower_bound` 和 `upper_bound`。
+
 ## functools
 
 ```py

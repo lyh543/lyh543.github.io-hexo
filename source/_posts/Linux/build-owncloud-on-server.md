@@ -44,7 +44,7 @@ sudo -u apache /var/www/html/nextcloud/occ --help
 
 首先要安装 Docker 以及 Docker Compose，可参照[这篇教程](../docker)。
 
-然后需要几个配置文件，我压缩好以后，放在我的网站上，当然也可以直接从服务器下载：
+然后需要几个配置文件，我压缩好以后，放在我的网站上，[链接在这里](nextcloud-docker-compose.tar)，当然也可以通过下面的命令直接从服务器下载：
 
 ```bash
 wget https://www.lyh543.xyz/Linux/build-owncloud-on-server/nextcloud-docker-compose.tar
@@ -207,6 +207,12 @@ docker-compose up -d
 
 在宿主机执行以下命令：
 
+```
+docker-compose exec seahub python /opt/seafile/seafile-server-latest/seahub/manage.py createsuperuser
+```
+
+如果正常，就会出现下面的情况：
+
 ```sh
 $ docker-compose exec seahub python /opt/seafile/seafile-server-latest/seahub/manage.py createsuperuser
 /opt/seafile/seafile-server-6.3.3/seahub/thirdpart/requests/__init__.py:80: RequestsDependencyWarning: urllib3 (1.19) or chardet (3.0.4) doesn't match a supported version!
@@ -251,7 +257,7 @@ Get:8 http://security.ubuntu.com/ubuntu xenial-security/universe amd64 Packages 
 Get:9 http://security.ubuntu.com/ubuntu xenial-security/multiverse amd64 Packages [6280 B]
 Get:10 http://archive.ubuntu.com/ubuntu xenial/restricted amd64 Packages [14.1 kB]
 Get:11 http://archive.ubuntu.com/ubuntu xenial/universe amd64 Packages [9827 kB]
-1231231Get:12 http://archive.ubuntu.com/ubuntu xenial/multiverse amd64 Packages [176 kB]
+Get:12 http://archive.ubuntu.com/ubuntu xenial/multiverse amd64 Packages [176 kB]
 Get:13 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 Packages [1432 kB]
 Get:14 http://archive.ubuntu.com/ubuntu xenial-updates/restricted amd64 Packages [13.1 kB]
 Get:15 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 Packages [1021 kB]
@@ -277,4 +283,4 @@ seahub.base.accounts.DoesNotExist: User matching query does not exits.
 
 可能是数据库的容器自己退出了。可以用 `docker ps --all`，然后看 `seafile-compose_db_1` 的 `STATUS` 是 `UP` 还是 `EXIT`。
 
-如果是退出了，那么 `docker-compose up -d` 即可重启。
+如果确实是 `EXIT` 退出了，那么 `docker-compose up -d` 即可重启。

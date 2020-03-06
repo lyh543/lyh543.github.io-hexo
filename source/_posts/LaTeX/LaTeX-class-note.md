@@ -213,6 +213,11 @@ xxx说的对。\cite{Zhang10} \\
 
 ## 表格
 
+创建表格，除了自己编辑，还可以使用生成工具，如：
+
+> https://tablesgenerator.com/
+> https://github.com/krlmlr/Excel2LaTeX
+
 ### 创建表格
 
 使用 `\begin{tabular}` `\end{tabular}` 和 `&` `\\` 即可创建表格。
