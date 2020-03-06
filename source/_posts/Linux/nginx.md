@@ -1,5 +1,5 @@
 ---
-title: Nginx
+title: Nginx（萌新向）
 date: 2020-03-01 20:46:22
 tags:
 - 服务器
@@ -74,3 +74,4 @@ server {
            index index.html;
        }
 }
+```

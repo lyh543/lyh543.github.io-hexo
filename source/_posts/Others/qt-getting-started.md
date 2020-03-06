@@ -39,7 +39,7 @@ connect(ExitAction, &QAction::triggered, this, &std::exit);
 
 更改程序编码
 
-```c++
+```cpp
 #pragma execution_character_set("utf-8")
 ```
 
