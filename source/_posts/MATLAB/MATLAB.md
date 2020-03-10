@@ -65,7 +65,7 @@ mathjax: true
 
 可以把矩阵变为线性矩阵：
 
-```matlab
+```m
 A = [1 2 3; 6 5 4];
 A(:); %返回 [1 6 2 5 3 4]'
 ```
@@ -146,7 +146,7 @@ MATLAB 脚本执行的时候，其**变量默认是既不跨文件，也不跨�
 
 修改上述脚本得到：
 
-```matlab
+```m
 global a;
 a=2;
 fun(1);
@@ -173,7 +173,7 @@ str=sprintf('%6d',score)         %不能输出
 
 貌似字符串的单双引号可以混用。
 
-文件输入输出件另一篇[博客](../string-and-file-function)。
+文件输入输出件另一篇[博客](../MATLAB-string-and-file-function)。
 
 ### 控制流程
 
@@ -256,7 +256,7 @@ MATLAB 的**数学函数**，网上都说有两种，分别是内联函数和匿
 正常情况下，函数外的参数不能被使用，自变量也不能被修改。和 C 一样。  
 若想要使用全局变量，在声明和使用变量时，都需要加 `global` 关键字，
 
-```matlab
+```m
 % hello.md
 function ret = hello
 disp('hello world');
@@ -276,7 +276,7 @@ end
 返回值可以为多参数。可以用 `nargin` 和 `nargout` 检测输入、输出参数个数。  
 函数中支持 `return`。
 
-```matlab
+```m
 function [r, v]=myfun(x)
     r=x.^2;    %计算第1个输出参数
     if nargout>=2,
@@ -291,7 +291,7 @@ function [r, v]=myfun(x)
 
 在 MATLAB R2016b 以后，还支持在函数里面写函数，并且对于输入和输出相同的函数（即原地调用），性能会有优化。
 
-```matlab
+```m
 function main
 tic, x = rand(1e8,1); toc
 tic, y = notInplace(x); toc
@@ -343,7 +343,7 @@ x = 1.2*x;
 
 ## 字符串与文件
 
-参见另一篇博客：[MATLAB 字符串与文件](../string-and-file-function)。
+参见另一篇博客：[MATLAB 字符串与文件](../MATLAB-string-and-file-function)。
 
 ## 符号编程
 
@@ -509,4 +509,46 @@ clear A B %% 清变量
 ```MATLAB
 pause        %按任意键以继续
 pause(0.5)
+```
+
+## MATLAB 和 MAT 文件
+
+MAT 文件即是将 MATLAB 运行中存储在工作区的变量等从内存存储到文件，方便下次继续使用。（这比其他编程语言方便的多）
+
+读取的方法就一行：
+
+```m
+load data
+```
+
+## 稀疏矩阵
+
+创建稀疏矩阵可以使用 `sparse` 函数：
+
+```m
+% 设 M, N, K 为同维列矩阵，表示稀疏矩阵的 M(i) 行 N(i) 列是 K(i)
+S = sparse(M, N, K);
+
+% 将普通矩阵转为稀疏矩阵
+S = sparse(A); 
+
+% 构造单位矩阵的稀疏矩阵
+S = speye(10);
+```
+
+稀疏矩阵和其他矩阵一样，可以使用 `S(a,b)` 读取，`+` `-` `*` `/` `^` 运算，以及其他函数。
+
+稀疏矩阵的特殊操作有：
+
+```m
+% 用图像描述稀疏矩阵的非零元的分布
+spy(S);
+```
+
+稀疏矩阵和普通矩阵的互相转化：
+
+```m
+% S 为稀疏矩阵，M 为普通矩阵
+S = sparse(M);
+M = full(S);
 ```

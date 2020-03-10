@@ -74,6 +74,50 @@ docker-compose up -d
 
 进入以后，就是 shell 的操作了。Nextcloud 文件的目录在 `/var/www/html`。
 
+### 添加信任域名
+
+从别的域名访问的时候，NextCloud 会提示：
+
+```
+通过不被信任的域名访问
+请联系您的管理员。如果您就是管理员，请参照 config.sample.php 中的示例编辑 config/config.php 中的 "trusted_domains" 设置。
+```
+
+我们需要在容器里配置文件添加自己的域名。
+
+首先进入容器的命令行：
+
+```
+# docker exec -it nextcloud_web_1 /bin/sh
+```
+
+然后用 vi 修改配置文件：
+
+```
+# vi config/config.php
+```
+
+然后找到 `trust_domain` 部分，我的在 30 行附近。
+
+```php
+  'trusted_domains' =>
+  array (
+    0 => 'example.com:8080',
+  ),
+```
+
+按 `i` 进入编辑模式，然后添加自己的域名。
+
+```php
+  'trusted_domains' =>
+  array (
+    0 => 'example.com:8080',
+    1 => 'cloud.example.com',
+  ),
+```
+
+然后按 `esc` 退出编辑模式，再依次按 `:wq` 后回车，保存并退出。再输入 `exit` 退出 NextCloud 容器的命令行，刷新页面即可。
+
 ## 安装基于 Docker 的 Seafile
 
 这里我们基于 [HumanBrainProject/seafile-compose](https://github.com/HumanBrainProject/seafile-compose/) 来配置 Seafile。

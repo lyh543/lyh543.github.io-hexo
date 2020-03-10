@@ -147,7 +147,7 @@ python3 -m  http.server 8000
 
 注意这是没有密码验证的，也不支持断点续传（毕竟 `simple` ），所以**不要长期开放！！！**
 
-#### npm http-server 一行建立 http 文件服务器（支持断点续传，不支持密码验证）
+#### npm http-server 一行建立 http 文件服务器（支持多线程、断点续传，不支持密码验证）
 
 ```bash
 apt install npm
@@ -158,7 +158,29 @@ http-server
 
 其中 `http-server` 的常用参数为 `http-server [path] [-p port]`。`port` 默认为 8080。
 
+如果想要在后台运行，可以配合 `nohup` 使用：
+
+```sh
+nohup http-server &
+```
+
+如果想要守护进程（如果被 kill 就立刻重启），可以使用：
+
+```sh
+apt install npm
+npm install pm2 -g
+pm2 --name s1 -f start http-server # 配置 pm2
+pm2 save # 可选命令，作用是保存当前的 pm2 状态，下次开机的时候可以使用 pm2 startup 恢复到当前状态
+pm2 ls   # 可选命令，列出当前 pm2 的任务
+```
+
 另外，实现同样功能的还有：https://github.com/lwsjs/local-web-server
+
+不过，需要注意的是，如果连接线程太多，会消耗大量服务器内存。在博主的测试中：
+
+* 单线程下载一个文件，内存占用 36 MB
+* 16 线程下载一个文件，内存占用 40 MB
+* 下载三个文件，每个文件 128 线程，内存占用高达 250MB（不要问我为什么这么高，问就是某线程破解版下载软件默认）
 
 ### 通过 SMB
 

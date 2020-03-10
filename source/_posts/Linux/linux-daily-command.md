@@ -154,14 +154,20 @@ tar -xf archive.tar          # Extract all files from archive.tar.
 
 以杀掉 `vi` 为例：
 
-```
+```sh
 ps aux | grep vi
 # 返回之中有一行如下，则用户名后的 138 即为其 PID
 # root 138  0.0  0.0  27612  6224 tty2     S    00:16   0:00 vi
 kill -9 138
 ```
 
-### 后台进程
+或者使用 `killall`：
+
+```sh
+killall vi
+```
+
+### 进程后台运行
 
 #### 使用 nohup
 
@@ -181,9 +187,9 @@ nohup ssserver & &> /dev/null
 ```bash
 apt install npm
 npm install pm2 -g
-pm2 --name s1 -f start ss-server # 配置 pm2
-pm2 startup # 启动
-pm2 save # 保存
+pm2 --name s1 -f start http-server # 配置 pm2
+pm2 save # 可选命令，作用是保存当前的 pm2 状态，下次开机的时候可以使用 pm2 startup 恢复到当前状态
+pm2 ls   # 可选命令，列出当前 pm2 的任务
 ```
 
 ### 开机自启
