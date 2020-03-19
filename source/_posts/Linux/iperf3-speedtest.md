@@ -3,7 +3,7 @@ title: 使用 iperf3 测速
 date: 2019-11-19 20:04:49
 tags:
 - 服务器
-- 语法测试
+- 测试
 category:
 - Linux
 mathjax: true

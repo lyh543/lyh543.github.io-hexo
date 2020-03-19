@@ -2,7 +2,7 @@
 title: C/C++ 字节对齐（Byte alignment）
 date: 2019-8-20
 tags:
-- 语法测试
+- 测试
 - C++
 category:
 - C++
