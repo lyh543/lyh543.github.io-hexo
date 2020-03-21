@@ -10,17 +10,25 @@ category:
 top: false
 ---
 
-先说一个概念：Git 是目前最流行的**版本管理系统**，学会 Git 几乎成了开发者的必备技能。
-
-如果你看不懂这句话，你可以从字面意思理解“版本管理系统”：多个开发者在同一个软件的基础上，开发了不同的版本，他们可以通过 Git 方便、严谨的实现上传、下载、比对、合并代码间的冲突等操作。
-
-而我们最常用的把代码放到 GitHub（或其他 Git 服务器）上的操作，可以把远程服务器也看做一个开发者（虽然他什么也不会修改），我们每次开发完以后，就会将代码上传给他。
+## 常用链接
 
 常用命令可查表：[Git-CheatSheet](git-cheatsheet.pdf)
 
 [官方文档](https://git-scm.com/book/zh/v2/) 也是很好的学习的手段。
 
+[GitHub 词汇表](https://help.github.com/cn/github/getting-started-with-github/github-glossary) 
+[GitHub 备忘清单](https://github.github.com/training-kit/downloads/zh_CN/github-git-cheat-sheet/)
+
 > 本博客参考链接：https://www.liaoxuefeng.com/wiki/896043488029600
+
+
+## 前言
+
+先说一个概念：Git 是目前最流行的**版本管理系统**，学会 Git 几乎成了开发者的必备技能。
+
+如果你看不懂这句话，你可以从字面意思理解“版本管理系统”：多个开发者在同一个软件的基础上，开发了不同的版本，他们可以通过 Git 方便、严谨的实现上传、下载、比对、合并代码间的冲突等操作。
+
+而我们最常用的把代码放到 GitHub（或其他 Git 服务器）上的操作，可以把远程服务器也看做一个开发者（虽然他什么也不会修改），我们每次开发完以后，就会将代码上传给他。
 
 ## Git 入门
 
