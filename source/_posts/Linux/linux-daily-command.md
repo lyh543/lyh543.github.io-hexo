@@ -108,6 +108,23 @@ alias la='ls -al --color=auto'
 
 3. `cat /etc/redhat-release` 只适用于 Redhat 系 Linux。
 
+
+## 当前文件夹 current directory
+
+当前文件夹是便于写相对路径的。
+
+假设你当前在 `/mnt/c/Users/lyh/Documents/Git/lyh543.github.io` 文件夹。  
+
+当你需要访问文件夹下的 `_config.yml`，你就可以写 `_config.yml` 或 `./_config.yml` （注意一定要加`.`，否则会被视为根目录）来代替 `/mnt/c/Users/lyh/Documents/Git/lyh543.github.io/_config.yml`。
+
+可以在命令行的`$`前看到当前文件夹，也可以使用非常简洁的命令：`pwd`。该命令返回当前文件夹。
+
+* 更改当前文件夹使用 `cd [DIRECTORY]`  
+* 若想跳到当前文件夹下的 `themes` 文件夹，可以使用 `cd themes`  
+* 若想跳到上一级文件夹，可以使用 `cd ..`（Windows cmd 中 `cd` 和 `..` 间可以不加空格，但是 Linux Shell 必须要有空格）  
+* 若想跳到上两级文件夹，可以使用 `cd ../..`  
+* 若想跳到上两级文件夹下的`theme`文件夹，可以使用 `cd ../../theme`  
+
 ## 文件
 
 ### 下载、解压
