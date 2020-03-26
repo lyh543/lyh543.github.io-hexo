@@ -84,7 +84,16 @@ pagination_dir: page
 feed:
   type: atom
   path: atom.xml
-  limit: 0
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+  icon: icon.png
+  autodiscovery: true
+  template:
+
 
 ### jsonContent: https://github.com/alexbruno/hexo-generator-json-content
 

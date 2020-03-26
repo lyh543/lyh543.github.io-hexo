@@ -21,5 +21,6 @@ git remote set-url origin git@github.com:lyh543/lyh543.github.io.backup.git
 # install hexo
 
 sudo apt-get install npm
-npm install hexo
-npm install hexo-cli -g
+npm install
+# npm install hexo
+# npm install hexo-cli -g

@@ -94,7 +94,6 @@ end
 
 ## mesh 散点图
 
-啊啊啊
 
 ## 动画程序框架
 
@@ -115,7 +114,7 @@ subplot(1,2,1);
 scatter(rand(1,10000),rand(1,10000))
 subplot(1,2,2)；
 scatter(rand(1,10000),rand(1,10000))
-``
+```
 
 ## 图的注释、美化
 
@@ -130,9 +129,10 @@ xlabel('x'), ylabel('y')
 ### plot 图的美化
 
 ```m
-h = plot(x1,y1, 'r-'); % r 红色， k 黑色
-set(h, 'linewidth' ,2);
+h = plot(x1,y1, 'r-');      % 选择曲线颜色、线型   r 红色，k 黑色，b 蓝色，o 
+set(h, 'linewidth' ,2);     % 调整线的属性
 legend('X', 'Y');
+axis([0 25 0 20])           % 调整坐标区的范围
 ```
 
 
