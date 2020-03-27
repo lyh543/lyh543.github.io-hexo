@@ -378,7 +378,7 @@ push 命令将本地的当前分支上传到 origin 的 master 分支（简写 o
 
 [学习链接](https://www.liaoxuefeng.com/wiki/896043488029600/896954848507552#0)
 
-![分支管理](https://www.liaoxuefeng.com/files/attachments/919021987875136/0)
+![分支管理](branch-management.png)
 
 其他版本控制系统如 SVN 等都有分支管理，但是用过之后你会发现，这些版本控制系统创建和切换分支比蜗牛还慢，简直让人无法忍受，结果分支功能成了摆设，大家都不去用。
 
@@ -394,7 +394,7 @@ push 命令将本地的当前分支上传到 origin 的 master 分支（简写 o
 
 也就是说，Git 中的每一个状态，其实指的是每一次 commit，而分支就是将 commit 串起来了（然后 `HEAD` 又指向了当前分支的头）。
 
-![分支](https://www.liaoxuefeng.com/files/attachments/919022325462368/0)
+![分支](branch.png)
 
 所以创建分支的本质就是添加一条线，更改一下 `HEAD`，很快的。而删除分支，就是删一条线（并不删除 commit），也很快。
 
@@ -415,7 +415,7 @@ git checkout -b dev
 
 实现的效果如图：
 
-![新建 dev 分支并切换到该分支](https://www.liaoxuefeng.com/files/attachments/919022363210080/l)
+![新建 dev 分支并切换到该分支](branch-1.png)
 
 顺便一提， `git checkout` 的确是有两个功能，一是切换分支，二是将暂存区的某文件修改覆盖工作区的对应文件，不过二需要使用 `git branch --`。
 
@@ -429,7 +429,7 @@ git commit -m "commit on dev branch"
 
 这之后，我们的仓库状态如下图：
 
-![在 dev 上三连后的仓库](https://www.liaoxuefeng.com/files/attachments/919022533080576/0)
+![在 dev 上三连后的仓库](branch-2.png)
 
 接下来，将 `dev` 上的 commit merge 进 `master`。
 
@@ -473,7 +473,7 @@ git merge --no-ff dev
 
 上面的分支图都是很简单的(linear)，如果复杂一点，比如两个分支都有自己的提交，`git merge` 就不能进行 `fast-forward merge` 了。
 
-![两个分支都有新的提交](https://www.liaoxuefeng.com/files/attachments/919023000423040/0)
+![两个分支都有新的提交](branch-3.png)
 
 对于简单的情况（两个分支只有文件增添，没有文件修改的冲突），Git 仍然可以实现自动合并，如：
 
@@ -549,7 +549,7 @@ git log --graph --pretty=oneline
 
 所以，团队合作的分支看起来就像这样：
 
-![团队合作的分支](https://www.liaoxuefeng.com/files/attachments/919023260793600/0)
+![团队合作的分支](branch-4.png)
 
 而对于一个小 bug 或者一个 issue-101，也可以通过开一个 `issue-101` 临时分支，写完、merge 以后，再将临时分支删掉。
 

@@ -47,7 +47,7 @@ sudo -u apache /var/www/html/nextcloud/occ --help
 然后需要几个配置文件，我压缩好以后，放在我的网站上，[链接在这里](nextcloud-docker-compose.tar)，当然也可以通过下面的命令直接从服务器下载：
 
 ```bash
-wget https://www.lyh543.xyz/Linux/build-owncloud-on-server/nextcloud-docker-compose.tar
+wget https://blog.lyh543.xyz/Linux/build-owncloud-on-server/nextcloud-docker-compose.tar
 tar -xf nextcloud-docker-compose.tar
 cd nextcloud-docker-compose
 cd nextcloud

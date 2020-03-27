@@ -9,10 +9,17 @@ category:
 mathjax: true
 ---
 
-Docker 像是一个容器一样，能够让应用运行在隔离的环境中。其实很像一个虚拟机，但是其本质和虚拟机是不同的，结构较虚拟机简单的多，因此速度也远快于虚拟机。
+Docker 像是一个容器一样，能够让应用运行在隔离的环境中。其实很像一个虚拟机，但是其本质和虚拟机是不同的，结构较虚拟机简单的多，因此速度也远快于虚拟机。  
+Docker 还是跨平台的，可以在 Linux/Windows/MacOS 上运行。  
+对于 Windows 的 Docker（准确的说是 Docker Desktop），它还提供了 Linux 和 Windows 两种子系统。（也就是说，在 Linux 下能运行的 Docker 容器，完全能够在 Windows 上运行）
+
+而 Docker Compose 可以根据配置文件自动下载镜像、配置、运行 Docker 容器，一气呵成。  
+下载网上写好的配置文件，然后一行代码 `docker-compose` 即可完成配置，搭建好自己的云服务。它同样是跨平台的。这也是 Docker 方便的原因之一。
 
 > Docker 文档：https://docs.docker.com/install/linux/docker-ce/centos/
 > Docker Compose 文档：https://docs.docker.com/compose/install/
+
+我收集的基于 Docker 的好用的云服务可以见[后面小节](#docker-镜像)
 
 ## 安装 Docker
 
@@ -116,6 +123,64 @@ $ docker-compose --version
 docker-compose version 1.25.4, build 8d51620a
 ```
 
+## Docker 更换国内源
+
+> 参考链接：https://www.cnblogs.com/wushuaishuai/p/9984228.html#_label0
+
+和很多东西一样，Docker 镜像也有国内仓库。
+
+国内的 Docker 镜像仓库有：
+
+```
+https://registry.docker-cn.com
+http://hub-mirror.c.163.com
+https://3laho3y3.mirror.aliyuncs.com
+http://f1361db2.m.daocloud.io
+https://mirror.ccs.tencentyun.com
+```
+
+这里选 aliyun 的做示范。
+
+创建一个 `daemon.json`：
+
+```bash
+sudo vim /etc/docker/daemon.json
+```
+
+按 `i` 进入编辑模式，写入以下内容：
+
+```json
+{
+  "registry-mirrors": ["https://3laho3y3.mirror.aliyuncs.com"]
+}
+```
+
+按 `esc` 退出编辑模式，按 `:wq` 保存。
+
+然后重启 Docker 服务。
+
+```
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+下次拉取镜像的时候就快得多了。
+
+## Docker 镜像
+
+个人收集的一些基于 Docker 的云服务。
+
+用途|镜像名|`docker-compose.yml`链接
+-|-|-
+私人云|NextCloud|[nextcloud-docker-compose.tar](wget https://blog.lyh543.xyz/Linux/build-owncloud-on-server/nextcloud-docker-compose.tar)
+私人云|[Seafile](https://github.com/HumanBrainProject/seafile-compose/)|[docker-compse.yaml](https://github.com/HumanBrainProject/seafile-compose/blob/master/docker-compose.yaml)
+在线 Markdown 编辑器|[CodiMD](https://github.com/hackmdio/codimd)|[docker-compse.yml](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-docker-deployment#Using-docker-compose-to-setup-CodiMD)
+在线 LaTeX 编辑器|[Overleaf](https://github.com/overleaf/overleaf)|[docker-compose.yml](https://github.com/overleaf/overleaf/blob/master/docker-compose.yml)
+云 SSH|[WebSSH2](https://hub.docker.com/r/oldiy/docker-webssh2)|无
+远程 Firefox|[firefox-enpass-novnc](https://hub.docker.com/r/oldiy/firefox-enpass-novnc)|无
+
+
+
 ## Docker 基础命令
 
 初次接触 Docker，要记得两个概念：images（镜像） 和 containers（容器）。从网上获取一个镜像，然后每次可以由这个镜像创造一个容器（像是每次由一个系统镜像安装一个系统一样）。
@@ -139,6 +204,17 @@ docker-compose version 1.25.4, build 8d51620a
 -|-|-
 `docker-compose up`|以当前文件夹下的 `docker-compose.yml` 作为配置文件，`run` 一个容器|`-d`可在后台运行
 `docker-compose down -v`|删除当前文件夹下的 `docker-compose.yml` 所指的容器
+
+## Docker Compose 文件语法
+
+本人不会写 `docker-compose.yml`，只会做一些简单的修改，因此只记录自己用过的语法。
+
+```yml
+    ports:
+      - 7070:80
+      # 将 Docker 内的 80 端口映射到宿主机的 7070 端口
+      # 即可以通过访问 Docker 外部的 7070 端口访问到内部的 80 端口
+```
 
 ## 常见错误（更新中）
 
