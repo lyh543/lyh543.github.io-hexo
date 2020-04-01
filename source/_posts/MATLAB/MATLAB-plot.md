@@ -9,7 +9,7 @@ category:
 mathjax: true
 ---
 
-## plot 按自变量、因变量值绘图
+## 按自变量、因变量值绘图
 
 这是老师教的方法。[官方文档](https://ww2.mathworks.cn/help/matlab/ref/plot.htm)
 
@@ -38,19 +38,7 @@ plot(x1,y1)
 plot(1:5, 1:5, '.'); % 另可用 `o`, `*`
 ```
 
-## hold on
-
-使用两个 `plot` （或其他画图语句）后，第二个会删掉前面的图并且重新画。
-
-要想将两个图叠加，需要在两个 `plot` 之间加一句 `hold on`。一般习惯写法是：
-
-```m
-plot(...), hold on;
-plot(...), hold on;
-plot(...)
-```
-
-## fplot 按符号函数绘图
+## 按符号函数绘图
 
 [官方文档](https://ww2.mathworks.cn/help/matlab/ref/fplot.html)
 
@@ -63,7 +51,7 @@ fplot(funx,funy)
 fplot(funx,funy,tinterval)
 ```
 
-## ezplot
+## ezplot（不知道是什么）
 
 ```MATLAB
 ezplot(sin(x)/x);
@@ -90,10 +78,55 @@ end
 
 其中，默认把 x 的值分为 10 个区间。
 
-## plot3 三维图
+## 三维线图
+
+`plot3`，和 `plot` 用法类似，给定 n 个点的 (x, y, z) 坐标，`plot3` 绘制其连起来的线图。
+
+## 三维面图
+
+`surf` 三维面图要稍微麻烦一点，需要给定 X, Y, Z 三个矩阵（而不是向量），其中 X, Y 可以用 `meshgrid` 函数和 x, y 的 n 个坐标进行生成。
+
+下面的代码将生成抛物线 $z=x^2+y^2$ 在 [-5,5] 的范围。
+
+```m
+x = -5:0.1:5;
+y = -5:0.1:5;
+[X, Y] = meshgrid(x, y);
+Z = X.^2 + Y.^2;
+surf(X,Y,Z);
+```
+
+MATLAB 自带了生成绘制标准球（`sphere`）、椭球（`ellipsoid`）和标准圆柱侧面（`cylinder`）的 X,Y,Z 的函数。  
+
+如果想要生成其他大小、位置的球/圆柱，可以考虑坐标变换。下面的代码生成了半径为 R，球心在 `[-R, -R, L]` 的球。
+
+```m
+[x1, y1, z1] = sphere;
+x1 = x1 * R - R;
+y1 = y1 * R - R;
+z1 = z1 * R + L;
+surf(x1, y1, z1);
+```
+
+也可以手算得到 X, Y, Z：
+
+```m
+close all
+a = 6000;
+b = 5000;
+[r,t]=meshgrid(linspace(0,a,50),linspace(0,2*pi,50));
+x=r.*cos(t); y=r.*sin(t);
+z = b*sqrt(1-(x.^2+y.^2)/(a*a));
+z = real(z);
+surf(x,y,z);
+hold on;
+surf(x,y,-z)
+axis equal
+```
+
+如果给定函数和范围想要直接画出图形，可以改用 `fsurf`。
 
 ## mesh 散点图
-
 
 ## 动画程序框架
 
@@ -107,7 +140,23 @@ for i=1:N
 end;
 ```
 
-## subplot 多图并排
+
+
+## 图的注释、美化
+
+## hold on
+
+使用两个 `plot` （或其他画图语句）后，第二个会删掉前面的图并且重新画。
+
+要想将两个图叠加，需要在两个 `plot` 之间加一句 `hold on`。一般习惯写法是：
+
+```m
+plot(...), hold on;
+plot(...), hold on;
+plot(...)
+```
+
+## 多图并排
 
 ```m
 subplot(1,2,1);
@@ -116,7 +165,12 @@ subplot(1,2,2)；
 scatter(rand(1,10000),rand(1,10000))
 ```
 
-## 图的注释、美化
+## 坐标轴格式调整
+
+```m
+axis off     % 隐藏坐标轴
+axis equal   % 使坐标轴的 x, y, z 轴单位长度相同
+```
 
 ### 图的注释
 
@@ -126,7 +180,7 @@ title('y=f(x)')
 xlabel('x'), ylabel('y')
 ```
 
-### plot 图的美化
+### 线图的美化
 
 ```m
 h = plot(x1,y1, 'r-');      % 选择曲线颜色、线型   r 红色，k 黑色，b 蓝色，o 

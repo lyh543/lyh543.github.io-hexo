@@ -164,6 +164,26 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
+Windows 应到 Docker Desktop 的 Settings 中的 Docker Engine 栏中修改。下面是我修改后的内容。
+
+```json
+{
+  "registry-mirrors": ["https://3laho3y3.mirror.aliyuncs.com"],
+  "insecure-registries": [],
+  "debug": true,
+  "experimental": false
+}
+```
+
+验证镜像源可以使用命令 `docker info`，如果看到有两行：
+
+```
+ Registry Mirrors:
+  https://3laho3y3.mirror.aliyuncs.com/
+```
+
+就表示成功。
+
 下次拉取镜像的时候就快得多了。
 
 ## Docker 镜像
@@ -175,9 +195,11 @@ sudo systemctl restart docker
 私人云|NextCloud|[nextcloud-docker-compose.tar](wget https://blog.lyh543.xyz/Linux/build-owncloud-on-server/nextcloud-docker-compose.tar)
 私人云|[Seafile](https://github.com/HumanBrainProject/seafile-compose/)|[docker-compse.yaml](https://github.com/HumanBrainProject/seafile-compose/blob/master/docker-compose.yaml)
 在线 Markdown 编辑器|[CodiMD](https://github.com/hackmdio/codimd)|[docker-compse.yml](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-docker-deployment#Using-docker-compose-to-setup-CodiMD)
-在线 LaTeX 编辑器|[Overleaf](https://github.com/overleaf/overleaf)|[docker-compose.yml](https://github.com/overleaf/overleaf/blob/master/docker-compose.yml)
+在线 LaTeX 编辑器|[Overleaf](https://github.com/overleaf/overleaf/wiki/Quick-Start-Guide)|[docker-compose.yml](https://github.com/overleaf/overleaf/blob/master/docker-compose.yml)
 云 SSH|[WebSSH2](https://hub.docker.com/r/oldiy/docker-webssh2)|无
 远程 Firefox|[firefox-enpass-novnc](https://hub.docker.com/r/oldiy/firefox-enpass-novnc)|无
+
+
 
 
 
@@ -192,9 +214,10 @@ sudo systemctl restart docker
 `docker run -dit ubuntu`|从 Ubuntu 镜像创造一个容器并运行|可用 `--name` 对容器命名，默认名是随机生成的；在最后可加 `<command>`
 `docker start -i <name>`|运行名为 `<name>`（也可以是容器的 container ID 值的前几位）的容器
 `docker images`|查看本地的镜像
-`docker container ls` （简写 `docker ps`）|查看正在运行的容器|加 `--all` 或 `-a` 查看所有的（包括已停止的镜像）
+`docker image prune -af`|删除所有没有使用的镜像（如果有容器使用了某镜像，无论这个容器正在运行/已停止，这个镜像不会被删除）
+`docker ps`|查看正在运行的容器|加 `--all` 或 `-a` 查看所有的（包括已停止的镜像）
 `docker container rm <name>`|删除名为 `<name>`（也可以是容器的 container ID 值的前几位）的容器
-`docker container prune`|删除所有已停止的容器
+`docker container prune -af`|删除所有已停止的容器
 `docker container rename <old_name> <new_name>`|给容器改名
 `docker exec -it <name> /bin/bash`|在正在运行的 `<name>` 容器中运行 bash 命令行
 
@@ -260,3 +283,58 @@ networks:
     depends_on:
       - app
 ```
+
+### Container is unhealty
+
+博主在 Windows 下安装 overleaf 时，出现过下面的情况。
+
+```sh
+> docker-compose up
+Creating network "overleaf_default" with the default driver
+Creating overleaf_redis ... done
+Creating overleaf_mongo ... done
+
+ERROR: for sharelatex  Container "233abaae4ea7" is unhealthy.
+ERROR: Encountered errors while bringing up the project.
+```
+
+在配置文件 `docker-compose.yml` 中写到，`sharelatex` 基于 `overleaf_redis` 和 `overleaf_mongo`，并且要求 `mongo` 是 healthy 的。  
+`233abaae4ea7` 正是我电脑上的 `mongo` 的 Container ID。
+
+```yml
+sharelatex:
+    depends_on:
+        mongo:
+            condition: service_healthy
+        redis:
+            condition: service_started
+mongo:
+    healthcheck:
+        test: echo 'db.stats().ok' | mongo localhost:27017/test --quiet
+        interval: 10s
+        timeout: 10s
+        retries: 5
+```
+
+healthy 可以理解为是正常运行。
+
+这里出错就有两种情况了，一是 `mongo` 本身不正常了，另一种是 `mongo` 检查的太频繁了，导致还没完成启动，就被诊断为 unhealthy 了。
+
+我们检查一下 mongo 的 log。
+
+```bash
+> docker ps | find "233a"
+233abaae4ea7        mongo                                   "docker-entrypoint.s鈥?   About a minute ago   Restarting (14) 47 seconds ago                            overleaf_mongo
+```
+
+显示 `mongo` 正在重启，我估计是在反复不正常-重启，因此就考虑在这方面进行 debug。  
+最后的问题出在由于我是在 Windows 上运行，文件映射可能不正确，我把配置文件的 `volumes` 部分删掉就可以了。
+
+当然，如果是正确的情况，上一行会显示：
+
+```bash
+> docker ps --all | find "mongo"
+194bafd8158f        mongo                                   "docker-entrypoint.s鈥?   13 minutes ago      Up 12 minutes (healthy)   27017/tcp                overleaf_mongo
+```
+
+这种情况下，可以考虑把 `mongo` 的 `healthcheck` 部分的 `inteval` 和 `timeout` 调大。

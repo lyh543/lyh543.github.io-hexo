@@ -9,6 +9,8 @@ mathjax: true
 
 ## 前言
 
+推荐官方提供的入门手册：[MATLAB 快速入门](https://ww2.mathworks.cn/help/matlab/getting-started-with-matlab.html)
+
 * `help xxx` 用于查看命令，`doc xxx` 直接调用文档
 * 单引号 `'` 和双引号 `"` 一样，推荐单引号。用单引号转义单引号，如 `disp('f''(x)')` 输出 `f(x)` 
 * 用分号 `;` 结束语句，以屏蔽输出。  
@@ -337,141 +339,25 @@ x = 1.2*x;
 
 符号函数可以转为匿名函数：`syms x; y=x^2; f=matlabFunction(y);`
 
-## Matlab 自带函数
+## MATLAB 自带函数
 
-这都是查手册可以解决的事情，放在另一篇[博客](../MATLAB-functions)里了。
+这都是查手册可以解决的事情。
+
+博主总结的可见 [MATLAB 函数](../MATLAB-functions)。
 
 ## 字符串与文件
 
-参见另一篇博客：[MATLAB 字符串与文件](../MATLAB-string-and-file-function)。
+见 [MATLAB 字符串与文件](../MATLAB-string-and-file-function)。
 
-## 符号编程
+## MATLAB 符号编程
 
-符号编程即 $y = ax^2 + bx + c$ 此类函数，并可以对其进行求极限、求导、积分等操作。
+[syms 英文文档](https://ww2.mathworks.cn/help/symbolic/syms.html)
 
-### 替换变量（求值）
-
-```MATLAB
-syms x y r(n);
-s = x^2 + y^2; subs(s,[x,y],[1,2])
-```
-
-将 `x = 1, y = 2` 代入，返回 5。
-
-### 解方程
-
-```m
-syms x;
-y = x^2 + 2*x;
-solve(y-1,x);
-```
-
-解 `y-1=0` 关于 x  的方程。返回：
-
-
-```
-[- 2^(1/2) - 1
-   2^(1/2) - 1]
-```
-
-另有：
-
-```m
-equa = x^2 + 2*x == 1;
-solve(equa);
-
-syms u v
-eqns = [2*u + v == 0, u - v == 1];
-S = solve(eqns,[u v])
-```
-
-### 化简表达式
-
-```m
-s = simplify(cos(x)^2-sin(x)^2)
-```
-
-返回 `cos(2*x)`。
-
-### 求极限
-
-```m
-s = limit((1+1/n)^n, n, inf);
-```
-
-返回 `exp(1)`。
-
-### 求级数
-
-```m
-s = symsum(1/factorial(x), 0, Inf)
-```
-
-返回 `exp(1)`。
-
-### 求导
-
-```m
-s = y^3+x^2; diff(s,y);
-```
-
-返回 `3*y^2`。
-
-另有求 dim 阶导数：
-
-```m
-diff(X,n,dim)
-```
-
-另外，对于矩阵 `A`，`diff(A)` 是差分。  
-
-另外可以求近似导数 $f'(x)=\lim\limits_{h \to 0} \frac{f(x+h)-f(x)}{h}$：
-
-```
-h = 0.001;
-X = 1:h:2;
-Y = sin(X);
-D = diff(Y)/h;
-
-### 积分
-
-```m
-int(x^2);
-```
-
-返回 `x^3/3`。
-
-另有以下形式：
-
-```m
-int(expr,var);
-int(expr,a,b);
-int(expr,var,a,b);
-```
-
-### 泰勒展开
-
-```m
-taylor(exp(x),x,0,'order',3)
-```
-
-2 阶泰勒展开，返回 `x^2/2+x+1`。 
-
-### 解常微分方程
-
-```MATLAB
-dsolve('Dy=(50-0.01*y)*y','y(0)=4','x'); % 二阶导的写法为'D2y'
-```
-
-详见[MATLAB 解常微分方程](../differential-equation/#MATLAB-解常微分方程)。
-
-### 分段函数
-
-分段函数：`pw = piecewise(cond1,val1,cond2,val2,...,otherwiseVal)`，如`y=piecewise(x<0,-x^2,x^2);`。
+见 [MATLAB 符号编程](../matlab-syms)。
 
 ## MATLAB 绘图
 
-见 [MATLAB 绘图](../matlab-draw)。
+见 [MATLAB 绘图](../MATLAB-plot)。
 
 ## MATLAB显示
 
@@ -489,7 +375,9 @@ format rat %% 分数模式
 format %% 小数模式
 ```
 
-对于某些只返回分数的函数（如 `symsum`），可通过 `vpa()` 函数将其转为小数。
+注意这里的分数仍然是近似解，只是将近似解化为了分数形式。如果需要完全精确的结果，请使用[符号编程](../MATLAB-syms) 或考虑使用其他数学软件如 Mathematica。
+
+对于符号编程中的函数，由于其返回的是分数，可通过 `double()` 或 `vpa()` 函数将其转为小数，后者返回的同样是 `sym` 类型，但可以给出任意的精度（对，任意！）。
 
 #### 显示小数位数
 
