@@ -11,7 +11,7 @@
                 "_UNICODE"
             ],
             "windowsSdkVersion": "10.0.18362.0",
-            "compilerPath": "D:\\Documents\\Tools\\Cygwin\\bin\\g++.exe",
+            "compilerPath": "D:\\Documents\\OneDrive - std.uestc.edu.cn\\Tools\\Command\\Cygwin\\bin\\g++.exe",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "gcc-x64"

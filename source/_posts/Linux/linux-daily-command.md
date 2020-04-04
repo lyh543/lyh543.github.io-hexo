@@ -241,7 +241,10 @@ nohup ssserver & &> /dev/null
 apt install npm
 npm install pm2 -g
 pm2 --name s1 -f start http-server # 配置 pm2
-pm2 save # 可选命令，作用是保存当前的 pm2 状态，下次开机的时候可以使用 pm2 startup 恢复到当前状态
+
+pm2 save # 可选命令，作用是保存当前的 pm2 状态
+pm2 startup # 可选命令，下次开机的时候可以恢复到 save 的状态
+
 pm2 ls   # 可选命令，列出当前 pm2 的任务
 ```
 
