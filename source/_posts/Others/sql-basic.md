@@ -67,20 +67,20 @@ Create Database HIS
 
 ```sql
 CREATE DATABASE HIS
-ON Primary                          -- On Primary 关键字，表明与该关键字相邻的文件为主文件
-( NAME = HIS_DATA1,                 -- SQLServer 使用的逻辑名称
-    FILENAME = 'd:\HIS_DATA1.mdf',  -- 文件名
+ON PRIMARY                          -- ON PRIMARY 关键字，表明与该关键字相邻的文件为主文件
+(   NAME = HIS_DATA1,                 -- SQL Server 使用的逻辑名称
+    FILENAME = 'D:\HIS_DATA1.mdf',  -- 文件名
     SIZE = 10,                      -- 文件的初始大小
     MAXSIZE = 1500,                 -- 文件的最大大小
     FILEGROWTH = 5 ),               -- SQLServer 每次扩大文件的大小，默认为 10%
-( NAME = HIS_DATA2,
-    FILENAME = 'd:\HIS_DATA2.ndf',  -- ndf 是次要文件
+(   NAME = HIS_DATA2,
+    FILENAME = 'D:\HIS_DATA2.ndf',  -- ndf 是次要文件
     SIZE = 10,
     MAXSIZE = 500,
     FILEGROWTH = 5 )
-LOG ON                               -- Log On 为关键字，见后
-( NAME = HIS_LOG,
-    FILENAME = 'd:\ HIS_LOG.ldf',
+LOG ON                               -- LOG ON 为关键字，见后
+(   NAME = HIS_LOG,
+    FILENAME = 'D:\ HIS_LOG.ldf',
     SIZE = 5MB,
     MAXSIZE = 500MB,
     FILEGROWTH = 5MB )
@@ -92,26 +92,26 @@ LOG ON                               -- Log On 为关键字，见后
 
 ```sql
 ALTER DATABASE HIS
-Add File
-( NAME = HIS_DATA3,
+ADD FILE
+(   NAME = HIS_DATA3,
     FILENAME = 'd:\data\HIS_DATA3.ndf',
     SIZE = 10,
     MAXSIZE = 1000,
     FILEGROWTH = 5 )
 
 ALTER DATABASE HIS
-Modify File
-( NAME = HIS_DATA2,
+MODIFY FILE
+(   NAME = HIS_DATA2,
     FILENAME = 'd:\data\HIS_DATA1.mdf',
     SIZE = 10,
     MAXSIZE = 1500,
     FILEGROWTH = 5 )
 
 ALTER DATABASE HIS
-Remove File HIS_DATA2
+REMOVE FILE HIS_DATA2
 ```
 
-可以看到有三种操作：`Add File`、`Modify File`、`Remove File`，其中前两者要指定的参数创建数据库相同。
+可以看到有三种操作：`ADD FILE`、`MODIFY FILE`、`REMOVE FILE`，其中前两者要指定的参数创建数据库相同。
 
 ### 删除数据库
 
