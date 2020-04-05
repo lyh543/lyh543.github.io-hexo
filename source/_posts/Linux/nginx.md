@@ -75,7 +75,7 @@ server{
     server_name www.lyh543.xyz;
 
 
-    location / {
+    location = / {
         return 301 https://blog.lyh543.xyz/;
     }
 
@@ -87,7 +87,9 @@ server{
         return 301 https://blog.lyh543.xyz/Linux/linux-daily-command/;
     }
 
-    return 301 https://blog.lyh543.xyz$request_uri;
+    location / {
+        return 301 https://blog.lyh543.xyz$request_uri;
+    }
 }
 ```
 
