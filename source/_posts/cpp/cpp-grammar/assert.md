@@ -3,6 +3,7 @@ title: assert
 date: 2019-8-1
 tags:
 - C++
+- C++语法
 category:
 - C++
 - C++语法

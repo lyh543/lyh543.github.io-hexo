@@ -5,6 +5,7 @@ tags:
 - Git
 - ssh
 - 服务器
+- Linux
 category: 
 - Linux
 top: false

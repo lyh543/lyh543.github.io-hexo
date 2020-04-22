@@ -2,6 +2,7 @@
 title: 《编程珠玑》笔记
 tags:
 - 读书笔记
+- 计算机科学
 category:
 - 计算机科学
 mathjax: true

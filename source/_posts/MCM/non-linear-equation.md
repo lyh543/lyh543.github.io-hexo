@@ -3,6 +3,7 @@ title: 非线性方程求根
 date: 2019-11-2
 tags:
 - 课程笔记
+- 数学建模
 category:
 - 数学建模
 mathjax: true

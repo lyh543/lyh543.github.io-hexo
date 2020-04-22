@@ -1,7 +1,9 @@
 ---
 title: Hexo 备份（及一次翻车的经历）
 date: 2019-9-17
-tags: Hexo
+tags:
+- Hexo
+- Blog
 category:
 - Blog
 mathjax: true

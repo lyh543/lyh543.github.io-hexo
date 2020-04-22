@@ -5,6 +5,8 @@ tags:
 - 数据结构
 - 字符串
 - 坑
+- C++
+- ACM
 category:
 - C++
 - ACM

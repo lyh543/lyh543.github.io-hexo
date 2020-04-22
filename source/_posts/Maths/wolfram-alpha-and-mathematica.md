@@ -1,6 +1,8 @@
 ---
 title: Wolfram Alpha 和 Mathematica
 date: 2019-7-7
+tags:
+- 数学
 category:
 - 数学
 ---

@@ -3,6 +3,7 @@ title: Hexo 插入 LaTeX 公式
 date: 2019-10-15
 tags:
 - Hexo
+- LaTeX
 category:
 - LaTeX
 mathjax: true
@@ -34,6 +35,7 @@ vendors:
 title: Hexo 插入 LaTeX 公式
 tags:
 - Hexo
+- LaTeX
 category:
 - LaTeX
 mathjax: true

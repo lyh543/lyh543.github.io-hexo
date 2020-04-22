@@ -3,6 +3,7 @@ title: 差分方程
 date: 2019-10-28 19:35:27
 tags:
 - 课程笔记
+- 数学
 category:
 - 数学
 mathjax: true

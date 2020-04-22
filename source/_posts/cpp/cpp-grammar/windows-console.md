@@ -7,6 +7,7 @@ category:
 tags:
 - Windows
 - C++
+- C++语法
 - Win32 API
 - Visual Studio
 mathjax: true

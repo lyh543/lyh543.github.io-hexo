@@ -3,6 +3,8 @@ title: C++：what's plus
 date: 2019-09-02 16:58:17
 tags:
 - 课程笔记
+- C++
+- C++语法
 category:
 - C++
 - C++语法

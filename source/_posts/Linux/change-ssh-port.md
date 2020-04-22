@@ -4,6 +4,7 @@ date: 2019-10-18 10:01:34
 tags:
 - ssh
 - 服务器
+- Linux
 category:
 - Linux
 mathjax: true

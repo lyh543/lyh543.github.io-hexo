@@ -3,6 +3,8 @@ title: pair 使用方法
 date: 2019-7-25
 tags:
 - STL
+- C++
+- C++语法
 category:
 - C++
 - C++语法

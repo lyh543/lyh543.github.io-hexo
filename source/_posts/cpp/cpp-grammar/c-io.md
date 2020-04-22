@@ -4,6 +4,8 @@ date: 2019.6.18
 tags:
 - C++
 - stdio
+- C++
+- C++语法
 category:
 - C++
 - C++语法

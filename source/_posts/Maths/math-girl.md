@@ -3,6 +3,7 @@ title: 《数学女孩》笔记
 date: 2018-07-01
 tags:
 - 读书笔记
+- 数学
 category:
 - 数学
 mathjax: true

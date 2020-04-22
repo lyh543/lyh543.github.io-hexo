@@ -5,6 +5,7 @@ tags:
 - Hexo
 - npm
 - 资源
+- Blog
 category:
 - Blog
 ---

@@ -3,6 +3,7 @@ title: 图论
 date: 2020-02-29 9:11:36
 tags:
 - 课程笔记
+- 数学建模
 category:
 - 数学建模
 mathjax: true

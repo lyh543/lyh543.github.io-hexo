@@ -3,6 +3,7 @@ title: LaTeX 基础
 date: 2019-11-19
 tags:
 - 课程笔记
+- LaTeX
 category:
 - LaTeX
 mathjax: true

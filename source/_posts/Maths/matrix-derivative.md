@@ -3,6 +3,7 @@ title: 矩阵求导（转载）
 date: 2019-10-04 17:22:53
 tags:
 - 转载
+- 数学
 category:
 - 数学
 mathjax: true

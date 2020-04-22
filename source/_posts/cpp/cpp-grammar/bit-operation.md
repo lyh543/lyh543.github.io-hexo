@@ -2,6 +2,8 @@
 title: 位运算
 date: 2019.5.17
 tags:
+- C++
+- C++语法
 category:
 - C++
 - C++语法

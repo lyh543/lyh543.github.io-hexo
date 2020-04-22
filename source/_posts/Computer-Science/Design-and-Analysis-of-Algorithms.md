@@ -4,6 +4,7 @@ date: 2019.10.28
 tags:
 - 课程笔记
 - 坑
+- 计算机科学
 category:
 - 计算机科学
 mathjax: true

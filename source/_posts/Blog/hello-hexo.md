@@ -3,6 +3,7 @@ title: Hello Hexo
 date: 2019-6-24
 tags:
 - Hexo
+- Blog
 category:
 - Blog
 ---

@@ -5,6 +5,7 @@ tags:
 - 课程笔记
 - 最优化
 - 迭代法
+- 数学建模
 category:
 - 数学建模
 mathjax: true

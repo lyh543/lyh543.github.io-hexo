@@ -6,6 +6,7 @@ tags:
 - Shadowsocks
 - ssh
 - 代理
+- Linux
 category:
 - Linux
 mathjax: true

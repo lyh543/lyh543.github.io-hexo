@@ -3,6 +3,7 @@ title: Hexo Indigo主题配置
 date: 2019-9-17
 tags:
 - Indigo
+- Blog
 category:
 - Blog
 mathjax: true

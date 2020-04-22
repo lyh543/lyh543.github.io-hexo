@@ -1,6 +1,8 @@
 ---
 title: Hexo Material 主题配置
 date: 2019-8-17
+tags:
+- Blog
 category:
 - Blog
 mathjax: true

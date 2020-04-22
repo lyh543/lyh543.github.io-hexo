@@ -2,6 +2,7 @@
 title: 数模自学笔记
 date: 2020-04-18 10:27:07
 tags:
+- 数学建模
 category:
 - 数学建模
 mathjax: true

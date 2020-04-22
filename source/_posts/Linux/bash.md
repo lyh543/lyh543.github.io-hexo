@@ -2,6 +2,7 @@
 title: bash 笔记
 date: 2019-8-16
 tags:
+- Linux
 category:
 - Linux
 mathjax: true

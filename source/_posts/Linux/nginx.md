@@ -4,6 +4,7 @@ date: 2020-03-01 20:46:22
 tags:
 - 服务器
 - Nginx
+- Linux
 category:
 - Linux
 mathjax: true

@@ -4,6 +4,8 @@ date: 2019-9-17
 tags:
 - 数论
 - DP
+- C++
+- ACM
 category:
 - C++
 - ACM

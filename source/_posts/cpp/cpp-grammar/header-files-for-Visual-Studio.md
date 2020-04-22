@@ -5,6 +5,8 @@ tags:
 - 资源
 - Visual Studio
 - C++
+- C++
+- C++语法
 category:
 - C++
 - C++语法

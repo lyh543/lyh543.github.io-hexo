@@ -5,6 +5,8 @@ tags:
 - 课程笔记
 - C++
 - gdb
+- C++
+- C++语法
 category:
 - C++
 - C++语法

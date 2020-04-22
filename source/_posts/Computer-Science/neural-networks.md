@@ -3,6 +3,7 @@ title: 神经网络 笔记
 date: 2019-09-27 16:28:59
 tags:
 - 课程笔记
+- 计算机科学
 category:
 - 计算机科学
 mathjax: true

@@ -1,7 +1,9 @@
 ---
-title: apt-get笔记
+title: apt 笔记
 date: 2019-8-20
 tags:
+- Linux
+- apt
 category:
 - Linux
 mathjax: true

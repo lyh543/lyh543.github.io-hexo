@@ -4,6 +4,7 @@ date: 2019-10-26
 tags:
 - 课程笔记
 - 目录
+- 数学建模
 category:
 - 数学建模
 mathjax: true

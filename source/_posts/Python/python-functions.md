@@ -2,6 +2,7 @@
 title: Python 常用函数
 date: 2019-08-30 21:42:45
 tags:
+- Python
 category:
 - Python
 mathjax: true

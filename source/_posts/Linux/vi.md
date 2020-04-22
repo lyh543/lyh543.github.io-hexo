@@ -2,6 +2,7 @@
 title: vi 笔记（萌新向）
 date: 2019-8-20
 tags:
+- Linux
 category:
 - Linux
 mathjax: true

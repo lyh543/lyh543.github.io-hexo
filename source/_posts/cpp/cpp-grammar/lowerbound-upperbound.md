@@ -4,6 +4,8 @@ date: 2019-8-17
 tags:
 - 测试
 - STL
+- C++
+- C++语法
 category:
 - C++
 - C++语法

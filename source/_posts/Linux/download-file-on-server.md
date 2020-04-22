@@ -3,6 +3,7 @@ title: 服务器下载文件
 date: 2019-10-23 12:39:17
 tags:
 - 服务器
+- Linux
 category:
 - Linux
 mathjax: true

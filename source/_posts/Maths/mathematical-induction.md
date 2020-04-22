@@ -3,6 +3,7 @@ title: 数学归纳法的七种变式及其应用
 date: 2019-10-31 14:13:11
 tags:
 - 转载
+- 数学
 category:
 - 数学
 mathjax: true

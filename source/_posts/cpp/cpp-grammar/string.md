@@ -5,6 +5,8 @@ tags:
 - C++
 - string
 - iostream
+- C++
+- C++语法
 category:
 - C++
 - C++语法

@@ -3,6 +3,7 @@ title: Hexo 使用 Gitalk 评论
 date: 2019-9-17
 tags:
 - Hexo
+- Blog
 category:
 - Blog
 mathjax: true

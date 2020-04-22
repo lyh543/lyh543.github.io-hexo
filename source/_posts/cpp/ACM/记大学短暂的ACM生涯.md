@@ -3,6 +3,8 @@ title: 记大学短暂的ACM生涯
 date: 2019-08-18 22:02:19
 tags:
 - 闲谈
+- C++
+- ACM
 category:
 - C++
 - ACM

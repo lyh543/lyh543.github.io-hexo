@@ -1,6 +1,9 @@
 ---
 title: C 语言程序程序设计课程
 date: 2019-3-6
+tags:
+- C++
+- C++语法
 category:
 - C++
 - C++语法

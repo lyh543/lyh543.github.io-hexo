@@ -3,6 +3,8 @@ title: 一句话描述的算法
 tags:
 - 数据结构
 - 数论
+- C++
+- ACM
 category:
 - C++
 - ACM

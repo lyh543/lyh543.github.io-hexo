@@ -3,6 +3,8 @@ title: auto 和 decltype 类型
 date: 2019-8-17
 tags:
 - C++
+- C++
+- C++语法
 category:
 - C++
 - C++语法

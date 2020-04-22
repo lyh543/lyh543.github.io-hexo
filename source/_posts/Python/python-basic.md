@@ -1,9 +1,10 @@
 ---
 title: Python 基础
 date: 2020-2-18 21:18:37
-tags: 
-category: 
- - Python
+tags:
+- Python
+category:
+- Python
 ---
 
 > 学习链接：https://www.liaoxuefeng.com/wiki/1016959663602400
@@ -1302,4 +1303,6 @@ import numpy as np
 
 顺便，在 Python 环境中（即 `>>>` 中）貌似没法直接运行脚本，如果需要调用脚本中的函数，应该当做模块一样，`import filename` 然后 `filename.function_name()` 来调用。
 
+## 面向对象编程
 
+见 [Python 面向对象编程](../python-oop)。

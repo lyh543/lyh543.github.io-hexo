@@ -3,6 +3,7 @@ title: 最优化算法在数学建模中的应用
 date: 2019-10-26 14:35:16
 tags:
 - 课程笔记
+- 数学建模
 category:
 - 数学建模
 mathjax: true

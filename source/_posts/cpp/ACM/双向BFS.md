@@ -3,6 +3,8 @@ title: 双向 BFS（折半搜索）
 date: 2019-6-25
 tags:
 - 搜索
+- C++
+- ACM
 category:
 - C++
 - ACM

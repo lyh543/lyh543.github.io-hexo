@@ -2,6 +2,8 @@
 title: 调一万年才能发现的bug
 date: 2019-7-25
 tags:
+- C++
+- C++语法
 category:
 - C++
 - C++语法

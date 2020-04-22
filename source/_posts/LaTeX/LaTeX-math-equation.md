@@ -1,6 +1,8 @@
 ---
 title: LaTeX 数学公式学习笔记
 date: 2019-10-15
+tags:
+- LaTeX
 category:
 - LaTeX
 mathjax: true

@@ -6,6 +6,7 @@ tags:
 - ssh
 - 服务器
 - frp
+- Linux
 category:
 - Linux
 mathjax: true
