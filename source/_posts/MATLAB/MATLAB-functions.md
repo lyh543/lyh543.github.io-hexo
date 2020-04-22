@@ -35,6 +35,29 @@ mathjax: true
 |整数规划|`intlinprog()`|解整数线性规划问题|
 |[遗传算法](../genetic-algorithm#在-MATLAB-中调用遗传算法)|`ga()`|包含以上所有功能，不过精度较低
 
+最优化相关的基于问题的方法 `Problem-Based Approach`：
+
+```m
+x = optimvar('x',2,'LowerBound',0);
+xb = optimvar('xb','LowerBound',0,'UpperBound',1,'Type','integer');
+prob = optimproblem('Objective',-3*x(1)-2*x(2)-xb);
+cons1 = sum(x) + xb <= 7;
+cons2 = 4*x(1) + 2*x(2) + xb == 12;
+prob.Constraints.cons1 = cons1;
+prob.Constraints.cons2 = cons2;
+
+% Convert the problem object to a problem structure.
+problem = prob2struct(prob);
+
+% Set Options
+problem.options = optimoptions('intlinprog','Display',"off");
+
+% Solve the resulting problem structure.
+[sol,fval,exitflag,output] = intlinprog(problem)
+```
+
+说白了，就是 `prob2struct` 函数能够将 `4*x(1) + 2*x(2) + xb == 12` 这样的直白的约束条件，换为 `intlinprog` 的 `Aeq` `beq`。对于复杂的问题，这样更不容易出错。
+
 ## 概率统计相关
 
 功能|函数名|注释

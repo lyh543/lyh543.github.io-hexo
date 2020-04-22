@@ -140,11 +140,20 @@ for i=1:N
 end;
 ```
 
+## image 输出图片
 
+```m
+background = imread('Snakes_And_Ladder.png');
+image(background);
+```
+
+输出了以后还可以用 `hold on; plot` 在图上绘制几何图形，每个像素为一个单位长度。但需要注意，该图的原点在左上角，x、y 轴的正方向分别为右方、下方。
+
+提示：还可以使用 `axis equal off` 来保持图片的长宽比，然后隐藏坐标轴。
 
 ## 图的注释、美化
 
-## hold on
+### hold on
 
 使用两个 `plot` （或其他画图语句）后，第二个会删掉前面的图并且重新画。
 
@@ -156,7 +165,7 @@ plot(...), hold on;
 plot(...)
 ```
 
-## 多图并排
+### 多图并排
 
 ```m
 subplot(1,2,1);
@@ -165,7 +174,7 @@ subplot(1,2,2)；
 scatter(rand(1,10000),rand(1,10000))
 ```
 
-## 坐标轴格式调整
+### 坐标轴格式调整
 
 ```m
 axis off     % 隐藏坐标轴

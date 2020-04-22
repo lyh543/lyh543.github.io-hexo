@@ -1,5 +1,5 @@
 ---
-title: linux 日常
+title: Linux 日常命令
 date: 2019-10-14 22:04:00
 tags:
 - ssh
@@ -286,3 +286,30 @@ cat /var/log/secure
 ### 查看网络流量
 
 可以使用第三方的 `nethogs`。
+
+### 防火墙
+
+> 参考链接：https://blog.csdn.net/fengspg/article/details/21337617
+
+以下针对 Cent OS 7。
+
+打开/关闭防火墙：
+
+```bash
+systemctl status firewalld # 查看防火墙打开/关闭状态
+systemctl start firewalld  # 打开防火墙
+systemctl stop firewalld   # 关闭防火墙
+```
+
+更改防火墙配置：
+
+```bash
+firewall-cmd --zone=public --add-port=80/tcp --permanent # 允许 80/TCP 端口通过，无 --permanent 参数则重启失效
+firewall-cmd --zone=public --add--port=1-65535/udp --pernament # 开放 UDP 的 1-65535 端口
+
+firewall-cmd --zone=public --remove-port=80/tcp # 关闭 80/TCP 端口
+
+firewall-cmd --reload # 重新加载防火墙，修改了以后都要执行这一步
+
+firewall-cmd --zone=public --query-port=80/tcp # 查询 80/TCP 端口
+```

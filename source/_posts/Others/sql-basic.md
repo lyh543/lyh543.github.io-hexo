@@ -182,7 +182,7 @@ CREATE TABLE RecipeMaster (
 CREATE TABLE RecipeDetail (
     Rno     varchar(10),
     Mno     varchar(10)
-            FOREIGN KEY(Mno)
+            FOREIGN KEY
             REFERENCES medicine(Mno),
     Mamount decimal(18, 0),
             CONSTRAINT Rnofk FOREIGN KEY(Rno)
@@ -190,20 +190,22 @@ CREATE TABLE RecipeDetail (
 );
 ```
 
+#### 外键约束
+
 最后一张表 `RecipeDetail` 用两种方法进行了外键约束。
 
 一种形式是在列后面进行约束：
 
 ```sql
-Mno varchar(10) FOREIGN KEY(Mno) REFERENCES medicine(Mno)
+Mno varchar(10) FOREIGN KEY REFERENCES medicine(Mno)
 -- FOREIGN KEY 后的 Mno 指的是该表的属性列的名称，即第一个 Mno
 ```
 
 另一种形式是作为表级的约束：
 
 ```sql
-CONSTRAINT Rnofk FOREIGN KEY(Rno) REFERENCES RecipeMaster(Rno)
--- 第一个 Rnofk 是外键名称（而非外键列名称），不需和后面保持一致
+CONSTRAINT RnoForeignKey FOREIGN KEY(Rno) REFERENCES RecipeMaster(Rno)
+-- RnoForeignKey 是外键名称（而非外键列名称），不需和后面保持一致，也可以省略
 ```
 
 ### 修改表
