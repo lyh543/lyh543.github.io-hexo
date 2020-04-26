@@ -8,6 +8,7 @@ category:
 ---
 
 > 学习链接：https://www.liaoxuefeng.com/wiki/1016959663602400
+> 参考链接：https://docs.python.org/zh-cn/3.7/tutorial/index.html
 
 比较基础的部分，新的东西就记一笔过一下就行了，方便以后查阅。
 
@@ -419,6 +420,30 @@ a = True
 
 Python （基本数据类型？）变量不需要初始化，且同一个变量可以反复赋值，而且可以是不同类型的变量。这种被称为 **动态语言**，反之为**静态语言**，如 C，Java。
 
+### 查询、判断变量类型
+
+查询类型使用 `type()`：
+
+```py
+>>> type(123)
+<class 'int'>
+>>> type('c')
+<class 'str'>
+```
+
+判断类型使用 `isinstance()`：
+
+```py
+>>> isinstance(123,int)
+True
+>>> isinstance(123,str)
+False
+>>> isinstance(123,lyh543)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'lyh543' is not defined
+```
+
 ### 常量
 
 对基本数据类型，Python 没有常量。
@@ -811,6 +836,23 @@ slice 也可以使用于 tuple，str 等支持切片的功能。
 >>> a=list(range(100))
 >>> a[::5]
 [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95]
+```
+
+### del 语句
+
+list 自带了 `append` 和 `insert`，分别是在 list 最后追加元素、在中间插入元素。也可以使用 `del` 删除元素。
+
+```py
+>>> a = [-1, 1, 66.25, 333, 333, 1234.5]
+>>> del a[0]
+>>> a
+[1, 66.25, 333, 333, 1234.5]
+>>> del a[2:4]
+>>> a
+[1, 66.25, 1234.5]
+>>> del a[:]
+>>> a
+[]
 ```
 
 ### 迭代 iteration
