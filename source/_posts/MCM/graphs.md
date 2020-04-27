@@ -158,7 +158,7 @@ $$
 
 Krusual 算法好评：
 
-![Kruskal 算法](../kruskal-algorithm.png)
+![Kruskal 算法](kruskal-algorithm.png)
 
 ## 网络流
 

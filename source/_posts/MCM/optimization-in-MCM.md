@@ -4,6 +4,7 @@ date: 2019-10-26 14:35:16
 tags:
 - 课程笔记
 - 数学建模
+- 最优化算法
 category:
 - 数学建模
 mathjax: true

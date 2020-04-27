@@ -35,6 +35,8 @@ mathjax: true
 |整数规划|`intlinprog()`|解整数线性规划问题|
 |[遗传算法](../genetic-algorithm#在-MATLAB-中调用遗传算法)|`ga()`|包含以上所有功能，不过精度较低
 
+### 基于问题的最优化
+
 最优化相关的基于问题的方法 `Problem-Based Approach`：
 
 ```m
@@ -56,7 +58,28 @@ problem.options = optimoptions('intlinprog','Display',"off");
 [sol,fval,exitflag,output] = intlinprog(problem)
 ```
 
-说白了，就是 `prob2struct` 函数能够将 `4*x(1) + 2*x(2) + xb == 12` 这样的直白的约束条件，换为 `intlinprog` 的 `Aeq` `beq`。对于复杂的问题，这样更不容易出错。
+说白了，就是 `prob2struct` 函数能够将 `4*x(1) + 2*x(2) + xb == 12` 这样的直白的优化式子和约束条件，换为 `intlinprog` 的 `Aeq` `beq`。  
+如果使用传统的方式，这一步转化需要人工完成。  
+对于复杂的问题，这样更不容易出错。
+
+跑出来的 `sol` 是一个 1*3 向量，那么 `x` 和 `xb` 对应哪些变量呢？
+
+可以使用 `varindex`：
+
+```m
+>> varindex(prob)
+
+ans = 
+
+  包含以下字段的 struct:
+
+    x: [1 2]
+    xb: 3
+```
+
+就可以看出对应关系了。
+
+更多相关资料可查看 [Problem-Based Optimization Setup - MATLAB & Simulink](https://www.mathworks.com/help/optim/problem-based-approach.html)
 
 ## 概率统计相关
 

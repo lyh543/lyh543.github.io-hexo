@@ -105,7 +105,7 @@ eqns = [2*u + v == 0, u - v == 1];
 S = solve(eqns,[u v])
 ```
 
-以上都是 `solve` 函数。如有必要，还可以考虑使用 `fzero`、`fsolve`、`vpasolve`，用法可查看官方文档或[博客](https://blog.csdn.net/zengxiantao1994/article/details/77943305)。
+以上都是 `solve` 函数。如有必要，还可以考虑使用 `roots`（给定多项式系数）`fzero`、`fsolve`（给定匿名函数）、`vpasolve`，用法可查看官方文档或[博客](https://blog.csdn.net/zengxiantao1994/article/details/77943305)。
 
 ## 化简表达式
 
