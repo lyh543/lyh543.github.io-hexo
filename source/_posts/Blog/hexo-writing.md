@@ -90,7 +90,7 @@ date: {{ date }}
 
 注意所有资源都不能以`_`开头。
 
-推荐使用的方法：
+Hexo 推荐使用的方法：
 
 1. 在markdown文件同目录下创建一个同名文件夹，保存要应用的图片（如`hello_hexo.jpg`）  
 2. 用下面的方式引用图片
@@ -106,6 +106,8 @@ date: {{ date }}
 ```
 
 但是好像感觉并没有什么用，而且重名文件夹会使目录变得更冗杂。还是用常规的方法吧。
+
+> 2020.5.1 更新：这样还是很麻烦。推荐 Visual Studio Code 的 [Coding 图床插件](https://marketplace.visualstudio.com/items?itemName=hancel.coding-picture-bed)，绑定 Coding.net 账号以后，可以在 VSCode 编辑 Markdown 的页面一键粘贴图片（将图片传到 Coding，然后粘贴图片链接）。
 
 ## HTML间的相对路径
 

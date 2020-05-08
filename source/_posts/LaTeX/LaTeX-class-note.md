@@ -4,6 +4,7 @@ date: 2019-11-19
 tags:
 - 课程笔记
 - LaTeX
+- 编程语言入门
 category:
 - LaTeX
 mathjax: true
@@ -29,6 +30,8 @@ mathjax: true
 
 推荐 TeX Live 和 TeXStudio。参考书推荐：[一份不太简短的LaTeX教程.pdf](一份不太简短的LaTeX教程.pdf)。
 
+另外推荐我编写的：[LaTeX常见语法](LaTeX常见语法.tex)，去掉了该文中复杂的部分，推荐快速入门。
+
 ## Hello, world
 
 ```latex
@@ -42,7 +45,7 @@ mathjax: true
 
 在接下来的学习中，可以使用 Bing/Google 到的模板。
 
-### 你好， LaTeX
+### 你好，LaTeX
 
 原生 LaTeX 不支持中文。需要引入包。课程使用的是 `CJK`。但是在我的 TeXstudio 编译不过？？？？？？
 
@@ -169,8 +172,9 @@ LaTeX 的引用原理是给每个文献写一个好记的名字，然后引用�
 \usepackage[UTF8]{ctex}
 \begin{document}
 
-xxx说的对。\cite{Zhang10} \\
-\indent yyy说的也对。\cite{Li10}
+xxx说的对。\cite{Zhang10}
+
+yyy说的也对。\cite{Li10}
 
 \begin{thebibliography}{}
 	
@@ -338,6 +342,58 @@ xxx说的对。\cite{Zhang10} \\
 ```
 
 有关 `[!hbp]` 等，详见：[插入浮动体](#插入浮动体)。
+
+### 对表格进行缩放 防止超宽
+
+遇到超宽的表格，我们可以使用 `\begin{adjustbox}...\end{adjustbox}` 对其进行缩放。
+
+```latex
+\documentclass{article}
+\usepackage{adjustbox}
+
+\begin{document}
+\begin{table}[h!]
+	\centering
+	\begin{adjustbox}{max width=\textwidth}
+	\begin{tabular}{*{14}{|c}|}%%{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		One & Two &Three & Four & Five & Six & Seven & Eight & Nine & Ten & Eleven &
+		Twelve & Thirteen & Fourteen\\
+		\hline
+		\hline
+		$1.111$ & $2.222$ & $3.333$ & $4.444$ & $5.555$ & $6.666$ & $7.777$ &
+		$8.888$ & $9.999$ & $0.000$ & $1.111$ & $2.222$ & $3.333$ & $4.444$\\
+		\hline
+	\end{tabular}
+	\end{adjustbox}
+	\caption{Test Table}
+	\label{tab:label_test}
+\end{table}
+
+\end{document}
+```
+![adjustbox 效果](https://lyh543.coding.net/p/pic-bed/d/pic-bed/git/raw/master/54bd298f13fd1b399794b0a2a5ac055e0a62b75f9f1835f23528a5a63c655782.png)  
+
+### 标准三线表格
+
+```latex
+\begin{table}[!htbp]
+    \caption{标准三线表格}\label{tab:001} \centering
+    \begin{tabular}{ccccc}
+        \toprule[1.5pt]
+        $D$(in) & $P_u$(lbs) & $u_u$(in) & $\beta$ & $G_f$(psi.in)\\
+        \midrule[1pt]
+        5 & 269.8 & 0.000674 & 1.79 & 0.04089\\
+        10 & 421.0 & 0.001035 & 3.59 & 0.04089\\
+        20 & 640.2 & 0.001565 & 7.18 & 0.04089\\
+        \bottomrule[1.5pt]
+    \end{tabular}
+\end{table}
+```
+
+![标准三线表格](https://lyh543.coding.net/p/pic-bed/d/pic-bed/git/raw/master/e649a9d9744cd33bb97af6ec3752f132c6667567287f93195ed2eeea9521b024.png)  
+
+另外，[Table Generator] 也支持标准三线表格，只需将 `Default Table Style` 改为 `Booktabs Table Style`。
 
 ### tabular\* 表格
 

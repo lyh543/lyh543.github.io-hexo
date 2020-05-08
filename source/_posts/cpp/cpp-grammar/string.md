@@ -18,9 +18,13 @@ category:
 
 ## 字符串字面量
 
-```R "分隔符( 原始字符 )分隔符"```
+`R "分隔符( 原始字符 )分隔符"`
 
-示例：`R"66(njjnb)66" == "njjnb"`
+示例：`R"66(\njjnb/)66" == "\\njjnb/"`
+
+> 其他语言的类似情况可参考 [逐字字符串在各语言中的表达式](/Computer-Science/verbatim-strings-literal-grammar/)。
+
+分隔符也可以为空。示例 2：`'R(njjnb)' == '\\njjnb/'` 
 
 另有 `L`, `u8`, `u`, `U` 作为前缀，类似于66L,表示`长char`、`UTF-8`、`UTF-16`、`UTF-32`字符。
 

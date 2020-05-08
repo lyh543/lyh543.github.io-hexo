@@ -3,6 +3,7 @@ title: Python 基础
 date: 2020-2-18 21:18:37
 tags:
 - Python
+- 编程语言入门
 category:
 - Python
 ---
@@ -101,7 +102,7 @@ Python 的 `\\` 和 `%` 是广义的整除和取模，可以在浮点数间使�
 
 1. 单双引号等价：`"a"` == `'a'`（Python 没有 `char` 的说法，只有 `one-character string`）  
 2. 支持转义字符 `\`：`"'"` == `"\'"` == `'\''`，`'\n'`  
-3. 类似于 C++ 的[字符串字面量](/cpp/cpp-grammar/string#字符串字面量)：`r'\n'` == `r'''\n'''`  
+3. 类似于 C++ 的[逐字字符串](/Computer-Science/verbatim-strings-literal-grammar/)：`r'\n'` == `r'''\n'''`  
 4. 还可以用 `'''` 括起表示换行的字符串（该语法支持与第三条搭配）：
 
 ```python
