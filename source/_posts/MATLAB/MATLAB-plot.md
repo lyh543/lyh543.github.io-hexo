@@ -157,11 +157,37 @@ image(background);
 
 使用两个 `plot` （或其他画图语句）后，第二个会删掉前面的图并且重新画。
 
-要想将两个图叠加，需要在两个 `plot` 之间加一句 `hold on`。一般习惯写法是：
+要想将两个图叠加在一起，需要在第一次绘图以后加一句 `hold on`。如：
 
 ```m
-plot(...), hold on;
-plot(...), hold on;
+plot(...);
+hold on;
+plot(...);
+plot(...)
+```
+
+如下次绘图不想叠加了，就在这次绘图之后加一句 `hold off` 即可。
+
+但请注意，`hold on` 和 `hold off` 的原理是设置图/表的 `NextPlot` 属性为 `add` 或 `replace`，并非立即刷新。在下次绘图时，会检查 `NextPlot` 的属性，再决定是否覆盖掉，还是将图形进行叠加。
+
+因此，下图的代码中的 `hold off` 其实无意义。
+
+```m
+plot(...);
+hold off;
+hold on;
+plot(...);
+plot(...)
+```
+
+另外，很神奇的是，在 MATLAB R2020a 中，`rectangle` 的语法很诡异。（在 MATLAB R2017a 中没有这个问题）
+
+```m
+plot(...);
+hold off;
+rectangle();
+hold on;
+plot(...);
 plot(...)
 ```
 
@@ -172,6 +198,23 @@ subplot(1,2,1);
 scatter(rand(1,10000),rand(1,10000))
 subplot(1,2,2)；
 scatter(rand(1,10000),rand(1,10000))
+```
+
+另外，从 R2019b 开始，您可以使用 `tiledlayout` 和 `nexttile` 函数显示平铺绘图。
+
+```m
+x = linspace(0,10);
+y1 = sin(x);
+y2 = cos(x);
+tiledlayout(2,1)
+
+% Top plot
+ax1 = nexttile;
+plot(ax1,x,y1)
+
+% Bottom plot
+ax2 = nexttile;
+plot(ax2,x,y2)
 ```
 
 ### 坐标轴格式调整
@@ -197,7 +240,6 @@ set(h, 'linewidth' ,2);     % 调整线的属性
 legend('X', 'Y');
 axis([0 25 0 20])           % 调整坐标区的范围
 ```
-
 
 ### 散点图的美化
 
