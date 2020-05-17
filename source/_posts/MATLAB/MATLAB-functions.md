@@ -15,7 +15,9 @@ mathjax: true
 
 ## 好用的函数收集
  
-（从 xls  txt）读写表格：`xlsread`，`readmatrix`（MATLAB R2019a 起）。
+（从 xls/xlsx csv txt）读写表格：`xlsread`，`readmatrix`（MATLAB R2019a 起）。
+
+注意 `readmatrix` 如不指定 `NumHeaderLines` 参数时，会自动识别并去掉行表头。写代码的时候小心。
 
 映射、map：[`containers.Map`](https://ww2.mathworks.cn/help/matlab/matlab_prog/creating-a-map-object.html)。
 
@@ -140,11 +142,22 @@ size(A) %返回一个1x2数组
 
 很重要很重要！！
 
-找到 v 中大于 0 元素的下标。
+第一行找到 v 中大于 0 的元素的下标。  
+第二行把下标矩阵作为原矩阵的下标，则可以直接筛选到对应下标的元素组成的矩阵。
+
+相当于实现了一个筛选矩阵元素的功能。可以用 `if` 改写，但是 MATLAB 中矩阵运算更快，因此能用矩阵运算就不要用 `if`。
 
 ```matlab
-idx=find(v>=0);
-v(find(v>=0));
+v = [1 0 -3 7 -5];
+idx = find(v>=0);   % idx == [1 2 4]
+v1 = v(idx);        % v1 = [1 0 7]
+```
+
+注意到，除了把下标矩阵 `idx` 传给 `v` 以外，还可以直接把 `v>=0` 传给矩阵，省去了一个 `find` 的过程。
+
+```m
+v = [1 0 -3 7 -5];
+v2 = v(v>=0); % v2 = [1 0 7]
 ```
 
 ## 图论
