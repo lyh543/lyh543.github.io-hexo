@@ -22,7 +22,9 @@ mathjax: true
 
 这篇博客就简单说一下，如何在自己的网站上使用 https。
 
-请把本文中出现的所有 `example.com` 替换为你的域名，将 `yourip` 替换为你的服务器的 ip,
+请把本文中出现的所有 `example.com` 替换为你的域名，将 `yourip` 替换为你的服务器的 ip。
+
+本文假定你清楚哪些网站是架在服务器上，并且这些网址的域名解析记录已以 `A` 的形式指向你的服务器。
 
 ## HTTPS、SSL、TLS 相关术语介绍
 
@@ -69,13 +71,7 @@ systemctl start nginx
 
 ## 测试 Nginx
 
-打开你的服务器网站 `example.com`，如果看到了欢迎界面，则说明 Nginx 正常。
-
-## 域名解析
-
-安装完 Nginx 以后，要进行域名解析。
-
-在你的域名提供商那里，把你想要加 https 的所有域名（如 `cloud`）以 `A` 的形式解析到你的服务器。也可以直接将 `*` 解析到你的服务器，这样没有专门设定解析的域名都会被以 `A` 解析到你的服务器。
+在浏览器地址栏输入你的服务器 IP 并访问，如果看到了欢迎界面，则说明 Nginx 正常。
 
 ## 申请 SSL 证书
 
@@ -83,7 +79,7 @@ systemctl start nginx
 
 > 2020.4.28 更新：**如果需要自动定期更新证书的**，请使用 [Certbot 自动脚本](https://github.com/ywdblog/certbot-letencrypt-wildcardcertificates-alydns-au)**而不是以下讲的方法**。自动脚本不适用于中文域名。
 
-下载 `autocert` 软件并给予可执行权限：
+在服务器上下载 `autocert` 软件并给予可执行权限：
 
 ```sh
 wget https://dl.eff.org/certbot-auto
@@ -120,13 +116,27 @@ cert.pem  chain.pem  fullchain.pem  privkey.pem  README
 
 这四个都是证书文件，请妥善保管。具体哪个是什么，可以先不追究这些细节。
 
+## 域名解析添加 CAA 记录
+
+接下来是可选、但是推荐的步骤。
+
+`letsencrpyt.org` 签发了你的证书，随后会公布到全网。
+
+但是有个问题，如果别的人也伪造了你的网站的证书（HTTPS 劫持），该如何保证你的网站使用 `letsencrypt.org` 的而不是他的证书呢？
+
+我们可以在 DNS 解析中添加 `CAA` 记录，当别人访问你的网站时，你告诉他们，你的证书是 `letsencrypt.org` 签发的，就行了。
+
+添加的方法可看 [使用CAA记录防止域名证书劫持_最佳实践_云解析DNS-阿里云](https://help.aliyun.com/document_detail/65537.html)。
+
+顺便，如果你想把你的某域名作为 GitHub Pages 的别名（如这篇博客），需要在 pages 的仓库设置 `CNAME`。如果需要 `https`，还需要添加 `CAA` 记录指向 `letsencrypt.org`，否则可能无法启用 `https`。
+
 ## 对全站加载 SSL 证书
 
 接下来我们要用 Nginx 做两件事：
 
 * 将 `https://*.example.com/` 加载 SSL 证书
 * 将 `http://*.example.com/` 转发到 `https://*.example.com/`
-、
+
 我们要通过配置 nginx 服务来完成这一点。
 
 > 如果你已经搭建过 nginx 服务，请直接参考修改 nginx 配置文件即可。

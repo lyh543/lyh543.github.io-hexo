@@ -2,10 +2,10 @@
 title: MATLAB GUIDE（萌新向）
 date: 2020-05-15 20:47:50
 tags:
-- 课程笔记
+- MATLAB
+- GUI
 category:
 - MATLAB
-- 
 mathjax: true
 ---
 
