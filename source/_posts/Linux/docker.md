@@ -5,7 +5,6 @@ tags:
 - Docker
 - 服务器
 - Linux
-- Linux
 category:
 - Linux
 mathjax: true
@@ -21,17 +20,25 @@ Docker 还是跨平台的，可以在 Linux/Windows/MacOS 上运行。
 > Docker 文档：https://docs.docker.com/install/linux/docker-ce/centos/
 > Docker Compose 文档：https://docs.docker.com/compose/install/
 
-我收集的基于 Docker 的好用的云服务可以见[后面小节](#docker-镜像)
+我收集的基于 Docker 的好用的云服务可以见[后面小节](#docker-镜像)。
 
 ## 安装 Docker
 
 ### Linux 安装 Docker
 
+#### 脚本安装
+
+```sh
+bash <(curl -s https://get.docker.com)
+```
+
+#### 手动安装
+
 由于项目是基于 Docker 的，所以要先安装 Docker。这篇文章安装的是稳定版的 Docker Engine - Community。
 
 先卸载以前的 Docker 安装：
 
-```
+```sh
 $ sudo yum remove docker \
                   docker-client \
                   docker-client-latest \
@@ -44,7 +51,7 @@ $ sudo yum remove docker \
 
 再安装所需的包：
 
-```
+```sh
 $ sudo yum install -y yum-utils \
   device-mapper-persistent-data \
   lvm2
@@ -52,7 +59,7 @@ $ sudo yum install -y yum-utils \
 
 接下来添加 Docker 的库，并安装 Docker：
 
-```
+```sh
 $ sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
@@ -63,13 +70,13 @@ $ sudo yum install -y docker-ce docker-ce-cli containerd.io
 
 接下来启动 Docker：
 
-```
+```sh
 $ sudo systemctl start docker
 ```
 
 然后进行一个对 Docker 的 Hello-World 测试：
 
-```
+```sh
 $ sudo docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
@@ -194,12 +201,13 @@ Windows 应到 Docker Desktop 的 Settings 中的 Docker Engine 栏中修改。�
 
 用途|镜像名|`docker-compose.yml`链接
 -|-|-
-私人云|NextCloud|[nextcloud-docker-compose.tar](wget https://blog.lyh543.xyz/Linux/build-owncloud-on-server/nextcloud-docker-compose.tar)
+私人云|NextCloud|[nextcloud-docker-compose.tar](https://blog.lyh543.xyz/Linux/build-owncloud-on-server/nextcloud-docker-compose.tar)
 私人云|[Seafile](https://github.com/HumanBrainProject/seafile-compose/)|[docker-compse.yaml](https://github.com/HumanBrainProject/seafile-compose/blob/master/docker-compose.yaml)
 在线 Markdown 编辑器|[CodiMD](https://github.com/hackmdio/codimd)|[docker-compse.yml](https://hackmd.io/c/codimd-documentation/%2Fs%2Fcodimd-docker-deployment#Using-docker-compose-to-setup-CodiMD)
 在线 LaTeX 编辑器|[Overleaf](https://github.com/overleaf/overleaf/wiki/Quick-Start-Guide)|[docker-compose.yml](https://github.com/overleaf/overleaf/blob/master/docker-compose.yml)
 云 SSH|[WebSSH2](https://hub.docker.com/r/oldiy/docker-webssh2)|无
 远程 Firefox|[firefox-enpass-novnc](https://hub.docker.com/r/oldiy/firefox-enpass-novnc)|无
+v2ray+自定义dns||`sudo docker run -d --rm --name v2ray -p 443:443 -p 80:80 -v $HOME/.caddy:/root/.caddy  pengchujin/v2ray_ws:0.08 YOURDOMAIN.COM V2RAY_WS && sleep 3s && sudo docker logs v2ray`
 
 
 

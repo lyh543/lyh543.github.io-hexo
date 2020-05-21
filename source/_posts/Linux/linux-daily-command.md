@@ -34,12 +34,17 @@ sudo passwd root
 
 ### 添加 PATH 路径
 
-以下方法（二选一）可以加入 `~/opt/bin` 目录。
+以下方法（二选一）可以临时在 PATH 目录下加入 `~/opt/bin` 目录。
 
 ```bash
-PATH=$PATH:~/opt/bin
-PATH=~/opt/bin:$PATH
+export PATH=$PATH:~/opt/bin # 加在 PATH 的最后
+export PATH=~/opt/bin:$PATH # 加在 PATH 的最前
+echo $PATH                  # 查看修改后的结果
 ```
+
+加上 `export` 的赋值，会使得被赋值的变量在其子进程中依旧可见。
+
+但是以上是针对该进程的子进程，如果想要全局生效，需要修改 `~/.bashrc`（对当前用户生效）或 `/etc/profile`（对所有用户生效）。记得注销重启。
 
 ### alias 简化命令
 
@@ -145,6 +150,15 @@ tar -xf archive.tar          # Extract all files from archive.tar.
 
 对于 `zip`，可以使用 `unzip`。
 
+### 下载脚本并执行
+
+对于下载脚本内容然后执行的情况，还有更简单的写法：
+
+```bash
+bash <(curl -s http://exmaple.com/)
+```
+
+注意 `<` 左右的空格，左边必须有空格，右边必须没有。
 
 ### 读取文件 加权限
 
@@ -203,6 +217,8 @@ chmod a+x test.sh # 给脚本文件加可执行的权限
 可以使用 `top` 工具。
 
 如果想要让进程按 CPU 或内存排序，可以按 `X` 键使得焦点在某一列（那一列的数字呈亮白色），然后按 `<` `>` （`Shift+,` `Shift+.`）以左右移动焦点。
+
+另外，还可以使用类似的 `htop` 工具。
 
 ### 杀进程
 

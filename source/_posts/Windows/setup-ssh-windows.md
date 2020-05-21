@@ -66,3 +66,8 @@ net start sshd
 ```
 
 即可。
+
+## 配置文件目录
+
+* `%USERPROFILE%/.ssh/` 对应 `~/.ssh/`
+* `%PROGRAMDATA%/ssh/` 对应 `/etc/ssh/`
