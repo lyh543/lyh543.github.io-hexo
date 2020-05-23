@@ -13,6 +13,58 @@ mathjax: true
 
 常用的可以看 MATLAB 教程书籍的附录。这里放一个整理的 [pdf](MATLAB函数速查手册.pdf)。
 
+## 统计函数
+
+### 向量的元素和/矩阵的每列和/最值/均值
+
+```MATLAB
+cumsum(A) % 累积和/每列的累积和，即前缀和
+sum(A)
+min(A)
+max(A)
+mean(A)
+
+[x, l] = min(A) % 顺便把最小值位置 index 给 l
+
+sum(A,2) % 矩阵的每行和（平均数），2 是第二维
+```
+
+### 向量长度、矩阵大小
+
+```MATLAB
+length(V)
+size(A) %返回一个1x2数组
+```
+
+### 列排序（返回数列、原数列元素在新数列的index）
+
+```
+[B I] = sort(V)
+[B I] = sort(V,'descend') %降序
+```
+
+### find
+
+很重要很重要！！
+
+第一行找到 v 中大于 0 的元素的下标。  
+第二行把下标矩阵作为原矩阵的下标，则可以直接筛选到对应下标的元素组成的矩阵。
+
+相当于实现了一个筛选矩阵元素的功能。可以用 `if` 改写，但是 MATLAB 中矩阵运算更快，因此能用矩阵运算就不要用 `if`。
+
+```matlab
+v = [1 0 -3 7 -5];
+idx = find(v>=0);   % idx == [1 2 4]
+v1 = v(idx);        % v1 = [1 0 7]
+```
+
+注意到，除了把下标矩阵 `idx` 传给 `v` 以外，还可以直接把 `v>=0` 传给矩阵，省去了一个 `find` 的过程。
+
+```m
+v = [1 0 -3 7 -5];
+v2 = v(v>=0); % v2 = [1 0 7]
+```
+
 ## 好用的函数收集
  
 （从 xls/xlsx csv txt）读写表格：`xlsread`，`readmatrix`（MATLAB R2019a 起）。
@@ -23,7 +75,8 @@ mathjax: true
 
 分段函数：`piecewise`。
 
-## 最优化相关
+
+## 最优化、规划问题相关
 
 求函数最小值，有一堆工具箱函数~~不知道有什么区别，可能使用的算法不同~~：
 
@@ -83,6 +136,17 @@ ans =
 
 更多相关资料可查看 [Problem-Based Optimization Setup - MATLAB & Simulink](https://www.mathworks.com/help/optim/problem-based-approach.html)
 
+## 插值拟合相关
+
+该部分详解可见[数模自学笔记——插值和拟合](/MCM/self-study/interpolation-and-curve-fit/)。
+
+功能|函数名|注释
+-|-|-
+一维插值|`interp1`|
+二维插值|`interp2`|
+样条插值|`csape`|
+多项式拟合|`polyfit`|多项式值计算可使用 `polyval`
+
 ## 概率统计相关
 
 功能|函数名|注释
@@ -108,58 +172,6 @@ ans =
 `cftool`|曲线拟合工具箱
 `distributionFitter`|分布拟合工具箱|相关知识还可见[MATLAB参数估计与假设检验-参数估计](https://blog.csdn.net/MATLAB_matlab/article/details/55802815)
 
-## 统计函数
-
-### 向量的元素和/矩阵的每列和/最值/均值
-
-```MATLAB
-cumsum(A) % 累积和/每列的累积和，即前缀和
-sum(A)
-min(A)
-max(A)
-mean(A)
-
-[x, l] = min(A) % 顺便把最小值位置 index 给 l
-
-sum(A,2) % 矩阵的每行和（平均数），2 是第二维
-```
-
-### 向量长度、矩阵大小
-
-```MATLAB
-length(V)
-size(A) %返回一个1x2数组
-```
-
-### 列排序（返回数列、原数列元素在新数列的index）
-
-```
-[B I] = sort(V)
-[B I] = sort(V,'descend') %降序
-```
-
-### find
-
-很重要很重要！！
-
-第一行找到 v 中大于 0 的元素的下标。  
-第二行把下标矩阵作为原矩阵的下标，则可以直接筛选到对应下标的元素组成的矩阵。
-
-相当于实现了一个筛选矩阵元素的功能。可以用 `if` 改写，但是 MATLAB 中矩阵运算更快，因此能用矩阵运算就不要用 `if`。
-
-```matlab
-v = [1 0 -3 7 -5];
-idx = find(v>=0);   % idx == [1 2 4]
-v1 = v(idx);        % v1 = [1 0 7]
-```
-
-注意到，除了把下标矩阵 `idx` 传给 `v` 以外，还可以直接把 `v>=0` 传给矩阵，省去了一个 `find` 的过程。
-
-```m
-v = [1 0 -3 7 -5];
-v2 = v(v>=0); % v2 = [1 0 7]
-```
-
 ## 图论
 
 命令名|作用
@@ -176,15 +188,10 @@ v2 = v(v>=0); % v2 = [1 0 7]
 `graphtopootder`|执行有向无圈图的拓扑排序
 `graphtraverse`|求从一顶点出发，所能遍历图中的顶点
 
-## 绘图
+## 绘图及图片处理
 
 见[绘图](../MATLAB-plot)。
 
 ## 符号编程
 
 见[符号编程](../MATLAB-syms)。
-
-## 图片处理
-
-* 读取：`pic = imread('a.bmp')`
-* 显示：`imshow(pic)`

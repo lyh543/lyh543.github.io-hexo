@@ -21,3 +21,11 @@ mathjax: true
 4. 字母键作方向键：上下左右是 `hjkl` 四个。其中，最左的 `h` 是左，最右的 `l` 是右；而剩下的 `jk` 中，左边的 `j` 是下，右边的 `k` 是上。
 
 有这些就基本够用了吧，还有新的就再来填坑。
+
+## deepin 无法在 vim 中使用 ctrl+shift+c/v 复制的解决办法
+
+我也不知道是什么原理，但是就是这样：
+
+```sh
+echo "set clipboard=unnamed" >> ~/.vimrc
+```

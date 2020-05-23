@@ -117,9 +117,10 @@ Google 了一下，说是可以上 BBR。BBR 是什么，如何开启，可以�
 
 [Google BBR是什么？](https://tech.jandou.com/CentOS7-Google-BBR.html)
 
+注意，BBR 是针对 TCP 发包的，也就是说，设置好以后，对于所有代理软件和服务器上的所有网页等都会生效。
+
 [Ubuntu 18.04/18.10快速开启Google BBR的方法](https://www.moerats.com/archives/612/)
 
-但貌似丢包率还是不低。。。
 
 ## 常见错误及解决方案
 

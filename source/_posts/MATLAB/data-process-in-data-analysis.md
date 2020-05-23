@@ -11,6 +11,7 @@ category:
 mathjax: true
 ---
 
+这是在数模课上做的随堂笔记，插值和拟合更详细的自学笔记请看[数模自学笔记——插值和拟合](/MCM/self-study/interpolation-and-curve-fit/)。
 
 ## 插值
 
@@ -18,7 +19,7 @@ mathjax: true
 
 这东西和拟合有点像。
 
-已知 $f(x)$ 的很多点 $(x\_i, y\_i)$，要找一个函数 $P(x) \approx f(x)$。
+未知 $f(x)$，但已知 $f(x)$ 的很多观测点 $(x\_i, y\_i)$，要找一个（可以分段的）函数 $\varphi(x) \approx f(x)$，并且强制要求 $\varphi(x)$ 经过所有观测点。
 
 这里使用的是多段分段函数进行近似。
 
